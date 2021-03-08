@@ -1,20 +1,47 @@
 package com.l2ashdz.appcliente.analizadores.sintactico;
 
+import com.l2ashdz.appcliente.model.Token;
+import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
+import com.l2ashdz.appcliente.model.errores.TipoError;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java_cup.runtime.Symbol;
 
 parser code{:
 
+    private List<ErrorAnalisis> errores = new ArrayList();
 
+    public List<ErrorAnalisis> getErrores() {
+        return this.errores;
+    }
+
+    public void syntax_error(Symbol s) {
+        Token t = (Token) s.value;
+        StringBuilder descripcion = new StringBuilder("Se esperaba: ");
+        expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
+        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
+    }
+
+    public void unrecovered_syntax_error(Symbol cur_token){
+        Token t = (Token) cur_token.value;
+        System.out.println("Error irrecuperable " + t.getLexema());
+    }
+
+    protected int error_sync_size() {
+        return 1;
+    }
 :}
 
 /*Terminales y no terminales*/
-terminal Token          START_REQUEST, END_REQUEST, USER_CREDENTIALS;
-terminal Token          LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
-terminal Token          PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
-terminal Token          LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token          VALUE;
+terminal Token      START_REQUEST, END_REQUEST, USER_CREDENTIALS;
+terminal Token      LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
+terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
+terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
+terminal Token      VALUE;
 
-non terminal            startRequest, requestName, startContent, blockParamName, startParams, pair, param, name, value, endParams, endContent, endRequest;
+non terminal        startRequest, requestName, startContent, blockParamName, startParams, pair, param, name, value, endParams, endContent, endRequest;
 
 /*Gramatica*/
 

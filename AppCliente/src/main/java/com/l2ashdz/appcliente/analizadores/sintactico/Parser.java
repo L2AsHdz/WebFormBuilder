@@ -5,6 +5,11 @@
 
 package com.l2ashdz.appcliente.analizadores.sintactico;
 
+import com.l2ashdz.appcliente.model.Token;
+import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
+import com.l2ashdz.appcliente.model.errores.TipoError;
+import java.util.ArrayList;
+import java.util.List;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.XMLElement;
 
@@ -140,7 +145,27 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
 
+    private List<ErrorAnalisis> errores = new ArrayList();
 
+    public List<ErrorAnalisis> getErrores() {
+        return this.errores;
+    }
+
+    public void syntax_error(Symbol s) {
+        Token t = (Token) s.value;
+        StringBuilder descripcion = new StringBuilder("Se esperaba: ");
+        expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
+        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
+    }
+
+        public void unrecovered_syntax_error(Symbol cur_token){
+        Token t = (Token) cur_token.value;
+        System.out.println("Error irrecuperable " + t.getLexema());
+    }
+
+    protected int error_sync_size() {
+        return 1;
+    }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/

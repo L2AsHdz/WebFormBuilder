@@ -1,9 +1,15 @@
 package com.l2ashdz.appcliente.analizadores.lexico;
 
-import com.l2ashdz.appcliente.analizadores.sintactico.sym;
-import java_cup.runtime.Symbol;
-import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 import com.l2ashdz.appcliente.model.Token;
+import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
+import com.l2ashdz.appcliente.model.errores.TipoError;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java_cup.runtime.Symbol;
+
+import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 
 %%
 
@@ -15,7 +21,11 @@ import com.l2ashdz.appcliente.model.Token;
 %column
 
 %{
-    //private List<ErrorAnalisis> errores = new ArrayList();
+    private List<ErrorAnalisis> errores = new ArrayList();
+
+    public List<ErrorAnalisis> getErrores(){
+        return this.errores;
+    }
 
     private Symbol symbol(int type){
         return new Symbol(type, new Token(yyline, yycolumn, yytext()));
@@ -23,10 +33,14 @@ import com.l2ashdz.appcliente.model.Token;
 
     private void addLexicError(){
         String descripcion = "El simbolo no pertenece al lenguaje";
-        //errores.add(new ErrorAnalisis(yytext(), yyline+1, yycolumn+1, TipoError.LEXICO, descripcion));
+        errores.add(new ErrorAnalisis(yytext(), yyline+1, yycolumn+1, TipoError.LEXICO, descripcion));
     }
 
 %}
+
+%eofval{
+    return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
+%eofval}
 
 SALTO = \n|\r|\r\n
 ESPACIO = {SALTO} | [ \t\f]
