@@ -1,4 +1,6 @@
+package com.l2ashdz.appcliente.analizadores.sintactico;
 
+import java_cup.runtime.Symbol;
 
 parser code{:
 
@@ -9,14 +11,14 @@ parser code{:
 terminal Token          START_REQUEST, END_REQUEST, USER_CREDENTIALS;
 terminal Token          LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
 terminal Token          PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
-terminal Token          LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BACKET;
-terminal Token          NOSE;
+terminal Token          LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
+terminal Token          VALUE;
 
-non terminal            startRequest, endRequest, requestName, blockParamName, startContent, endContent, startParams, endParams, pair, param, name, value;
+non terminal            startRequest, requestName, startContent, blockParamName, startParams, pair, param, name, value, endParams, endContent, endRequest;
 
 /*Gramatica*/
 
-startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestName QUOTE_MARK GREATER_THAN starContent endRequest;
+startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestName QUOTE_MARK GREATER_THAN startContent endRequest;
 
 requestName ::= LOGIN
               | CREATE_USER
@@ -28,13 +30,13 @@ startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRAC
 
 blockParamName ::= USER_CREDENTIALS;
 
-startParams ::= OPEN_BRACE pairs endParams;
+startParams ::= OPEN_BRACE pair endParams;
 
 pair ::= param COMMA pair
         | param
         ;
 
-param ::= QUOTE_MARK name QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK
+param ::= QUOTE_MARK name QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
 
 name ::= PARAM_USUARIO
        | PARAM_PASSWORD
@@ -44,7 +46,7 @@ name ::= PARAM_USUARIO
        | PARAM_NEW_PASSWORD
        ;
 
-value ::= NOSE;
+value ::= VALUE;
 
 endParams ::= CLOSE_BRACE COMMA startParams
             | CLOSE_BRACE

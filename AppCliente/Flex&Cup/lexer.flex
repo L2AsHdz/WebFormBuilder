@@ -1,3 +1,9 @@
+package com.l2ashdz.appcliente.analizadores.lexico;
+
+import com.l2ashdz.appcliente.analizadores.sintactico.sym;
+import java_cup.runtime.Symbol;
+import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
+import com.l2ashdz.appcliente.model.Token;
 
 %%
 
@@ -20,10 +26,6 @@
         //errores.add(new ErrorAnalisis(yytext(), yyline+1, yycolumn+1, TipoError.LEXICO, descripcion));
     }
 
-
-
-
-
 %}
 
 SALTO = \n|\r|\r\n
@@ -32,7 +34,7 @@ DIGITO = [0-9]
 LETRA = [a-zA-z]
 NUMERO = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
-NOSE = ({LETRA}|{DIGITO}|"-"|"_")*
+NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 
 %%
 
@@ -66,9 +68,10 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")*
     "{"                                 {return symbol(OPEN_BRACE);}
     "}"                                 {return symbol(CLOSE_BRACE);}
     "["                                 {return symbol(OPEN_BRACKET);}
-    "]"                                 {return symbol(CLOSE_BACKET);}
+    "]"                                 {return symbol(CLOSE_BRACKET);}
 }
 
-{NOSE}                                  {return symbol(NOSE);}
+{NOSE}                                  {return symbol(VALUE);}
+{ESPACIO}                               {/*Ignorar*/}
 
 [^]                                 {addLexicError();}
