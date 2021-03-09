@@ -2,7 +2,10 @@ package com.l2ashdz.appcliente;
 
 import com.l2ashdz.appcliente.analizadores.lexico.Lexer;
 import com.l2ashdz.appcliente.analizadores.sintactico.Parser;
+import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,20 +16,26 @@ public class AppCliente {
     public static void main(String[] args) {
         
         StringReader str = new StringReader("""
-                                            graficar circulo ( 25 + 12, 12, 15/3, rojo)
-                                            graficar circulo ( 25 + 12, 12, 15/3, azul)
-                                            animar objeto anterior (69/3,2*5,curva)
-                                            graficar cuadrado ( 12*3, 15+1, (15-3) / 4, verde)
-                                            animar objeto anterior (69/3,2*5,curva)
-                                            graficar rectangulo ( 12 * 3 + 2, 15, 4 / 4, 25, negro)
-                                            animar objeto anterior (69/3,2*5,curva)
-                                            graficar linea ( 12 *3 + 2, 15, 4 / 4, 50 * 1, amarillo)
-                                            graficar linea ( 12 *3 + 2, 15, 4 / 4, 50 * 1, cafe)
-                                            animar objeto anterior (69/3,2*5,curva)
-                                            graficar poligono (1,     2,3,((25+(35)-62+6)*1)+1,5,rojo)
-                                            animar objeto anterior (69/3,2*5,linea)""");
+                                            <!ini_solicitud:"ELIMINAR_USUARIO">
+                                                  { "CREDENCIALES_USUARIO":[{
+                                                        "USUARIO": "juanito619lopez"
+                                                       }         
+                                                     ]
+                                                  }
+                                            <fin_solicitud!>""");
 
         Lexer lex = new Lexer(str);
         Parser parser = new Parser(lex);
+        
+        try {
+            parser.parse();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        
+        List<ErrorAnalisis> errores = new ArrayList();
+        errores.addAll(lex.getErrores());
+        errores.addAll(parser.getErrores());
+        errores.forEach(e -> System.out.println(e.getLexema() + " - " + e.getDescripcion() + " - " + e.getTipoError()));
     }
 }

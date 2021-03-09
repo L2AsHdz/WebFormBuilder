@@ -73,7 +73,6 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "NUEVO_PASSWORD"            {return symbol(PARAM_NEW_PASSWORD);}
 
 <YYINITIAL> {
-
     "<"                                 {return symbol(LESS_THAN);}
     ">"                                 {return symbol(GREATER_THAN);}
     "!"                                 {return symbol(EXCLAMATION_MARK);}

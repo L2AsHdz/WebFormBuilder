@@ -15,6 +15,8 @@ import java_cup.runtime.Symbol;
 parser code{:
 
     private List<ErrorAnalisis> errores = new ArrayList();
+    private List<Solicitud> solicitudes = new ArrayList();
+    private List<Parametro> parametros = new ArrayList();
 
     public List<ErrorAnalisis> getErrores() {
         return this.errores;
@@ -49,7 +51,7 @@ non terminal        startRequest, requestType, startContent, blockParamName, end
 non terminal        startParamsLogin, startParamsCreateUser, startParamsModifyUser, startParamsDeleteUser;
 non terminal        endParamsLogin, endParamsCreateUser, endParamsModifyUser, endParamsDeleteUser;
 
-\non terminal List<Parametro>    paramsLogin, paramsCreateUser, paramsModifyUser;
+non terminal List<Parametro>    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser, value;
 
@@ -77,8 +79,8 @@ paramsLogin ::= paramLogin COMMA paramsLogin
 
 paramLogin ::= QUOTE_MARK nameParamLogin QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
 
-nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema():}
-                 | PARAM_PASSWORD:p         {:RESULT = p.getLexema():}
+nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema();:}
+                 | PARAM_PASSWORD:p         {:RESULT = p.getLexema();:}
                  ;
                  
 endParamsLogin ::= CLOSE_BRACE COMMA startParamsLogin
@@ -97,9 +99,9 @@ paramsCreateUser ::= paramCreateUser COMMA paramsCreateUser
      
 paramCreateUser ::= QUOTE_MARK nameParamCreateUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
 
-nameParamCreateUser ::= PARAM_USUARIO:p             {:RESULT = p.getLexema();:}
-                      | PARAM_PASSWORD:p            {:RESULT = p.getLexema();:}
-                      | PARAM_FECHA_CREACION        {:RESULT = p.getLexema();:}
+nameParamCreateUser ::= PARAM_USUARIO:p               {:RESULT = p.getLexema();:}
+                      | PARAM_PASSWORD:p              {:RESULT = p.getLexema();:}
+                      | PARAM_FECHA_CREACION:p        {:RESULT = p.getLexema();:}
                       ;
            
 endParamsCreateUser ::= CLOSE_BRACE COMMA startParamsCreateUser
@@ -132,11 +134,24 @@ endParamsModifyUser ::= CLOSE_BRACE COMMA startParamsModifyUser
 
 
 /**************************Producciones para parametros de solicitud EliminarUsuario*************************/
-startParamsDeleteUser ::= OPEN_BRACE paramDeleteUser endParamsDeleteUser;
+startParamsDeleteUser ::= OPEN_BRACE paramDeleteUser:p endParamsDeleteUser
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_USER, parametros));
+                            solicitudes.forEach(s -> {
+                                System.out.println("Solicitud tipo " + s.getTipo());
+                                s.getParametros().forEach(param -> System.out.println(param.getName() + " - " + param.getValue()));
+                            });
+                        :}
+                        ;
 
-paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK;
+paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(p.getLexema(), v);
+                    :}
+                    ;
 
-endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser
+endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser         {:parametros.clear();:}
                       | CLOSE_BRACE
                       ;
 /************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
