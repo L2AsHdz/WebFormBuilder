@@ -3,6 +3,9 @@ package com.l2ashdz.appcliente.analizadores.sintactico;
 import com.l2ashdz.appcliente.model.Token;
 import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
 import com.l2ashdz.appcliente.model.errores.TipoError;
+import com.l2ashdz.appcliente.model.solicitudes.Solicitud;
+import com.l2ashdz.appcliente.model.solicitudes.TipoSolicitud;
+import com.l2ashdz.appcliente.model.solicitudes.Parametro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,50 +37,109 @@ parser code{:
     }
 :}
 
-/*Terminales y no terminales*/
+//Terminales
 terminal Token      START_REQUEST, END_REQUEST, USER_CREDENTIALS;
 terminal Token      LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
-terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
+terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_FECHA_MODIFICACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
 terminal Token      VALUE;
 
-non terminal        startRequest, requestName, startContent, blockParamName, startParams, pair, param, name, value, endParams, endContent, endRequest;
+//no terminales
+non terminal        startRequest, requestType, startContent, blockParamName, value, endContent, endRequest;
+non terminal        startParamsLogin, paramsLogin, paramLogin, nameParamLogin, endParamsLogin;
+non terminal        startParamsCreateUser, paramsCreateUser, paramCreateUser, nameParamCreateUser, endParamsCreateUser;
+non terminal        startParamsModifyUser, paramsModifyUser, paramModifyUser, nameParamModifyUser, endParamsModifyUser;
+non terminal        startParamsDeleteUser, paramDeleteUser, endParamsDeleteUser;
 
-/*Gramatica*/
 
-startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestName QUOTE_MARK GREATER_THAN startContent endRequest;
+//Inicio de una solicitud
+startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestType endContent endRequest;
 
-requestName ::= LOGIN
-              | CREATE_USER
-              | DELETE_USER
-              | MODIFY_USER
-              ;
+//Tipos de solicitudes
+requestType ::= LOGIN QUOTE_MARK GREATER_THAN startContent startParamsLogin
+| CREATE_USER QUOTE_MARK GREATER_THAN startContent startParamsCreateUser
+| MODIFY_USER QUOTE_MARK GREATER_THAN startContent startParamsModifyUser
+| DELETE_USER QUOTE_MARK GREATER_THAN startContent startParamsDeleteUser
+;
 
-startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET startParams endContent;
+startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET;
 
 blockParamName ::= USER_CREDENTIALS;
 
-startParams ::= OPEN_BRACE pair endParams;
+/******************************Producciones para parametros de solicitud Login******************************/
+startParamsLogin ::= OPEN_BRACE paramsLogin endParamsLogin;
 
-pair ::= param COMMA pair
-        | param
-        ;
+paramsLogin ::= paramLogin COMMA paramsLogin
+              | paramLogin
+              ;
 
-param ::= QUOTE_MARK name QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+paramLogin ::= QUOTE_MARK nameParamLogin QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
 
-name ::= PARAM_USUARIO
-       | PARAM_PASSWORD
-       | PARAM_FECHA_CREACION
-       | PARAM_OLD_USER
-       | PARAM_NEW_USER
-       | PARAM_NEW_PASSWORD
-       ;
+nameParamLogin ::= PARAM_USUARIO
+                 | PARAM_PASSWORD
+                 ;
+                 
+endParamsLogin ::= CLOSE_BRACE COMMA startParamsLogin
+                 | CLOSE_BRACE
+                 ;
+/**************************Fin de producciones para parametros de solicitud Login**************************/    
 
-value ::= VALUE;
 
-endParams ::= CLOSE_BRACE COMMA startParams
+
+/******************************Producciones para parametros de solicitud CrearUsuario******************************/
+startParamsCreateUser ::= OPEN_BRACE paramsCreateUser endParamsCreateUser;
+
+paramsCreateUser ::= paramCreateUser COMMA paramsCreateUser
+                   | paramCreateUser
+                   ;
+     
+                   paramCreateUser ::= QUOTE_MARK nameParamCreateUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+
+nameParamCreateUser ::= PARAM_USUARIO
+                      | PARAM_PASSWORD
+                      | PARAM_FECHA_CREACION
+                      ;
+           
+endParamsCreateUser ::= CLOSE_BRACE COMMA startParamsCreateUser
+                      | CLOSE_BRACE
+                      ;
+/****************************Fin producciones para parametros de solicitud CrearUsuario****************************/      
+
+
+
+/**************************Producciones para parametros de solicitud ModificarUsuario*************************/
+startParamsModifyUser ::= OPEN_BRACE paramsModifyUser endParamsModifyUser;
+
+paramsModifyUser ::= paramModifyUser COMMA paramsModifyUser
+                   | paramModifyUser
+                   ;
+
+paramModifyUser ::= QUOTE_MARK nameParamModifyUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+
+nameParamModifyUser ::= PARAM_OLD_USER
+                      | PARAM_NEW_USER
+                      | PARAM_NEW_PASSWORD
+                      | PARAM_FECHA_MODIFICACION
+                      ;
+
+endParamsModifyUser ::= CLOSE_BRACE COMMA startParamsModifyUser
             | CLOSE_BRACE
             ;
+/************************Fin producciones para parametros de solicitud ModificarUsuario************************/       
+
+
+
+/**************************Producciones para parametros de solicitud EliminarUsuario*************************/
+startParamsDeleteUser ::= OPEN_BRACE paramDeleteUser endParamsDeleteUser;
+
+paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+
+endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser
+| CLOSE_BRACE
+;
+/************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
+
+value ::= VALUE;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 

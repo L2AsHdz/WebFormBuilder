@@ -8,32 +8,33 @@ package com.l2ashdz.appcliente.analizadores.sintactico;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int CLOSE_BRACKET = 24;
-  public static final int OPEN_BRACE = 21;
-  public static final int PARAM_OLD_USER = 12;
+  public static final int CLOSE_BRACKET = 25;
+  public static final int OPEN_BRACE = 22;
+  public static final int PARAM_OLD_USER = 13;
   public static final int PARAM_PASSWORD = 10;
   public static final int LOGIN = 5;
-  public static final int PARAM_NEW_PASSWORD = 14;
-  public static final int GREATER_THAN = 16;
-  public static final int QUOTE_MARK = 18;
-  public static final int VALUE = 25;
+  public static final int PARAM_NEW_PASSWORD = 15;
+  public static final int GREATER_THAN = 17;
+  public static final int QUOTE_MARK = 19;
+  public static final int VALUE = 26;
   public static final int CREATE_USER = 6;
   public static final int START_REQUEST = 2;
   public static final int MODIFY_USER = 8;
-  public static final int COLON = 19;
-  public static final int OPEN_BRACKET = 23;
+  public static final int COLON = 20;
+  public static final int OPEN_BRACKET = 24;
   public static final int DELETE_USER = 7;
   public static final int USER_CREDENTIALS = 4;
-  public static final int COMMA = 20;
+  public static final int PARAM_FECHA_MODIFICACION = 12;
+  public static final int COMMA = 21;
   public static final int EOF = 0;
-  public static final int LESS_THAN = 15;
-  public static final int CLOSE_BRACE = 22;
-  public static final int EXCLAMATION_MARK = 17;
+  public static final int LESS_THAN = 16;
+  public static final int CLOSE_BRACE = 23;
+  public static final int EXCLAMATION_MARK = 18;
   public static final int error = 1;
   public static final int PARAM_FECHA_CREACION = 11;
   public static final int PARAM_USUARIO = 9;
   public static final int END_REQUEST = 3;
-  public static final int PARAM_NEW_USER = 13;
+  public static final int PARAM_NEW_USER = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -47,6 +48,7 @@ public class sym {
   "PARAM_USUARIO",
   "PARAM_PASSWORD",
   "PARAM_FECHA_CREACION",
+  "PARAM_FECHA_MODIFICACION",
   "PARAM_OLD_USER",
   "PARAM_NEW_USER",
   "PARAM_NEW_PASSWORD",
