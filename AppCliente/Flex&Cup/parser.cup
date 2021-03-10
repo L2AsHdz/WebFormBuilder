@@ -69,8 +69,8 @@ terminal Token      VALUE;
 
 //no terminales
 non terminal        inicio, startRequest, requestType, startContent, blockParamName, endContent, endRequest;
-non terminal        startParamsLogin, startParamsCreateUser, startParamsModifyUser, startParamsDeleteUser;
-non terminal        endParamsLogin, endParamsCreateUser, endParamsModifyUser, endParamsDeleteUser;
+non terminal        bloquesLogin, bloquesCreateUser, bloquesModifyUser, bloquesDeleteUser;
+non terminal        bloqueLogin, bloqueCreateUser, bloqueModifyUser, bloqueDeleteUser;
 
 non terminal List<Parametro>    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
@@ -84,10 +84,10 @@ inicio ::= startRequest
 startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestType endContent endRequest;
 
 /******************************Producciones para los diferentes tipos de solicitud******************************/
-requestType ::= LOGIN QUOTE_MARK GREATER_THAN startContent startParamsLogin
-| CREATE_USER QUOTE_MARK GREATER_THAN startContent startParamsCreateUser
-| MODIFY_USER QUOTE_MARK GREATER_THAN startContent startParamsModifyUser
-| DELETE_USER QUOTE_MARK GREATER_THAN startContent startParamsDeleteUser
+requestType ::= LOGIN QUOTE_MARK GREATER_THAN startContent bloquesLogin
+| CREATE_USER QUOTE_MARK GREATER_THAN startContent bloquesCreateUser
+| MODIFY_USER QUOTE_MARK GREATER_THAN startContent bloquesModifyUser
+| DELETE_USER QUOTE_MARK GREATER_THAN startContent bloquesDeleteUser
 ;
 
 startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET;
@@ -95,7 +95,11 @@ startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRAC
 blockParamName ::= USER_CREDENTIALS;
 
 /******************************Producciones para parametros de solicitud Login******************************/
-startParamsLogin ::= OPEN_BRACE paramsLogin endParamsLogin
+bloquesLogin ::= bloqueLogin COMMA bloquesLogin
+               | bloqueLogin
+               ;
+
+bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE
                      {:
                         solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
                         parametros = new ArrayList();
@@ -115,16 +119,16 @@ paramLogin ::= QUOTE_MARK nameParamLogin:n QUOTE_MARK COLON QUOTE_MARK value:v Q
 nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema();:}
                  | PARAM_PASSWORD:p         {:RESULT = p.getLexema();:}
                  ;
-                 
-endParamsLogin ::= CLOSE_BRACE COMMA startParamsLogin
-                 | CLOSE_BRACE
-                 ;
 /**************************Fin de producciones para parametros de solicitud Login**************************/    
 
 
 
 /******************************Producciones para parametros de solicitud CrearUsuario******************************/
-startParamsCreateUser ::= OPEN_BRACE paramsCreateUser endParamsCreateUser
+bloquesCreateUser ::= bloqueCreateUser COMMA bloquesCreateUser
+                    | bloqueCreateUser
+                    ;
+
+bloqueCreateUser ::= OPEN_BRACE paramsCreateUser CLOSE_BRACE
                           {:
                                 solicitudes.add(new Solicitud(TipoSolicitud.CREATE_USER, parametros));
                                 parametros = new ArrayList();
@@ -145,16 +149,16 @@ nameParamCreateUser ::= PARAM_USUARIO:p               {:RESULT = p.getLexema();:
                       | PARAM_PASSWORD:p              {:RESULT = p.getLexema();:}
                       | PARAM_FECHA_CREACION:p        {:RESULT = p.getLexema();:}
                       ;
-           
-endParamsCreateUser ::= CLOSE_BRACE COMMA startParamsCreateUser
-                      | CLOSE_BRACE
-                      ;
 /****************************Fin producciones para parametros de solicitud CrearUsuario****************************/      
 
 
 
 /**************************Producciones para parametros de solicitud ModificarUsuario*************************/
-startParamsModifyUser ::= OPEN_BRACE paramsModifyUser endParamsModifyUser
+bloquesModifyUser ::= bloqueModifyUser COMMA bloquesModifyUser
+                    | bloqueModifyUser
+                    ;
+
+bloqueModifyUser ::= OPEN_BRACE paramsModifyUser CLOSE_BRACE
                         {:
                             solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
                             parametros = new ArrayList();
@@ -176,16 +180,16 @@ nameParamModifyUser ::= PARAM_OLD_USER:p                  {:RESULT = p.getLexema
                       | PARAM_NEW_PASSWORD:p              {:RESULT = p.getLexema();:}
                       | PARAM_FECHA_MODIFICACION:p        {:RESULT = p.getLexema();:}
                       ;
-
-endParamsModifyUser ::= CLOSE_BRACE COMMA startParamsModifyUser
-                      | CLOSE_BRACE
-                      ;
 /************************Fin producciones para parametros de solicitud ModificarUsuario************************/       
 
 
 
 /**************************Producciones para parametros de solicitud EliminarUsuario*************************/
-startParamsDeleteUser ::= OPEN_BRACE paramDeleteUser:p endParamsDeleteUser
+bloquesDeleteUser ::= bloqueDeleteUser COMMA bloquesDeleteUser
+                    | bloqueDeleteUser
+                    ;
+
+bloqueDeleteUser ::= OPEN_BRACE paramDeleteUser:p CLOSE_BRACE
                         {:
                             parametros.add(p);
                             solicitudes.add(new Solicitud(TipoSolicitud.DELETE_USER, parametros));
@@ -198,10 +202,6 @@ paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value
                         RESULT = new Parametro(p.getLexema(), v);
                     :}
                     ;
-
-endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser
-                      | CLOSE_BRACE
-                      ;
 /************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}

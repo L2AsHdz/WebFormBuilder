@@ -36,7 +36,11 @@ public class AppCliente {
                                                 { "CREDENCIALES_USUARIO":[{
                                                        "USUARIO": "AsaelLogin",
                                                        "PASSWORD": "123321"
-                                                      }         
+                                                      },
+                                                    {
+                                                    "USUARIO": "Login2doBloque",
+                                                    "PASSWORD": "22222222"
+                                                   }        
                                                     ]
                                                  }      
                                            <fin_solicitud!>
@@ -52,8 +56,6 @@ public class AppCliente {
                                             <!ini_solicitud:"LOGIN_USUARIO">
                                                  { "CREDENCIALES_USUARIO":[{
                                                         "USUARIO": "loginUser",
-                                                        "USUARIO": "loginUser",
-                                                        "PASSWORD": "12345678",
                                                         "PASSWORD": "12345678"
                                                        }         
                                                      ]
@@ -62,7 +64,9 @@ public class AppCliente {
                                             <!ini_solicitud:"ELIMINAR_USUARIO">
                                                 { "CREDENCIALES_USUARIO":[{
                                                     "USUARIO": "userEliminar2"
-                                                    }         
+                                                    },
+                                                    { "USUARIO" : "userEliminar2doBloque"
+                                                     }
                                                 ]
                                                  }
                                             <fin_solicitud!>""");
@@ -89,7 +93,7 @@ public class AppCliente {
                 s.getParametros().forEach(param -> System.out.println("\t" + param.getName() + " : " + param.getValue()));
             });
         } else {
-            errores.forEach(e -> System.out.println(e.getLexema() + " - " + e.getDescripcion() + " - " + e.getTipoError()));
+            errores.forEach(e -> System.out.println(e.getLexema() + " - " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
         }
     }
     

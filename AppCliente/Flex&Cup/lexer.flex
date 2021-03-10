@@ -62,7 +62,12 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "ELIMINAR_USUARIO"          {return symbol(DELETE_USER);}
 <YYINITIAL> "MODIFICAR_USUARIO"         {return symbol(MODIFY_USER);}
 
+<YYINITIAL> "NUEVO_FORMULARIO"          {return symbol(NEW_FORM);}
+<YYINITIAL> "ELIMINAR_FORMULARIO"       {return symbol(DELETE_FORM);}
+<YYINITIAL> "MODIFICAR_FORMULARIO"      {return symbol(MODIFY_FORM);}
+
 <YYINITIAL> "CREDENCIALES_USUARIO"      {return symbol(USER_CREDENTIALS);}
+<YYINITIAL> "PARAMETROS_FORMULARIO"     {return symbol(FORM_PARAMS);}
 
 <YYINITIAL> "USUARIO"                   {return symbol(PARAM_USUARIO);}
 <YYINITIAL> "PASSWORD"                  {return symbol(PARAM_PASSWORD);}
@@ -71,6 +76,13 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "USUARIO_ANTIGUO"           {return symbol(PARAM_OLD_USER);}
 <YYINITIAL> "USUARIO_NUEVO"             {return symbol(PARAM_NEW_USER);}
 <YYINITIAL> "NUEVO_PASSWORD"            {return symbol(PARAM_NEW_PASSWORD);}
+
+<YYINITIAL> "ID"                        {return symbol(ID);}
+<YYINITIAL> "TITULO"                    {return symbol(TITULO_FORM);}
+<YYINITIAL> "NOMBRE"                    {return symbol(NOMBRE_FORM);}
+<YYINITIAL> "TEMA"                      {return symbol(TEMA);}
+<YYINITIAL> "USUARIO_CREACION"          {return symbol(USUARIO_CREACION);}
+<YYINITIAL> "FECHA_CREACION"            {return symbol(FECHA_CREACION);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
