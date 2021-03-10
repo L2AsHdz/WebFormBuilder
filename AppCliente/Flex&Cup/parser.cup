@@ -26,6 +26,23 @@ parser code{:
         return this.solicitudes;
     }
 
+    private void addParameter(List<Parametro> parametros, Parametro param) {
+        boolean add = true;
+        
+        for (Parametro p : parametros) {
+            if (p.getName().equalsIgnoreCase(param.getName())) {
+                add = false;
+            }
+        }
+        
+        if (add) {
+            parametros.add(param);
+            System.out.println("Se agrego el parametro");
+        } else {
+            System.out.println("El parametro ya esta agregado");
+        }
+    }
+
     public void syntax_error(Symbol s) {
         Token t = (Token) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
@@ -85,8 +102,8 @@ startParamsLogin ::= OPEN_BRACE paramsLogin endParamsLogin
                      :}
                      ;
 
-paramsLogin ::= paramLogin:p COMMA paramsLogin        {:parametros.add(p);:}
-              | paramLogin:p                          {:parametros.add(p);:}
+paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(parametros, p);:}
+              | paramLogin:p                          {:addParameter(parametros, p);:}
               ;
 
 paramLogin ::= QUOTE_MARK nameParamLogin:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
@@ -114,8 +131,8 @@ startParamsCreateUser ::= OPEN_BRACE paramsCreateUser endParamsCreateUser
                           :}
                           ;
 
-paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:parametros.add(p);:}
-                   | paramCreateUser:p                          {:parametros.add(p);:}
+paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(parametros, p);:}
+                   | paramCreateUser:p                          {:addParameter(parametros, p);:}
                    ;
      
 paramCreateUser ::= QUOTE_MARK nameParamCreateUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
@@ -144,8 +161,8 @@ startParamsModifyUser ::= OPEN_BRACE paramsModifyUser endParamsModifyUser
                         :}
                         ;
 
-paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:parametros.add(p);:}
-                   | paramModifyUser:p                            {:parametros.add(p);:}
+paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter(parametros, p);:}
+                   | paramModifyUser:p                            {:addParameter(parametros, p);:}
                    ;
 
 paramModifyUser ::= QUOTE_MARK nameParamModifyUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK

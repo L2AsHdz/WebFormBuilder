@@ -52,6 +52,8 @@ public class AppCliente {
                                             <!ini_solicitud:"LOGIN_USUARIO">
                                                  { "CREDENCIALES_USUARIO":[{
                                                         "USUARIO": "loginUser",
+                                                        "USUARIO": "loginUser",
+                                                        "PASSWORD": "12345678",
                                                         "PASSWORD": "12345678"
                                                        }         
                                                      ]
@@ -90,4 +92,6 @@ public class AppCliente {
             errores.forEach(e -> System.out.println(e.getLexema() + " - " + e.getDescripcion() + " - " + e.getTipoError()));
         }
     }
+    
+    
 }
