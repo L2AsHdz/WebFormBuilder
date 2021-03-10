@@ -15,61 +15,64 @@ import java.util.List;
 public class AppCliente {
 
     public static void main(String[] args) {
-
+        
+        
         StringReader str = new StringReader("""
-                                            <!ini_solicitud:"ELIMINAR_USUARIO">
-                                                  { "CREDENCIALES_USUARIO":[{
-                                                        "USUARIO": "userEliminar"
-                                                       }         
-                                                     ]
-                                                  }
-                                            <fin_solicitud!>
-                                            <!ini_solicitud:"CREAR_USUARIO">
-                                                  { "CREDENCIALES_USUARIO":[{
-                                                        "USUARIO": "neuvoUsuario",
-                                                        "PASSWORD": "password"
-                                                       }         
-                                                     ]
-                                                  }
-                                            <fin_solicitud!>
-                                            <!ini_solicitud:"LOGIN_USUARIO">
-                                                { "CREDENCIALES_USUARIO":[{
-                                                       "USUARIO": "AsaelLogin",
-                                                       "PASSWORD": "123321"
-                                                      },
-                                                    {
-                                                    "USUARIO": "Login2doBloque",
-                                                    "PASSWORD": "22222222"
-                                                   }        
+                                            <!ini_solicitudes>
+                                                <!ini_solicitud:"ELIMINAR_USUARIO">
+                                                      { "CREDENCIALES_USUARIO":[{
+                                                            "USUARIO": "userEliminar"
+                                                           }         
+                                                         ]
+                                                      }
+                                                <fin_solicitud!>
+                                                <!ini_solicitud:"CREAR_USUARIO">
+                                                      { "CREDENCIALES_USUARIO":[{
+                                                            "USUARIO": "neuvoUsuario",
+                                                            "PASSWORD": "password"
+                                                           }         
+                                                         ]
+                                                      }
+                                                <fin_solicitud!>
+                                                <!ini_solicitud:"LOGIN_USUARIO">
+                                                    { "CREDENCIALES_USUARIO":[{
+                                                           "USUARIO": "AsaelLogin",
+                                                           "PASSWORD": "123321"
+                                                          },
+                                                        {
+                                                        "USUARIO": "Login2doBloque",
+                                                        "PASSWORD": "22222222"
+                                                       }        
+                                                        ]
+                                                     }      
+                                               <fin_solicitud!>
+                                                <!ini_solicitud:"MODIFICAR_USUARIO">
+                                                      { "CREDENCIALES_USUARIO":[{
+                                                            "USUARIO_ANTIGUO": "junito",
+                                                            "USUARIO_NUEVO": "juanitoNuevo",
+                                                            "NUEVO_PASSWORD": "12345678910"
+                                                           }         
+                                                         ]
+                                                      }
+                                                <fin_solicitud!>
+                                                <!ini_solicitud:"LOGIN_USUARIO">
+                                                     { "CREDENCIALES_USUARIO":[{
+                                                            "USUARIO": "loginUser",
+                                                            "PASSWORD": "12345678"
+                                                           }         
+                                                         ]
+                                                      }      
+                                                <fin_solicitud!>
+                                                <!ini_solicitud:"ELIMINAR_USUARIO">
+                                                    { "CREDENCIALES_USUARIO":[{
+                                                        "USUARIO": "userEliminar2"
+                                                        },
+                                                        { "USUARIO" : "userEliminar2doBloque"
+                                                         }
                                                     ]
-                                                 }      
-                                           <fin_solicitud!>
-                                            <!ini_solicitud:"MODIFICAR_USUARIO">
-                                                  { "CREDENCIALES_USUARIO":[{
-                                                        "USUARIO_ANTIGUO": "junito",
-                                                        "USUARIO_NUEVO": "juanitoNuevo",
-                                                        "NUEVO_PASSWORD": "12345678910"
-                                                       }         
-                                                     ]
-                                                  }
-                                            <fin_solicitud!>
-                                            <!ini_solicitud:"LOGIN_USUARIO">
-                                                 { "CREDENCIALES_USUARIO":[{
-                                                        "USUARIO": "loginUser",
-                                                        "PASSWORD": "12345678"
-                                                       }         
-                                                     ]
-                                                  }      
-                                            <fin_solicitud!>
-                                            <!ini_solicitud:"ELIMINAR_USUARIO">
-                                                { "CREDENCIALES_USUARIO":[{
-                                                    "USUARIO": "userEliminar2"
-                                                    },
-                                                    { "USUARIO" : "userEliminar2doBloque"
                                                      }
-                                                ]
-                                                 }
-                                            <fin_solicitud!>""");
+                                                <fin_solicitud!>
+                                            <!fin_solicitudes>""");
 
         Lexer lex = new Lexer(str);
         Parser parser = new Parser(lex);

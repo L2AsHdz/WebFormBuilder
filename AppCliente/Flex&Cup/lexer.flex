@@ -56,6 +56,8 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 
 <YYINITIAL> "ini_solicitud"             {return symbol(START_REQUEST);}
 <YYINITIAL> "fin_solicitud"             {return symbol(END_REQUEST);}
+<YYINITIAL> "ini_solicitudes"           {return symbol(START_REQUESTS);}
+<YYINITIAL> "fin_solicitudes"           {return symbol(END_REQUESTS);}
 
 <YYINITIAL> "LOGIN_USUARIO"             {return symbol(LOGIN);}
 <YYINITIAL> "CREAR_USUARIO"             {return symbol(CREATE_USER);}
@@ -82,7 +84,7 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "NOMBRE"                    {return symbol(NOMBRE_FORM);}
 <YYINITIAL> "TEMA"                      {return symbol(TEMA);}
 <YYINITIAL> "USUARIO_CREACION"          {return symbol(USUARIO_CREACION);}
-<YYINITIAL> "FECHA_CREACION"            {return symbol(FECHA_CREACION);}
+<YYINITIAL> "FECHA_CREACION_FORM"            {return symbol(FECHA_CREACION_FORM);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
