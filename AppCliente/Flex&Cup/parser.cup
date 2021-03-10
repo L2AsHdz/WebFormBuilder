@@ -22,6 +22,10 @@ parser code{:
         return this.errores;
     }
 
+    public List<Solicitud> getSolicitudes() {
+        return this.solicitudes;
+    }
+
     public void syntax_error(Symbol s) {
         Token t = (Token) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
@@ -47,7 +51,7 @@ terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON
 terminal Token      VALUE;
 
 //no terminales
-non terminal        startRequest, requestType, startContent, blockParamName, endContent, endRequest;
+non terminal        inicio, startRequest, requestType, startContent, blockParamName, endContent, endRequest;
 non terminal        startParamsLogin, startParamsCreateUser, startParamsModifyUser, startParamsDeleteUser;
 non terminal        endParamsLogin, endParamsCreateUser, endParamsModifyUser, endParamsDeleteUser;
 
@@ -55,6 +59,9 @@ non terminal List<Parametro>    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser, value;
 
+
+inicio ::= startRequest
+         | startRequest inicio;
 
 /******************************Produccion para el inicio de una solicitud en general******************************/
 startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestType endContent endRequest;
@@ -71,13 +78,22 @@ startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRAC
 blockParamName ::= USER_CREDENTIALS;
 
 /******************************Producciones para parametros de solicitud Login******************************/
-startParamsLogin ::= OPEN_BRACE paramsLogin endParamsLogin;
+startParamsLogin ::= OPEN_BRACE paramsLogin endParamsLogin
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
 
-paramsLogin ::= paramLogin COMMA paramsLogin
-              | paramLogin
+paramsLogin ::= paramLogin:p COMMA paramsLogin        {:parametros.add(p);:}
+              | paramLogin:p                          {:parametros.add(p);:}
               ;
 
-paramLogin ::= QUOTE_MARK nameParamLogin QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+paramLogin ::= QUOTE_MARK nameParamLogin:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+               {:
+                    RESULT = new Parametro(n, v);
+               :}
+               ;
 
 nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema();:}
                  | PARAM_PASSWORD:p         {:RESULT = p.getLexema();:}
@@ -91,13 +107,22 @@ endParamsLogin ::= CLOSE_BRACE COMMA startParamsLogin
 
 
 /******************************Producciones para parametros de solicitud CrearUsuario******************************/
-startParamsCreateUser ::= OPEN_BRACE paramsCreateUser endParamsCreateUser;
+startParamsCreateUser ::= OPEN_BRACE paramsCreateUser endParamsCreateUser
+                          {:
+                                solicitudes.add(new Solicitud(TipoSolicitud.CREATE_USER, parametros));
+                                parametros = new ArrayList();
+                          :}
+                          ;
 
-paramsCreateUser ::= paramCreateUser COMMA paramsCreateUser
-                   | paramCreateUser
+paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:parametros.add(p);:}
+                   | paramCreateUser:p                          {:parametros.add(p);:}
                    ;
      
-paramCreateUser ::= QUOTE_MARK nameParamCreateUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+paramCreateUser ::= QUOTE_MARK nameParamCreateUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(n, v);
+                    :}
+                    ;
 
 nameParamCreateUser ::= PARAM_USUARIO:p               {:RESULT = p.getLexema();:}
                       | PARAM_PASSWORD:p              {:RESULT = p.getLexema();:}
@@ -112,13 +137,22 @@ endParamsCreateUser ::= CLOSE_BRACE COMMA startParamsCreateUser
 
 
 /**************************Producciones para parametros de solicitud ModificarUsuario*************************/
-startParamsModifyUser ::= OPEN_BRACE paramsModifyUser endParamsModifyUser;
+startParamsModifyUser ::= OPEN_BRACE paramsModifyUser endParamsModifyUser
+                        {:
+                            solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
 
-paramsModifyUser ::= paramModifyUser COMMA paramsModifyUser
-                   | paramModifyUser
+paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:parametros.add(p);:}
+                   | paramModifyUser:p                            {:parametros.add(p);:}
                    ;
 
-paramModifyUser ::= QUOTE_MARK nameParamModifyUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+paramModifyUser ::= QUOTE_MARK nameParamModifyUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(n, v);
+                    :}
+                    ;
 
 nameParamModifyUser ::= PARAM_OLD_USER:p                  {:RESULT = p.getLexema();:}
                       | PARAM_NEW_USER:p                  {:RESULT = p.getLexema();:}
@@ -138,10 +172,7 @@ startParamsDeleteUser ::= OPEN_BRACE paramDeleteUser:p endParamsDeleteUser
                         {:
                             parametros.add(p);
                             solicitudes.add(new Solicitud(TipoSolicitud.DELETE_USER, parametros));
-                            solicitudes.forEach(s -> {
-                                System.out.println("Solicitud tipo " + s.getTipo());
-                                s.getParametros().forEach(param -> System.out.println(param.getName() + " - " + param.getValue()));
-                            });
+                            parametros = new ArrayList();
                         :}
                         ;
 
@@ -151,7 +182,7 @@ paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value
                     :}
                     ;
 
-endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser         {:parametros.clear();:}
+endParamsDeleteUser ::= CLOSE_BRACE COMMA startParamsDeleteUser
                       | CLOSE_BRACE
                       ;
 /************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
