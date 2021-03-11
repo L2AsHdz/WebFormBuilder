@@ -8,35 +8,44 @@ package com.l2ashdz.appcliente.analizadores.sintactico;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int CLOSE_BRACKET = 27;
-  public static final int OPEN_BRACE = 24;
-  public static final int END_REQUESTS = 5;
-  public static final int PARAM_OLD_USER = 15;
-  public static final int PARAM_PASSWORD = 12;
-  public static final int LOGIN = 7;
-  public static final int PARAM_NEW_PASSWORD = 17;
-  public static final int GREATER_THAN = 19;
-  public static final int QUOTE_MARK = 21;
-  public static final int VALUE = 28;
-  public static final int START_REQUESTS = 3;
-  public static final int CREATE_USER = 8;
-  public static final int START_REQUEST = 2;
-  public static final int MODIFY_USER = 10;
-  public static final int COLON = 22;
-  public static final int OPEN_BRACKET = 26;
-  public static final int DELETE_USER = 9;
-  public static final int USER_CREDENTIALS = 6;
-  public static final int PARAM_FECHA_MODIFICACION = 14;
-  public static final int COMMA = 23;
-  public static final int EOF = 0;
-  public static final int LESS_THAN = 18;
-  public static final int CLOSE_BRACE = 25;
-  public static final int EXCLAMATION_MARK = 20;
-  public static final int error = 1;
-  public static final int PARAM_FECHA_CREACION = 13;
-  public static final int PARAM_USUARIO = 11;
+  public static final int PARAM_NEW_USER = 20;
+  public static final int PARAM_ID = 22;
+  public static final int NEW_FORM = 12;
+  public static final int GREATER_THAN = 28;
   public static final int END_REQUEST = 4;
-  public static final int PARAM_NEW_USER = 16;
+  public static final int PARAM_TEMA = 25;
+  public static final int PARAM_OLD_USER = 19;
+  public static final int COMMA = 32;
+  public static final int END_REQUESTS = 5;
+  public static final int CREATE_USER = 9;
+  public static final int EOF = 0;
+  public static final int PARAM_FECHA_CREACION = 17;
+  public static final int PARAM_TITULO_FORM = 23;
+  public static final int PARAM_NOMBRE_FORM = 24;
+  public static final int DELETE_USER = 10;
+  public static final int error = 1;
+  public static final int QUOTE_MARK = 30;
+  public static final int PARAM_PASSWORD = 16;
+  public static final int OPEN_BRACE = 33;
+  public static final int CLOSE_BRACKET = 36;
+  public static final int OPEN_BRACKET = 35;
+  public static final int PARAM_USUARIO_CREACION = 26;
+  public static final int DELETE_FORM = 13;
+  public static final int USER_CREDENTIALS = 6;
+  public static final int START_REQUEST = 2;
+  public static final int COLON = 31;
+  public static final int PARAM_FECHA_MODIFICACION = 18;
+  public static final int START_REQUESTS = 3;
+  public static final int MODIFY_USER = 11;
+  public static final int LOGIN = 8;
+  public static final int FORM_PARAMS = 7;
+  public static final int MODIFY_FORM = 14;
+  public static final int CLOSE_BRACE = 34;
+  public static final int VALUE = 37;
+  public static final int PARAM_NEW_PASSWORD = 21;
+  public static final int EXCLAMATION_MARK = 29;
+  public static final int LESS_THAN = 27;
+  public static final int PARAM_USUARIO = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -45,10 +54,14 @@ public class sym {
   "END_REQUEST",
   "END_REQUESTS",
   "USER_CREDENTIALS",
+  "FORM_PARAMS",
   "LOGIN",
   "CREATE_USER",
   "DELETE_USER",
   "MODIFY_USER",
+  "NEW_FORM",
+  "DELETE_FORM",
+  "MODIFY_FORM",
   "PARAM_USUARIO",
   "PARAM_PASSWORD",
   "PARAM_FECHA_CREACION",
@@ -56,6 +69,11 @@ public class sym {
   "PARAM_OLD_USER",
   "PARAM_NEW_USER",
   "PARAM_NEW_PASSWORD",
+  "PARAM_ID",
+  "PARAM_TITULO_FORM",
+  "PARAM_NOMBRE_FORM",
+  "PARAM_TEMA",
+  "PARAM_USUARIO_CREACION",
   "LESS_THAN",
   "GREATER_THAN",
   "EXCLAMATION_MARK",

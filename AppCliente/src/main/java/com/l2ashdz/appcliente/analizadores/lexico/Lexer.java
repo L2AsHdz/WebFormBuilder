@@ -113,12 +113,12 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\3\6\1\16\42\6\1\17\30\6\1\20\3\6\1\21"+
     "\16\6\1\22\14\6\1\23\104\6\1\24\5\6\1\25"+
     "\7\6\1\26\1\27\1\30\3\6\1\31\4\6\1\32"+
-    "\16\6\1\33\1\6\1\34\1\35\2\6\1\36\4\6"+
-    "\1\37\1\6\1\40\5\6\1\41\4\6\1\42\3\6"+
-    "\1\43\1\44\2\6\1\45\1\46\1\6\1\47";
+    "\15\6\1\33\1\6\1\34\1\35\2\6\1\36\3\6"+
+    "\1\37\1\6\1\40\4\6\1\41\3\6\1\42\3\6"+
+    "\1\43\2\6\1\44\1\45\1\6\1\46";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[267];
+    int [] result = new int[262];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -169,17 +169,16 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\0\u1ed8\0\u1f07\0\u1f36\0\u1f65\0\u1f94\0\u1fc3\0\u1ff2\0\215"+
     "\0\u2021\0\u2050\0\u207f\0\u20ae\0\u20dd\0\215\0\u210c\0\u213b"+
     "\0\u216a\0\u2199\0\u21c8\0\u21f7\0\u2226\0\215\0\u2255\0\u2284"+
-    "\0\u22b3\0\u22e2\0\u2311\0\u2340\0\u236f\0\u239e\0\u23cd\0\u23fc"+
-    "\0\215\0\u242b\0\u245a\0\u2489\0\u24b8\0\u24e7\0\u2516\0\u2545"+
-    "\0\u2574\0\u25a3\0\u25d2\0\u2601\0\u2630\0\u265f\0\u268e\0\215"+
-    "\0\u26bd\0\215\0\215\0\u26ec\0\u271b\0\215\0\u274a\0\u2779"+
-    "\0\u27a8\0\u27d7\0\215\0\u2806\0\215\0\u2835\0\u2864\0\u2893"+
-    "\0\u28c2\0\u28f1\0\215\0\u2920\0\u294f\0\u297e\0\u29ad\0\215"+
-    "\0\u29dc\0\u2a0b\0\u2a3a\0\215\0\215\0\u2a69\0\u2a98\0\215"+
-    "\0\215\0\u2ac7\0\215";
+    "\0\u22b3\0\u22e2\0\u2311\0\215\0\u2340\0\u236f\0\u239e\0\u23cd"+
+    "\0\215\0\u23fc\0\u242b\0\u245a\0\u2489\0\u24b8\0\u24e7\0\u2516"+
+    "\0\u2545\0\u2574\0\u25a3\0\u25d2\0\u2601\0\u2630\0\215\0\u265f"+
+    "\0\215\0\215\0\u268e\0\u26bd\0\215\0\u26ec\0\u271b\0\u274a"+
+    "\0\215\0\u2779\0\215\0\u27a8\0\u27d7\0\u2806\0\u2835\0\215"+
+    "\0\u2864\0\u2893\0\u28c2\0\215\0\u28f1\0\u2920\0\u294f\0\215"+
+    "\0\u297e\0\u29ad\0\215\0\215\0\u29dc\0\215";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[267];
+    int [] result = new int[262];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -348,40 +347,37 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\3\0\31\10\1\336\10\10\11\0\1\10\3\0\17\10"+
     "\1\337\22\10\11\0\1\10\3\0\11\10\1\340\30\10"+
     "\11\0\1\10\3\0\10\10\1\341\31\10\11\0\1\10"+
-    "\3\0\26\10\1\342\13\10\11\0\1\10\3\0\2\10"+
-    "\1\343\37\10\11\0\1\10\3\0\21\10\1\344\20\10"+
-    "\11\0\1\10\3\0\16\10\1\345\23\10\11\0\1\10"+
-    "\3\0\10\10\1\346\31\10\11\0\1\10\3\0\12\10"+
-    "\1\347\27\10\11\0\1\10\3\0\14\10\1\350\25\10"+
-    "\11\0\1\10\3\0\14\10\1\351\25\10\11\0\1\10"+
-    "\3\0\37\10\1\352\2\10\11\0\1\10\3\0\37\10"+
-    "\1\353\2\10\11\0\1\10\3\0\21\10\1\354\20\10"+
-    "\11\0\1\10\3\0\1\355\41\10\11\0\1\10\3\0"+
-    "\14\10\1\356\25\10\11\0\1\10\3\0\5\10\1\357"+
-    "\34\10\11\0\1\10\3\0\10\10\1\360\31\10\11\0"+
-    "\1\10\3\0\11\10\1\361\30\10\11\0\1\10\3\0"+
-    "\10\10\1\362\31\10\11\0\1\10\3\0\14\10\1\363"+
-    "\25\10\11\0\1\10\3\0\21\10\1\364\20\10\11\0"+
-    "\1\10\3\0\13\10\1\365\26\10\11\0\1\10\3\0"+
-    "\1\366\41\10\11\0\1\10\3\0\16\10\1\367\23\10"+
-    "\11\0\1\10\3\0\14\10\1\370\25\10\11\0\1\10"+
-    "\3\0\14\10\1\371\25\10\11\0\1\10\3\0\1\372"+
-    "\41\10\11\0\1\10\3\0\14\10\1\373\25\10\11\0"+
-    "\1\10\3\0\11\10\1\374\30\10\11\0\1\10\3\0"+
-    "\16\10\1\375\23\10\11\0\1\10\3\0\10\10\1\376"+
-    "\31\10\11\0\1\10\3\0\16\10\1\377\23\10\11\0"+
-    "\1\10\3\0\13\10\1\u0100\26\10\11\0\1\10\3\0"+
-    "\16\10\1\u0101\23\10\11\0\1\10\3\0\1\u0102\41\10"+
-    "\11\0\1\10\3\0\10\10\1\u0103\31\10\11\0\1\10"+
-    "\3\0\14\10\1\u0104\25\10\11\0\1\10\3\0\12\10"+
-    "\1\u0105\27\10\11\0\1\10\3\0\10\10\1\u0106\31\10"+
-    "\11\0\1\10\3\0\16\10\1\u0107\23\10\11\0\1\10"+
-    "\3\0\14\10\1\u0108\25\10\11\0\1\10\3\0\14\10"+
-    "\1\u0109\25\10\11\0\1\10\3\0\10\10\1\u010a\31\10"+
-    "\11\0\1\10\3\0\14\10\1\u010b\25\10\2\0";
+    "\3\0\2\10\1\342\37\10\11\0\1\10\3\0\21\10"+
+    "\1\343\20\10\11\0\1\10\3\0\16\10\1\344\23\10"+
+    "\11\0\1\10\3\0\10\10\1\345\31\10\11\0\1\10"+
+    "\3\0\12\10\1\346\27\10\11\0\1\10\3\0\14\10"+
+    "\1\347\25\10\11\0\1\10\3\0\14\10\1\350\25\10"+
+    "\11\0\1\10\3\0\37\10\1\351\2\10\11\0\1\10"+
+    "\3\0\37\10\1\352\2\10\11\0\1\10\3\0\21\10"+
+    "\1\353\20\10\11\0\1\10\3\0\1\354\41\10\11\0"+
+    "\1\10\3\0\14\10\1\355\25\10\11\0\1\10\3\0"+
+    "\10\10\1\356\31\10\11\0\1\10\3\0\11\10\1\357"+
+    "\30\10\11\0\1\10\3\0\10\10\1\360\31\10\11\0"+
+    "\1\10\3\0\14\10\1\361\25\10\11\0\1\10\3\0"+
+    "\21\10\1\362\20\10\11\0\1\10\3\0\13\10\1\363"+
+    "\26\10\11\0\1\10\3\0\1\364\41\10\11\0\1\10"+
+    "\3\0\16\10\1\365\23\10\11\0\1\10\3\0\14\10"+
+    "\1\366\25\10\11\0\1\10\3\0\1\367\41\10\11\0"+
+    "\1\10\3\0\14\10\1\370\25\10\11\0\1\10\3\0"+
+    "\11\10\1\371\30\10\11\0\1\10\3\0\16\10\1\372"+
+    "\23\10\11\0\1\10\3\0\10\10\1\373\31\10\11\0"+
+    "\1\10\3\0\13\10\1\374\26\10\11\0\1\10\3\0"+
+    "\16\10\1\375\23\10\11\0\1\10\3\0\1\376\41\10"+
+    "\11\0\1\10\3\0\10\10\1\377\31\10\11\0\1\10"+
+    "\3\0\14\10\1\u0100\25\10\11\0\1\10\3\0\10\10"+
+    "\1\u0101\31\10\11\0\1\10\3\0\16\10\1\u0102\23\10"+
+    "\11\0\1\10\3\0\14\10\1\u0103\25\10\11\0\1\10"+
+    "\3\0\14\10\1\u0104\25\10\11\0\1\10\3\0\10\10"+
+    "\1\u0105\31\10\11\0\1\10\3\0\14\10\1\u0106\25\10"+
+    "\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[10998];
+    int [] result = new int[10763];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -425,10 +421,10 @@ public class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\2\11\1\1\3\11\1\1\3\11\16\1\2\11"+
-    "\360\1";
+    "\353\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[267];
+    int [] result = new int[262];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -932,197 +928,192 @@ public class Lexer implements java_cup.runtime.Scanner {
             { addLexicError();
             }
             // fall through
-          case 40: break;
+          case 39: break;
           case 2:
             { /*Ignorar*/
             }
             // fall through
-          case 41: break;
+          case 40: break;
           case 3:
             { return symbol(EXCLAMATION_MARK);
             }
             // fall through
-          case 42: break;
+          case 41: break;
           case 4:
             { return symbol(QUOTE_MARK);
             }
             // fall through
-          case 43: break;
+          case 42: break;
           case 5:
             { return symbol(COMMA);
             }
             // fall through
-          case 44: break;
+          case 43: break;
           case 6:
             { return symbol(VALUE);
             }
             // fall through
-          case 45: break;
+          case 44: break;
           case 7:
             { return symbol(COLON);
             }
             // fall through
-          case 46: break;
+          case 45: break;
           case 8:
             { return symbol(LESS_THAN);
             }
             // fall through
-          case 47: break;
+          case 46: break;
           case 9:
             { return symbol(GREATER_THAN);
             }
             // fall through
-          case 48: break;
+          case 47: break;
           case 10:
             { return symbol(OPEN_BRACKET);
             }
             // fall through
-          case 49: break;
+          case 48: break;
           case 11:
             { return symbol(CLOSE_BRACKET);
             }
             // fall through
-          case 50: break;
+          case 49: break;
           case 12:
             { return symbol(OPEN_BRACE);
             }
             // fall through
-          case 51: break;
+          case 50: break;
           case 13:
             { return symbol(CLOSE_BRACE);
             }
             // fall through
-          case 52: break;
+          case 51: break;
           case 14:
-            { return symbol(ID);
+            { return symbol(PARAM_ID);
+            }
+            // fall through
+          case 52: break;
+          case 15:
+            { return symbol(PARAM_TEMA);
             }
             // fall through
           case 53: break;
-          case 15:
-            { return symbol(TEMA);
+          case 16:
+            { return symbol(PARAM_NOMBRE_FORM);
             }
             // fall through
           case 54: break;
-          case 16:
-            { return symbol(NOMBRE_FORM);
+          case 17:
+            { return symbol(PARAM_TITULO_FORM);
             }
             // fall through
           case 55: break;
-          case 17:
-            { return symbol(TITULO_FORM);
-            }
-            // fall through
-          case 56: break;
           case 18:
             { return symbol(PARAM_USUARIO);
             }
             // fall through
-          case 57: break;
+          case 56: break;
           case 19:
             { return symbol(PARAM_PASSWORD);
             }
             // fall through
-          case 58: break;
+          case 57: break;
           case 20:
             { return symbol(CREATE_USER);
             }
             // fall through
-          case 59: break;
+          case 58: break;
           case 21:
             { return symbol(LOGIN);
             }
             // fall through
-          case 60: break;
+          case 59: break;
           case 22:
             { return symbol(PARAM_NEW_USER);
             }
             // fall through
-          case 61: break;
+          case 60: break;
           case 23:
             { return symbol(END_REQUEST);
             }
             // fall through
-          case 62: break;
+          case 61: break;
           case 24:
             { return symbol(START_REQUEST);
             }
             // fall through
-          case 63: break;
+          case 62: break;
           case 25:
             { return symbol(PARAM_FECHA_CREACION);
             }
             // fall through
-          case 64: break;
+          case 63: break;
           case 26:
             { return symbol(PARAM_NEW_PASSWORD);
             }
             // fall through
-          case 65: break;
+          case 64: break;
           case 27:
             { return symbol(PARAM_OLD_USER);
             }
             // fall through
-          case 66: break;
+          case 65: break;
           case 28:
             { return symbol(END_REQUESTS);
             }
             // fall through
-          case 67: break;
+          case 66: break;
           case 29:
             { return symbol(START_REQUESTS);
             }
             // fall through
-          case 68: break;
+          case 67: break;
           case 30:
             { return symbol(DELETE_USER);
             }
             // fall through
-          case 69: break;
+          case 68: break;
           case 31:
             { return symbol(NEW_FORM);
             }
             // fall through
-          case 70: break;
+          case 69: break;
           case 32:
-            { return symbol(USUARIO_CREACION);
+            { return symbol(PARAM_USUARIO_CREACION);
             }
             // fall through
-          case 71: break;
+          case 70: break;
           case 33:
             { return symbol(MODIFY_USER);
             }
             // fall through
-          case 72: break;
+          case 71: break;
           case 34:
             { return symbol(PARAM_FECHA_MODIFICACION);
             }
             // fall through
-          case 73: break;
+          case 72: break;
           case 35:
             { return symbol(DELETE_FORM);
             }
             // fall through
-          case 74: break;
+          case 73: break;
           case 36:
-            { return symbol(FECHA_CREACION_FORM);
-            }
-            // fall through
-          case 75: break;
-          case 37:
             { return symbol(USER_CREDENTIALS);
             }
             // fall through
-          case 76: break;
-          case 38:
+          case 74: break;
+          case 37:
             { return symbol(MODIFY_FORM);
             }
             // fall through
-          case 77: break;
-          case 39:
+          case 75: break;
+          case 38:
             { return symbol(FORM_PARAMS);
             }
             // fall through
-          case 78: break;
+          case 76: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

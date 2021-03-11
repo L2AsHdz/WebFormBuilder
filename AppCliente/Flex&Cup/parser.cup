@@ -62,22 +62,31 @@ parser code{:
 
 //Terminales
 terminal Token      START_REQUEST, START_REQUESTS, END_REQUEST, END_REQUESTS;
-terminal Token      USER_CREDENTIALS;
+terminal Token      USER_CREDENTIALS, FORM_PARAMS;
 terminal Token      LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
+terminal Token      NEW_FORM, DELETE_FORM, MODIFY_FORM;
 terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_FECHA_MODIFICACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
+terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
 terminal Token      VALUE;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
-non terminal        requestType, startContent, blockParamName, endContent;
+non terminal        requestType, startContentUser, startContentForm, endContent;
+
 non terminal        bloquesLogin, bloquesCreateUser, bloquesModifyUser, bloquesDeleteUser;
 non terminal        bloqueLogin, bloqueCreateUser, bloqueModifyUser, bloqueDeleteUser;
 
-non terminal List<Parametro>    paramsLogin, paramsCreateUser, paramsModifyUser;
+non terminal        bloquesNewForm, bloquesEditForm, bloquesDeleteForm;
+non terminal        bloqueNewForm, bloqueEditForm, bloqueDeleteForm;
+
+non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser, value;
 
+non terminal                    paramsNewForm, paramsEditForm;
+non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
+non terminal String             nameParamNewForm, nameParamEditForm;
 
 inicio ::= startRequest
          | startRequests
@@ -93,15 +102,19 @@ requests ::= startRequest endRequests
 startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestType endContent endRequest;
 
 /******************************Producciones para los diferentes tipos de solicitud******************************/
-requestType ::= LOGIN QUOTE_MARK GREATER_THAN startContent bloquesLogin
-| CREATE_USER QUOTE_MARK GREATER_THAN startContent bloquesCreateUser
-| MODIFY_USER QUOTE_MARK GREATER_THAN startContent bloquesModifyUser
-| DELETE_USER QUOTE_MARK GREATER_THAN startContent bloquesDeleteUser
-;
+requestType ::= LOGIN startContentUser bloquesLogin
+              | CREATE_USER startContentUser bloquesCreateUser
+              | MODIFY_USER startContentUser bloquesModifyUser
+              | DELETE_USER startContentUser bloquesDeleteUser
+              | NEW_FORM startContentForm bloquesNewForm
+              | MODIFY_FORM startContentForm bloquesEditForm
+              | DELETE_FORM startContentForm bloquesDeleteForm
+              ;
 
-startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET;
+startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET;
+startContentForm ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK FORM_PARAMS QUOTE_MARK COLON OPEN_BRACKET;
 
-blockParamName ::= USER_CREDENTIALS;
+
 
 /******************************Producciones para parametros de solicitud Login******************************/
 bloquesLogin ::= bloqueLogin COMMA bloquesLogin
@@ -212,6 +225,92 @@ paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value
                     :}
                     ;
 /************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
+
+
+
+/******************************Producciones para parametros de solicitud NuevoFormulario******************************/
+bloquesNewForm ::= bloqueNewForm COMMA bloquesNewForm
+               | bloqueNewForm
+               ;
+
+bloqueNewForm ::= OPEN_BRACE paramsNewForm CLOSE_BRACE
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
+
+paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(parametros, p);:}
+              | paramNewForm:p                              {:addParameter(parametros, p);:}
+              ;
+
+paramNewForm ::= QUOTE_MARK nameParamNewForm:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+               {:
+                    RESULT = new Parametro(n, v);
+               :}
+               ;
+
+nameParamNewForm ::= PARAM_ID:p                     {:RESULT = p.getLexema();:}
+                   | PARAM_TITULO_FORM:p            {:RESULT = p.getLexema();:}
+                   | PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
+                   | PARAM_TEMA:p                   {:RESULT = p.getLexema();:}
+                   | PARAM_USUARIO_CREACION:p       {:RESULT = p.getLexema();:}
+                   | PARAM_FECHA_CREACION:p    {:RESULT = p.getLexema();:}
+                   ;
+/**************************Fin de producciones para parametros de solicitud NuevoFormulario**************************/
+
+
+
+/******************************Producciones para parametros de solicitud DeleteForm******************************/
+bloquesDeleteForm ::= bloqueDeleteForm COMMA bloquesDeleteForm
+                    | bloqueDeleteForm
+                    ;
+
+bloqueDeleteForm ::= OPEN_BRACE paramDeleteForm:p CLOSE_BRACE
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_FORM, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramDeleteForm ::= QUOTE_MARK PARAM_ID:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(p.getLexema(), v);
+                    :}
+                    ;
+/**************************Fin de producciones para parametros de solicitud DeleteForm**************************/
+
+
+
+/******************************Producciones para parametros de solicitud ModifyForm******************************/
+bloquesEditForm ::= bloqueEditForm COMMA bloquesEditForm
+                  | bloqueEditForm
+                  ;
+
+bloqueEditForm ::= OPEN_BRACE paramsEditForm CLOSE_BRACE
+                 {:
+                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    parametros = new ArrayList();
+                 :}
+                 ;
+
+paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(parametros, p);:}
+                 | paramEditForm:p                              {:addParameter(parametros, p);:}
+                 ;
+
+paramEditForm ::= QUOTE_MARK nameParamEditForm:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+               {:
+                    RESULT = new Parametro(n, v);
+               :}
+               ;
+
+nameParamEditForm ::= PARAM_ID:p                {:RESULT = p.getLexema();:}
+                   | PARAM_TITULO_FORM:p        {:RESULT = p.getLexema();:}
+                   | PARAM_NOMBRE_FORM:p        {:RESULT = p.getLexema();:}
+                   | PARAM_TEMA:p               {:RESULT = p.getLexema();:}
+                   ;
+/**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;

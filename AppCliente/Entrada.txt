@@ -1,0 +1,79 @@
+<!ini_solicitudes>
+    
+    <!ini_solicitud:"CREAR_USUARIO">
+            { "CREDENCIALES_USUARIO":[{
+                "USUARIO": "neuvoUsuario",
+                "PASSWORD": "password"
+                }         
+                ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"LOGIN_USUARIO">
+        { "CREDENCIALES_USUARIO":[{
+                "USUARIO": "AsaelLogin",
+                "PASSWORD": "123321"
+                },
+            {
+            "USUARIO": "Login2doBloque",
+            "PASSWORD": "22222222"
+            }        
+            ]
+            }      
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"MODIFICAR_USUARIO">
+            { "CREDENCIALES_USUARIO":[{
+                "USUARIO_ANTIGUO": "junito",
+                "USUARIO_NUEVO": "juanitoNuevo",
+                "NUEVO_PASSWORD": "12345678910"
+                }         
+                ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"ELIMINAR_USUARIO">
+        { "CREDENCIALES_USUARIO":[{
+            "USUARIO": "userEliminar2"
+            },
+            { "USUARIO" : "userEliminar2doBloque"
+                }
+        ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"NUEVO_FORMULARIO">
+       { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"form1",
+                    "TITULO":"Formularioparaencuesta1",
+                    "NOMBRE":"formulario_encuesta_1",
+                    "TEMA":"Dark",
+                    "FECHA_CREACION": "2002-06-06"
+                }
+            ]
+        }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"ELIMINAR_FORMULARIO">
+        { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"form1"
+                }
+            ]
+        }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"MODIFICAR_FORMULARIO">
+       { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"form10",
+                    "TITULO":"FormularioModificado",
+                    "NOMBRE":"formulario_encuesta_111",
+                    "TEMA":"White"
+                }
+            ]
+        }
+    <fin_solicitud!>
+    
+<!fin_solicitudes>

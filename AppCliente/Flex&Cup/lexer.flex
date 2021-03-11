@@ -79,12 +79,11 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "USUARIO_NUEVO"             {return symbol(PARAM_NEW_USER);}
 <YYINITIAL> "NUEVO_PASSWORD"            {return symbol(PARAM_NEW_PASSWORD);}
 
-<YYINITIAL> "ID"                        {return symbol(ID);}
-<YYINITIAL> "TITULO"                    {return symbol(TITULO_FORM);}
-<YYINITIAL> "NOMBRE"                    {return symbol(NOMBRE_FORM);}
-<YYINITIAL> "TEMA"                      {return symbol(TEMA);}
-<YYINITIAL> "USUARIO_CREACION"          {return symbol(USUARIO_CREACION);}
-<YYINITIAL> "FECHA_CREACION_FORM"            {return symbol(FECHA_CREACION_FORM);}
+<YYINITIAL> "ID"                        {return symbol(PARAM_ID);}
+<YYINITIAL> "TITULO"                    {return symbol(PARAM_TITULO_FORM);}
+<YYINITIAL> "NOMBRE"                    {return symbol(PARAM_NOMBRE_FORM);}
+<YYINITIAL> "TEMA"                      {return symbol(PARAM_TEMA);}
+<YYINITIAL> "USUARIO_CREACION"          {return symbol(PARAM_USUARIO_CREACION);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}

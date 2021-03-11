@@ -39,21 +39,30 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\060\000\002\002\003\000\002\002\004\000\002\002" +
+    "\000\115\000\002\002\003\000\002\002\004\000\002\002" +
     "\003\000\002\003\007\000\002\004\004\000\002\004\004" +
-    "\000\002\006\012\000\002\010\007\000\002\010\007\000" +
-    "\002\010\007\000\002\010\007\000\002\011\010\000\002" +
-    "\012\003\000\002\014\005\000\002\014\003\000\002\020" +
-    "\005\000\002\024\005\000\002\024\003\000\002\027\011" +
-    "\000\002\033\003\000\002\033\003\000\002\015\005\000" +
-    "\002\015\003\000\002\021\005\000\002\025\005\000\002" +
-    "\025\003\000\002\030\011\000\002\034\003\000\002\034" +
-    "\003\000\002\034\003\000\002\016\005\000\002\016\003" +
-    "\000\002\022\005\000\002\026\005\000\002\026\003\000" +
-    "\002\031\011\000\002\035\003\000\002\035\003\000\002" +
-    "\035\003\000\002\035\003\000\002\017\005\000\002\017" +
-    "\003\000\002\023\005\000\002\032\011\000\002\036\003" +
-    "\000\002\013\004\000\002\007\006\000\002\005\006" });
+    "\000\002\006\012\000\002\010\005\000\002\010\005\000" +
+    "\002\010\005\000\002\010\005\000\002\010\005\000\002" +
+    "\010\005\000\002\010\005\000\002\011\012\000\002\012" +
+    "\012\000\002\014\005\000\002\014\003\000\002\020\005" +
+    "\000\002\032\005\000\002\032\003\000\002\035\011\000" +
+    "\002\041\003\000\002\041\003\000\002\015\005\000\002" +
+    "\015\003\000\002\021\005\000\002\033\005\000\002\033" +
+    "\003\000\002\036\011\000\002\042\003\000\002\042\003" +
+    "\000\002\042\003\000\002\016\005\000\002\016\003\000" +
+    "\002\022\005\000\002\034\005\000\002\034\003\000\002" +
+    "\037\011\000\002\043\003\000\002\043\003\000\002\043" +
+    "\003\000\002\043\003\000\002\017\005\000\002\017\003" +
+    "\000\002\023\005\000\002\040\011\000\002\024\005\000" +
+    "\002\024\003\000\002\027\005\000\002\045\005\000\002" +
+    "\045\003\000\002\047\011\000\002\052\003\000\002\052" +
+    "\003\000\002\052\003\000\002\052\003\000\002\052\003" +
+    "\000\002\052\003\000\002\026\005\000\002\026\003\000" +
+    "\002\031\005\000\002\051\011\000\002\025\005\000\002" +
+    "\025\003\000\002\030\005\000\002\046\005\000\002\046" +
+    "\003\000\002\050\011\000\002\053\003\000\002\053\003" +
+    "\000\002\053\003\000\002\053\003\000\002\044\003\000" +
+    "\002\013\004\000\002\007\006\000\002\005\006" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -61,70 +70,104 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\201\000\004\024\004\001\002\000\004\026\011\001" +
+    "\000\302\000\004\035\004\001\002\000\004\037\011\001" +
     "\002\000\004\002\uffff\001\002\000\004\002\001\001\002" +
     "\000\004\002\010\001\002\000\004\002\000\001\002\000" +
-    "\006\004\012\005\013\001\002\000\004\030\027\001\002" +
-    "\000\004\025\014\001\002\000\004\024\015\001\002\000" +
-    "\004\026\026\001\002\000\004\024\020\001\002\000\004" +
-    "\002\ufffe\001\002\000\004\026\023\001\002\000\004\002" +
+    "\006\004\012\005\013\001\002\000\004\041\027\001\002" +
+    "\000\004\036\014\001\002\000\004\035\015\001\002\000" +
+    "\004\037\026\001\002\000\004\035\020\001\002\000\004" +
+    "\002\ufffe\001\002\000\004\037\023\001\002\000\004\002" +
     "\ufffd\001\002\000\004\002\ufffc\001\002\000\006\004\012" +
-    "\007\024\001\002\000\004\025\025\001\002\000\004\002" +
-    "\uffd2\001\002\000\004\004\012\001\002\000\004\027\030" +
-    "\001\002\000\012\011\032\012\034\013\033\014\035\001" +
-    "\002\000\004\035\174\001\002\000\004\027\146\001\002" +
-    "\000\004\027\125\001\002\000\004\027\076\001\002\000" +
-    "\004\027\036\001\002\000\004\025\037\001\002\000\004" +
-    "\032\041\001\002\000\004\032\052\001\002\000\004\027" +
-    "\042\001\002\000\004\010\044\001\002\000\004\027\045" +
-    "\001\002\000\004\027\ufff5\001\002\000\004\030\046\001" +
-    "\002\000\004\034\047\001\002\000\004\032\ufff6\001\002" +
-    "\000\004\035\ufff8\001\002\000\006\031\074\035\uffe2\001" +
-    "\002\000\004\027\055\001\002\000\006\031\072\033\uffdf" +
-    "\001\002\000\004\033\071\001\002\000\012\020\057\021" +
-    "\061\022\056\023\060\001\002\000\004\027\uffdc\001\002" +
-    "\000\004\027\uffda\001\002\000\004\027\uffdb\001\002\000" +
-    "\004\027\uffdd\001\002\000\004\027\063\001\002\000\004" +
-    "\030\064\001\002\000\004\027\065\001\002\000\004\036" +
-    "\066\001\002\000\004\027\uffd5\001\002\000\004\027\070" +
-    "\001\002\000\006\031\uffde\033\uffde\001\002\000\006\031" +
-    "\uffe1\035\uffe1\001\002\000\004\027\055\001\002\000\004" +
-    "\033\uffe0\001\002\000\004\032\052\001\002\000\004\035" +
-    "\uffe3\001\002\000\004\025\077\001\002\000\004\032\041" +
-    "\001\002\000\004\032\103\001\002\000\004\035\ufff9\001" +
-    "\002\000\006\031\123\035\uffeb\001\002\000\004\027\106" +
-    "\001\002\000\006\031\121\033\uffe8\001\002\000\004\033" +
-    "\120\001\002\000\010\015\107\016\111\017\110\001\002" +
-    "\000\004\027\uffe6\001\002\000\004\027\uffe4\001\002\000" +
-    "\004\027\uffe5\001\002\000\004\027\113\001\002\000\004" +
-    "\030\114\001\002\000\004\027\115\001\002\000\004\036" +
-    "\066\001\002\000\004\027\117\001\002\000\006\031\uffe7" +
-    "\033\uffe7\001\002\000\006\031\uffea\035\uffea\001\002\000" +
-    "\004\027\106\001\002\000\004\033\uffe9\001\002\000\004" +
-    "\032\103\001\002\000\004\035\uffec\001\002\000\004\025" +
-    "\126\001\002\000\004\032\041\001\002\000\004\032\132" +
-    "\001\002\000\006\031\144\035\uffd8\001\002\000\004\035" +
-    "\ufff7\001\002\000\004\027\133\001\002\000\004\015\136" +
-    "\001\002\000\004\033\135\001\002\000\006\031\uffd7\035" +
-    "\uffd7\001\002\000\004\027\137\001\002\000\004\030\140" +
-    "\001\002\000\004\027\141\001\002\000\004\036\066\001" +
-    "\002\000\004\027\143\001\002\000\004\033\uffd6\001\002" +
-    "\000\004\032\132\001\002\000\004\035\uffd9\001\002\000" +
-    "\004\025\147\001\002\000\004\032\041\001\002\000\004" +
-    "\032\153\001\002\000\004\035\ufffa\001\002\000\006\031" +
-    "\172\035\ufff3\001\002\000\004\027\156\001\002\000\004" +
-    "\033\171\001\002\000\006\031\167\033\ufff0\001\002\000" +
-    "\006\015\160\016\161\001\002\000\004\027\162\001\002" +
-    "\000\004\027\uffee\001\002\000\004\027\uffed\001\002\000" +
-    "\004\030\163\001\002\000\004\027\164\001\002\000\004" +
-    "\036\066\001\002\000\004\027\166\001\002\000\006\031" +
-    "\uffef\033\uffef\001\002\000\004\027\156\001\002\000\004" +
-    "\033\ufff1\001\002\000\006\031\ufff2\035\ufff2\001\002\000" +
-    "\004\032\153\001\002\000\004\035\ufff4\001\002\000\004" +
-    "\033\203\001\002\000\004\024\176\001\002\000\004\006" +
-    "\200\001\002\000\006\002\ufffb\024\ufffb\001\002\000\004" +
-    "\026\201\001\002\000\004\025\202\001\002\000\006\002" +
-    "\uffd3\024\uffd3\001\002\000\004\024\uffd4\001\002" });
+    "\007\024\001\002\000\004\036\025\001\002\000\004\002" +
+    "\uffb5\001\002\000\004\004\012\001\002\000\004\040\030" +
+    "\001\002\000\020\012\033\013\036\014\035\015\040\016" +
+    "\032\017\037\020\034\001\002\000\004\046\275\001\002" +
+    "\000\004\040\101\001\002\000\004\040\041\001\002\000" +
+    "\004\040\101\001\002\000\004\040\041\001\002\000\004" +
+    "\040\041\001\002\000\004\040\101\001\002\000\004\040" +
+    "\041\001\002\000\004\036\071\001\002\000\004\043\045" +
+    "\001\002\000\004\046\ufff8\001\002\000\006\042\067\046" +
+    "\uffdf\001\002\000\004\040\050\001\002\000\006\042\065" +
+    "\044\uffdc\001\002\000\004\044\064\001\002\000\012\024" +
+    "\052\025\054\026\051\027\053\001\002\000\004\040\uffd9" +
+    "\001\002\000\004\040\uffd7\001\002\000\004\040\uffd8\001" +
+    "\002\000\004\040\uffda\001\002\000\004\040\056\001\002" +
+    "\000\004\041\057\001\002\000\004\040\060\001\002\000" +
+    "\004\047\062\001\002\000\004\040\063\001\002\000\004" +
+    "\040\uffb8\001\002\000\006\042\uffdb\044\uffdb\001\002\000" +
+    "\006\042\uffde\046\uffde\001\002\000\004\040\050\001\002" +
+    "\000\004\044\uffdd\001\002\000\004\043\045\001\002\000" +
+    "\004\046\uffe0\001\002\000\004\043\072\001\002\000\004" +
+    "\040\073\001\002\000\004\010\074\001\002\000\004\040" +
+    "\075\001\002\000\004\041\076\001\002\000\004\045\077" +
+    "\001\002\000\004\043\ufff3\001\002\000\004\043\113\001" +
+    "\002\000\004\036\102\001\002\000\004\043\103\001\002" +
+    "\000\004\040\104\001\002\000\004\011\105\001\002\000" +
+    "\004\040\106\001\002\000\004\041\107\001\002\000\004" +
+    "\045\110\001\002\000\004\043\ufff2\001\002\000\004\046" +
+    "\ufff4\001\002\000\006\042\125\046\uffc5\001\002\000\004" +
+    "\040\115\001\002\000\004\044\124\001\002\000\004\030" +
+    "\116\001\002\000\004\040\117\001\002\000\004\041\120" +
+    "\001\002\000\004\040\121\001\002\000\004\047\062\001" +
+    "\002\000\004\040\123\001\002\000\004\044\uffc3\001\002" +
+    "\000\006\042\uffc4\046\uffc4\001\002\000\004\043\113\001" +
+    "\002\000\004\046\uffc6\001\002\000\004\043\132\001\002" +
+    "\000\004\046\ufff9\001\002\000\006\042\152\046\uffe8\001" +
+    "\002\000\004\040\135\001\002\000\006\042\150\044\uffe5" +
+    "\001\002\000\004\044\147\001\002\000\010\021\136\022" +
+    "\140\023\137\001\002\000\004\040\uffe3\001\002\000\004" +
+    "\040\uffe1\001\002\000\004\040\uffe2\001\002\000\004\040" +
+    "\142\001\002\000\004\041\143\001\002\000\004\040\144" +
+    "\001\002\000\004\047\062\001\002\000\004\040\146\001" +
+    "\002\000\006\042\uffe4\044\uffe4\001\002\000\006\042\uffe7" +
+    "\046\uffe7\001\002\000\004\040\135\001\002\000\004\044" +
+    "\uffe6\001\002\000\004\043\132\001\002\000\004\046\uffe9" +
+    "\001\002\000\004\043\156\001\002\000\006\042\171\046" +
+    "\uffd5\001\002\000\004\040\160\001\002\000\004\046\ufff7" +
+    "\001\002\000\004\021\163\001\002\000\004\044\162\001" +
+    "\002\000\006\042\uffd4\046\uffd4\001\002\000\004\040\164" +
+    "\001\002\000\004\041\165\001\002\000\004\040\166\001" +
+    "\002\000\004\047\062\001\002\000\004\040\170\001\002" +
+    "\000\004\044\uffd3\001\002\000\004\043\156\001\002\000" +
+    "\004\046\uffd6\001\002\000\004\043\176\001\002\000\006" +
+    "\042\217\046\uffc1\001\002\000\004\046\ufff5\001\002\000" +
+    "\004\040\201\001\002\000\004\044\216\001\002\000\006" +
+    "\042\214\044\uffbe\001\002\000\012\030\203\031\205\032" +
+    "\206\033\204\001\002\000\004\040\207\001\002\000\004" +
+    "\040\uffbc\001\002\000\004\040\uffb9\001\002\000\004\040" +
+    "\uffbb\001\002\000\004\040\uffba\001\002\000\004\041\210" +
+    "\001\002\000\004\040\211\001\002\000\004\047\062\001" +
+    "\002\000\004\040\213\001\002\000\006\042\uffbd\044\uffbd" +
+    "\001\002\000\004\040\201\001\002\000\004\044\uffbf\001" +
+    "\002\000\006\042\uffc0\046\uffc0\001\002\000\004\043\176" +
+    "\001\002\000\004\046\uffc2\001\002\000\004\043\224\001" +
+    "\002\000\004\046\ufffa\001\002\000\006\042\243\046\ufff0" +
+    "\001\002\000\004\040\227\001\002\000\004\044\242\001" +
+    "\002\000\006\042\240\044\uffed\001\002\000\006\021\230" +
+    "\022\232\001\002\000\004\040\uffeb\001\002\000\004\040" +
+    "\233\001\002\000\004\040\uffea\001\002\000\004\041\234" +
+    "\001\002\000\004\040\235\001\002\000\004\047\062\001" +
+    "\002\000\004\040\237\001\002\000\006\042\uffec\044\uffec" +
+    "\001\002\000\004\040\227\001\002\000\004\044\uffee\001" +
+    "\002\000\006\042\uffef\046\uffef\001\002\000\004\043\224" +
+    "\001\002\000\004\046\ufff1\001\002\000\004\043\247\001" +
+    "\002\000\004\046\ufff6\001\002\000\004\040\255\001\002" +
+    "\000\006\042\251\046\uffd1\001\002\000\004\043\247\001" +
+    "\002\000\004\046\uffd2\001\002\000\004\044\274\001\002" +
+    "\000\006\042\272\044\uffce\001\002\000\016\023\256\030" +
+    "\257\031\261\032\262\033\260\034\264\001\002\000\004" +
+    "\040\uffc7\001\002\000\004\040\uffcc\001\002\000\004\040" +
+    "\uffc9\001\002\000\004\040\uffcb\001\002\000\004\040\uffca" +
+    "\001\002\000\004\040\265\001\002\000\004\040\uffc8\001" +
+    "\002\000\004\041\266\001\002\000\004\040\267\001\002" +
+    "\000\004\047\062\001\002\000\004\040\271\001\002\000" +
+    "\006\042\uffcd\044\uffcd\001\002\000\004\040\255\001\002" +
+    "\000\004\044\uffcf\001\002\000\006\042\uffd0\046\uffd0\001" +
+    "\002\000\004\044\304\001\002\000\004\035\277\001\002" +
+    "\000\004\006\301\001\002\000\006\002\ufffb\035\ufffb\001" +
+    "\002\000\004\037\302\001\002\000\004\036\303\001\002" +
+    "\000\006\002\uffb6\035\uffb6\001\002\000\004\035\uffb7\001" +
+    "\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -132,7 +175,7 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\201\000\010\002\006\003\004\006\005\001\001\000" +
+    "\000\302\000\010\002\006\003\004\006\005\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\006\004\016\006\015\001\001" +
@@ -140,46 +183,71 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\010\030\001\001\000\004\013\174\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\011\037\001\001\000\006\016" +
-    "\047\022\050\001\001\000\002\001\001\000\004\012\042" +
+    "\010\030\001\001\000\004\013\275\001\001\000\004\012" +
+    "\244\001\001\000\004\011\220\001\001\000\004\012\172" +
+    "\001\001\000\004\011\153\001\001\000\004\011\126\001" +
+    "\001\000\004\012\077\001\001\000\004\011\041\001\001" +
+    "\000\002\001\001\000\006\016\042\022\043\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\034\046\037\045" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\043" +
+    "\054\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\006\026\053\031\052\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\035\061\001\001" +
+    "\001\000\002\001\001\000\004\044\060\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\034\065\037\045\001\001\000\002\001\001" +
+    "\000\006\016\067\022\043\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\026\110\031\111\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\004\036\066\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\026\072\031\052\001\001\000\002\001\001\000\006\016" +
-    "\074\022\050\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\011\077\001\001\000\006\015\100\021\101\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\025\104" +
-    "\030\103\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\034\111\001\001\000\002\001\001\000\002\001\001" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\051" +
+    "\113\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\044" +
+    "\121\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\026\125\031\111\001\001\000\002\001" +
+    "\001\000\006\015\127\021\130\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\033\133\036\132\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\042\140\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\036\115\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\025\121\030" +
-    "\103\001\001\000\002\001\001\000\006\015\123\021\101" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\011" +
-    "\126\001\001\000\006\017\130\023\127\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\032\133\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\036" +
-    "\141\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\017\144\023\127\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\011\147\001\001\000\006\014\150\020\151" +
-    "\001\001\000\002\001\001\000\002\001\001\000\006\024" +
-    "\153\027\154\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\033\156\001\001\000\002\001\001\000\002\001" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\044\144\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\006\033\150\036\132\001\001\000\002" +
+    "\001\001\000\006\015\152\021\130\001\001\000\002\001" +
+    "\001\000\006\017\156\023\154\001\001\000\002\001\001" +
+    "\000\004\040\160\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\036\164\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\024\167\027\154\001\001\000\002\001\001" +
-    "\000\002\001\001\000\006\014\172\020\151\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\007\176\001\001" +
+    "\000\002\001\001\000\002\001\001\000\004\044\166\001" +
+    "\001\000\002\001\001\000\002\001\001\000\006\017\171" +
+    "\023\154\001\001\000\002\001\001\000\006\025\174\030" +
+    "\173\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\046\176\050\177\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\053\201\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\044\211" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\046" +
+    "\214\050\177\001\001\000\002\001\001\000\002\001\001" +
+    "\000\006\025\217\030\173\001\001\000\002\001\001\000" +
+    "\006\014\221\020\222\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\032\224\035\225\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\041\230\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\044\235\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\032\240\035\225\001" +
+    "\001\000\002\001\001\000\002\001\001\000\006\014\243" +
+    "\020\222\001\001\000\002\001\001\000\006\024\245\027" +
+    "\247\001\001\000\002\001\001\000\006\045\252\047\253" +
+    "\001\001\000\002\001\001\000\006\024\251\027\247\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\052\262\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001" });
+    "\002\001\001\000\004\044\267\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\045\272\047\253\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\007\277\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -358,61 +426,88 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // requestType ::= LOGIN QUOTE_MARK GREATER_THAN startContent bloquesLogin 
+          case 7: // requestType ::= LOGIN startContentUser bloquesLogin 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // requestType ::= CREATE_USER QUOTE_MARK GREATER_THAN startContent bloquesCreateUser 
+          case 8: // requestType ::= CREATE_USER startContentUser bloquesCreateUser 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // requestType ::= MODIFY_USER QUOTE_MARK GREATER_THAN startContent bloquesModifyUser 
+          case 9: // requestType ::= MODIFY_USER startContentUser bloquesModifyUser 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // requestType ::= DELETE_USER QUOTE_MARK GREATER_THAN startContent bloquesDeleteUser 
+          case 10: // requestType ::= DELETE_USER startContentUser bloquesDeleteUser 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET 
+          case 11: // requestType ::= NEW_FORM startContentForm bloquesNewForm 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("startContent",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // blockParamName ::= USER_CREDENTIALS 
+          case 12: // requestType ::= MODIFY_FORM startContentForm bloquesEditForm 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("blockParamName",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // bloquesLogin ::= bloqueLogin COMMA bloquesLogin 
+          case 13: // requestType ::= DELETE_FORM startContentForm bloquesDeleteForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("requestType",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 14: // startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("startContentUser",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // startContentForm ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK FORM_PARAMS QUOTE_MARK COLON OPEN_BRACKET 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("startContentForm",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // bloquesLogin ::= bloqueLogin COMMA bloquesLogin 
             {
               Object RESULT =null;
 
@@ -421,7 +516,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // bloquesLogin ::= bloqueLogin 
+          case 17: // bloquesLogin ::= bloqueLogin 
             {
               Object RESULT =null;
 
@@ -430,7 +525,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE 
+          case 18: // bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE 
             {
               Object RESULT =null;
 		
@@ -442,31 +537,31 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // paramsLogin ::= paramLogin COMMA paramsLogin 
+          case 19: // paramsLogin ::= paramLogin COMMA paramsLogin 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsLogin",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsLogin",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // paramsLogin ::= paramLogin 
+          case 20: // paramsLogin ::= paramLogin 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsLogin",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsLogin",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // paramLogin ::= QUOTE_MARK nameParamLogin QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+          case 21: // paramLogin ::= QUOTE_MARK nameParamLogin QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
             {
               Parametro RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -478,36 +573,36 @@ class CUP$Parser$actions {
 		
                     RESULT = new Parametro(n, v);
                
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramLogin",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramLogin",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // nameParamLogin ::= PARAM_USUARIO 
+          case 22: // nameParamLogin ::= PARAM_USUARIO 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamLogin",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamLogin",31, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // nameParamLogin ::= PARAM_PASSWORD 
+          case 23: // nameParamLogin ::= PARAM_PASSWORD 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamLogin",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamLogin",31, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // bloquesCreateUser ::= bloqueCreateUser COMMA bloquesCreateUser 
+          case 24: // bloquesCreateUser ::= bloqueCreateUser COMMA bloquesCreateUser 
             {
               Object RESULT =null;
 
@@ -516,7 +611,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // bloquesCreateUser ::= bloqueCreateUser 
+          case 25: // bloquesCreateUser ::= bloqueCreateUser 
             {
               Object RESULT =null;
 
@@ -525,7 +620,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // bloqueCreateUser ::= OPEN_BRACE paramsCreateUser CLOSE_BRACE 
+          case 26: // bloqueCreateUser ::= OPEN_BRACE paramsCreateUser CLOSE_BRACE 
             {
               Object RESULT =null;
 		
@@ -537,31 +632,31 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // paramsCreateUser ::= paramCreateUser COMMA paramsCreateUser 
+          case 27: // paramsCreateUser ::= paramCreateUser COMMA paramsCreateUser 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // paramsCreateUser ::= paramCreateUser 
+          case 28: // paramsCreateUser ::= paramCreateUser 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // paramCreateUser ::= QUOTE_MARK nameParamCreateUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+          case 29: // paramCreateUser ::= QUOTE_MARK nameParamCreateUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
             {
               Parametro RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -573,48 +668,48 @@ class CUP$Parser$actions {
 		
                         RESULT = new Parametro(n, v);
                     
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramCreateUser",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramCreateUser",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // nameParamCreateUser ::= PARAM_USUARIO 
+          case 30: // nameParamCreateUser ::= PARAM_USUARIO 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // nameParamCreateUser ::= PARAM_PASSWORD 
+          case 31: // nameParamCreateUser ::= PARAM_PASSWORD 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // nameParamCreateUser ::= PARAM_FECHA_CREACION 
+          case 32: // nameParamCreateUser ::= PARAM_FECHA_CREACION 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamCreateUser",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // bloquesModifyUser ::= bloqueModifyUser COMMA bloquesModifyUser 
+          case 33: // bloquesModifyUser ::= bloqueModifyUser COMMA bloquesModifyUser 
             {
               Object RESULT =null;
 
@@ -623,7 +718,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // bloquesModifyUser ::= bloqueModifyUser 
+          case 34: // bloquesModifyUser ::= bloqueModifyUser 
             {
               Object RESULT =null;
 
@@ -632,7 +727,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // bloqueModifyUser ::= OPEN_BRACE paramsModifyUser CLOSE_BRACE 
+          case 35: // bloqueModifyUser ::= OPEN_BRACE paramsModifyUser CLOSE_BRACE 
             {
               Object RESULT =null;
 		
@@ -644,31 +739,31 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // paramsModifyUser ::= paramModifyUser COMMA paramsModifyUser 
+          case 36: // paramsModifyUser ::= paramModifyUser COMMA paramsModifyUser 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 34: // paramsModifyUser ::= paramModifyUser 
+          case 37: // paramsModifyUser ::= paramModifyUser 
             {
-              List<Parametro> RESULT =null;
+              Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		addParameter(parametros, p);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 35: // paramModifyUser ::= QUOTE_MARK nameParamModifyUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+          case 38: // paramModifyUser ::= QUOTE_MARK nameParamModifyUser QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
             {
               Parametro RESULT =null;
 		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -680,60 +775,60 @@ class CUP$Parser$actions {
 		
                         RESULT = new Parametro(n, v);
                     
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramModifyUser",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramModifyUser",29, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // nameParamModifyUser ::= PARAM_OLD_USER 
+          case 39: // nameParamModifyUser ::= PARAM_OLD_USER 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 37: // nameParamModifyUser ::= PARAM_NEW_USER 
+          case 40: // nameParamModifyUser ::= PARAM_NEW_USER 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 38: // nameParamModifyUser ::= PARAM_NEW_PASSWORD 
+          case 41: // nameParamModifyUser ::= PARAM_NEW_PASSWORD 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 39: // nameParamModifyUser ::= PARAM_FECHA_MODIFICACION 
+          case 42: // nameParamModifyUser ::= PARAM_FECHA_MODIFICACION 
             {
               String RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = p.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamModifyUser",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 40: // bloquesDeleteUser ::= bloqueDeleteUser COMMA bloquesDeleteUser 
+          case 43: // bloquesDeleteUser ::= bloqueDeleteUser COMMA bloquesDeleteUser 
             {
               Object RESULT =null;
 
@@ -742,7 +837,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 41: // bloquesDeleteUser ::= bloqueDeleteUser 
+          case 44: // bloquesDeleteUser ::= bloqueDeleteUser 
             {
               Object RESULT =null;
 
@@ -751,7 +846,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 42: // bloqueDeleteUser ::= OPEN_BRACE paramDeleteUser CLOSE_BRACE 
+          case 45: // bloqueDeleteUser ::= OPEN_BRACE paramDeleteUser CLOSE_BRACE 
             {
               Object RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -767,7 +862,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 43: // paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+          case 46: // paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
             {
               Parametro RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
@@ -779,24 +874,337 @@ class CUP$Parser$actions {
 		
                         RESULT = new Parametro(p.getLexema(), v);
                     
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramDeleteUser",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramDeleteUser",30, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 44: // value ::= VALUE 
+          case 47: // bloquesNewForm ::= bloqueNewForm COMMA bloquesNewForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesNewForm",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 48: // bloquesNewForm ::= bloqueNewForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesNewForm",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 49: // bloqueNewForm ::= OPEN_BRACE paramsNewForm CLOSE_BRACE 
+            {
+              Object RESULT =null;
+		
+                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        parametros = new ArrayList();
+                     
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloqueNewForm",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 50: // paramsNewForm ::= paramNewForm COMMA paramsNewForm 
+            {
+              Object RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		addParameter(parametros, p);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsNewForm",35, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 51: // paramsNewForm ::= paramNewForm 
+            {
+              Object RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		addParameter(parametros, p);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsNewForm",35, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 52: // paramNewForm ::= QUOTE_MARK nameParamNewForm QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+            {
+              Parametro RESULT =null;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String v = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		
+                    RESULT = new Parametro(n, v);
+               
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramNewForm",37, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 53: // nameParamNewForm ::= PARAM_ID 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 54: // nameParamNewForm ::= PARAM_TITULO_FORM 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 55: // nameParamNewForm ::= PARAM_NOMBRE_FORM 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 56: // nameParamNewForm ::= PARAM_TEMA 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 57: // nameParamNewForm ::= PARAM_USUARIO_CREACION 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 58: // nameParamNewForm ::= PARAM_FECHA_CREACION 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamNewForm",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 59: // bloquesDeleteForm ::= bloqueDeleteForm COMMA bloquesDeleteForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesDeleteForm",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 60: // bloquesDeleteForm ::= bloqueDeleteForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesDeleteForm",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 61: // bloqueDeleteForm ::= OPEN_BRACE paramDeleteForm CLOSE_BRACE 
+            {
+              Object RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_FORM, parametros));
+                            parametros = new ArrayList();
+                        
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloqueDeleteForm",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 62: // paramDeleteForm ::= QUOTE_MARK PARAM_ID QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+            {
+              Parametro RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String v = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		
+                        RESULT = new Parametro(p.getLexema(), v);
+                    
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramDeleteForm",39, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 63: // bloquesEditForm ::= bloqueEditForm COMMA bloquesEditForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesEditForm",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 64: // bloquesEditForm ::= bloqueEditForm 
+            {
+              Object RESULT =null;
+
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloquesEditForm",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 65: // bloqueEditForm ::= OPEN_BRACE paramsEditForm CLOSE_BRACE 
+            {
+              Object RESULT =null;
+		
+                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    parametros = new ArrayList();
+                 
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("bloqueEditForm",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 66: // paramsEditForm ::= paramEditForm COMMA paramsEditForm 
+            {
+              Object RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		addParameter(parametros, p);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsEditForm",36, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 67: // paramsEditForm ::= paramEditForm 
+            {
+              Object RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		addParameter(parametros, p);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramsEditForm",36, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 68: // paramEditForm ::= QUOTE_MARK nameParamEditForm QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK 
+            {
+              Parametro RESULT =null;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		String n = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String v = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		
+                    RESULT = new Parametro(n, v);
+               
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("paramEditForm",38, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 69: // nameParamEditForm ::= PARAM_ID 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamEditForm",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 70: // nameParamEditForm ::= PARAM_TITULO_FORM 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamEditForm",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 71: // nameParamEditForm ::= PARAM_NOMBRE_FORM 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamEditForm",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 72: // nameParamEditForm ::= PARAM_TEMA 
+            {
+              String RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Token p = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = p.getLexema();
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nameParamEditForm",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 73: // value ::= VALUE 
             {
               String RESULT =null;
 		int vleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token v = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = v.getLexema();
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("value",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("value",34, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 45: // endContent ::= CLOSE_BRACKET CLOSE_BRACE 
+          case 74: // endContent ::= CLOSE_BRACKET CLOSE_BRACE 
             {
               Object RESULT =null;
 
@@ -805,7 +1213,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 46: // endRequest ::= LESS_THAN END_REQUEST EXCLAMATION_MARK GREATER_THAN 
+          case 75: // endRequest ::= LESS_THAN END_REQUEST EXCLAMATION_MARK GREATER_THAN 
             {
               Object RESULT =null;
 
@@ -814,7 +1222,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 47: // endRequests ::= LESS_THAN EXCLAMATION_MARK END_REQUESTS GREATER_THAN 
+          case 76: // endRequests ::= LESS_THAN EXCLAMATION_MARK END_REQUESTS GREATER_THAN 
             {
               Object RESULT =null;
 
