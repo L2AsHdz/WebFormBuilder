@@ -37,7 +37,6 @@ parser code{:
         
         if (add) {
             parametros.add(param);
-            System.out.println("Se agrego el parametro");
         } else {
             System.out.println("El parametro ya esta agregado");
         }
@@ -127,6 +126,7 @@ requestType ::= LOGIN startContentUser bloquesLogin
               | MODIFY_FORM startContentForm bloquesEditForm
               | DELETE_FORM startContentForm bloquesDeleteForm
               | NEW_COMPONENT startContentComponent bloquesNewComponent
+              | EDIT_COMPONENT startContentComponent bloquesEditComponent
               ;
 
 startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET;
@@ -333,7 +333,7 @@ nameParamEditForm ::= PARAM_ID:p                {:RESULT = p.getLexema();:}
 
 
 
-/******************************Producciones para parametros de solicitud ModifyForm******************************/
+/******************************Producciones para parametros de solicitud AddComponent******************************/
 bloquesNewComponent ::= bloqueNewComponent COMMA bloquesNewComponent
                       | bloqueNewComponent
                       ;
@@ -367,7 +367,46 @@ nameParamNewComponent ::= PARAM_ID:p                    {:RESULT = p.getLexema()
                         | PARAM_COLUMNAS:p              {:RESULT = p.getLexema();:}
                         | PARAM_URL:p                   {:RESULT = p.getLexema();:}
                         ;
-/**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
+/**************************Fin de producciones para parametros de solicitud AddComponent**************************/
+
+
+
+/******************************Producciones para parametros de solicitud EditComponent******************************/
+bloquesEditComponent ::= bloqueEditComponent COMMA bloquesEditComponent
+                       | bloqueEditComponent
+                       ;
+
+bloqueEditComponent ::= OPEN_BRACE paramsEditComponent CLOSE_BRACE
+                      {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
+                        parametros = new ArrayList();
+                      :}
+                      ;
+
+paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:addParameter(parametros, p);:}
+                      | paramEditComponent:p                                  {:addParameter(parametros, p);:}
+                      ;
+
+paramEditComponent ::= QUOTE_MARK nameParamEditComponent:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                     {:
+                        RESULT = new Parametro(n, v);
+                     :}
+                     ;
+
+nameParamEditComponent ::= PARAM_ID:p                    {:RESULT = p.getLexema();:}
+                         | PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
+                         | PARAM_FORMULARIO:p            {:RESULT = p.getLexema();:}
+                         | PARAM_CLASE:p                 {:RESULT = p.getLexema();:}
+                         | PARAM_TEXTO_VISIBLE:p         {:RESULT = p.getLexema();:}
+                         | PARAM_ALINEACION:p            {:RESULT = p.getLexema();:}
+                         | PARAM_REQUERIDO:p             {:RESULT = p.getLexema();:}
+                         | PARAM_OPCIONES:p              {:RESULT = p.getLexema();:}
+                         | PARAM_FILAS:p                 {:RESULT = p.getLexema();:}
+                         | PARAM_COLUMNAS:p              {:RESULT = p.getLexema();:}
+                         | PARAM_URL:p                   {:RESULT = p.getLexema();:}
+                         | PARAM_INDICE:p                {:RESULT = p.getLexema();:}
+                         ;
+/**************************Fin de producciones para parametros de solicitud EditComponent**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;

@@ -77,7 +77,7 @@
     <fin_solicitud!>
     
     <!ini_solicitud:"AGREGAR_COMPONENTE">
-     { "PARAMETROS_COMPONENTE":[
+        { "PARAMETROS_COMPONENTE":[
                 {
                     "ID": "_text_cliente",
                     "NOMBRE_CAMPO": "Cliente",
@@ -91,5 +91,18 @@
         }
     <fin_solicitud!>
 
-    
+    <!ini_solicitud:"MODIFICAR_COMPONENTE">
+       { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "_grupo_paises",
+                    "FORMULARIO": "form1",
+                    "CLASE": "CHECKBOXX",
+                    "INDICE": "1",
+                    "ALINEACION": "DERECHAA",
+                    "OPCIONES": "Guatemala-ElSalvador-Honduras-OTRO"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
 <!fin_solicitudes>

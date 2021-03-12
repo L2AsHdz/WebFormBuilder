@@ -45,7 +45,7 @@ import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 SALTO = \n|\r|\r\n
 ESPACIO = {SALTO} | [ \t\f]
 DIGITO = [0-9]
-LETRA = [a-zA-z]
+LETRA = [a-zA-Z]
 ENTERO = 0|([1-9][0-9]*)
 DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
