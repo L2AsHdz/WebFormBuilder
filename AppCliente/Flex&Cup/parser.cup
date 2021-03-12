@@ -100,9 +100,9 @@ non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
 non terminal String             nameParamNewForm, nameParamEditForm;
 
-non terminal                    paramsNewComponent, paramsEditComponent, paramsDeleteComponent;
+non terminal                    paramsNewComponent, paramsEditComponent;
 non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
-non terminal String             nameParamNewComponent, nameParamEditComponent, nameParamDeleteComponent;
+non terminal String             nameParamNewComponent, nameParamEditComponent;
 
 inicio ::= startRequest
          | startRequests
@@ -127,6 +127,7 @@ requestType ::= LOGIN startContentUser bloquesLogin
               | DELETE_FORM startContentForm bloquesDeleteForm
               | NEW_COMPONENT startContentComponent bloquesNewComponent
               | EDIT_COMPONENT startContentComponent bloquesEditComponent
+              | DELETE_COMPONENT startContentComponent bloquesDeleteComponent
               ;
 
 startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET;
@@ -407,6 +408,28 @@ nameParamEditComponent ::= PARAM_ID:p                    {:RESULT = p.getLexema(
                          | PARAM_INDICE:p                {:RESULT = p.getLexema();:}
                          ;
 /**************************Fin de producciones para parametros de solicitud EditComponent**************************/
+
+
+
+/******************************Producciones para parametros de solicitud DeleteComponent******************************/
+bloquesDeleteComponent ::= bloqueDeleteComponent COMMA bloquesDeleteComponent
+                         | bloqueDeleteComponent
+                         ;
+
+bloqueDeleteComponent ::= OPEN_BRACE paramDeleteComponent:p CLOSE_BRACE
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramDeleteComponent ::= QUOTE_MARK PARAM_ID:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(p.getLexema(), v);
+                    :}
+                    ;
+/**************************Fin de producciones para parametros de solicitud DeleteComponent**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;

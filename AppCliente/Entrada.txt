@@ -105,4 +105,17 @@
         }
     <fin_solicitud!>
 
+    <!ini_solicitud:"ELIMINAR_COMPONENTE">
+        { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "_grupo_paises"
+                },
+                {
+                    "ID" : "identificadorComponent"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+
 <!fin_solicitudes>
