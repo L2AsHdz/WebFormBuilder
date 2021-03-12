@@ -76,4 +76,20 @@
         }
     <fin_solicitud!>
     
+    <!ini_solicitud:"AGREGAR_COMPONENTE">
+     { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "_text_cliente",
+                    "NOMBRE_CAMPO": "Cliente",
+                    "FORMULARIO": "form1",
+                    "CLASE": "campoTexto",
+                    "TEXTO_VISIBLE": "Nombredecliente",
+                    "ALINEACION":"centro",
+                    "REQUERIDO": "SI"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    
 <!fin_solicitudes>

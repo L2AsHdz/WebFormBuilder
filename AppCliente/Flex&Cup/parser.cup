@@ -81,13 +81,16 @@ terminal Token      VALUE, IDENTIFICADOR;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
-non terminal        requestType, startContentUser, startContentForm, endContent;
+non terminal        requestType, startContentUser, startContentForm, startContentComponent, endContent;
 
 non terminal        bloquesLogin, bloquesCreateUser, bloquesModifyUser, bloquesDeleteUser;
 non terminal        bloqueLogin, bloqueCreateUser, bloqueModifyUser, bloqueDeleteUser;
 
 non terminal        bloquesNewForm, bloquesEditForm, bloquesDeleteForm;
 non terminal        bloqueNewForm, bloqueEditForm, bloqueDeleteForm;
+
+non terminal        bloquesNewComponent, bloquesEditComponent, bloquesDeleteComponent;
+non terminal        bloqueNewComponent, bloqueEditComponent, bloqueDeleteComponent;
 
 non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
@@ -97,6 +100,10 @@ non terminal String             value, id;
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
 non terminal String             nameParamNewForm, nameParamEditForm;
+
+non terminal                    paramsNewComponent, paramsEditComponent, paramsDeleteComponent;
+non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
+non terminal String             nameParamNewComponent, nameParamEditComponent, nameParamDeleteComponent;
 
 inicio ::= startRequest
          | startRequests
@@ -119,10 +126,12 @@ requestType ::= LOGIN startContentUser bloquesLogin
               | NEW_FORM startContentForm bloquesNewForm
               | MODIFY_FORM startContentForm bloquesEditForm
               | DELETE_FORM startContentForm bloquesDeleteForm
+              | NEW_COMPONENT startContentComponent bloquesNewComponent
               ;
 
 startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET;
 startContentForm ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK FORM_PARAMS QUOTE_MARK COLON OPEN_BRACKET;
+startContentComponent ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK COMPONENT_PARAMS QUOTE_MARK COLON OPEN_BRACKET;
 
 
 
@@ -320,6 +329,44 @@ nameParamEditForm ::= PARAM_ID:p                {:RESULT = p.getLexema();:}
                     | PARAM_NOMBRE_FORM:p        {:RESULT = p.getLexema();:}
                     | PARAM_TEMA:p               {:RESULT = p.getLexema();:}
                     ;
+/**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
+
+
+
+/******************************Producciones para parametros de solicitud ModifyForm******************************/
+bloquesNewComponent ::= bloqueNewComponent COMMA bloquesNewComponent
+                      | bloqueNewComponent
+                      ;
+
+bloqueNewComponent ::= OPEN_BRACE paramsNewComponent CLOSE_BRACE
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
+
+paramsNewComponent ::= paramNewComponent:p COMMA paramsNewComponent         {:addParameter(parametros, p);:}
+                     | paramNewComponent:p                                  {:addParameter(parametros, p);:}
+                     ;
+
+paramNewComponent ::= QUOTE_MARK nameParamNewComponent:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+                    {:
+                        RESULT = new Parametro(n, v);
+                    :}
+                    ;
+
+nameParamNewComponent ::= PARAM_ID:p                    {:RESULT = p.getLexema();:}
+                        | PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
+                        | PARAM_FORMULARIO:p            {:RESULT = p.getLexema();:}
+                        | PARAM_CLASE:p                 {:RESULT = p.getLexema();:}
+                        | PARAM_TEXTO_VISIBLE:p         {:RESULT = p.getLexema();:}
+                        | PARAM_ALINEACION:p            {:RESULT = p.getLexema();:}
+                        | PARAM_REQUERIDO:p             {:RESULT = p.getLexema();:}
+                        | PARAM_OPCIONES:p              {:RESULT = p.getLexema();:}
+                        | PARAM_FILAS:p                 {:RESULT = p.getLexema();:}
+                        | PARAM_COLUMNAS:p              {:RESULT = p.getLexema();:}
+                        | PARAM_URL:p                   {:RESULT = p.getLexema();:}
+                        ;
 /**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
