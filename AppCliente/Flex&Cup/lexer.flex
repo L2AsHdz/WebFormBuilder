@@ -46,9 +46,12 @@ SALTO = \n|\r|\r\n
 ESPACIO = {SALTO} | [ \t\f]
 DIGITO = [0-9]
 LETRA = [a-zA-z]
-NUMERO = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
+ENTERO = 0|([1-9][0-9]*)
+DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
 NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
+IDENT = ("-"|"_"|"$")({LETRA}|{DIGITO}|"-"|"_"|"$")+
+FECHA = ([ENTERO]"-"[1-12]"-"[1-31])
 
 %%
 
@@ -68,8 +71,13 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "ELIMINAR_FORMULARIO"       {return symbol(DELETE_FORM);}
 <YYINITIAL> "MODIFICAR_FORMULARIO"      {return symbol(MODIFY_FORM);}
 
+<YYINITIAL> "AGREGAR_COMPONENTE"        {return symbol(NEW_COMPONENT);}
+<YYINITIAL> "ELIMINAR_COMPONENTE"       {return symbol(DELETE_COMPONENT);}
+<YYINITIAL> "MODIFICAR_COMPONENTE"      {return symbol(EDIT_COMPONENT);}
+
 <YYINITIAL> "CREDENCIALES_USUARIO"      {return symbol(USER_CREDENTIALS);}
 <YYINITIAL> "PARAMETROS_FORMULARIO"     {return symbol(FORM_PARAMS);}
+<YYINITIAL> "PARAMETROS_COMPONENTE"     {return symbol(COMPONENT_PARAMS);}
 
 <YYINITIAL> "USUARIO"                   {return symbol(PARAM_USUARIO);}
 <YYINITIAL> "PASSWORD"                  {return symbol(PARAM_PASSWORD);}
@@ -85,6 +93,32 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 <YYINITIAL> "TEMA"                      {return symbol(PARAM_TEMA);}
 <YYINITIAL> "USUARIO_CREACION"          {return symbol(PARAM_USUARIO_CREACION);}
 
+<YYINITIAL> "NOMBRE_CAMPO"              {return symbol(PARAM_NOMBRE_CAMPO);}
+<YYINITIAL> "FORMULARIO"                {return symbol(PARAM_FORMULARIO);}
+<YYINITIAL> "CLASE"                     {return symbol(PARAM_CLASE);}
+<YYINITIAL> "INDICE"                    {return symbol(PARAM_INDICE);}
+<YYINITIAL> "TEXTO_VISIBLE"             {return symbol(PARAM_TEXTO_VISIBLE);}
+<YYINITIAL> "ALINEACION"                {return symbol(PARAM_ALINEACION);}
+<YYINITIAL> "REQUERIDO"                 {return symbol(PARAM_REQUERIDO);}
+<YYINITIAL> "OPCIONES"                  {return symbol(PARAM_OPCIONES);}
+<YYINITIAL> "FILAS"                     {return symbol(PARAM_FILAS);}
+<YYINITIAL> "COLUMNAS"                  {return symbol(PARAM_COLUMNAS);}
+<YYINITIAL> "URL"                       {return symbol(PARAM_URL);}
+
+<YYINITIAL> "CAMPO_TEXTO"               {return symbol(CLASS_CAMPO_TEXTO);}
+<YYINITIAL> "AREA_TEXTO"                {return symbol(CLASS_AREA_TEXTO);}
+<YYINITIAL> "CHECKBOX"                  {return symbol(CLASS_CHECKBOX);}
+<YYINITIAL> "RADIO"                     {return symbol(CLASS_RADIO);}
+<YYINITIAL> "FICHERO"                   {return symbol(CLASS_FICHERO);}
+<YYINITIAL> "IMAGEN"                    {return symbol(CLASS_IMAGEN);}
+<YYINITIAL> "COMBO"                     {return symbol(CLASS_COMBO);}
+<YYINITIAL> "BOTON"                     {return symbol(CLASS_BOTON);}
+
+<YYINITIAL> "CENTRO"                    {return symbol(CENTRO);}
+<YYINITIAL> "IZQUIERDA"                 {return symbol(IZQUIERDA);}
+<YYINITIAL> "DERECHA"                   {return symbol(DERECHA);}
+<YYINITIAL> "JUSTIFICAR"                {return symbol(JUSTIFICAR);}
+
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
     ">"                                 {return symbol(GREATER_THAN);}
@@ -99,6 +133,7 @@ NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 }
 
 {NOSE}                                  {return symbol(VALUE);}
+{IDENT}                                 {return symbol(IDENTIFICADOR);}
 {ESPACIO}                               {/*Ignorar*/}
 
 [^]                                 {addLexicError();}

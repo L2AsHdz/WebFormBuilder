@@ -12,6 +12,7 @@ public class sym {
   public static final int PARAM_ID = 22;
   public static final int NEW_FORM = 12;
   public static final int GREATER_THAN = 28;
+  public static final int IDENTIFICADOR = 38;
   public static final int END_REQUEST = 4;
   public static final int PARAM_TEMA = 25;
   public static final int PARAM_OLD_USER = 19;
@@ -84,7 +85,8 @@ public class sym {
   "CLOSE_BRACE",
   "OPEN_BRACKET",
   "CLOSE_BRACKET",
-  "VALUE"
+  "VALUE",
+  "IDENTIFICADOR"
   };
 }
 

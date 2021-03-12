@@ -62,13 +62,22 @@ parser code{:
 
 //Terminales
 terminal Token      START_REQUEST, START_REQUESTS, END_REQUEST, END_REQUESTS;
-terminal Token      USER_CREDENTIALS, FORM_PARAMS;
+terminal Token      USER_CREDENTIALS, FORM_PARAMS, COMPONENT_PARAMS;
+
 terminal Token      LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
-terminal Token      NEW_FORM, DELETE_FORM, MODIFY_FORM;
 terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_FECHA_MODIFICACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
+
+terminal Token      NEW_FORM, DELETE_FORM, MODIFY_FORM;
 terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+
+terminal Token      NEW_COMPONENT, DELETE_COMPONENT, EDIT_COMPONENT;
+terminal Token      PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_INDICE, PARAM_TEXTO_VISIBLE, PARAM_ALINEACION;
+terminal Token      PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
+terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
+terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
+
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE;
+terminal Token      VALUE, IDENTIFICADOR;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
@@ -82,7 +91,8 @@ non terminal        bloqueNewForm, bloqueEditForm, bloqueDeleteForm;
 
 non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
-non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser, value;
+non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser;
+non terminal String             value, id;
 
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
@@ -306,14 +316,17 @@ paramEditForm ::= QUOTE_MARK nameParamEditForm:n QUOTE_MARK COLON QUOTE_MARK val
                ;
 
 nameParamEditForm ::= PARAM_ID:p                {:RESULT = p.getLexema();:}
-                   | PARAM_TITULO_FORM:p        {:RESULT = p.getLexema();:}
-                   | PARAM_NOMBRE_FORM:p        {:RESULT = p.getLexema();:}
-                   | PARAM_TEMA:p               {:RESULT = p.getLexema();:}
-                   ;
+                    | PARAM_TITULO_FORM:p        {:RESULT = p.getLexema();:}
+                    | PARAM_NOMBRE_FORM:p        {:RESULT = p.getLexema();:}
+                    | PARAM_TEMA:p               {:RESULT = p.getLexema();:}
+                    ;
 /**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;
+
+id ::= IDENTIFICADOR:i      {:RESULT = i.getLexema();:}
+     ;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 
