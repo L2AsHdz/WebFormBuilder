@@ -68,6 +68,7 @@ terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_F
 
 terminal Token      NEW_FORM, DELETE_FORM, MODIFY_FORM;
 terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+terminal Token      DARK, WHITE;
 
 terminal Token      NEW_COMPONENT, DELETE_COMPONENT, EDIT_COMPONENT;
 terminal Token      PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_INDICE, PARAM_TEXTO_VISIBLE, PARAM_ALINEACION;
@@ -97,13 +98,14 @@ non terminal String             nameParamLogin, nameParamCreateUser, nameParamMo
 
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
-non terminal String             nameParamNewForm, nameParamEditForm;
+non terminal String             nameParamNewForm;
+non terminal String             tema;
 
 non terminal                    paramsNewComponent, paramsEditComponent;
 non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
 non terminal String             nameParamNewComponent, nameParamEditComponent;
 
-non terminal String         value, id, fecha, literal;
+non terminal String             value, id, fecha, literal;
 
 inicio ::= startRequest
          | startRequests
@@ -259,13 +261,17 @@ paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(param
 paramNewForm ::= nameParamNewForm:n COLON value:v           {:RESULT = new Parametro(n, v);:}
                | PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
                | PARAM_FECHA_CREACION:p COLON fecha:f       {:RESULT = new Parametro(p.getLexema(), f);:}
+               | PARAM_TITULO_FORM:p COLON literal:l        {:RESULT = new Parametro(p.getLexema(), l);:}
+               | PARAM_TEMA:p COLON tema:t                  {:RESULT = new Parametro(p.getLexema(), t);:}
                ;
 
-nameParamNewForm ::= PARAM_TITULO_FORM:p            {:RESULT = p.getLexema();:}
-                   | PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
-                   | PARAM_TEMA:p                   {:RESULT = p.getLexema();:}
+nameParamNewForm ::= PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
                    | PARAM_USUARIO_CREACION:p       {:RESULT = p.getLexema();:}
                    ;
+
+tema ::= DARK:t                 {:RESULT = t.getLexema();:}
+       | WHITE:t                {:RESULT = t.getLexema();:}
+       ;
 /**************************Fin de producciones para parametros de solicitud NuevoFormulario**************************/
 
 
@@ -283,10 +289,7 @@ bloqueDeleteForm ::= OPEN_BRACE paramDeleteForm:p CLOSE_BRACE
                         :}
                         ;
 
-paramDeleteForm ::= PARAM_ID:p COLON value:v
-                    {:
-                        RESULT = new Parametro(p.getLexema(), v);
-                    :}
+paramDeleteForm ::= PARAM_ID:p COLON id:i               {:RESULT = new Parametro(p.getLexema(), i);:}
                     ;
 /**************************Fin de producciones para parametros de solicitud DeleteForm**************************/
 
@@ -308,17 +311,11 @@ paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(p
                  | paramEditForm:p                              {:addParameter(parametros, p);:}
                  ;
 
-paramEditForm ::= nameParamEditForm:n COLON value:v
-               {:
-                    RESULT = new Parametro(n, v);
-               :}
-               ;
-
-nameParamEditForm ::= PARAM_ID:p                {:RESULT = p.getLexema();:}
-                    | PARAM_TITULO_FORM:p        {:RESULT = p.getLexema();:}
-                    | PARAM_NOMBRE_FORM:p        {:RESULT = p.getLexema();:}
-                    | PARAM_TEMA:p               {:RESULT = p.getLexema();:}
-                    ;
+paramEditForm ::= PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
+                | PARAM_TITULO_FORM:p COLON literal:l        {:RESULT = new Parametro(p.getLexema(), l);:}
+                | PARAM_NOMBRE_FORM:p COLON value:v          {:RESULT = new Parametro(p.getLexema(), v);:}
+                | PARAM_TEMA:p COLON tema:t                  {:RESULT = new Parametro(p.getLexema(), t);:}
+                ;
 /**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
 
 
@@ -423,12 +420,14 @@ paramDeleteComponent ::= PARAM_ID:p COLON value:v
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;
 
-id ::= ID:i      {:RESULT = i.getLexema();:}
+id ::= ID:i                 {:RESULT = i.getLexema();:}
      ;
 
 fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
         ;
 
+literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
+          ;
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 
 endRequest ::= LESS_THAN END_REQUEST EXCLAMATION_MARK GREATER_THAN;

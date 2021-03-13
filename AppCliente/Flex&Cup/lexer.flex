@@ -58,8 +58,6 @@ FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
 VALUE = "\""[^ '\"']*"\""
 LITERAL = "\""[^"\""]*"\""
 
-%state STRING
-
 %%
 
 //Palabras reservadas
@@ -112,6 +110,9 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\""({ESPACIO})*("COLUMNAS")({ESPACIO})*"\""                  {return symbol(PARAM_COLUMNAS);}
 <YYINITIAL> "\""({ESPACIO})*("URL")({ESPACIO})*"\""                       {return symbol(PARAM_URL);}
 
+<YYINITIAL> "\""({ESPACIO})*([dD][aA][rR][kK])({ESPACIO})*"\""            {return symbol(DARK);}
+<YYINITIAL> "\""({ESPACIO})*([wW][hH][iI][tT][eE])({ESPACIO})*"\""        {return symbol(WHITE)}
+
 <YYINITIAL> "\""({ESPACIO})*("CAMPO_TEXTO")({ESPACIO})*"\""               {return symbol(CLASS_CAMPO_TEXTO);}
 <YYINITIAL> "\""({ESPACIO})*("AREA_TEXTO")({ESPACIO})*"\""                {return symbol(CLASS_AREA_TEXTO);}
 <YYINITIAL> "\""({ESPACIO})*("CHECKBOX")({ESPACIO})*"\""                  {return symbol(CLASS_CHECKBOX);}
@@ -136,7 +137,6 @@ LITERAL = "\""[^"\""]*"\""
     "}"                                 {return symbol(CLOSE_BRACE);}
     "["                                 {return symbol(OPEN_BRACKET);}
     "]"                                 {return symbol(CLOSE_BRACKET);}
-    //"\""                                {string.setLength(0); yybegin(STRING);}
     {ESPACIO}                           {/*Ignorar*/}
 }
 
@@ -144,18 +144,5 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> {FECHA}                     {return symbol(FECHA);}
 <YYINITIAL> {VALUE}                     {return symbol(VALUE);}
 <YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
-
-<STRING> {
-    \"                            { 
-                                        yybegin(YYINITIAL);
-                                        return symbol(VALUE, string.toString()); 
-                                    }
-    [^\n\r\"\\]+                  {string.append(yytext());}
-    \\t                             {string.append('\t');}
-    \\n                             {string.append('\n');}
-    \\r                             {string.append('\r');}
-    \\\"                          {string.append('\"');}
-    \\                              {string.append('\\');}
-  }
 
 [^]                                 {addLexicError();}
