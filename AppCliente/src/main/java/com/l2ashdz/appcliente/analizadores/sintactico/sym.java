@@ -53,6 +53,7 @@ public class sym {
   public static final int USER_CREDENTIALS = 6;
   public static final int PARAM_INDICE = 34;
   public static final int START_REQUEST = 2;
+  public static final int LITERAL = 66;
   public static final int COLON = 57;
   public static final int PARAM_FECHA_MODIFICACION = 16;
   public static final int START_REQUESTS = 3;
@@ -140,7 +141,8 @@ public class sym {
   "CLOSE_BRACKET",
   "VALUE",
   "ID",
-  "FECHA"
+  "FECHA",
+  "LITERAL"
   };
 }
 

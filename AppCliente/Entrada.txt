@@ -1,49 +1,5 @@
 <!ini_solicitudes>
     
-    <!ini_solicitud:"CREAR_USUARIO">
-            { "CREDENCIALES_USUARIO":[{
-                "PASSWORD": "password",
-                "USUARIO": "neuvoUsuario",
-                "FECHA_CREACION": "2023-05-06"
-                }         
-                ]
-            }
-    <fin_solicitud!>
-    
-    <!ini_solicitud:"LOGIN_USUARIO">
-        { "CREDENCIALES_USUARIO":[{
-                "USUARIO": "usuario",
-                "PASSWORD": "202055"
-                },
-            {
-            "USUARIO": "Login2doBloque",
-            "PASSWORD": "22222222"
-            }        
-            ]
-            }      
-    <fin_solicitud!>
-    
-    <!ini_solicitud:"MODIFICAR_USUARIO">
-            { "CREDENCIALES_USUARIO":[{
-                "USUARIO_ANTIGUO": "junito",
-                "USUARIO_NUEVO": "juanitoNuevo",
-                "NUEVO_PASSWORD": "12345678910",
-                "FECHA_MODIFICACION" : "2020-01-26"
-                }         
-                ]
-            }
-    <fin_solicitud!>
-    
-    <!ini_solicitud:"ELIMINAR_USUARIO">
-        { "CREDENCIALES_USUARIO":[{
-            "USUARIO": "userEliminar2"
-            },
-            { "USUARIO" : "userEliminar2doBloque"
-                }
-        ]
-            }
-    <fin_solicitud!>
-    
     <!ini_solicitud:"NUEVO_FORMULARIO">
        { "PARAMETROS_FORMULARIO":[
                 {
@@ -51,7 +7,7 @@
                     "TITULO":"Formularioparaencuesta1",
                     "NOMBRE":"formulario_encuesta_1",
                     "TEMA":"Dark",
-                    "FECHA_CREACION": "200"
+                    "FECHA_CREACION": "2000-02-31"
                 }
             ]
         }
@@ -77,47 +33,5 @@
             ]
         }
     <fin_solicitud!>
-    
-    <!ini_solicitud:"AGREGAR_COMPONENTE">
-        { "PARAMETROS_COMPONENTE":[
-                {
-                    "ID": "text_cliente",
-                    "NOMBRE_CAMPO": "Cliente",
-                    "FORMULARIO": "form1",
-                    "CLASE": "campoTexto",
-                    "TEXTO_VISIBLE": "Nombredecliente",
-                    "ALINEACION":"centro",
-                    "REQUERIDO": "SI"
-                }
-            ]
-        }
-    <fin_solicitud!>
-
-    <!ini_solicitud:"MODIFICAR_COMPONENTE">
-       { "PARAMETROS_COMPONENTE":[
-                {
-                    "ID": "grupo_paises",
-                    "FORMULARIO": "form1",
-                    "CLASE": "CHECKBOXX",
-                    "INDICE": "1",
-                    "ALINEACION": "DERECHAA",
-                    "OPCIONES": "Guatemala-ElSalvador-Honduras-OTRO"
-                }
-            ]
-        }
-    <fin_solicitud!>
-
-    <!ini_solicitud:"ELIMINAR_COMPONENTE">
-        { "PARAMETROS_COMPONENTE":[
-                {
-                    "ID": "grupo_paises"
-                },
-                {
-                    "ID" : "identificadorComponent"
-                }
-            ]
-        }
-    <fin_solicitud!>
-
 
 <!fin_solicitudes>

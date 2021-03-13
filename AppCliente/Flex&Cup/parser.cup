@@ -76,7 +76,7 @@ terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_R
 terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
 
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE, ID, FECHA;
+terminal Token      VALUE, ID, FECHA, LITERAL;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
@@ -94,7 +94,6 @@ non terminal        bloqueNewComponent, bloqueEditComponent, bloqueDeleteCompone
 non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser;
-non terminal String             value, id, fecha;
 
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
@@ -103,6 +102,8 @@ non terminal String             nameParamNewForm, nameParamEditForm;
 non terminal                    paramsNewComponent, paramsEditComponent;
 non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
 non terminal String             nameParamNewComponent, nameParamEditComponent;
+
+non terminal String         value, id, fecha, literal;
 
 inicio ::= startRequest
          | startRequests
@@ -257,13 +258,13 @@ paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(param
 
 paramNewForm ::= nameParamNewForm:n COLON value:v           {:RESULT = new Parametro(n, v);:}
                | PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
+               | PARAM_FECHA_CREACION:p COLON fecha:f       {:RESULT = new Parametro(p.getLexema(), f);:}
                ;
 
 nameParamNewForm ::= PARAM_TITULO_FORM:p            {:RESULT = p.getLexema();:}
                    | PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
                    | PARAM_TEMA:p                   {:RESULT = p.getLexema();:}
                    | PARAM_USUARIO_CREACION:p       {:RESULT = p.getLexema();:}
-                   | PARAM_FECHA_CREACION:p    {:RESULT = p.getLexema();:}
                    ;
 /**************************Fin de producciones para parametros de solicitud NuevoFormulario**************************/
 

@@ -55,6 +55,8 @@ DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
+VALUE = "\""[^ '\"']*"\""
+LITERAL = "\""[^"\""]*"\""
 
 %state STRING
 
@@ -128,19 +130,20 @@ FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
     "<"                                 {return symbol(LESS_THAN);}
     ">"                                 {return symbol(GREATER_THAN);}
     "!"                                 {return symbol(EXCLAMATION_MARK);}
-    "\""                                {string.setLength(0); yybegin(STRING);}
     ":"                                 {return symbol(COLON);}
     ","                                 {return symbol(COMMA);}
     "{"                                 {return symbol(OPEN_BRACE);}
     "}"                                 {return symbol(CLOSE_BRACE);}
     "["                                 {return symbol(OPEN_BRACKET);}
     "]"                                 {return symbol(CLOSE_BRACKET);}
-    
-    {ID}                                {return symbol(ID);}
-    {FECHA}                             {return symbol(FECHA);}
-//{VALUE}                                 {return symbol(VALUE);}
+    //"\""                                {string.setLength(0); yybegin(STRING);}
     {ESPACIO}                           {/*Ignorar*/}
 }
+
+<YYINITIAL> {ID}                        {return symbol(ID);}
+<YYINITIAL> {FECHA}                     {return symbol(FECHA);}
+<YYINITIAL> {VALUE}                     {return symbol(VALUE);}
+<YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
 
 <STRING> {
     \"                            { 
