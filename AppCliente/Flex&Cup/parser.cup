@@ -76,7 +76,7 @@ terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_R
 terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
 
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE, IDENTIFICADOR, LITERAL;
+terminal Token      VALUE, IDENTIFICADOR, FECHA;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
@@ -94,7 +94,7 @@ non terminal        bloqueNewComponent, bloqueEditComponent, bloqueDeleteCompone
 non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser;
-non terminal String             value, id, literal;
+non terminal String             value, id, fecha;
 
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
@@ -152,11 +152,8 @@ paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(parametros,
               | paramLogin:p                          {:addParameter(parametros, p);:}
               ;
 
-paramLogin ::= nameParamLogin:n COLON value:v
-               {:
-                    RESULT = new Parametro(n, v);
-               :}
-               ;
+paramLogin ::= nameParamLogin:n COLON value:v           {:RESULT = new Parametro(n, v);:}
+             ;
 
 nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema();:}
                  | PARAM_PASSWORD:p         {:RESULT = p.getLexema();:}
@@ -181,15 +178,12 @@ paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(p
                    | paramCreateUser:p                          {:addParameter(parametros, p);:}
                    ;
      
-paramCreateUser ::= nameParamCreateUser:n COLON value:v
-                    {:
-                        RESULT = new Parametro(n, v);
-                    :}
-                    ;
+paramCreateUser ::= nameParamCreateUser:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+                  | PARAM_FECHA_CREACION:p COLON fecha:f        {:RESULT = new Parametro(p.getLexema(), f);:}
+                  ;
 
 nameParamCreateUser ::= PARAM_USUARIO:p               {:RESULT = p.getLexema();:}
                       | PARAM_PASSWORD:p              {:RESULT = p.getLexema();:}
-                      | PARAM_FECHA_CREACION:p        {:RESULT = p.getLexema();:}
                       ;
 /****************************Fin producciones para parametros de solicitud CrearUsuario****************************/      
 
@@ -211,16 +205,13 @@ paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter
                    | paramModifyUser:p                            {:addParameter(parametros, p);:}
                    ;
 
-paramModifyUser ::= nameParamModifyUser:n COLON value:v
-                    {:
-                        RESULT = new Parametro(n, v);
-                    :}
+paramModifyUser ::= nameParamModifyUser:n COLON value:v             {:RESULT = new Parametro(n, v);:}
+                  | PARAM_FECHA_MODIFICACION:p COLON fecha:f        {:RESULT = new Parametro(p.getLexema(), f);:}
                     ;
 
 nameParamModifyUser ::= PARAM_OLD_USER:p                  {:RESULT = p.getLexema();:}
                       | PARAM_NEW_USER:p                  {:RESULT = p.getLexema();:}
                       | PARAM_NEW_PASSWORD:p              {:RESULT = p.getLexema();:}
-                      | PARAM_FECHA_MODIFICACION:p        {:RESULT = p.getLexema();:}
                       ;
 /************************Fin producciones para parametros de solicitud ModificarUsuario************************/       
 
@@ -436,6 +427,9 @@ value ::= VALUE:v           {:RESULT = v.getLexema();:}
 
 id ::= IDENTIFICADOR:i      {:RESULT = i.getLexema();:}
      ;
+
+fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
+        ;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 

@@ -2,8 +2,9 @@
     
     <!ini_solicitud:"CREAR_USUARIO">
             { "CREDENCIALES_USUARIO":[{
+                "PASSWORD": "password",
                 "USUARIO": "neuvoU suario",
-                "PASSWORD": "password"
+                "FECHA_CREACION": "2023-05-06"
                 }         
                 ]
             }
@@ -12,7 +13,7 @@
     <!ini_solicitud:"LOGIN_USUARIO">
         { "CREDENCIALES_USUARIO":[{
                 "USUARIO": "usuario",
-                "PASSWORD": "123321"
+                "PASSWORD": "202055"
                 },
             {
             "USUARIO": "Login2doBloque",
@@ -26,7 +27,8 @@
             { "CREDENCIALES_USUARIO":[{
                 "USUARIO_ANTIGUO": "junito",
                 "USUARIO_NUEVO": "juanitoNuevo",
-                "NUEVO_PASSWORD": "12345678910"
+                "NUEVO_PASSWORD": "12345678910",
+                "FECHA_MODIFICACION" : "2020-01-26"
                 }         
                 ]
             }
@@ -49,7 +51,7 @@
                     "TITULO":"Formularioparaencuesta1",
                     "NOMBRE":"formulario_encuesta_1",
                     "TEMA":"Dark",
-                    "FECHA_CREACION": "2002-06-06"
+                    "FECHA_CREACION": "200"
                 }
             ]
         }
