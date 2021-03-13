@@ -21,7 +21,6 @@ public class sym {
   public static final int CLASS_CHECKBOX = 44;
   public static final int GREATER_THAN = 55;
   public static final int CLASS_COMBO = 48;
-  public static final int IDENTIFICADOR = 64;
   public static final int END_REQUEST = 4;
   public static final int PARAM_TEMA = 26;
   public static final int PARAM_OLD_USER = 17;
@@ -32,6 +31,7 @@ public class sym {
   public static final int PARAM_FORMULARIO = 32;
   public static final int CLASS_CAMPO_TEXTO = 42;
   public static final int PARAM_URL = 41;
+  public static final int ID = 64;
   public static final int CREATE_USER = 10;
   public static final int EOF = 0;
   public static final int PARAM_FECHA_CREACION = 15;
@@ -139,7 +139,7 @@ public class sym {
   "OPEN_BRACKET",
   "CLOSE_BRACKET",
   "VALUE",
-  "IDENTIFICADOR",
+  "ID",
   "FECHA"
   };
 }

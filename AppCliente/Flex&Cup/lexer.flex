@@ -53,7 +53,7 @@ LETRA = [a-zA-Z]
 ENTERO = 0|([1-9][0-9]*)
 DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
-IDENT = ("-"|"_"|"$")({LETRA}|\d|"-"|"_"|"$")+
+ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
 
 %state STRING
@@ -136,8 +136,9 @@ FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
     "["                                 {return symbol(OPEN_BRACKET);}
     "]"                                 {return symbol(CLOSE_BRACKET);}
     
-    {IDENT}                             {return symbol(IDENTIFICADOR);}
+    {ID}                                {return symbol(ID);}
     {FECHA}                             {return symbol(FECHA);}
+//{VALUE}                                 {return symbol(VALUE);}
     {ESPACIO}                           {/*Ignorar*/}
 }
 

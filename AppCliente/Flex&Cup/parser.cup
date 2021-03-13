@@ -76,7 +76,7 @@ terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_R
 terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
 
 terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE, IDENTIFICADOR, FECHA;
+terminal Token      VALUE, ID, FECHA;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
@@ -255,14 +255,11 @@ paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(param
               | paramNewForm:p                              {:addParameter(parametros, p);:}
               ;
 
-paramNewForm ::= nameParamNewForm:n COLON value:v
-               {:
-                    RESULT = new Parametro(n, v);
-               :}
+paramNewForm ::= nameParamNewForm:n COLON value:v           {:RESULT = new Parametro(n, v);:}
+               | PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
                ;
 
-nameParamNewForm ::= PARAM_ID:p                     {:RESULT = p.getLexema();:}
-                   | PARAM_TITULO_FORM:p            {:RESULT = p.getLexema();:}
+nameParamNewForm ::= PARAM_TITULO_FORM:p            {:RESULT = p.getLexema();:}
                    | PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
                    | PARAM_TEMA:p                   {:RESULT = p.getLexema();:}
                    | PARAM_USUARIO_CREACION:p       {:RESULT = p.getLexema();:}
@@ -425,7 +422,7 @@ paramDeleteComponent ::= PARAM_ID:p COLON value:v
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;
 
-id ::= IDENTIFICADOR:i      {:RESULT = i.getLexema();:}
+id ::= ID:i      {:RESULT = i.getLexema();:}
      ;
 
 fecha ::= FECHA:f           {:RESULT = f.getLexema();:}

@@ -3,7 +3,7 @@
     <!ini_solicitud:"CREAR_USUARIO">
             { "CREDENCIALES_USUARIO":[{
                 "PASSWORD": "password",
-                "USUARIO": "neuvoU suario",
+                "USUARIO": "neuvoUsuario",
                 "FECHA_CREACION": "2023-05-06"
                 }         
                 ]
@@ -47,7 +47,7 @@
     <!ini_solicitud:"NUEVO_FORMULARIO">
        { "PARAMETROS_FORMULARIO":[
                 {
-                    "ID":"form1",
+                    "ID":"$form2",
                     "TITULO":"Formularioparaencuesta1",
                     "NOMBRE":"formulario_encuesta_1",
                     "TEMA":"Dark",
@@ -81,7 +81,7 @@
     <!ini_solicitud:"AGREGAR_COMPONENTE">
         { "PARAMETROS_COMPONENTE":[
                 {
-                    "ID": "_text_cliente",
+                    "ID": "text_cliente",
                     "NOMBRE_CAMPO": "Cliente",
                     "FORMULARIO": "form1",
                     "CLASE": "campoTexto",
@@ -96,7 +96,7 @@
     <!ini_solicitud:"MODIFICAR_COMPONENTE">
        { "PARAMETROS_COMPONENTE":[
                 {
-                    "ID": "_grupo_paises",
+                    "ID": "grupo_paises",
                     "FORMULARIO": "form1",
                     "CLASE": "CHECKBOXX",
                     "INDICE": "1",
@@ -110,7 +110,7 @@
     <!ini_solicitud:"ELIMINAR_COMPONENTE">
         { "PARAMETROS_COMPONENTE":[
                 {
-                    "ID": "_grupo_paises"
+                    "ID": "grupo_paises"
                 },
                 {
                     "ID" : "identificadorComponent"
