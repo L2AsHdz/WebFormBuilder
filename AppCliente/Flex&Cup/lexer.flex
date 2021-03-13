@@ -22,6 +22,7 @@ import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 
 %{
     private List<ErrorAnalisis> errores = new ArrayList();
+    private StringBuffer string = new StringBuffer();
 
     public List<ErrorAnalisis> getErrores(){
         return this.errores;
@@ -29,6 +30,10 @@ import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 
     private Symbol symbol(int type){
         return new Symbol(type, new Token(yyline, yycolumn, yytext()));
+    }
+    
+    private Symbol symbol(int type, String lexema){
+        return new Symbol(type, new Token(yyline, yycolumn, lexema);
     }
 
     private void addLexicError(){
@@ -51,7 +56,9 @@ DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
 NOSE = ({LETRA}|{DIGITO}|"-"|"_")+
 IDENT = ("-"|"_"|"$")({LETRA}|{DIGITO}|"-"|"_"|"$")+
-FECHA = ([ENTERO]"-"[1-12]"-"[1-31])
+FECHA = ([DIGITO]{4}"-"[1-12]"-"[1-31])
+
+%state STRING
 
 %%
 
@@ -62,78 +69,91 @@ FECHA = ([ENTERO]"-"[1-12]"-"[1-31])
 <YYINITIAL> "ini_solicitudes"           {return symbol(START_REQUESTS);}
 <YYINITIAL> "fin_solicitudes"           {return symbol(END_REQUESTS);}
 
-<YYINITIAL> "LOGIN_USUARIO"             {return symbol(LOGIN);}
-<YYINITIAL> "CREAR_USUARIO"             {return symbol(CREATE_USER);}
-<YYINITIAL> "ELIMINAR_USUARIO"          {return symbol(DELETE_USER);}
-<YYINITIAL> "MODIFICAR_USUARIO"         {return symbol(MODIFY_USER);}
+<YYINITIAL> "\""({ESPACIO})*("LOGIN_USUARIO")({ESPACIO})*"\""             {return symbol(LOGIN);}
+<YYINITIAL> "\""({ESPACIO})*("CREAR_USUARIO")({ESPACIO})*"\""             {return symbol(CREATE_USER);}
+<YYINITIAL> "\""({ESPACIO})*("ELIMINAR_USUARIO")({ESPACIO})*"\""          {return symbol(DELETE_USER);}
+<YYINITIAL> "\""({ESPACIO})*("MODIFICAR_USUARIO")({ESPACIO})*"\""         {return symbol(MODIFY_USER);}
 
-<YYINITIAL> "NUEVO_FORMULARIO"          {return symbol(NEW_FORM);}
-<YYINITIAL> "ELIMINAR_FORMULARIO"       {return symbol(DELETE_FORM);}
-<YYINITIAL> "MODIFICAR_FORMULARIO"      {return symbol(MODIFY_FORM);}
+<YYINITIAL> "\""({ESPACIO})*("NUEVO_FORMULARIO")({ESPACIO})*"\""          {return symbol(NEW_FORM);}
+<YYINITIAL> "\""({ESPACIO})*("ELIMINAR_FORMULARIO")({ESPACIO})*"\""       {return symbol(DELETE_FORM);}
+<YYINITIAL> "\""({ESPACIO})*("MODIFICAR_FORMULARIO")({ESPACIO})*"\""      {return symbol(MODIFY_FORM);}
 
-<YYINITIAL> "AGREGAR_COMPONENTE"        {return symbol(NEW_COMPONENT);}
-<YYINITIAL> "ELIMINAR_COMPONENTE"       {return symbol(DELETE_COMPONENT);}
-<YYINITIAL> "MODIFICAR_COMPONENTE"      {return symbol(EDIT_COMPONENT);}
+<YYINITIAL> "\""({ESPACIO})*("AGREGAR_COMPONENTE")({ESPACIO})*"\""        {return symbol(NEW_COMPONENT);}
+<YYINITIAL> "\""({ESPACIO})*("ELIMINAR_COMPONENTE")({ESPACIO})*"\""       {return symbol(DELETE_COMPONENT);}
+<YYINITIAL> "\""({ESPACIO})*("MODIFICAR_COMPONENTE")({ESPACIO})*"\""      {return symbol(EDIT_COMPONENT);}
 
-<YYINITIAL> "CREDENCIALES_USUARIO"      {return symbol(USER_CREDENTIALS);}
-<YYINITIAL> "PARAMETROS_FORMULARIO"     {return symbol(FORM_PARAMS);}
-<YYINITIAL> "PARAMETROS_COMPONENTE"     {return symbol(COMPONENT_PARAMS);}
+<YYINITIAL> "\""({ESPACIO})*("CREDENCIALES_USUARIO")({ESPACIO})*"\""      {return symbol(USER_CREDENTIALS);}
+<YYINITIAL> "\""({ESPACIO})*("PARAMETROS_FORMULARIO")({ESPACIO})*"\""     {return symbol(FORM_PARAMS);}
+<YYINITIAL> "\""({ESPACIO})*("PARAMETROS_COMPONENTE")({ESPACIO})*"\""     {return symbol(COMPONENT_PARAMS);}
 
-<YYINITIAL> "USUARIO"                   {return symbol(PARAM_USUARIO);}
-<YYINITIAL> "PASSWORD"                  {return symbol(PARAM_PASSWORD);}
-<YYINITIAL> "FECHA_CREACION"            {return symbol(PARAM_FECHA_CREACION);}
-<YYINITIAL> "FECHA_MODIFICACION"        {return symbol(PARAM_FECHA_MODIFICACION);}
-<YYINITIAL> "USUARIO_ANTIGUO"           {return symbol(PARAM_OLD_USER);}
-<YYINITIAL> "USUARIO_NUEVO"             {return symbol(PARAM_NEW_USER);}
-<YYINITIAL> "NUEVO_PASSWORD"            {return symbol(PARAM_NEW_PASSWORD);}
+<YYINITIAL> "\""({ESPACIO})*("USUARIO")({ESPACIO})*"\""                   {return symbol(PARAM_USUARIO);}
+<YYINITIAL> "\""({ESPACIO})*("PASSWORD")({ESPACIO})*"\""                  {return symbol(PARAM_PASSWORD);}
+<YYINITIAL> "\""({ESPACIO})*("FECHA_CREACION")({ESPACIO})*"\""            {return symbol(PARAM_FECHA_CREACION);}
+<YYINITIAL> "\""({ESPACIO})*("FECHA_MODIFICACION")({ESPACIO})*"\""        {return symbol(PARAM_FECHA_MODIFICACION);}
+<YYINITIAL> "\""({ESPACIO})*("USUARIO_ANTIGUO")({ESPACIO})*"\""           {return symbol(PARAM_OLD_USER);}
+<YYINITIAL> "\""({ESPACIO})*("USUARIO_NUEVO")({ESPACIO})*"\""             {return symbol(PARAM_NEW_USER);}
+<YYINITIAL> "\""({ESPACIO})*("NUEVO_PASSWORD")({ESPACIO})*"\""            {return symbol(PARAM_NEW_PASSWORD);}
 
-<YYINITIAL> "ID"                        {return symbol(PARAM_ID);}
-<YYINITIAL> "TITULO"                    {return symbol(PARAM_TITULO_FORM);}
-<YYINITIAL> "NOMBRE"                    {return symbol(PARAM_NOMBRE_FORM);}
-<YYINITIAL> "TEMA"                      {return symbol(PARAM_TEMA);}
-<YYINITIAL> "USUARIO_CREACION"          {return symbol(PARAM_USUARIO_CREACION);}
+<YYINITIAL> "\""({ESPACIO})*("ID")({ESPACIO})*"\""                        {return symbol(PARAM_ID);}
+<YYINITIAL> "\""({ESPACIO})*("TITULO")({ESPACIO})*"\""                    {return symbol(PARAM_TITULO_FORM);}
+<YYINITIAL> "\""({ESPACIO})*("NOMBRE")({ESPACIO})*"\""                    {return symbol(PARAM_NOMBRE_FORM);}
+<YYINITIAL> "\""({ESPACIO})*("TEMA")({ESPACIO})*"\""                      {return symbol(PARAM_TEMA);}
+<YYINITIAL> "\""({ESPACIO})*("USUARIO_CREACION")({ESPACIO})*"\""          {return symbol(PARAM_USUARIO_CREACION);}
 
-<YYINITIAL> "NOMBRE_CAMPO"              {return symbol(PARAM_NOMBRE_CAMPO);}
-<YYINITIAL> "FORMULARIO"                {return symbol(PARAM_FORMULARIO);}
-<YYINITIAL> "CLASE"                     {return symbol(PARAM_CLASE);}
-<YYINITIAL> "INDICE"                    {return symbol(PARAM_INDICE);}
-<YYINITIAL> "TEXTO_VISIBLE"             {return symbol(PARAM_TEXTO_VISIBLE);}
-<YYINITIAL> "ALINEACION"                {return symbol(PARAM_ALINEACION);}
-<YYINITIAL> "REQUERIDO"                 {return symbol(PARAM_REQUERIDO);}
-<YYINITIAL> "OPCIONES"                  {return symbol(PARAM_OPCIONES);}
-<YYINITIAL> "FILAS"                     {return symbol(PARAM_FILAS);}
-<YYINITIAL> "COLUMNAS"                  {return symbol(PARAM_COLUMNAS);}
-<YYINITIAL> "URL"                       {return symbol(PARAM_URL);}
+<YYINITIAL> "\""({ESPACIO})*("NOMBRE_CAMPO")({ESPACIO})*"\""              {return symbol(PARAM_NOMBRE_CAMPO);}
+<YYINITIAL> "\""({ESPACIO})*("FORMULARIO")({ESPACIO})*"\""                {return symbol(PARAM_FORMULARIO);}
+<YYINITIAL> "\""({ESPACIO})*("CLASE")({ESPACIO})*"\""                     {return symbol(PARAM_CLASE);}
+<YYINITIAL> "\""({ESPACIO})*("INDICE")({ESPACIO})*"\""                    {return symbol(PARAM_INDICE);}
+<YYINITIAL> "\""({ESPACIO})*("TEXTO_VISIBLE")({ESPACIO})*"\""             {return symbol(PARAM_TEXTO_VISIBLE);}
+<YYINITIAL> "\""({ESPACIO})*("ALINEACION")({ESPACIO})*"\""                {return symbol(PARAM_ALINEACION);}
+<YYINITIAL> "\""({ESPACIO})*("REQUERIDO")({ESPACIO})*"\""                 {return symbol(PARAM_REQUERIDO);}
+<YYINITIAL> "\""({ESPACIO})*("OPCIONES")({ESPACIO})*"\""                  {return symbol(PARAM_OPCIONES);}
+<YYINITIAL> "\""({ESPACIO})*("FILAS")({ESPACIO})*"\""                     {return symbol(PARAM_FILAS);}
+<YYINITIAL> "\""({ESPACIO})*("COLUMNAS")({ESPACIO})*"\""                  {return symbol(PARAM_COLUMNAS);}
+<YYINITIAL> "\""({ESPACIO})*("URL")({ESPACIO})*"\""                       {return symbol(PARAM_URL);}
 
-<YYINITIAL> "CAMPO_TEXTO"               {return symbol(CLASS_CAMPO_TEXTO);}
-<YYINITIAL> "AREA_TEXTO"                {return symbol(CLASS_AREA_TEXTO);}
-<YYINITIAL> "CHECKBOX"                  {return symbol(CLASS_CHECKBOX);}
-<YYINITIAL> "RADIO"                     {return symbol(CLASS_RADIO);}
-<YYINITIAL> "FICHERO"                   {return symbol(CLASS_FICHERO);}
-<YYINITIAL> "IMAGEN"                    {return symbol(CLASS_IMAGEN);}
-<YYINITIAL> "COMBO"                     {return symbol(CLASS_COMBO);}
-<YYINITIAL> "BOTON"                     {return symbol(CLASS_BOTON);}
+<YYINITIAL> "\""({ESPACIO})*("CAMPO_TEXTO")({ESPACIO})*"\""               {return symbol(CLASS_CAMPO_TEXTO);}
+<YYINITIAL> "\""({ESPACIO})*("AREA_TEXTO")({ESPACIO})*"\""                {return symbol(CLASS_AREA_TEXTO);}
+<YYINITIAL> "\""({ESPACIO})*("CHECKBOX")({ESPACIO})*"\""                  {return symbol(CLASS_CHECKBOX);}
+<YYINITIAL> "\""({ESPACIO})*("RADIO")({ESPACIO})*"\""                     {return symbol(CLASS_RADIO);}
+<YYINITIAL> "\""({ESPACIO})*("FICHERO")({ESPACIO})*"\""                   {return symbol(CLASS_FICHERO);}
+<YYINITIAL> "\""({ESPACIO})*("IMAGEN")({ESPACIO})*"\""                    {return symbol(CLASS_IMAGEN);}
+<YYINITIAL> "\""({ESPACIO})*("COMBO")({ESPACIO})*"\""                     {return symbol(CLASS_COMBO);}
+<YYINITIAL> "\""({ESPACIO})*("BOTON")({ESPACIO})*"\""                     {return symbol(CLASS_BOTON);}
 
-<YYINITIAL> "CENTRO"                    {return symbol(CENTRO);}
-<YYINITIAL> "IZQUIERDA"                 {return symbol(IZQUIERDA);}
-<YYINITIAL> "DERECHA"                   {return symbol(DERECHA);}
-<YYINITIAL> "JUSTIFICAR"                {return symbol(JUSTIFICAR);}
+<YYINITIAL> "\""({ESPACIO})*("CENTRO")({ESPACIO})*"\""                    {return symbol(CENTRO);}
+<YYINITIAL> "\""({ESPACIO})*("IZQUIERDA")({ESPACIO})*"\""                 {return symbol(IZQUIERDA);}
+<YYINITIAL> "\""({ESPACIO})*("DERECHA")({ESPACIO})*"\""                   {return symbol(DERECHA);}
+<YYINITIAL> "\""({ESPACIO})*("JUSTIFICAR")({ESPACIO})*"\""                {return symbol(JUSTIFICAR);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
     ">"                                 {return symbol(GREATER_THAN);}
     "!"                                 {return symbol(EXCLAMATION_MARK);}
-    "\""                                {return symbol(QUOTE_MARK);}
+    "\""                                {string.setLength(0); yybegin(STRING);}
     ":"                                 {return symbol(COLON);}
     ","                                 {return symbol(COMMA);}
     "{"                                 {return symbol(OPEN_BRACE);}
     "}"                                 {return symbol(CLOSE_BRACE);}
     "["                                 {return symbol(OPEN_BRACKET);}
     "]"                                 {return symbol(CLOSE_BRACKET);}
+    
+    //{NOSE}                              {return symbol(VALUE);}
+    {IDENT}                             {return symbol(IDENTIFICADOR);}
+    {ESPACIO}                           {/*Ignorar*/}
 }
 
-{NOSE}                                  {return symbol(VALUE);}
-{IDENT}                                 {return symbol(IDENTIFICADOR);}
-{ESPACIO}                               {/*Ignorar*/}
+<STRING> {
+    \"                            { 
+                                        yybegin(YYINITIAL);
+                                        return symbol(VALUE, string.toString()); 
+                                    }
+    [^\n\r\"\\]+                  {string.append(yytext());}
+    \\t                             {string.append('\t');}
+    \\n                             {string.append('\n');}
+    \\r                             {string.append('\r');}
+    \\\"                          {string.append('\"');}
+    \\                              {string.append('\\');}
+  }
 
 [^]                                 {addLexicError();}

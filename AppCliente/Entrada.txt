@@ -2,7 +2,7 @@
     
     <!ini_solicitud:"CREAR_USUARIO">
             { "CREDENCIALES_USUARIO":[{
-                "USUARIO": "neuvoUsuario",
+                "USUARIO": "neuvoU suario",
                 "PASSWORD": "password"
                 }         
                 ]
@@ -11,7 +11,7 @@
     
     <!ini_solicitud:"LOGIN_USUARIO">
         { "CREDENCIALES_USUARIO":[{
-                "USUARIO": "AsaelLogin",
+                "USUARIO": "usuario",
                 "PASSWORD": "123321"
                 },
             {

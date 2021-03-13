@@ -75,8 +75,8 @@ terminal Token      PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS
 terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
 terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
 
-terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE, IDENTIFICADOR;
+terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
+terminal Token      VALUE, IDENTIFICADOR, LITERAL;
 
 //no terminales
 non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
@@ -94,7 +94,7 @@ non terminal        bloqueNewComponent, bloqueEditComponent, bloqueDeleteCompone
 non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
 non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
 non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser;
-non terminal String             value, id;
+non terminal String             value, id, literal;
 
 non terminal                    paramsNewForm, paramsEditForm;
 non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
@@ -115,7 +115,7 @@ requests ::= startRequest endRequests
            ;
 
 /******************************Produccion para el inicio de una solicitud en general******************************/
-startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestType endContent endRequest;
+startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON requestType endContent endRequest;
 
 /******************************Producciones para los diferentes tipos de solicitud******************************/
 requestType ::= LOGIN startContentUser bloquesLogin
@@ -130,9 +130,9 @@ requestType ::= LOGIN startContentUser bloquesLogin
               | DELETE_COMPONENT startContentComponent bloquesDeleteComponent
               ;
 
-startContentUser ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK USER_CREDENTIALS QUOTE_MARK COLON OPEN_BRACKET;
-startContentForm ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK FORM_PARAMS QUOTE_MARK COLON OPEN_BRACKET;
-startContentComponent ::= QUOTE_MARK GREATER_THAN OPEN_BRACE QUOTE_MARK COMPONENT_PARAMS QUOTE_MARK COLON OPEN_BRACKET;
+startContentUser ::= GREATER_THAN OPEN_BRACE USER_CREDENTIALS COLON OPEN_BRACKET;
+startContentForm ::= GREATER_THAN OPEN_BRACE FORM_PARAMS COLON OPEN_BRACKET;
+startContentComponent ::= GREATER_THAN OPEN_BRACE COMPONENT_PARAMS COLON OPEN_BRACKET;
 
 
 
@@ -152,7 +152,7 @@ paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(parametros,
               | paramLogin:p                          {:addParameter(parametros, p);:}
               ;
 
-paramLogin ::= QUOTE_MARK nameParamLogin:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramLogin ::= nameParamLogin:n COLON value:v
                {:
                     RESULT = new Parametro(n, v);
                :}
@@ -181,7 +181,7 @@ paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(p
                    | paramCreateUser:p                          {:addParameter(parametros, p);:}
                    ;
      
-paramCreateUser ::= QUOTE_MARK nameParamCreateUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramCreateUser ::= nameParamCreateUser:n COLON value:v
                     {:
                         RESULT = new Parametro(n, v);
                     :}
@@ -211,7 +211,7 @@ paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter
                    | paramModifyUser:p                            {:addParameter(parametros, p);:}
                    ;
 
-paramModifyUser ::= QUOTE_MARK nameParamModifyUser:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramModifyUser ::= nameParamModifyUser:n COLON value:v
                     {:
                         RESULT = new Parametro(n, v);
                     :}
@@ -239,7 +239,7 @@ bloqueDeleteUser ::= OPEN_BRACE paramDeleteUser:p CLOSE_BRACE
                         :}
                         ;
 
-paramDeleteUser ::= QUOTE_MARK PARAM_USUARIO:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramDeleteUser ::= PARAM_USUARIO:p COLON value:v
                     {:
                         RESULT = new Parametro(p.getLexema(), v);
                     :}
@@ -264,7 +264,7 @@ paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(param
               | paramNewForm:p                              {:addParameter(parametros, p);:}
               ;
 
-paramNewForm ::= QUOTE_MARK nameParamNewForm:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramNewForm ::= nameParamNewForm:n COLON value:v
                {:
                     RESULT = new Parametro(n, v);
                :}
@@ -294,7 +294,7 @@ bloqueDeleteForm ::= OPEN_BRACE paramDeleteForm:p CLOSE_BRACE
                         :}
                         ;
 
-paramDeleteForm ::= QUOTE_MARK PARAM_ID:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramDeleteForm ::= PARAM_ID:p COLON value:v
                     {:
                         RESULT = new Parametro(p.getLexema(), v);
                     :}
@@ -319,7 +319,7 @@ paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(p
                  | paramEditForm:p                              {:addParameter(parametros, p);:}
                  ;
 
-paramEditForm ::= QUOTE_MARK nameParamEditForm:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramEditForm ::= nameParamEditForm:n COLON value:v
                {:
                     RESULT = new Parametro(n, v);
                :}
@@ -350,7 +350,7 @@ paramsNewComponent ::= paramNewComponent:p COMMA paramsNewComponent         {:ad
                      | paramNewComponent:p                                  {:addParameter(parametros, p);:}
                      ;
 
-paramNewComponent ::= QUOTE_MARK nameParamNewComponent:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramNewComponent ::= nameParamNewComponent:n COLON value:v
                     {:
                         RESULT = new Parametro(n, v);
                     :}
@@ -388,7 +388,7 @@ paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:
                       | paramEditComponent:p                                  {:addParameter(parametros, p);:}
                       ;
 
-paramEditComponent ::= QUOTE_MARK nameParamEditComponent:n QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramEditComponent ::= nameParamEditComponent:n COLON value:v
                      {:
                         RESULT = new Parametro(n, v);
                      :}
@@ -424,7 +424,7 @@ bloqueDeleteComponent ::= OPEN_BRACE paramDeleteComponent:p CLOSE_BRACE
                         :}
                         ;
 
-paramDeleteComponent ::= QUOTE_MARK PARAM_ID:p QUOTE_MARK COLON QUOTE_MARK value:v QUOTE_MARK
+paramDeleteComponent ::= PARAM_ID:p COLON value:v
                     {:
                         RESULT = new Parametro(p.getLexema(), v);
                     :}

@@ -20,12 +20,12 @@ public class sym {
   public static final int CLASS_CHECKBOX = 44;
   public static final int GREATER_THAN = 55;
   public static final int CLASS_COMBO = 48;
-  public static final int IDENTIFICADOR = 65;
+  public static final int IDENTIFICADOR = 64;
   public static final int END_REQUEST = 4;
   public static final int PARAM_TEMA = 26;
   public static final int PARAM_OLD_USER = 17;
   public static final int PARAM_NOMBRE_CAMPO = 31;
-  public static final int COMMA = 59;
+  public static final int COMMA = 58;
   public static final int CENTRO = 50;
   public static final int END_REQUESTS = 5;
   public static final int PARAM_FORMULARIO = 32;
@@ -39,21 +39,21 @@ public class sym {
   public static final int PARAM_NOMBRE_FORM = 25;
   public static final int DELETE_USER = 11;
   public static final int error = 1;
-  public static final int QUOTE_MARK = 57;
   public static final int COMPONENT_PARAMS = 8;
   public static final int PARAM_PASSWORD = 14;
-  public static final int OPEN_BRACE = 60;
+  public static final int OPEN_BRACE = 59;
   public static final int CLASS_AREA_TEXTO = 43;
   public static final int PARAM_FILAS = 39;
-  public static final int CLOSE_BRACKET = 63;
-  public static final int OPEN_BRACKET = 62;
+  public static final int CLOSE_BRACKET = 62;
+  public static final int OPEN_BRACKET = 61;
   public static final int CLASS_IMAGEN = 47;
   public static final int PARAM_USUARIO_CREACION = 27;
   public static final int DELETE_FORM = 21;
   public static final int USER_CREDENTIALS = 6;
   public static final int PARAM_INDICE = 34;
   public static final int START_REQUEST = 2;
-  public static final int COLON = 58;
+  public static final int LITERAL = 65;
+  public static final int COLON = 57;
   public static final int PARAM_FECHA_MODIFICACION = 16;
   public static final int START_REQUESTS = 3;
   public static final int MODIFY_USER = 12;
@@ -65,8 +65,8 @@ public class sym {
   public static final int FORM_PARAMS = 7;
   public static final int NEW_COMPONENT = 28;
   public static final int MODIFY_FORM = 22;
-  public static final int CLOSE_BRACE = 61;
-  public static final int VALUE = 64;
+  public static final int CLOSE_BRACE = 60;
+  public static final int VALUE = 63;
   public static final int PARAM_NEW_PASSWORD = 19;
   public static final int EXCLAMATION_MARK = 56;
   public static final int PARAM_OPCIONES = 38;
@@ -132,7 +132,6 @@ public class sym {
   "LESS_THAN",
   "GREATER_THAN",
   "EXCLAMATION_MARK",
-  "QUOTE_MARK",
   "COLON",
   "COMMA",
   "OPEN_BRACE",
@@ -140,7 +139,8 @@ public class sym {
   "OPEN_BRACKET",
   "CLOSE_BRACKET",
   "VALUE",
-  "IDENTIFICADOR"
+  "IDENTIFICADOR",
+  "LITERAL"
   };
 }
 
