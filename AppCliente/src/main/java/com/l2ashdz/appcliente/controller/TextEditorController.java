@@ -15,7 +15,8 @@ import java.awt.HeadlessException;
 public class TextEditorController implements ActionListener {
 
     private TextEditorView textEditorV;
-    private String path;
+    private boolean hasChanges = false;
+    private String path = "";
 
     public TextEditorController(TextEditorView textEditorV) {
         this.textEditorV = textEditorV;
@@ -52,49 +53,13 @@ public class TextEditorController implements ActionListener {
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
-            JFileChooser fc = new JFileChooser();
-            fc.showOpenDialog(this.textEditorV);
-            try {
-                path = fc.getSelectedFile().getAbsolutePath();
-                this.textEditorV.getTxtArea().setText(readFile(path));
-                //withoutChange = true;
-            } catch (Exception ex) {
-                System.out.println("se cancelo");
-                ex.printStackTrace(System.out);
-            }
+            abrir();
         } else if (this.textEditorV.getItmNuevo() == e.getSource()) {
-            //if (withoutChange) {
-                this.textEditorV.getTxtArea().setText("");
-                path = "";
-                //withoutChange = true;
-            //} else {
-                //cambiosSinGuardar(evt, 2);
-            //}
+            nuevo();
         } else if (this.textEditorV.getItmSave() == e.getSource()) {
-            String texto = this.textEditorV.getTxtArea().getText();
-            if (verifyFile(path)) {
-                saveFile(path, texto);
-                //withoutChange = true;
-            } else {
-                JFileChooser fc = new JFileChooser();
-                path = "";
-                try {
-                    if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                        try {
-                            path = fc.getSelectedFile().getAbsolutePath() + ".txt";
-                            //withoutChange = true;
-                        } catch (Exception ex) {
-                            System.out.println("se cancelo");
-                            ex.printStackTrace(System.out);
-                        }
-                    }
-                    saveFile(path, texto);
-                } catch (HeadlessException ex) {
-                    ex.printStackTrace(System.out);
-                }
-            }
+            guardar();
         } else if (this.textEditorV.getItmSaveAs() == e.getSource()) {
-
+            guardarComo();
         } else if (this.textEditorV.getItmRehacer() == e.getSource()) {
 
         } else if (this.textEditorV.getItmDeshacer() == e.getSource()) {
@@ -112,4 +77,73 @@ public class TextEditorController implements ActionListener {
         }
     }
 
+    private void abrir() {
+        if (!hasChanges) {
+            JFileChooser fc = new JFileChooser();
+            fc.showOpenDialog(this.textEditorV);
+            try {
+                path = fc.getSelectedFile().getAbsolutePath();
+                this.textEditorV.getTxtArea().setText(readFile(path));
+                hasChanges = false;
+            } catch (Exception ex) {
+                System.out.println("se cancelo");
+                ex.printStackTrace(System.out);
+            }
+        } else {
+            //cambiosSinGuardar
+        }
+    }
+
+    private void nuevo() {
+        if (!hasChanges) {
+            this.textEditorV.getTxtArea().setText("");
+            path = "";
+            hasChanges = false;
+        } else {
+            //cambiosSinGuardar
+        }
+    }
+
+    private void guardar() {
+        String texto = this.textEditorV.getTxtArea().getText();
+        if (verifyFile(path)) {
+            saveFile(path, texto);
+            hasChanges = false;
+        } else {
+            JFileChooser fc = new JFileChooser();
+            try {
+                if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        path = fc.getSelectedFile().getAbsolutePath() + ".txt";
+                        saveFile(path, texto);
+                        hasChanges = false;
+                    } catch (Exception ex) {
+                        System.out.println("se cancelo");
+                        ex.printStackTrace(System.out);
+                    }
+                }
+            } catch (HeadlessException ex) {
+                ex.printStackTrace(System.out);
+            }
+        }
+    }
+
+    private void guardarComo() {
+        String texto = this.textEditorV.getTxtArea().getText();
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Guardar Como");
+        try {
+            if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    path = fc.getSelectedFile().getAbsolutePath() + ".txt";
+                    saveFile(path, texto);
+                    hasChanges = false;
+                } catch (Exception e) {
+                    System.out.println("se cancelo");
+                }
+            }
+        } catch (HeadlessException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
 }
