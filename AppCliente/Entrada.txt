@@ -13,11 +13,11 @@
     <!ini_solicitud:"LOGIN_USUARIO">
         { "CREDENCIALES_USUARIO":[{
                 "USUARIO": "usuario",
-                "PASSWORD": "202055"
+                "PASSWORD": "20205c5"
                 },
             {
             "USUARIO": "Login2doBloque",
-            "PASSWORD": "22222222"
+            "PASSWORD": "2222s2222"
             }        
             ]
             }      
@@ -27,7 +27,7 @@
             { "CREDENCIALES_USUARIO":[{
                 "USUARIO_ANTIGUO": "junito",
                 "USUARIO_NUEVO": "juanitoNuevo",
-                "NUEVO_PASSWORD": "12345678910",
+                "NUEVO_PASSWORD": "123456s78910",
                 "FECHA_MODIFICACION" : "2020-01-26"
                 }         
                 ]
@@ -73,6 +73,23 @@
                     "TITULO":"Formul arioModificado",
                     "NOMBRE":"formulario_encuesta_111",
                     "TEMA":"White"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    <!ini_solicitud:"AGREGAR_COMPONENTE">
+        { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "$text_cliente",
+                    "NOMBRE_CAMPO": "Cliente",
+                    "FORMULARIO": "$form1",
+                    "CLASE": "CAMPO_TEXTO",
+                    "TEXTO_VISIBLE": "Nombre de cliente: ",
+                    "ALINEACION":"CENTRO",
+                    "REQUERIDO": "SI",
+                    "FILAS" : "5",
+                    "OPCIONES" : "holi|opcion"
                 }
             ]
         }

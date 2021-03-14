@@ -31,10 +31,6 @@ import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
     private Symbol symbol(int type){
         return new Symbol(type, new Token(yyline, yycolumn, yytext()));
     }
-    
-    private Symbol symbol(int type, String lexema){
-        return new Symbol(type, new Token(yyline, yycolumn, lexema);
-    }
 
     private void addLexicError(){
         String descripcion = "El simbolo no pertenece al lenguaje";
@@ -50,11 +46,12 @@ import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
 SALTO = \n|\r|\r\n
 ESPACIO = {SALTO} | [ \t\f]
 LETRA = [a-zA-Z]
-ENTERO = 0|([1-9][0-9]*)
+ENTERO = "\""(0|([1-9][0-9]*))"\""
 DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
+OPCIONES = "\""((\w+\|\w+)(\|\w+)*)"\""
 VALUE = "\""[^ '\"']*"\""
 LITERAL = "\""[^"\""]*"\""
 
@@ -111,7 +108,7 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\""({ESPACIO})*("URL")({ESPACIO})*"\""                       {return symbol(PARAM_URL);}
 
 <YYINITIAL> "\""({ESPACIO})*([dD][aA][rR][kK])({ESPACIO})*"\""            {return symbol(DARK);}
-<YYINITIAL> "\""({ESPACIO})*([wW][hH][iI][tT][eE])({ESPACIO})*"\""        {return symbol(WHITE)}
+<YYINITIAL> "\""({ESPACIO})*([wW][hH][iI][tT][eE])({ESPACIO})*"\""        {return symbol(WHITE);}
 
 <YYINITIAL> "\""({ESPACIO})*("CAMPO_TEXTO")({ESPACIO})*"\""               {return symbol(CLASS_CAMPO_TEXTO);}
 <YYINITIAL> "\""({ESPACIO})*("AREA_TEXTO")({ESPACIO})*"\""                {return symbol(CLASS_AREA_TEXTO);}
@@ -126,6 +123,9 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\""({ESPACIO})*("IZQUIERDA")({ESPACIO})*"\""                 {return symbol(IZQUIERDA);}
 <YYINITIAL> "\""({ESPACIO})*("DERECHA")({ESPACIO})*"\""                   {return symbol(DERECHA);}
 <YYINITIAL> "\""({ESPACIO})*("JUSTIFICAR")({ESPACIO})*"\""                {return symbol(JUSTIFICAR);}
+
+<YYINITIAL> "\""({ESPACIO})*([sS][iI])({ESPACIO})*"\""                    {return symbol(SI);}
+<YYINITIAL> "\""({ESPACIO})*([nN][oO])({ESPACIO})*"\""                    {return symbol(NO);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
@@ -142,6 +142,8 @@ LITERAL = "\""[^"\""]*"\""
 
 <YYINITIAL> {ID}                        {return symbol(ID);}
 <YYINITIAL> {FECHA}                     {return symbol(FECHA);}
+<YYINITIAL> {ENTERO}                    {return symbol(ENTERO);}
+<YYINITIAL> {OPCIONES}                  {return symbol(OPCIONES);}
 <YYINITIAL> {VALUE}                     {return symbol(VALUE);}
 <YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
 
