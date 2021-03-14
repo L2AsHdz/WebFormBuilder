@@ -95,4 +95,30 @@
         }
     <fin_solicitud!>
 
+    <!ini_solicitud:"ELIMINAR_COMPONENTE">
+        { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "-grupo_paises"
+                },
+                {
+                    "ID" : "$identificadorComponent"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    <!ini_solicitud:"MODIFICAR_COMPONENTE">
+       { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "$grupo_paises",
+                    "FORMULARIO": "$form1",
+                    "CLASE": "CHECKBOX",
+                    "INDICE": "1",
+                    "ALINEACION": "DERECHA",
+                    "OPCIONES": "Guatemala|ElSalvador|Honduras|OTRO"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
 <!fin_solicitudes>

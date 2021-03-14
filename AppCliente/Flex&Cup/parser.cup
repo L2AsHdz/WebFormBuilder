@@ -107,7 +107,7 @@ non terminal Parametro          paramNewComponent, paramEditComponent, paramDele
 non terminal String             nameParamNewComponent, nameParamEditComponent;
 non terminal String             clase, alineacion, required, opciones;
 
-non terminal String             value, id, fecha, literal;
+non terminal String             value, id, fecha, literal, entero;
 
 inicio ::= startRequest
          | startRequests
@@ -342,8 +342,8 @@ paramNewComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = n
                     | PARAM_ALINEACION:p COLON alineacion:a         {:RESULT = new Parametro(p.getLexema(), a);:}
                     | PARAM_REQUERIDO:p COLON required:r            {:RESULT = new Parametro(p.getLexema(), r);:}
                     | PARAM_OPCIONES:p COLON opciones:o             {:RESULT = new Parametro(p.getLexema(), o);:}
-                    | PARAM_FILAS:p COLON ENTERO:e                  {:RESULT = new Parametro(p.getLexema(), e.getLexema());:}
-                    | PARAM_COLUMNAS:p COLON ENTERO:e               {:RESULT = new Parametro(p.getLexema(), e.getLexema());:}
+                    | PARAM_FILAS:p COLON entero:e                  {:RESULT = new Parametro(p.getLexema(), e);:}
+                    | PARAM_COLUMNAS:p COLON entero:e               {:RESULT = new Parametro(p.getLexema(), e);:}
                     ;
 
 nameParamNewComponent ::= PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
@@ -369,24 +369,21 @@ paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:
                       | paramEditComponent:p                                  {:addParameter(parametros, p);:}
                       ;
 
-paramEditComponent ::= nameParamEditComponent:n COLON value:v
-                     {:
-                        RESULT = new Parametro(n, v);
-                     :}
+paramEditComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+                     | PARAM_ID:p COLON id:i                         {:RESULT = new Parametro(p.getLexema(), i);:}
+                     | PARAM_FORMULARIO:p COLON id:i                 {:RESULT = new Parametro(p.getLexema(), i);:}
+                     | PARAM_CLASE:p COLON clase:c                   {:RESULT = new Parametro(p.getLexema(), c);:}
+                     | PARAM_TEXTO_VISIBLE:p COLON literal:l         {:RESULT = new Parametro(p.getLexema(), l);:}
+                     | PARAM_ALINEACION:p COLON alineacion:a         {:RESULT = new Parametro(p.getLexema(), a);:}
+                     | PARAM_REQUERIDO:p COLON required:r            {:RESULT = new Parametro(p.getLexema(), r);:}
+                     | PARAM_OPCIONES:p COLON opciones:o             {:RESULT = new Parametro(p.getLexema(), o);:}
+                     | PARAM_FILAS:p COLON entero:e                  {:RESULT = new Parametro(p.getLexema(), e);:}
+                     | PARAM_COLUMNAS:p COLON entero:e               {:RESULT = new Parametro(p.getLexema(), e);:}
+                     | PARAM_INDICE:p COLON entero:e                 {:RESULT = new Parametro(p.getLexema(), e);:}
                      ;
 
-nameParamEditComponent ::= PARAM_ID:p                    {:RESULT = p.getLexema();:}
-                         | PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
-                         | PARAM_FORMULARIO:p            {:RESULT = p.getLexema();:}
-                         | PARAM_CLASE:p                 {:RESULT = p.getLexema();:}
-                         | PARAM_TEXTO_VISIBLE:p         {:RESULT = p.getLexema();:}
-                         | PARAM_ALINEACION:p            {:RESULT = p.getLexema();:}
-                         | PARAM_REQUERIDO:p             {:RESULT = p.getLexema();:}
-                         | PARAM_OPCIONES:p              {:RESULT = p.getLexema();:}
-                         | PARAM_FILAS:p                 {:RESULT = p.getLexema();:}
-                         | PARAM_COLUMNAS:p              {:RESULT = p.getLexema();:}
+nameParamEditComponent ::= PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
                          | PARAM_URL:p                   {:RESULT = p.getLexema();:}
-                         | PARAM_INDICE:p                {:RESULT = p.getLexema();:}
                          ;
 /**************************Fin de producciones para parametros de solicitud EditComponent**************************/
 
@@ -405,11 +402,8 @@ bloqueDeleteComponent ::= OPEN_BRACE paramDeleteComponent:p CLOSE_BRACE
                         :}
                         ;
 
-paramDeleteComponent ::= PARAM_ID:p COLON value:v
-                    {:
-                        RESULT = new Parametro(p.getLexema(), v);
-                    :}
-                    ;
+paramDeleteComponent ::= PARAM_ID:p COLON id:i          {:RESULT = new Parametro(p.getLexema(), i);:}
+                       ;
 /**************************Fin de producciones para parametros de solicitud DeleteComponent**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
@@ -424,6 +418,9 @@ fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
 literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
           ;
 
+entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
+         ;
+         
 tema ::= DARK:t                 {:RESULT = t.getLexema();:}
        | WHITE:t                {:RESULT = t.getLexema();:}
        ;
