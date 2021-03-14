@@ -1,9 +1,7 @@
 package com.l2ashdz.appcliente;
 
-import com.l2ashdz.appcliente.analizadores.lexico.Lexer;
-import com.l2ashdz.appcliente.analizadores.sintactico.Parser;
-import com.l2ashdz.appcliente.view.EditorTexto;
-import java.io.StringReader;
+import com.l2ashdz.appcliente.controller.TextEditorController;
+import com.l2ashdz.appcliente.view.TextEditorView;
 
 /**
  *
@@ -12,8 +10,8 @@ import java.io.StringReader;
 public class AppCliente {
 
     public static void main(String[] args) {
-        EditorTexto et = new EditorTexto();
-        et.setLocationRelativeTo(null);
-        et.setVisible(true);
+        TextEditorView textEditorV = new TextEditorView();
+        TextEditorController textEditorC = new TextEditorController(textEditorV);
+        textEditorC.start();
     }
 }
