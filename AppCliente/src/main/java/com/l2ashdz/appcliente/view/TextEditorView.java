@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultEditorKit;
 
 /**
  *
@@ -52,9 +53,9 @@ public class TextEditorView extends javax.swing.JFrame {
         itmRehacer = new javax.swing.JMenuItem();
         itmDeshacer = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        itmCopiar = new javax.swing.JMenuItem();
-        itmCortar = new javax.swing.JMenuItem();
-        itmPegar = new javax.swing.JMenuItem();
+        itmCopiar = new javax.swing.JMenuItem(new DefaultEditorKit.CopyAction());
+        itmCortar = new javax.swing.JMenuItem(new DefaultEditorKit.CutAction());
+        itmPegar = new javax.swing.JMenuItem(new DefaultEditorKit.PasteAction());
         jMenu3 = new javax.swing.JMenu();
         itmManual = new javax.swing.JMenuItem();
         itmAbout = new javax.swing.JMenuItem();
