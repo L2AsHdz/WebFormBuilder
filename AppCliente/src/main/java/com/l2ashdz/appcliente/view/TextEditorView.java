@@ -59,7 +59,7 @@ public class TextEditorView extends javax.swing.JFrame {
         itmManual = new javax.swing.JMenuItem();
         itmAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         txtArea.setColumns(20);
         txtArea.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N

@@ -3,16 +3,22 @@ package com.l2ashdz.appcliente.controller;
 import com.l2ashdz.appcliente.view.TextEditorView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.HeadlessException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import static com.l2ashdz.appcliente.controller.FileController.*;
-import java.awt.HeadlessException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 /**
  *
  * @author asael
  */
-public class TextEditorController implements ActionListener {
+public class TextEditorController extends WindowAdapter implements ActionListener, DocumentListener {
 
     private TextEditorView textEditorV;
     private boolean hasChanges = false;
@@ -36,6 +42,10 @@ public class TextEditorController implements ActionListener {
 
         this.textEditorV.getItmAbout().addActionListener(this);
         this.textEditorV.getItmManual().addActionListener(this);
+
+        this.textEditorV.getTxtArea().getDocument().addDocumentListener(this);
+
+        this.textEditorV.addWindowListener(this);
     }
 
     public void start() {
@@ -90,7 +100,7 @@ public class TextEditorController implements ActionListener {
                 ex.printStackTrace(System.out);
             }
         } else {
-            //cambiosSinGuardar
+            cambiosSinGuardar(1);
         }
     }
 
@@ -100,7 +110,7 @@ public class TextEditorController implements ActionListener {
             path = "";
             hasChanges = false;
         } else {
-            //cambiosSinGuardar
+            cambiosSinGuardar(2);
         }
     }
 
@@ -146,4 +156,57 @@ public class TextEditorController implements ActionListener {
             ex.printStackTrace(System.out);
         }
     }
+
+    private void cambiosSinGuardar(int op) {
+        String[] options = {"Guardar Cambios", "Desechar Cambios", "Cancelar"};
+        int selection = JOptionPane.showOptionDialog(null, "Hay cambios sin guardar!",
+                "Informacion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, options, options[0]);
+
+        switch (selection) {
+            case 0 ->
+                guardar();
+            case 1 -> {
+                switch (op) {
+                    case 0 ->
+                        System.exit(0);
+                    case 1 -> {
+                        hasChanges = false;
+                        abrir();
+                    }
+                    case 2 -> {
+                        hasChanges = false;
+                        nuevo();
+                    }
+                }
+            }
+            case 2 -> {
+            }
+        }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent de) {
+        hasChanges = true;
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent de) {
+        hasChanges = true;
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent de) {
+        hasChanges = true;
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        if (!hasChanges) {
+            System.exit(0);
+        } else {
+            cambiosSinGuardar(0);
+        }
+    }
+
 }
