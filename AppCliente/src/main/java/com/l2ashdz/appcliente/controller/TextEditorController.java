@@ -3,24 +3,29 @@ package com.l2ashdz.appcliente.controller;
 import com.l2ashdz.appcliente.view.TextEditorView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.HeadlessException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import static com.l2ashdz.appcliente.controller.FileController.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 
 /**
  *
  * @author asael
  */
-public class TextEditorController extends WindowAdapter implements ActionListener, DocumentListener {
+public class TextEditorController extends WindowAdapter implements ActionListener, 
+        DocumentListener, UndoableEditListener {
 
-    private TextEditorView textEditorV;
+    private UndoManager undoManager = new UndoManager();
+    private final TextEditorView textEditorV;
     private boolean hasChanges = false;
     private String path = "";
 
@@ -44,6 +49,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         this.textEditorV.getItmManual().addActionListener(this);
 
         this.textEditorV.getTxtArea().getDocument().addDocumentListener(this);
+        this.textEditorV.getTxtArea().getDocument().addUndoableEditListener(this);
 
         this.textEditorV.addWindowListener(this);
     }
@@ -71,9 +77,9 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         } else if (this.textEditorV.getItmSaveAs() == e.getSource()) {
             guardarComo();
         } else if (this.textEditorV.getItmRehacer() == e.getSource()) {
-
+            rehacer();
         } else if (this.textEditorV.getItmDeshacer() == e.getSource()) {
-
+            deshacer();
         } else if (this.textEditorV.getItmCopiar() == e.getSource()) {
 
         } else if (this.textEditorV.getItmCortar() == e.getSource()) {
@@ -184,6 +190,18 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             }
         }
     }
+    
+    private void rehacer() {
+        try {
+            undoManager.redo();
+        } catch (CannotRedoException e) {}
+    }
+
+    private void deshacer() {
+        try {
+            undoManager.undo();
+        } catch (CannotUndoException e) {}
+    }
 
     @Override
     public void insertUpdate(DocumentEvent de) {
@@ -209,4 +227,8 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         }
     }
 
+    @Override
+    public void undoableEditHappened(UndoableEditEvent e) {
+        undoManager.addEdit(e.getEdit());
+    }
 }
