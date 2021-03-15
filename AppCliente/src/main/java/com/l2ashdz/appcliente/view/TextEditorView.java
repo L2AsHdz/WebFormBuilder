@@ -68,7 +68,7 @@ public class TextEditorView extends javax.swing.JFrame {
 
         btnSendToServer.setText("Enviar al servidor");
 
-        lblPosCaret.setText("Linea: X  -  Columna: X");
+        lblPosCaret.setText("Linea: 1  -  Columna: 1");
 
         btnShowReports.setText("Area reportes");
         btnShowReports.setEnabled(false);

@@ -16,13 +16,16 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 import static com.l2ashdz.appcliente.controller.FileController.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 
 /**
  *
  * @author asael
  */
-public class TextEditorController extends WindowAdapter implements ActionListener, 
-        DocumentListener, UndoableEditListener {
+public class TextEditorController extends WindowAdapter implements ActionListener,
+        DocumentListener, UndoableEditListener, CaretListener {
 
     private UndoManager undoManager = new UndoManager();
     private final TextEditorView textEditorV;
@@ -48,6 +51,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         this.textEditorV.getItmAbout().addActionListener(this);
         this.textEditorV.getItmManual().addActionListener(this);
 
+        this.textEditorV.getTxtArea().addCaretListener(this);
         this.textEditorV.getTxtArea().getDocument().addDocumentListener(this);
         this.textEditorV.getTxtArea().getDocument().addUndoableEditListener(this);
 
@@ -190,17 +194,19 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             }
         }
     }
-    
+
     private void rehacer() {
         try {
             undoManager.redo();
-        } catch (CannotRedoException e) {}
+        } catch (CannotRedoException e) {
+        }
     }
 
     private void deshacer() {
         try {
             undoManager.undo();
-        } catch (CannotUndoException e) {}
+        } catch (CannotUndoException e) {
+        }
     }
 
     @Override
@@ -230,5 +236,22 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     @Override
     public void undoableEditHappened(UndoableEditEvent e) {
         undoManager.addEdit(e.getEdit());
+    }
+
+    @Override
+    public void caretUpdate(CaretEvent ce) {
+        int linea = 1;
+        int columna = 1;
+
+        try {
+            int caretPos = this.textEditorV.getTxtArea().getCaretPosition();
+            linea = this.textEditorV.getTxtArea().getLineOfOffset(caretPos);
+            columna = caretPos - this.textEditorV.getTxtArea().getLineStartOffset(linea);
+            linea++;
+            columna++;
+            
+        } catch (BadLocationException e) {
+        }
+        this.textEditorV.getLblPosCaret().setText("Linea: " + linea + "  -  Columna: " + columna);
     }
 }
