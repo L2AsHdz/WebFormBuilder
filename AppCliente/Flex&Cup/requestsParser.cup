@@ -369,7 +369,7 @@ paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:
                       | paramEditComponent:p                                  {:addParameter(parametros, p);:}
                       ;
 
-paramEditComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+paramEditComponent ::= nameParamEditComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
                      | PARAM_ID:p COLON id:i                         {:RESULT = new Parametro(p.getLexema(), i);:}
                      | PARAM_FORMULARIO:p COLON id:i                 {:RESULT = new Parametro(p.getLexema(), i);:}
                      | PARAM_CLASE:p COLON clase:c                   {:RESULT = new Parametro(p.getLexema(), c);:}
