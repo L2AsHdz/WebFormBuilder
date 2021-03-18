@@ -1,0 +1,90 @@
+package com.l2ashdz.appcliente.analizadores.sintactico;
+
+import com.l2ashdz.appcliente.model.Token;
+import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
+import com.l2ashdz.appcliente.model.errores.TipoError;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java_cup.runtime.Symbol;
+
+parser code{:
+    
+    private List<ErrorAnalisis> errores = new ArrayList();
+
+    public List<ErrorAnalisis> getErrores() {
+        return this.errores;
+    }
+
+    public void syntax_error(Symbol s) {
+        Token t = (Token) s.value;
+        StringBuilder descripcion = new StringBuilder("Se esperaba: ");
+        expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
+        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
+    }
+
+    public void unrecovered_syntax_error(Symbol cur_token){
+        Token t = (Token) cur_token.value;
+        System.out.println("Error irrecuperable " + t.getLexema());
+    }
+
+    protected int error_sync_size() {
+        return 1;
+    }
+
+:}
+
+
+terminal Token      SELECT, TO, FORM, WHERE, AND, OR, NOT;
+terminal Token      ARROW, OPEN_BRACKET, CLOSE_BRACKET, COMMA, APOSTROPHE;
+terminal Token      LESS_THAN, GREATER_THAN, EQUAL_TO, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, NOT_EQUAL_TO;
+terminal Token      ID, NUMERO, CADENA, NAME;
+
+non terminal        inicio, consulta, where, restricciones, restriccion;
+non terminal        identificador, fields, campos, idCampoWhere;
+non terminal        operadorRelacional, operadorLogico, valorCompare;
+
+inicio ::= consulta
+         | consulta where
+         ;
+
+consulta ::= SELECT TO FORM ARROW identificador fields;
+
+identificador ::= ID;
+
+fields ::= OPEN_BRACKET CLOSE_BRACKET
+         | OPEN_BRACKET campos CLOSE_BRACKET;
+
+campos ::= NAME
+         | NAME COMMA campos
+         ;
+
+//where ::= WHERE OPEN_BRACKET CLOSE_BRACKET;
+where ::= WHERE OPEN_BRACKET restricciones CLOSE_BRACKET;
+
+restricciones ::= restriccion
+                | restriccion operadorLogico restricciones
+                ;
+
+restriccion ::= idCampoWhere operadorRelacional valorCompare;
+
+idCampoWhere ::= ID;
+
+operadorRelacional ::= LESS_THAN
+                     | GREATER_THAN
+                     | EQUAL_TO
+                     | LESS_THAN_OR_EQUAL_TO
+                     | GREATER_THAN_OR_EQUAL_TO
+                     | NOT_EQUAL_TO
+                     ;
+
+valorCompare ::= NUMERO
+               | CADENA
+               ;
+
+operadorLogico ::= AND
+                 | OR
+                 | NOT
+                 ;
+

@@ -1,7 +1,7 @@
 package com.l2ashdz.appcliente;
 
-import com.l2ashdz.appcliente.analizadores.lexico.Lexer;
-import com.l2ashdz.appcliente.analizadores.sintactico.Parser;
+import com.l2ashdz.appcliente.analizadores.lexico.ReportsLexer;
+import com.l2ashdz.appcliente.analizadores.sintactico.ReportsParser;
 import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
 import com.l2ashdz.appcliente.model.solicitudes.Solicitud;
 import java.io.File;
@@ -17,16 +17,16 @@ public class AppCliente {
 
     public static void main(String[] args) {
         
-        File file = new File("Entrada.txt");
+        File file = new File("Entrada2.txt");
         FileReader fileR;
-        Lexer lex = null;
-        Parser parser = null;
+        ReportsLexer lex = null;
+        ReportsParser parser = null;
         
         try {
             fileR = new FileReader(file);
 
-            lex = new Lexer(fileR);
-            parser = new Parser(lex);
+            lex = new ReportsLexer(fileR);
+            parser = new ReportsParser(lex);
             parser.parse();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -36,15 +36,10 @@ public class AppCliente {
         
         errores.addAll(lex.getErrores());
         errores.addAll(parser.getErrores());
-
-        List<Solicitud> solicitudes = parser.getSolicitudes();
         
         
         if (errores.isEmpty()) {
-            solicitudes.forEach(s -> {
-                System.out.println("\nSolicitud tipo: " + s.getTipo());
-                s.getParametros().forEach(param -> System.out.println("\t" + param.getName() + " : " + param.getValue()));
-            });
+            System.out.println("Todo nice");
         } else {
             errores.forEach(e -> System.out.println(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
         }
