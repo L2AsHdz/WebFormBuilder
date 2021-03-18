@@ -1,5 +1,7 @@
 package com.l2ashdz.appcliente.model.solicitudes;
 
+import java.util.List;
+
 /**
  *
  * @author asael
@@ -7,12 +9,12 @@ package com.l2ashdz.appcliente.model.solicitudes;
 public class Solicitud {
     
     private TipoSolicitud tipo;
-    private Parametro[] parametros;
+    private List<Parametro> parametros;
 
     public Solicitud() {
     }
 
-    public Solicitud(TipoSolicitud tipo, Parametro[] parametros) {
+    public Solicitud(TipoSolicitud tipo, List<Parametro> parametros) {
         this.tipo = tipo;
         this.parametros = parametros;
     }
@@ -25,11 +27,11 @@ public class Solicitud {
         this.tipo = tipo;
     }
 
-    public Parametro[] getParametros() {
+    public List<Parametro> getParametros() {
         return parametros;
     }
 
-    public void setParametros(Parametro[] parametros) {
+    public void setParametros(List<Parametro> parametros) {
         this.parametros = parametros;
     }
 }

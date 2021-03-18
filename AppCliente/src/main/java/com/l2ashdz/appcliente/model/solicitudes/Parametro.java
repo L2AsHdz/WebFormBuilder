@@ -6,30 +6,30 @@ package com.l2ashdz.appcliente.model.solicitudes;
  */
 public class Parametro {
     
-    private String paramName;
-    private String paramValue;
+    private String name;
+    private String value;
 
     public Parametro() {
     }
 
-    public Parametro(String paramName, String paramValue) {
-        this.paramName = paramName;
-        this.paramValue = paramValue;
+    public Parametro(String name, String value) {
+        this.name = name;
+        this.value = value;
     }
 
-    public String getParamName() {
-        return paramName;
+    public String getName() {
+        return name;
     }
 
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getParamValue() {
-        return paramValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setParamValue(String paramValue) {
-        this.paramValue = paramValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

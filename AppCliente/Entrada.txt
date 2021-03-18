@@ -1,0 +1,124 @@
+<!ini_solicitudes>
+
+    <!ini_solicitud:"CREAR_USUARIO">
+            { "CREDENCIALES_USUARIO":[{
+                "PASSWORD": "password",
+                "USUARIO": "neuvoUsuario",
+                "FECHA_CREACION": "2023-05-06"
+                }         
+                ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"LOGIN_USUARIO">
+        { "CREDENCIALES_USUARIO":[{
+                "USUARIO": "usuario",
+                "PASSWORD": "20205c5"
+                },
+            {
+            "USUARIO": "Login2doBloque",
+            "PASSWORD": "2222s2222"
+            }        
+            ]
+            }      
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"MODIFICAR_USUARIO">
+            { "CREDENCIALES_USUARIO":[{
+                "USUARIO_ANTIGUO": "junito",
+                "USUARIO_NUEVO": "juanitoNuevo",
+                "NUEVO_PASSWORD": "123456s78910",
+                "FECHA_MODIFICACION" : "2020-01-26"
+                }         
+                ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"ELIMINAR_USUARIO">
+        { "CREDENCIALES_USUARIO":[{
+            "USUARIO": "userEliminar2"
+            },
+            { "USUARIO" : "userEliminar2doBloque"
+                }
+        ]
+            }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"NUEVO_FORMULARIO">
+       { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"$form2",
+                    "TITULO":"Formulariop araencuesta1",
+                    "NOMBRE":"formulario_encuesta_1",
+                    "TEMA":"Dark",
+                    "FECHA_CREACION": "2000-02-31"
+                }
+            ]
+        }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"ELIMINAR_FORMULARIO">
+        { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"_form1"
+                }
+            ]
+        }
+    <fin_solicitud!>
+    
+    <!ini_solicitud:"MODIFICAR_FORMULARIO">
+       { "PARAMETROS_FORMULARIO":[
+                {
+                    "ID":"-form10",
+                    "TITULO":"Formul arioModificado",
+                    "NOMBRE":"formulario_encuesta_111",
+                    "TEMA":"White"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    <!ini_solicitud:"AGREGAR_COMPONENTE">
+        { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "$text_cliente",
+                    "NOMBRE_CAMPO": "Cliente",
+                    "FORMULARIO": "$form1",
+                    "CLASE": "CAMPO_TEXTO",
+                    "TEXTO_VISIBLE": "Nombre de cliente: ",
+                    "ALINEACION":"CENTRO",
+                    "REQUERIDO": "SI",
+                    "FILAS" : "5",
+                    "OPCIONES" : "holi|opcion"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    <!ini_solicitud:"ELIMINAR_COMPONENTE">
+        { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "-grupo_paises"
+                },
+                {
+                    "ID" : "$identificadorComponent"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+    <!ini_solicitud:"MODIFICAR_COMPONENTE">
+       { "PARAMETROS_COMPONENTE":[
+                {
+                    "ID": "$grupo_paises",
+                    "FORMULARIO": "$form1",
+                    "CLASE": "CHECKBOX",
+                    "INDICE": "1",
+                    "ALINEACION": "DERECHA",
+                    "OPCIONES": "Guatemala|ElSalvador|Honduras|OTRO"
+                }
+            ]
+        }
+    <fin_solicitud!>
+
+<!fin_solicitudes>

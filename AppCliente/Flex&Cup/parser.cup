@@ -3,6 +3,9 @@ package com.l2ashdz.appcliente.analizadores.sintactico;
 import com.l2ashdz.appcliente.model.Token;
 import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
 import com.l2ashdz.appcliente.model.errores.TipoError;
+import com.l2ashdz.appcliente.model.solicitudes.Solicitud;
+import com.l2ashdz.appcliente.model.solicitudes.TipoSolicitud;
+import com.l2ashdz.appcliente.model.solicitudes.Parametro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +15,31 @@ import java_cup.runtime.Symbol;
 parser code{:
 
     private List<ErrorAnalisis> errores = new ArrayList();
+    private List<Solicitud> solicitudes = new ArrayList();
+    private List<Parametro> parametros = new ArrayList();
 
     public List<ErrorAnalisis> getErrores() {
         return this.errores;
+    }
+
+    public List<Solicitud> getSolicitudes() {
+        return this.solicitudes;
+    }
+
+    private void addParameter(List<Parametro> parametros, Parametro param) {
+        boolean add = true;
+        
+        for (Parametro p : parametros) {
+            if (p.getName().equalsIgnoreCase(param.getName())) {
+                add = false;
+            }
+        }
+        
+        if (add) {
+            parametros.add(param);
+        } else {
+            System.out.println("El parametro ya esta agregado");
+        }
     }
 
     public void syntax_error(Symbol s) {
@@ -34,51 +59,397 @@ parser code{:
     }
 :}
 
-/*Terminales y no terminales*/
-terminal Token      START_REQUEST, END_REQUEST, USER_CREDENTIALS;
+//Terminales
+terminal Token      START_REQUEST, START_REQUESTS, END_REQUEST, END_REQUESTS;
+terminal Token      USER_CREDENTIALS, FORM_PARAMS, COMPONENT_PARAMS;
+
 terminal Token      LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
-terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
-terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, QUOTE_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
-terminal Token      VALUE;
+terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_FECHA_MODIFICACION, PARAM_OLD_USER, PARAM_NEW_USER, PARAM_NEW_PASSWORD;
 
-non terminal        startRequest, requestName, startContent, blockParamName, startParams, pair, param, name, value, endParams, endContent, endRequest;
+terminal Token      NEW_FORM, DELETE_FORM, MODIFY_FORM;
+terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+terminal Token      DARK, WHITE;
 
-/*Gramatica*/
+terminal Token      NEW_COMPONENT, DELETE_COMPONENT, EDIT_COMPONENT;
+terminal Token      PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_INDICE, PARAM_TEXTO_VISIBLE, PARAM_ALINEACION;
+terminal Token      PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
+terminal Token      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
+terminal Token      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
+terminal Token      SI, NO, OPCIONES;
 
-startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON QUOTE_MARK requestName QUOTE_MARK GREATER_THAN startContent endRequest;
+terminal Token      LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
+terminal Token      VALUE, ID, FECHA, LITERAL, ENTERO;
 
-requestName ::= LOGIN
-              | CREATE_USER
-              | DELETE_USER
-              | MODIFY_USER
+//no terminales
+non terminal        inicio, startRequests, requests, endRequests, startRequest, endRequest;
+non terminal        requestType, startContentUser, startContentForm, startContentComponent, endContent;
+
+non terminal        bloquesLogin, bloquesCreateUser, bloquesModifyUser, bloquesDeleteUser;
+non terminal        bloqueLogin, bloqueCreateUser, bloqueModifyUser, bloqueDeleteUser;
+
+non terminal        bloquesNewForm, bloquesEditForm, bloquesDeleteForm;
+non terminal        bloqueNewForm, bloqueEditForm, bloqueDeleteForm;
+
+non terminal        bloquesNewComponent, bloquesEditComponent, bloquesDeleteComponent;
+non terminal        bloqueNewComponent, bloqueEditComponent, bloqueDeleteComponent;
+
+non terminal                    paramsLogin, paramsCreateUser, paramsModifyUser;
+non terminal Parametro          paramLogin, paramCreateUser, paramModifyUser, paramDeleteUser;
+non terminal String             nameParamLogin, nameParamCreateUser, nameParamModifyUser;
+
+non terminal                    paramsNewForm, paramsEditForm;
+non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
+non terminal String             nameParamNewForm;
+non terminal String             tema;
+
+non terminal                    paramsNewComponent, paramsEditComponent;
+non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
+non terminal String             nameParamNewComponent, nameParamEditComponent;
+non terminal String             clase, alineacion, required, opciones;
+
+non terminal String             value, id, fecha, literal, entero;
+
+inicio ::= startRequest
+         | startRequests
+         ;
+
+startRequests ::= LESS_THAN EXCLAMATION_MARK START_REQUESTS GREATER_THAN requests;
+
+requests ::= startRequest endRequests
+           | startRequest requests
+           ;
+
+/******************************Produccion para el inicio de una solicitud en general******************************/
+startRequest ::= LESS_THAN EXCLAMATION_MARK START_REQUEST COLON requestType endContent endRequest;
+
+/******************************Producciones para los diferentes tipos de solicitud******************************/
+requestType ::= LOGIN startContentUser bloquesLogin
+              | CREATE_USER startContentUser bloquesCreateUser
+              | MODIFY_USER startContentUser bloquesModifyUser
+              | DELETE_USER startContentUser bloquesDeleteUser
+              | NEW_FORM startContentForm bloquesNewForm
+              | MODIFY_FORM startContentForm bloquesEditForm
+              | DELETE_FORM startContentForm bloquesDeleteForm
+              | NEW_COMPONENT startContentComponent bloquesNewComponent
+              | EDIT_COMPONENT startContentComponent bloquesEditComponent
+              | DELETE_COMPONENT startContentComponent bloquesDeleteComponent
               ;
 
-startContent ::= OPEN_BRACE QUOTE_MARK blockParamName QUOTE_MARK COLON OPEN_BRACKET startParams endContent;
+startContentUser ::= GREATER_THAN OPEN_BRACE USER_CREDENTIALS COLON OPEN_BRACKET;
+startContentForm ::= GREATER_THAN OPEN_BRACE FORM_PARAMS COLON OPEN_BRACKET;
+startContentComponent ::= GREATER_THAN OPEN_BRACE COMPONENT_PARAMS COLON OPEN_BRACKET;
 
-blockParamName ::= USER_CREDENTIALS;
 
-startParams ::= OPEN_BRACE pair endParams;
 
-pair ::= param COMMA pair
-        | param
+/******************************Producciones para parametros de solicitud Login******************************/
+bloquesLogin ::= bloqueLogin COMMA bloquesLogin
+               | bloqueLogin
+               ;
+
+bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
+
+paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(parametros, p);:}
+              | paramLogin:p                          {:addParameter(parametros, p);:}
+              ;
+
+paramLogin ::= nameParamLogin:n COLON value:v           {:RESULT = new Parametro(n, v);:}
+             ;
+
+nameParamLogin ::= PARAM_USUARIO:p          {:RESULT = p.getLexema();:}
+                 | PARAM_PASSWORD:p         {:RESULT = p.getLexema();:}
+                 ;
+/**************************Fin de producciones para parametros de solicitud Login**************************/    
+
+
+
+/******************************Producciones para parametros de solicitud CrearUsuario******************************/
+bloquesCreateUser ::= bloqueCreateUser COMMA bloquesCreateUser
+                    | bloqueCreateUser
+                    ;
+
+bloqueCreateUser ::= OPEN_BRACE paramsCreateUser CLOSE_BRACE
+                          {:
+                                solicitudes.add(new Solicitud(TipoSolicitud.CREATE_USER, parametros));
+                                parametros = new ArrayList();
+                          :}
+                          ;
+
+paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(parametros, p);:}
+                   | paramCreateUser:p                          {:addParameter(parametros, p);:}
+                   ;
+     
+paramCreateUser ::= nameParamCreateUser:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+                  | PARAM_FECHA_CREACION:p COLON fecha:f        {:RESULT = new Parametro(p.getLexema(), f);:}
+                  ;
+
+nameParamCreateUser ::= PARAM_USUARIO:p               {:RESULT = p.getLexema();:}
+                      | PARAM_PASSWORD:p              {:RESULT = p.getLexema();:}
+                      ;
+/****************************Fin producciones para parametros de solicitud CrearUsuario****************************/      
+
+
+
+/**************************Producciones para parametros de solicitud ModificarUsuario*************************/
+bloquesModifyUser ::= bloqueModifyUser COMMA bloquesModifyUser
+                    | bloqueModifyUser
+                    ;
+
+bloqueModifyUser ::= OPEN_BRACE paramsModifyUser CLOSE_BRACE
+                        {:
+                            solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter(parametros, p);:}
+                   | paramModifyUser:p                            {:addParameter(parametros, p);:}
+                   ;
+
+paramModifyUser ::= nameParamModifyUser:n COLON value:v             {:RESULT = new Parametro(n, v);:}
+                  | PARAM_FECHA_MODIFICACION:p COLON fecha:f        {:RESULT = new Parametro(p.getLexema(), f);:}
+                    ;
+
+nameParamModifyUser ::= PARAM_OLD_USER:p                  {:RESULT = p.getLexema();:}
+                      | PARAM_NEW_USER:p                  {:RESULT = p.getLexema();:}
+                      | PARAM_NEW_PASSWORD:p              {:RESULT = p.getLexema();:}
+                      ;
+/************************Fin producciones para parametros de solicitud ModificarUsuario************************/       
+
+
+
+/**************************Producciones para parametros de solicitud EliminarUsuario*************************/
+bloquesDeleteUser ::= bloqueDeleteUser COMMA bloquesDeleteUser
+                    | bloqueDeleteUser
+                    ;
+
+bloqueDeleteUser ::= OPEN_BRACE paramDeleteUser:p CLOSE_BRACE
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_USER, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramDeleteUser ::= PARAM_USUARIO:p COLON value:v
+                    {:
+                        RESULT = new Parametro(p.getLexema(), v);
+                    :}
+                    ;
+/************************Fin producciones para parametros de solicitud EliminarUsuario***********************/
+
+
+
+/******************************Producciones para parametros de solicitud NuevoFormulario******************************/
+bloquesNewForm ::= bloqueNewForm COMMA bloquesNewForm
+               | bloqueNewForm
+               ;
+
+bloqueNewForm ::= OPEN_BRACE paramsNewForm CLOSE_BRACE
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
+
+paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(parametros, p);:}
+              | paramNewForm:p                              {:addParameter(parametros, p);:}
+              ;
+
+paramNewForm ::= nameParamNewForm:n COLON value:v           {:RESULT = new Parametro(n, v);:}
+               | PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
+               | PARAM_FECHA_CREACION:p COLON fecha:f       {:RESULT = new Parametro(p.getLexema(), f);:}
+               | PARAM_TITULO_FORM:p COLON literal:l        {:RESULT = new Parametro(p.getLexema(), l);:}
+               | PARAM_TEMA:p COLON tema:t                  {:RESULT = new Parametro(p.getLexema(), t);:}
+               ;
+
+nameParamNewForm ::= PARAM_NOMBRE_FORM:p            {:RESULT = p.getLexema();:}
+                   | PARAM_USUARIO_CREACION:p       {:RESULT = p.getLexema();:}
+                   ;
+/**************************Fin de producciones para parametros de solicitud NuevoFormulario**************************/
+
+
+
+/******************************Producciones para parametros de solicitud DeleteForm******************************/
+bloquesDeleteForm ::= bloqueDeleteForm COMMA bloquesDeleteForm
+                    | bloqueDeleteForm
+                    ;
+
+bloqueDeleteForm ::= OPEN_BRACE paramDeleteForm:p CLOSE_BRACE
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_FORM, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramDeleteForm ::= PARAM_ID:p COLON id:i               {:RESULT = new Parametro(p.getLexema(), i);:}
+                    ;
+/**************************Fin de producciones para parametros de solicitud DeleteForm**************************/
+
+
+
+/******************************Producciones para parametros de solicitud ModifyForm******************************/
+bloquesEditForm ::= bloqueEditForm COMMA bloquesEditForm
+                  | bloqueEditForm
+                  ;
+
+bloqueEditForm ::= OPEN_BRACE paramsEditForm CLOSE_BRACE
+                 {:
+                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    parametros = new ArrayList();
+                 :}
+                 ;
+
+paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(parametros, p);:}
+                 | paramEditForm:p                              {:addParameter(parametros, p);:}
+                 ;
+
+paramEditForm ::= PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
+                | PARAM_TITULO_FORM:p COLON literal:l        {:RESULT = new Parametro(p.getLexema(), l);:}
+                | PARAM_NOMBRE_FORM:p COLON value:v          {:RESULT = new Parametro(p.getLexema(), v);:}
+                | PARAM_TEMA:p COLON tema:t                  {:RESULT = new Parametro(p.getLexema(), t);:}
+                ;
+/**************************Fin de producciones para parametros de solicitud ModifyForm**************************/
+
+
+
+/******************************Producciones para parametros de solicitud AddComponent******************************/
+bloquesNewComponent ::= bloqueNewComponent COMMA bloquesNewComponent
+                      | bloqueNewComponent
+                      ;
+
+bloqueNewComponent ::= OPEN_BRACE paramsNewComponent CLOSE_BRACE
+                     {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+                        parametros = new ArrayList();
+                     :}
+                     ;
+
+paramsNewComponent ::= paramNewComponent:p COMMA paramsNewComponent         {:addParameter(parametros, p);:}
+                     | paramNewComponent:p                                  {:addParameter(parametros, p);:}
+                     ;
+
+paramNewComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+                    | PARAM_ID:p COLON id:i                         {:RESULT = new Parametro(p.getLexema(), i);:}
+                    | PARAM_FORMULARIO:p COLON id:i                 {:RESULT = new Parametro(p.getLexema(), i);:}
+                    | PARAM_CLASE:p COLON clase:c                   {:RESULT = new Parametro(p.getLexema(), c);:}
+                    | PARAM_TEXTO_VISIBLE:p COLON literal:l         {:RESULT = new Parametro(p.getLexema(), l);:}
+                    | PARAM_ALINEACION:p COLON alineacion:a         {:RESULT = new Parametro(p.getLexema(), a);:}
+                    | PARAM_REQUERIDO:p COLON required:r            {:RESULT = new Parametro(p.getLexema(), r);:}
+                    | PARAM_OPCIONES:p COLON opciones:o             {:RESULT = new Parametro(p.getLexema(), o);:}
+                    | PARAM_FILAS:p COLON entero:e                  {:RESULT = new Parametro(p.getLexema(), e);:}
+                    | PARAM_COLUMNAS:p COLON entero:e               {:RESULT = new Parametro(p.getLexema(), e);:}
+                    ;
+
+nameParamNewComponent ::= PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
+                        | PARAM_URL:p                   {:RESULT = p.getLexema();:}
+                        ;
+/**************************Fin de producciones para parametros de solicitud AddComponent**************************/
+
+
+
+/******************************Producciones para parametros de solicitud EditComponent******************************/
+bloquesEditComponent ::= bloqueEditComponent COMMA bloquesEditComponent
+                       | bloqueEditComponent
+                       ;
+
+bloqueEditComponent ::= OPEN_BRACE paramsEditComponent CLOSE_BRACE
+                      {:
+                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
+                        parametros = new ArrayList();
+                      :}
+                      ;
+
+paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:addParameter(parametros, p);:}
+                      | paramEditComponent:p                                  {:addParameter(parametros, p);:}
+                      ;
+
+paramEditComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
+                     | PARAM_ID:p COLON id:i                         {:RESULT = new Parametro(p.getLexema(), i);:}
+                     | PARAM_FORMULARIO:p COLON id:i                 {:RESULT = new Parametro(p.getLexema(), i);:}
+                     | PARAM_CLASE:p COLON clase:c                   {:RESULT = new Parametro(p.getLexema(), c);:}
+                     | PARAM_TEXTO_VISIBLE:p COLON literal:l         {:RESULT = new Parametro(p.getLexema(), l);:}
+                     | PARAM_ALINEACION:p COLON alineacion:a         {:RESULT = new Parametro(p.getLexema(), a);:}
+                     | PARAM_REQUERIDO:p COLON required:r            {:RESULT = new Parametro(p.getLexema(), r);:}
+                     | PARAM_OPCIONES:p COLON opciones:o             {:RESULT = new Parametro(p.getLexema(), o);:}
+                     | PARAM_FILAS:p COLON entero:e                  {:RESULT = new Parametro(p.getLexema(), e);:}
+                     | PARAM_COLUMNAS:p COLON entero:e               {:RESULT = new Parametro(p.getLexema(), e);:}
+                     | PARAM_INDICE:p COLON entero:e                 {:RESULT = new Parametro(p.getLexema(), e);:}
+                     ;
+
+nameParamEditComponent ::= PARAM_NOMBRE_CAMPO:p          {:RESULT = p.getLexema();:}
+                         | PARAM_URL:p                   {:RESULT = p.getLexema();:}
+                         ;
+/**************************Fin de producciones para parametros de solicitud EditComponent**************************/
+
+
+
+/******************************Producciones para parametros de solicitud DeleteComponent******************************/
+bloquesDeleteComponent ::= bloqueDeleteComponent COMMA bloquesDeleteComponent
+                         | bloqueDeleteComponent
+                         ;
+
+bloqueDeleteComponent ::= OPEN_BRACE paramDeleteComponent:p CLOSE_BRACE
+                        {:
+                            parametros.add(p);
+                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
+                            parametros = new ArrayList();
+                        :}
+                        ;
+
+paramDeleteComponent ::= PARAM_ID:p COLON id:i          {:RESULT = new Parametro(p.getLexema(), i);:}
+                       ;
+/**************************Fin de producciones para parametros de solicitud DeleteComponent**************************/
+
+value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;
 
-param ::= QUOTE_MARK name QUOTE_MARK COLON QUOTE_MARK value QUOTE_MARK;
+id ::= ID:i                 {:RESULT = i.getLexema();:}
+     ;
 
-name ::= PARAM_USUARIO
-       | PARAM_PASSWORD
-       | PARAM_FECHA_CREACION
-       | PARAM_OLD_USER
-       | PARAM_NEW_USER
-       | PARAM_NEW_PASSWORD
+fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
+        ;
+
+literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
+          ;
+
+entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
+         ;
+         
+tema ::= DARK:t                 {:RESULT = t.getLexema();:}
+       | WHITE:t                {:RESULT = t.getLexema();:}
        ;
 
-value ::= VALUE;
+clase ::= CLASS_CAMPO_TEXTO:c     {:RESULT = c.getLexema();:}
+        | CLASS_AREA_TEXTO:c      {:RESULT = c.getLexema();:}
+        | CLASS_CHECKBOX:c        {:RESULT = c.getLexema();:}
+        | CLASS_RADIO:c           {:RESULT = c.getLexema();:}
+        | CLASS_FICHERO:c         {:RESULT = c.getLexema();:}
+        | CLASS_IMAGEN:c          {:RESULT = c.getLexema();:}
+        | CLASS_COMBO:c           {:RESULT = c.getLexema();:}
+        | CLASS_BOTON:c           {:RESULT = c.getLexema();:}
+        ;
 
-endParams ::= CLOSE_BRACE COMMA startParams
-            | CLOSE_BRACE
-            ;
+alineacion ::= CENTRO:a           {:RESULT = a.getLexema();:}
+             | IZQUIERDA:a        {:RESULT = a.getLexema();:}
+             | DERECHA:a          {:RESULT = a.getLexema();:}
+             | JUSTIFICAR:a       {:RESULT = a.getLexema();:}
+             ;
+
+required ::= SI:r   {:RESULT =r.getLexema();:}
+           | NO:r   {:RESULT =r.getLexema();:}
+           ;
+
+opciones ::= OPCIONES:o         {:RESULT = o.getLexema();:}
+           ;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 
 endRequest ::= LESS_THAN END_REQUEST EXCLAMATION_MARK GREATER_THAN;
+
+endRequests ::= LESS_THAN EXCLAMATION_MARK END_REQUESTS GREATER_THAN;
