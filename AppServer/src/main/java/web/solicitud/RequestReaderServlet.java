@@ -1,4 +1,4 @@
-package web;
+package web.solicitud;
 
 import analizadores.lexico.Lexer;
 import analizadores.sintactico.Parser;
@@ -36,28 +36,12 @@ public class RequestReaderServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         BufferedReader reader = request.getReader();
-        /*String s;
-        while ((s = reader.readLine()) != null) {
-            System.out.println(s);
-        }*/
 
-        Lexer lex = null;
-        Parser parser = null;
+       RequestAnalyzer analyzer = new RequestAnalyzer();
+       analyzer.analyze(reader);
 
-        try {
-            lex = new Lexer(reader);
-            parser = new Parser(lex);
-            parser.parse();
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-
-        List<ErrorAnalisis> errores = new ArrayList();
-
-        errores.addAll(lex.getErrores());
-        errores.addAll(parser.getErrores());
-
-        List<Solicitud> solicitudes = parser.getSolicitudes();
+        List<ErrorAnalisis> errores = analyzer.getErrores();
+        List<Solicitud> solicitudes = analyzer.getSolicitudes();
 
         response.setContentType("text/plain");
         try (PrintWriter out = response.getWriter()) {
