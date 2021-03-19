@@ -29,6 +29,7 @@ public class RequestReaderServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
         BufferedReader reader = request.getReader();
         String s;
         while ((s = reader.readLine()) != null) {
@@ -41,7 +42,6 @@ public class RequestReaderServlet extends HttpServlet {
             out.print("Holi");
         }
         
-        response.sendRedirect("login.jsp");
     }
     
     
