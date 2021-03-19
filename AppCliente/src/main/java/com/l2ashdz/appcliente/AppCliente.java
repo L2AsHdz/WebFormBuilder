@@ -1,7 +1,11 @@
 package com.l2ashdz.appcliente;
 
-import com.l2ashdz.appcliente.controller.TextEditorController;
-import com.l2ashdz.appcliente.view.TextEditorView;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse;
 
 /**
  *
@@ -9,41 +13,21 @@ import com.l2ashdz.appcliente.view.TextEditorView;
  */
 public class AppCliente {
 
-    public static void main(String[] args) {
-        TextEditorView textEditorV = new TextEditorView();
-        TextEditorController textEditorC = new TextEditorController(textEditorV);
-        textEditorC.start();
-        
-        /*File file = new File("Entrada.txt");
-        FileReader fileR;
-        Lexer lex = null;
-        Parser parser = null;
-        
-        try {
-            fileR = new FileReader(file);
+    public static final String URL = "http://localhost:8080/AppServer/requestReader";
+    //public static final String URL = "https://jsonplaceholder.typicode.com/posts";
 
-            lex = new Lexer(fileR);
-            parser = new Parser(lex);
-            parser.parse();
-        } catch (Exception e) {
+    public static void main(String[] args) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(BodyPublishers.ofString("Este es un mensaje desde la appCliente"))
+                .uri(URI.create(URL))
+                .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace(System.out);
         }
-
-        List<ErrorAnalisis> errores = new ArrayList();
-        
-        errores.addAll(lex.getErrores());
-        errores.addAll(parser.getErrores());
-
-        List<Solicitud> solicitudes = parser.getSolicitudes();
-        
-        
-        if (errores.isEmpty()) {
-            solicitudes.forEach(s -> {
-                System.out.println("\nSolicitud tipo: " + s.getTipo());
-                s.getParametros().forEach(param -> System.out.println("\t" + param.getName() + " : " + param.getValue()));
-            });
-        } else {
-            errores.forEach(e -> System.out.println(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
-        }*/
     }
 }
