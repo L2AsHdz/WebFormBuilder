@@ -1,4 +1,4 @@
-package com.l2ashdz.appcliente.controller;
+package com.l2ashdz.appcliente.controller.textEditor;
 
 import com.l2ashdz.appcliente.view.TextEditorView;
 import java.awt.event.ActionEvent;
@@ -15,10 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
-import static com.l2ashdz.appcliente.controller.FileController.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
+import static com.l2ashdz.appcliente.controller.FileController.*;
+import static com.l2ashdz.appcliente.controller.textEditor.SendDataToServer.send;
 
 /**
  *
@@ -26,12 +27,12 @@ import javax.swing.text.BadLocationException;
  */
 public class TextEditorController extends WindowAdapter implements ActionListener,
         DocumentListener, UndoableEditListener, CaretListener {
-
-    private UndoManager undoManager = new UndoManager();
+    
+    private final UndoManager undoManager = new UndoManager();
     private final TextEditorView textEditorV;
     private boolean hasChanges = false;
     private String path = "";
-
+    
     public TextEditorController(TextEditorView textEditorV) {
         this.textEditorV = textEditorV;
         this.textEditorV.getBtnSendToServer().addActionListener(this);
@@ -69,7 +70,8 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     public void actionPerformed(ActionEvent e) {
 
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
-
+            String result = send(this.textEditorV.getTxtArea().getText());
+            this.textEditorV.getTxtArea().setText(result);
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
@@ -84,12 +86,6 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             rehacer();
         } else if (this.textEditorV.getItmDeshacer() == e.getSource()) {
             deshacer();
-        } else if (this.textEditorV.getItmCopiar() == e.getSource()) {
-
-        } else if (this.textEditorV.getItmCortar() == e.getSource()) {
-
-        } else if (this.textEditorV.getItmPegar() == e.getSource()) {
-
         } else if (this.textEditorV.getItmManual() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbout() == e.getSource()) {
@@ -194,7 +190,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             }
         }
     }
-
+    
     private void rehacer() {
         try {
             undoManager.redo();
