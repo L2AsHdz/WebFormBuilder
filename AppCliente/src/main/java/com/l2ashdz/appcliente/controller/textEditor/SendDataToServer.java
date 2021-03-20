@@ -17,10 +17,10 @@ public class SendDataToServer {
     private static final String URL = "http://localhost:8080/AppServer/requestReader";
     private static final HttpClient client = HttpClient.newHttpClient();
     
-    public static String send(String text, String user) {
+    public static String send(String text, String loggedUser) {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(text))
-                .setHeader("user", user)
+                .setHeader("loggedUser", loggedUser)
                 .uri(URI.create(URL))
                 .build();
 

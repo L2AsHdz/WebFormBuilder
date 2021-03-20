@@ -1,11 +1,8 @@
 package web.solicitud;
 
-import analizadores.lexico.Lexer;
-import analizadores.sintactico.Parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +32,9 @@ public class RequestReaderServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        response.setContentType("text/plain");
         BufferedReader reader = request.getReader();
-        String user = request.getHeader("user");
+        String loggedUser = request.getHeader("loggedUser");
 
         RequestAnalyzer analyzer = new RequestAnalyzer();
         analyzer.analyze(reader);
@@ -44,18 +42,13 @@ public class RequestReaderServlet extends HttpServlet {
         List<ErrorAnalisis> errores = analyzer.getErrores();
         List<Solicitud> solicitudes = analyzer.getSolicitudes();
 
-        response.setContentType("text/plain");
-        try (PrintWriter out = response.getWriter()) {
-
-            if (errores.isEmpty()) {
-                solicitudes.forEach(s -> {
-                    out.println("\nSolicitud tipo: " + s.getTipo());
-                    s.getParametros().forEach(param -> out.println("\t" + param.getName() + " : " + param.getValue()));
-                });
-            } else {
-                errores.forEach(e -> out.println(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
+        if (!loggedUser.trim().isEmpty()) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("Usuario logeado: " + loggedUser);
+            } catch (Exception e) {
             }
-            out.println(user);
+        } else {
+            //Ignorar solicitudes e informar que no esta logeado
         }
 
     }
