@@ -36,9 +36,10 @@ public class RequestReaderServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         BufferedReader reader = request.getReader();
+        String user = request.getHeader("user");
 
-       RequestAnalyzer analyzer = new RequestAnalyzer();
-       analyzer.analyze(reader);
+        RequestAnalyzer analyzer = new RequestAnalyzer();
+        analyzer.analyze(reader);
 
         List<ErrorAnalisis> errores = analyzer.getErrores();
         List<Solicitud> solicitudes = analyzer.getSolicitudes();
@@ -54,7 +55,7 @@ public class RequestReaderServlet extends HttpServlet {
             } else {
                 errores.forEach(e -> out.println(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
             }
-        
+            out.println(user);
         }
 
     }

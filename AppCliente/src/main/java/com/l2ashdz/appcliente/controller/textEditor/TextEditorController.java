@@ -31,6 +31,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     private final UndoManager undoManager = new UndoManager();
     private final TextEditorView textEditorV;
     private boolean hasChanges = false;
+    private String user = "Prueba";
     private String path = "";
     
     public TextEditorController(TextEditorView textEditorV) {
@@ -70,8 +71,9 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     public void actionPerformed(ActionEvent e) {
 
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
-            String result = send(this.textEditorV.getTxtArea().getText());
-            this.textEditorV.getTxtArea().setText(result);
+            String text = this.textEditorV.getTxtArea().getText();
+            String respuestaServer = send(text, user);
+            this.textEditorV.getTxtArea().setText(respuestaServer);
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
