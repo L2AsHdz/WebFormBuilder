@@ -7,5 +7,5 @@ echo ---------------------
 echo Compilando Parser...
 cup -parser Parser -symbols sym parser.cup
 
-mv Lexer.java /home/asael/NetBeansProjects/WebFormBuilder/AppCliente/src/main/java/com/l2ashdz/appcliente/analizadores/lexico/
-mv Parser.java sym.java /home/asael/NetBeansProjects/WebFormBuilder/AppCliente/src/main/java/com/l2ashdz/appcliente/analizadores/sintactico/
+mv Lexer.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/lexico/
+mv Parser.java sym.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/sintactico/

@@ -10,13 +10,15 @@ public class Usuario {
     
     private String nombre;
     private String password;
+    private String fechaCreacion;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String password) {
+    public Usuario(String nombre, String password, String fechaCreacion) {
         this.nombre = nombre;
         this.password = password;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getNombre() {
@@ -33,5 +35,13 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }

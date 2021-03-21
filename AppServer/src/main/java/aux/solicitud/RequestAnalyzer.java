@@ -1,4 +1,4 @@
-package web.solicitud;
+package aux.solicitud;
 
 import analizadores.lexico.Lexer;
 import analizadores.sintactico.Parser;

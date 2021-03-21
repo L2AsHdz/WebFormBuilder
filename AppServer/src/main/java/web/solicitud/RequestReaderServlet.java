@@ -1,5 +1,6 @@
 package web.solicitud;
 
+import aux.solicitud.RequestExecutor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
