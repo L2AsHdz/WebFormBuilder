@@ -1,9 +1,7 @@
 package aux.solicitud;
 
+import aux.user.UserRequestExecutor;
 import java.io.Reader;
-import java.util.List;
-import model.errores.ErrorAnalisis;
-import model.solicitudes.Solicitud;
 
 /**
  *
@@ -20,15 +18,28 @@ public class RequestExecutor {
 
     public String run(Reader reader, String loggedUser) {
 
-        RequestAnalyzer analyzer = new RequestAnalyzer();
+        var analyzer = new RequestAnalyzer();
         analyzer.analyze(reader);
 
-        List<ErrorAnalisis> errores = analyzer.getErrores();
-        List<Solicitud> solicitudes = analyzer.getSolicitudes();
+        var errores = analyzer.getErrores();
+        var solicitudes = analyzer.getSolicitudes();
 
         if (!loggedUser.trim().isEmpty()) {
             if (errores.isEmpty()) {
-                
+
+                var userRE = new UserRequestExecutor();
+
+                solicitudes.forEach(s -> {
+                    switch (s.getTipo()) {
+                        case CREATE_USER -> {
+                            userRE.executeCreateUser(s);
+                        }
+                        case MODIFY_USER -> {
+                        }
+                        case DELETE_USER -> {
+                        }
+                    }
+                });
             } else {
                 errores.forEach(e -> addLinea(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
             }

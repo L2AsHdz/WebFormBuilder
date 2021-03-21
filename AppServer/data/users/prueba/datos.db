@@ -1,6 +1,0 @@
-db.usuario(
-    {
-        "USUARIO" : "prueba",
-        "PASSWORD" : "123" 
-    }
-)

@@ -1,11 +1,9 @@
 package aux.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 import model.Usuario;
 import model.solicitudes.Parametro;
 import model.solicitudes.Solicitud;
-import model.solicitudes.TipoSolicitud;
 
 /**
  *
@@ -15,34 +13,33 @@ import model.solicitudes.TipoSolicitud;
  */
 public class UserBuilder {
 
-    private List<Solicitud> solicitudes;
-    private List<Usuario> usuarios = new ArrayList();
+    private final Solicitud solicitud;
+    private Usuario usuario;
 
-    public UserBuilder(List<Solicitud> solicitudes) {
-        this.solicitudes = solicitudes;
+    public UserBuilder(Solicitud s) {
+        this.solicitud = s;
     }
 
-    public List<Usuario> buildUsers() {
+    public Usuario buildUser() {
         String nameUser = "";
         String password = "";
         String fecha = "";
 
-        for (Solicitud s : solicitudes) {
-            if (s.getTipo().equals(TipoSolicitud.CREATE_USER)) {
-                for (Parametro p : s.getParametros()) {
-                    if (p.getName().contains("USUARIO")) {
-                        nameUser = p.getValue().replaceAll("\\s", "");
-                    } else if (p.getName().contains("PASSWORD")) {
-                        password = p.getValue().replaceAll("\\s", "");
-                    } else if (p.getName().contains("FECHA_CREACION")) {
-                        fecha = p.getValue().replaceAll("\\s", "");
-                    }
-                }
-                usuarios.add(new Usuario(nameUser, password, fecha));
+        for (Parametro p : solicitud.getParametros()) {
+            if (p.getName().contains("USUARIO")) {
+                nameUser = p.getValue().replaceAll("\\s", "").replace("\"", "");
+            } else if (p.getName().contains("PASSWORD")) {
+                password = p.getValue().replaceAll("\\s", "").replace("\"", "");
+            } else if (p.getName().contains("FECHA_CREACION")) {
+                fecha = p.getValue().replaceAll("\\s", "").replace("\"", "");
             }
         }
+        usuario = new Usuario(nameUser, password, fecha);
+        if (usuario.getFechaCreacion().isEmpty()) {
+            usuario.setFechaCreacion(LocalDate.now().toString());
+        }
 
-        return usuarios;
+        return usuario;
     }
 
 }

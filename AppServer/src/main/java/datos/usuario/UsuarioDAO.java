@@ -40,7 +40,7 @@ public class UsuarioDAO implements CRUD<Usuario> {
 
     @Override
     public boolean exists(String id) {
-        return new File("data/users" + id + ".db").exists();
+        return new File("/home/asael/NetBeansProjects/WebFormBuilder/data/users/" + id + ".db").exists();
     }
 
 }
