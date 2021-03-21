@@ -30,4 +30,16 @@ public class UserRequestExecutor {
             System.out.println("Error, usuario ya existe en el sistema");
         }
     }
+    
+    public void executeDeleteUser(Solicitud s) {
+        String nombre = s.getParametros().get(0).getValue()
+                .replace("\"", "")
+                .replaceAll("\\s", "");
+        
+        if (usuarioDAO.delete(nombre)) {
+            System.out.println("Usuario Eliminado");
+        } else {
+            System.out.println("Usuario no existe");
+        }
+    }
 }

@@ -31,13 +31,9 @@ public class RequestExecutor {
 
                 solicitudes.forEach(s -> {
                     switch (s.getTipo()) {
-                        case CREATE_USER -> {
-                            userRE.executeCreateUser(s);
-                        }
-                        case MODIFY_USER -> {
-                        }
-                        case DELETE_USER -> {
-                        }
+                        case CREATE_USER -> userRE.executeCreateUser(s);
+                        case MODIFY_USER -> {}
+                        case DELETE_USER -> userRE.executeDeleteUser(s);
                     }
                 });
             } else {

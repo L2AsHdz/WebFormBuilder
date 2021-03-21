@@ -33,13 +33,13 @@ public class UsuarioDAO implements CRUD<Usuario> {
     }
 
     @Override
-    public void update(Usuario t) {
+    public boolean update(Usuario t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(String path) {
+        return deleteFile(PATH_USERS + path + ".db");
     }
 
     @Override

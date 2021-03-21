@@ -40,6 +40,10 @@ public class FileController {
         }
     }
 
+    public static boolean deleteFile(String path) {
+        return new File(path).delete();
+    }
+    
     public static boolean verifyFile(String archivo) {
         return new File(archivo).exists();
     }
