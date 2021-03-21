@@ -2197,6 +2197,6 @@ class CUP$Parser$actions {
                                CUP$Parser$stack,
                                CUP$Parser$top);
     }
-    }
+}
 
 }

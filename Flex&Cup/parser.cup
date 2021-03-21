@@ -1,11 +1,11 @@
-package com.l2ashdz.appcliente.analizadores.sintactico;
+package analizadores.sintactico;
 
-import com.l2ashdz.appcliente.model.Token;
-import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
-import com.l2ashdz.appcliente.model.errores.TipoError;
-import com.l2ashdz.appcliente.model.solicitudes.Solicitud;
-import com.l2ashdz.appcliente.model.solicitudes.TipoSolicitud;
-import com.l2ashdz.appcliente.model.solicitudes.Parametro;
+import model.Token;
+import model.errores.ErrorAnalisis;
+import model.errores.TipoError;
+import model.solicitudes.Solicitud;
+import model.solicitudes.TipoSolicitud;
+import model.solicitudes.Parametro;
 
 import java.util.ArrayList;
 import java.util.List;

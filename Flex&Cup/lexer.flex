@@ -1,15 +1,15 @@
-package com.l2ashdz.appcliente.analizadores.lexico;
+package analizadores.lexico;
 
-import com.l2ashdz.appcliente.model.Token;
-import com.l2ashdz.appcliente.model.errores.ErrorAnalisis;
-import com.l2ashdz.appcliente.model.errores.TipoError;
+import model.Token;
+import model.errores.ErrorAnalisis;
+import model.errores.TipoError;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import java_cup.runtime.Symbol;
 
-import static com.l2ashdz.appcliente.analizadores.sintactico.sym.*;
+import static analizadores.sintactico.sym.*;
 
 %%
 
