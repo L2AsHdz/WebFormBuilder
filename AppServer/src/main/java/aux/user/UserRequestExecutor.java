@@ -25,10 +25,9 @@ public class UserRequestExecutor {
         var usuario = userBuilder.buildUser();
 
         if (!usuarioDAO.exists(usuario.getNombre())) {
-            System.out.println("creando archivo: " + usuario.getNombre());
-            System.out.println("fecha: "+usuario.getFechaCreacion());
+            usuarioDAO.create(usuario);
         } else {
-            System.out.println("Ya eciste perro");
+            System.out.println("Error, usuario ya existe en el sistema");
         }
     }
 }

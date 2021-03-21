@@ -1,9 +1,11 @@
 package datos.usuario;
 
 import datos.CRUD;
-import java.io.File;
 import java.util.List;
 import model.Usuario;
+
+import static aux.FileController.*;
+import static datos.usuario.UserStorageStructureGenerator.generate;
 
 /**
  *
@@ -13,14 +15,16 @@ import model.Usuario;
  */
 public class UsuarioDAO implements CRUD<Usuario> {
 
+    private final String PATH_USERS = "/home/asael/NetBeansProjects/WebFormBuilder/data/users/";
+
     @Override
     public List<Usuario> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void create(Usuario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void create(Usuario u) {
+        saveFile(PATH_USERS + u.getNombre() + ".db", generate(u));
     }
 
     @Override
@@ -40,7 +44,7 @@ public class UsuarioDAO implements CRUD<Usuario> {
 
     @Override
     public boolean exists(String id) {
-        return new File("/home/asael/NetBeansProjects/WebFormBuilder/data/users/" + id + ".db").exists();
+        return verifyFile(PATH_USERS + id + ".db");
     }
 
 }
