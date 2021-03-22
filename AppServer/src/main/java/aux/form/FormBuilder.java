@@ -34,7 +34,7 @@ public class FormBuilder {
             if (p.getName().contains("ID")) {
                 id = obtenerValor(p.getValue());
             } else if (p.getName().contains("TITULO")) {
-                titulo = obtenerValor(p.getValue());
+                titulo = p.getValue().replace("\"", "");
             } else if (p.getName().contains("NOMBRE")) {
                 nombre = obtenerValor(p.getValue());
             } else if (p.getName().contains("TEMA")) {
