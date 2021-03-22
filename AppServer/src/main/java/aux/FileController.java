@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author asael
  */
 public class FileController {
-    
+
     public static String readFile(String path) {
         String texto = "";
         ArrayList<String> textos;
@@ -33,17 +33,28 @@ public class FileController {
     }
 
     public static void saveFile(String path, String texto) {
-        try (PrintWriter escribir = new PrintWriter(path)) {
-                escribir.print(texto);
+        try ( PrintWriter escribir = new PrintWriter(path)) {
+            escribir.print(texto);
         } catch (IOException ex) {
             System.out.println("No se encontró el archivo");
         }
     }
-
+    
     public static boolean deleteFile(String path) {
         return new File(path).delete();
     }
     
+    public static void createDirectory(String directory) {
+        File directorio = new File(directory);
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+    }
+
     public static boolean verifyFile(String archivo) {
         return new File(archivo).exists();
     }

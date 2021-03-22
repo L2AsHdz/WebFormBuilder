@@ -20,7 +20,7 @@ public class UserBuilder {
         this.solicitud = s;
     }
 
-    public Usuario buildUser() {
+    public Usuario build() {
         String nameUser = "";
         String password = "";
         String fecha = "";
