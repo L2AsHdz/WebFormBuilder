@@ -22,10 +22,12 @@ public class UserRequestExecutor {
     public void executeCreateUser(Solicitud s) {
         var userBuilder = new UserBuilder(s);
 
-        var usuario = userBuilder.buildUser();
+        var usuario = userBuilder.build();
 
         if (!usuarioDAO.exists(usuario.getNombre())) {
             usuarioDAO.create(usuario);
+            //Generar respuesta
+            System.out.println("Usuario " + usuario.getNombre() + " creado");
         } else {
             System.out.println("Error, usuario ya existe en el sistema");
         }

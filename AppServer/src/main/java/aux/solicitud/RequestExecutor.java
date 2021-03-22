@@ -1,5 +1,6 @@
 package aux.solicitud;
 
+import aux.form.FormRequestExecutor;
 import aux.user.UserRequestExecutor;
 import java.io.Reader;
 
@@ -28,16 +29,14 @@ public class RequestExecutor {
             if (errores.isEmpty()) {
 
                 var userRE = new UserRequestExecutor();
+                var formRE = new FormRequestExecutor();
 
                 solicitudes.forEach(s -> {
                     switch (s.getTipo()) {
-                        case CREATE_USER -> {
-                            userRE.executeCreateUser(s);
-                        }
-                        case MODIFY_USER -> {
-                        }
-                        case DELETE_USER -> {
-                        }
+                        case CREATE_USER -> userRE.executeCreateUser(s);
+                        case MODIFY_USER -> {}
+                        case DELETE_USER -> {}
+                        case NEW_FORM -> formRE.executeCreateForm(s, loggedUser);
                     }
                 });
             } else {
