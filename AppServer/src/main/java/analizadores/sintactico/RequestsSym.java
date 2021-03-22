@@ -6,7 +6,7 @@
 package analizadores.sintactico;
 
 /** CUP generated class containing symbol constants. */
-public class sym {
+public class RequestsSym {
   /* terminals */
   public static final int DARK = 28;
   public static final int DELETE_USER = 11;

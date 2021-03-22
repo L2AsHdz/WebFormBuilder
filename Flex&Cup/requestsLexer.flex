@@ -9,11 +9,11 @@ import java.util.List;
 
 import java_cup.runtime.Symbol;
 
-import static analizadores.sintactico.sym.*;
+import static analizadores.sintactico.RequestsSym.*;
 
 %%
 
-%class Lexer
+%class RequestsLexer
 %public
 %cup
 %unicode

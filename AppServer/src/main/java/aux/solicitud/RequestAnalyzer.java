@@ -1,7 +1,7 @@
 package aux.solicitud;
 
-import analizadores.lexico.Lexer;
-import analizadores.sintactico.Parser;
+import analizadores.lexico.RequestsLexer;
+import analizadores.sintactico.RequestsParser;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import model.solicitudes.Solicitud;
  */
 public class RequestAnalyzer {
 
-    Lexer lex = null;
-    Parser parser = null;
+    RequestsLexer lex = null;
+    RequestsParser parser = null;
     List<ErrorAnalisis> errores = new ArrayList<>();
     List<Solicitud> solicitudes = new ArrayList<>();
 
@@ -26,8 +26,8 @@ public class RequestAnalyzer {
 
     public void analyze(Reader reader) {
         try {
-            lex = new Lexer(reader);
-            parser = new Parser(lex);
+            lex = new RequestsLexer(reader);
+            parser = new RequestsParser(lex);
             parser.parse();
             setListados();
         } catch (Exception e) {

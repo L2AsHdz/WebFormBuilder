@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo Compilando Lexer...
-jflex lexer.flex
+jflex requestsLexer.flex
 echo ---------------------
 
 echo Compilando Parser...
-cup -parser Parser -symbols sym parser.cup
+cup -parser RequestsParser -symbols RequestsSym requestsParser.cup
 
-mv Lexer.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/lexico/
-mv Parser.java sym.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/sintactico/
+mv RequestsLexer.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/lexico/
+mv RequestsParser.java RequestsSym.java /home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/java/analizadores/sintactico/
