@@ -37,6 +37,7 @@ public class RequestExecutor {
                         case MODIFY_USER -> {}
                         case DELETE_USER -> userRE.executeDeleteUser(s);
                         case NEW_FORM -> formRE.executeCreateForm(s, loggedUser);
+                        case DELETE_FORM -> formRE.executeDeleteForm(s);
                     }
                 });
             } else {

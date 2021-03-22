@@ -44,6 +44,16 @@ public class FileController {
         return new File(path).delete();
     }
     
+    public static boolean deleteDirectory(File file) {
+
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                deleteDirectory(f);
+            }
+        }
+         return file.delete();
+    }
+    
     public static void createDirectory(String directory) {
         File directorio = new File(directory);
         if (!directorio.exists()) {

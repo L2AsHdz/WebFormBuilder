@@ -6,6 +6,7 @@ import model.Formulario;
 
 import static aux.FileController.*;
 import static datos.form.FormStorageStructureGenerator.generate;
+import java.io.File;
 
 /**
  *
@@ -40,7 +41,7 @@ public class FormularioDAO implements CRUD<Formulario>{
 
     @Override
     public boolean delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return deleteDirectory(new File(PATH_FORMS + id));
     }
 
     @Override

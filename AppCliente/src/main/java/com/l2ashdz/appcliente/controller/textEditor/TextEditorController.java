@@ -73,7 +73,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
             String text = this.textEditorV.getTxtArea().getText();
             String respuestaServer = send(text, usuarioLogueado);
-            this.textEditorV.getTxtArea().setText(respuestaServer);
+            //this.textEditorV.getTxtArea().setText(respuestaServer);
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
