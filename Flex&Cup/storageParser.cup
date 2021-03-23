@@ -2,7 +2,9 @@ package analizadores.sintactico;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import model.Formulario;
+import model.Token;
+import model.Usuario;
 import java_cup.runtime.Symbol;
 
 parser code {:
@@ -26,17 +28,23 @@ terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, 
 
 terminal Token      COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
 terminal Token      ID, FECHA, ENTERO, VALUE, LITERAL;
+terminal Token      DARK, WHITE;
 
-non terminal        inicio, startUserStructure, endUserStructure, startFormStructure, endFormStructure;
-non terminal        paramsUser, paramUser nameParamUser;
+non terminal        inicio, startUserStructure, startFormStructure, startStructure, endStructure;
+non terminal        paramsUser, paramUser, nameParamUser;
+non terminal        paramsForm, paramForm, nameParamForm;
 
-non termina         value, fecha, entero, literal, id;
+non terminal         value, fecha, entero, literal, id, tema;
 
 inicio ::= startUserStructure
          | startFormStructure
          ;
 
-startUserStructure ::= INICIO_USER OPEN_ROUND_BRACKET OPEN_BRACE paramsUser endUserStructure;
+startUserStructure ::= INICIO_USER startStructure paramsUser endStructure;
+startFormStructure ::= INICIO_FORM startStructure paramsForm endStructure;
+
+startStructure ::= OPEN_ROUND_BRACKET OPEN_BRACE;
+
 
 /*********************Producciones para parametros de usuario*********************/
 paramsUser ::= paramUser COMMA paramsUser
@@ -51,6 +59,26 @@ nameParamUser ::= PARAM_USUARIO
                 | PARAM_PASSWORD
                 ;
 /*****************Fin de producciones para parametros de usuario*****************/
+
+
+
+/*********************Producciones para parametros de form*********************/
+paramsForm ::= paramForm COMMA paramsForm
+             | paramForm
+             ;
+
+paramForm ::= nameParamForm COLON value:v           
+            | PARAM_ID:p COLON id:i                 
+            | PARAM_FECHA_CREACION:p COLON fecha:f  
+            | PARAM_TITULO_FORM:p COLON literal:l   
+            | PARAM_TEMA:p COLON tema:t             
+            ;
+
+nameParamForm ::= PARAM_NOMBRE_FORM:p            
+                | PARAM_USUARIO_CREACION:p       
+                ;
+/*****************Fin de producciones para parametros de form*****************/
+
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
         ;
@@ -67,4 +95,4 @@ literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
 entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
          ;
 
-endUserStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;
+endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;

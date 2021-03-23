@@ -1,5 +1,6 @@
 package analizadores.lexico;
 
+import model.Token;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import static analizadores.sintactico.StorageSym.*;
         return new Symbol(type, new Token(yyline, yycolumn, yytext()));
     }
 
-}%
+%}
 
 %eofval{
 return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
@@ -51,8 +52,8 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\"TEMA\""                      {return symbol(PARAM_TEMA);}
 <YYINITIAL> "\"USUARIO_CREACION\""          {return symbol(PARAM_USUARIO_CREACION);}
 
-<YYINITIAL> "\""({ESPACIO})*([dD][aA][rR][kK])({ESPACIO})*"\""            {return symbol(DARK);}
-<YYINITIAL> "\""({ESPACIO})*([wW][hH][iI][tT][eE])({ESPACIO})*"\""        {return symbol(WHITE);}
+<YYINITIAL> "\""([dD][aA][rR][kK])"\""            {return symbol(DARK);}
+<YYINITIAL> "\""([wW][hH][iI][tT][eE])"\""        {return symbol(WHITE);}
 
 
 <YYINITIAL> {
@@ -70,5 +71,3 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> {ENTERO}                    {return symbol(ENTERO);}
 <YYINITIAL> {VALUE}                     {return symbol(VALUE);}
 <YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
-
-[^]                                 {addLexicError();}
