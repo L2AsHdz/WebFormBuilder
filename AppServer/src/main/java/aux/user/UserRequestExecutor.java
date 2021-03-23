@@ -1,5 +1,6 @@
 package aux.user;
 
+import analizadores.lexico.StorageLexer;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
 import model.Usuario;
@@ -43,5 +44,9 @@ public class UserRequestExecutor {
         } else {
             System.out.println("Usuario no existe");
         }
+    }
+    
+    public void executeModifyUser(Solicitud s) {
+        //StorageLexer lex = new StorageLexer();
     }
 }

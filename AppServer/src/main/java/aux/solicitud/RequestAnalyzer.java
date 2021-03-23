@@ -16,8 +16,8 @@ import model.solicitudes.Solicitud;
  */
 public class RequestAnalyzer {
 
-    RequestsLexer lex = null;
-    RequestsParser parser = null;
+    RequestsLexer lex;
+    RequestsParser parser;
     List<ErrorAnalisis> errores = new ArrayList<>();
     List<Solicitud> solicitudes = new ArrayList<>();
 

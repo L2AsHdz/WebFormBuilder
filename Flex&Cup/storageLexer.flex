@@ -1,8 +1,6 @@
 package analizadores.lexico;
 
 import model.Token;
-import java.util.ArrayList;
-import java.util.List;
 
 import java_cup.runtime.Symbol;
 

@@ -9,32 +9,32 @@ import java_cup.runtime.Symbol;
 
 parser code {:
     
-    private List<Usuario> usuarios = new ArrayList();
-    private List<Formulario> forms = new ArrayList();
+    private Usuario user = new Usuario();
+    private Formulario form = new Formulario();
 
-    public List<Usuario> getUsuarios(){
-        return this.usuarios;
+    public Usuario getUsuario(){
+        return this.user;
     }
 
-    public List<Formulario> getForms(){
-        return this.forms;
+    public Formulario getForm(){
+        return this.form;
     }
 
 :}
 
-terminal Token      INICIO_USER, INICIO_FORM;
-terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
-terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+terminal      INICIO_USER, INICIO_FORM;
+terminal      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
+terminal      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+terminal      COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
 
-terminal Token      COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
-terminal Token      ID, FECHA, ENTERO, VALUE, LITERAL;
-terminal Token      DARK, WHITE;
+terminal String      ID, FECHA, ENTERO, VALUE, LITERAL;
+terminal String      DARK, WHITE;
 
 non terminal        inicio, startUserStructure, startFormStructure, startStructure, endStructure;
-non terminal        paramsUser, paramUser, nameParamUser;
-non terminal        paramsForm, paramForm, nameParamForm;
+non terminal        paramsUser, paramUser;
+non terminal        paramsForm, paramForm;
 
-non terminal         value, fecha, entero, literal, id, tema;
+non terminal String         value, fecha, entero, literal, id, tema;
 
 inicio ::= startUserStructure
          | startFormStructure
@@ -51,13 +51,10 @@ paramsUser ::= paramUser COMMA paramsUser
              | paramUser
              ;
 
-paramUser ::= nameParamUser COLON value
-            | PARAM_FECHA_CREACION COLON fecha
+paramUser ::= PARAM_USUARIO COLON value:v               {:user.setNombre(v.replace("\"",""));:}
+            | PARAM_PASSWORD COLON value:v              {:user.setPassword(v.replace("\"",""));:}
+            | PARAM_FECHA_CREACION COLON fecha:f        {:user.setFechaCreacion(f.replace("\"",""));:}
             ;
-
-nameParamUser ::= PARAM_USUARIO
-                | PARAM_PASSWORD
-                ;
 /*****************Fin de producciones para parametros de usuario*****************/
 
 
@@ -67,32 +64,29 @@ paramsForm ::= paramForm COMMA paramsForm
              | paramForm
              ;
 
-paramForm ::= nameParamForm COLON value:v           
-            | PARAM_ID:p COLON id:i                 
-            | PARAM_FECHA_CREACION:p COLON fecha:f  
-            | PARAM_TITULO_FORM:p COLON literal:l   
-            | PARAM_TEMA:p COLON tema:t             
+paramForm ::= PARAM_NOMBRE_FORM COLON value:v
+            | PARAM_USUARIO_CREACION COLON value:v    
+            | PARAM_ID COLON id:i                 
+            | PARAM_FECHA_CREACION COLON fecha:f  
+            | PARAM_TITULO_FORM COLON literal:l   
+            | PARAM_TEMA COLON tema:t             
             ;
-
-nameParamForm ::= PARAM_NOMBRE_FORM:p            
-                | PARAM_USUARIO_CREACION:p       
-                ;
 /*****************Fin de producciones para parametros de form*****************/
 
 
-value ::= VALUE:v           {:RESULT = v.getLexema();:}
+value ::= VALUE:v           {:RESULT = v;:}
         ;
 
-id ::= ID:i                 {:RESULT = i.getLexema();:}
+id ::= ID:i                 {:RESULT = i;:}
      ;
 
-fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
+fecha ::= FECHA:f           {:RESULT = f;:}
         ;
 
-literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
+literal ::= LITERAL:l       {:RESULT = l;:}
           ;
 
-entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
+entero ::= ENTERO:e         {:RESULT = e;:}
          ;
 
 endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;
