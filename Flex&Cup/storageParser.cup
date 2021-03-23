@@ -1,0 +1,70 @@
+package analizadores.sintactico;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java_cup.runtime.Symbol;
+
+parser code {:
+    
+    private List<Usuario> usuarios = new ArrayList();
+    private List<Formulario> forms = new ArrayList();
+
+    public List<Usuario> getUsuarios(){
+        return this.usuarios;
+    }
+
+    public List<Formulario> getForms(){
+        return this.forms;
+    }
+
+:}
+
+terminal Token      INICIO_USER, INICIO_FORM;
+terminal Token      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
+terminal Token      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+
+terminal Token      COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
+terminal Token      ID, FECHA, ENTERO, VALUE, LITERAL;
+
+non terminal        inicio, startUserStructure, endUserStructure, startFormStructure, endFormStructure;
+non terminal        paramsUser, paramUser nameParamUser;
+
+non termina         value, fecha, entero, literal, id;
+
+inicio ::= startUserStructure
+         | startFormStructure
+         ;
+
+startUserStructure ::= INICIO_USER OPEN_ROUND_BRACKET OPEN_BRACE paramsUser endUserStructure;
+
+/*********************Producciones para parametros de usuario*********************/
+paramsUser ::= paramUser COMMA paramsUser
+             | paramUser
+             ;
+
+paramUser ::= nameParamUser COLON value
+            | PARAM_FECHA_CREACION COLON fecha
+            ;
+
+nameParamUser ::= PARAM_USUARIO
+                | PARAM_PASSWORD
+                ;
+/*****************Fin de producciones para parametros de usuario*****************/
+
+value ::= VALUE:v           {:RESULT = v.getLexema();:}
+        ;
+
+id ::= ID:i                 {:RESULT = i.getLexema();:}
+     ;
+
+fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
+        ;
+
+literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
+          ;
+
+entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
+         ;
+
+endUserStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;

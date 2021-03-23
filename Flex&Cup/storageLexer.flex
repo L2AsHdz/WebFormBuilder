@@ -18,15 +18,8 @@ import static analizadores.sintactico.StorageSym.*;
 
 %{
 
-    private List<Usuario> usuarios = new ArrayList();
-    private List<Formulario> forms = new ArrayList();
-
-    public List<Usuario> getUsuarios(){
-        return this.usuarios;
-    }
-
-    public List<Formulario> getForms(){
-        return this.forms;
+    private Symbol symbol(int type){
+        return new Symbol(type, new Token(yyline, yycolumn, yytext()));
     }
 
 }%
@@ -35,9 +28,7 @@ import static analizadores.sintactico.StorageSym.*;
 return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
 %eofval}
 
-LETRA = [a-zA-Z]
 ENTERO = "\""(0|([1-9][0-9]*))"\""
-DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
 
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
@@ -69,7 +60,7 @@ LITERAL = "\""[^"\""]*"\""
     ","                                 {return symbol(COMMA);}
     "{"                                 {return symbol(OPEN_BRACE);}
     "}"                                 {return symbol(CLOSE_BRACE);}
-    "("                                 {return symbol(OPEN__ROUND_BRACKET);}
+    "("                                 {return symbol(OPEN_ROUND_BRACKET);}
     ")"                                 {return symbol(CLOSE_ROUND_BRACKET);}
     "\s"                                {/*Ignorar*/}
 }
