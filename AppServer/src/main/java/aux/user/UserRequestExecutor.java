@@ -1,8 +1,11 @@
 package aux.user;
 
 import analizadores.lexico.StorageLexer;
+import analizadores.sintactico.StorageParser;
+import aux.FileController;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
+import java.io.StringReader;
 import model.Usuario;
 import model.solicitudes.Solicitud;
 
@@ -47,6 +50,16 @@ public class UserRequestExecutor {
     }
     
     public void executeModifyUser(Solicitud s) {
-        //StorageLexer lex = new StorageLexer();
+        StringReader reader = new StringReader(FileController.readFile("/home/asael/NetBeansProjects/WebFormBuilder/data/users/usER22.db"));
+        StorageLexer lex = new StorageLexer(reader);
+        StorageParser parser = new StorageParser(lex);
+        
+        try {
+            parser.parse();
+            System.out.println(parser.getUsuario().getNombre());
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        System.out.println(FileController.readFile("/home/asael/NetBeansProjects/WebFormBuilder/data/users/usER22.db"));
     }
 }

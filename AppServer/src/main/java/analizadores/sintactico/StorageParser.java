@@ -10,6 +10,8 @@ import java.util.List;
 import model.Formulario;
 import model.Token;
 import model.Usuario;
+import model.errores.ErrorAnalisis;
+import model.errores.TipoError;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.XMLElement;
 
@@ -149,8 +151,13 @@ public class StorageParser extends java_cup.runtime.lr_parser {
 
 
     
+    private List<ErrorAnalisis> errores = new ArrayList();
     private Usuario user = new Usuario();
     private Formulario form = new Formulario();
+
+    public List<ErrorAnalisis> getErrores() {
+        return this.errores;
+    }
 
     public Usuario getUsuario(){
         return this.user;
@@ -158,6 +165,13 @@ public class StorageParser extends java_cup.runtime.lr_parser {
 
     public Formulario getForm(){
         return this.form;
+    }
+
+    public void syntax_error(Symbol s) {
+        Token t = (Token) s.value;
+        StringBuilder descripcion = new StringBuilder("Se esperaba: ");
+        expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
+        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
     }
 
 
