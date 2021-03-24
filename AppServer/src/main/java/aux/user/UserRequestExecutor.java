@@ -1,11 +1,7 @@
 package aux.user;
 
-import analizadores.lexico.StorageLexer;
-import analizadores.sintactico.StorageParser;
-import aux.FileController;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
-import java.io.StringReader;
 import model.Usuario;
 import model.solicitudes.Solicitud;
 
@@ -18,13 +14,14 @@ import model.solicitudes.Solicitud;
 public class UserRequestExecutor {
 
     private final CRUD<Usuario> usuarioDAO;
+    private UserBuilder userBuilder;
 
     public UserRequestExecutor() {
         usuarioDAO = new UsuarioDAO();
     }
 
     public void executeCreateUser(Solicitud s) {
-        var userBuilder = new UserBuilder(s);
+        userBuilder = new UserBuilder(s);
 
         var usuario = userBuilder.build();
 
@@ -48,8 +45,23 @@ public class UserRequestExecutor {
             System.out.println("Usuario no existe");
         }
     }
-    
+
     public void executeModifyUser(Solicitud s) {
-        
+        userBuilder = new UserBuilder(s);
+
+        var oldUser = userBuilder.buildOld();
+        var newUser = userBuilder.buildNew();
+
+        if (usuarioDAO.exists(oldUser.getNombre())) {
+            if (usuarioDAO.delete(oldUser.getNombre())) {
+                System.out.println("Usuario " + oldUser.getNombre() + " eliminado");
+            }
+            usuarioDAO.create(newUser);
+            //generar respuesta
+            System.out.println("Se modifico el usuario " + oldUser.getNombre());
+        } else {
+            System.out.println("Error, usuario no existe");
+        }
+
     }
 }

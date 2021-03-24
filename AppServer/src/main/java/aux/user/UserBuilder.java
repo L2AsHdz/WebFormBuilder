@@ -27,11 +27,11 @@ public class UserBuilder {
 
         for (Parametro p : solicitud.getParametros()) {
             String name = p.getName();
-            if (name.contains("USUARIO") | name.contains("USUARIO_NUEVO")) {
+            if (name.contains("\"USUARIO\"")) {
                 nameUser = p.getValue().replaceAll("\\s", "").replace("\"", "");
-            } else if (name.contains("PASSWORD") | name.contains("NUEVO_PASSWORD")) {
+            } else if (name.contains("PASSWORD")) {
                 password = p.getValue().replaceAll("\\s", "").replace("\"", "");
-            } else if (name.contains("FECHA_CREACION") | name.contains("MODIFICACION")) {
+            } else if (name.contains("FECHA_CREACION")) {
                 fecha = p.getValue().replaceAll("\\s", "").replace("\"", "");
             }
         }
@@ -41,6 +41,42 @@ public class UserBuilder {
         }
 
         return usuario;
+    }
+    
+    public Usuario buildOld() {
+        String nameUser = "";
+        
+        for (Parametro p : solicitud.getParametros()) {
+            if (p.getName().contains("USUARIO_ANTIGUO")) {
+                nameUser = p.getValue().replace("\"", "").replaceAll("\\s", "");
+            }
+        }
+        usuario = new Usuario();
+        usuario.setNombre(nameUser);
+        
+        return usuario;
+    }
+    
+    public Usuario buildNew() {
+        usuario = new Usuario();
+        solicitud.getParametros().forEach(p -> {
+            if (p.getName().contains("USUARIO_NUEVO")) {
+                usuario.setNombre(getValue(p.getValue()));
+            } else if (p.getName().contains("NUEVO_PASSWORD")) {
+                usuario.setPassword(getValue(p.getValue()));
+            } else if (p.getName().contains("MODIFICACION")) {
+                usuario.setFechaCreacion(getValue(p.getValue()));
+            }
+        });
+        if (usuario.getFechaCreacion() == null) {
+            usuario.setFechaCreacion(LocalDate.now().toString());
+        }
+        
+        return usuario;
+    }
+    
+    private String getValue(String s) {
+        return s.replaceAll("\\s", "").replace("\"", "");
     }
 
 }
