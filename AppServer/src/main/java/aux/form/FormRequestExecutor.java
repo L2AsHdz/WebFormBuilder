@@ -14,13 +14,14 @@ import model.solicitudes.Solicitud;
 public class FormRequestExecutor {
 
     private final CRUD<Formulario> formDAO;
+    private FormBuilder formBuilder;
 
     public FormRequestExecutor() {
         formDAO = new FormularioDAO();
     }
 
     public void executeCreateForm(Solicitud s, String loggedUser) {
-        var formBuilder = new FormBuilder(s, loggedUser);
+        formBuilder = new FormBuilder(s, loggedUser);
         var form = formBuilder.build();
 
         if (!formDAO.exists(form.getId())) {
@@ -43,8 +44,24 @@ public class FormRequestExecutor {
             System.out.println("Formulario no existe");
         }
     }
-    
+
     public void executeModifyForm(Solicitud s) {
-        
+        formBuilder = new FormBuilder(s);
+
+        var modifyForm = formBuilder.buildModify();
+
+        if (formDAO.exists(modifyForm.getId())) {
+            var currentForm = formDAO.getObject(modifyForm.getId());
+
+            if (modifyForm.getTitulo() != null) currentForm.setTitulo(modifyForm.getTitulo());
+            if (modifyForm.getNombre() != null) currentForm.setNombre(modifyForm.getNombre());
+            if (modifyForm.getTema() != null) currentForm.setTema(modifyForm.getTema());
+            
+            formDAO.create(currentForm);
+            System.out.println("Formulario modificado");
+            //generar respuesta
+        } else {
+            System.out.println("Error, formulario no existe");
+        }
     }
 }

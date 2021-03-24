@@ -2,6 +2,7 @@ package aux.form;
 
 import java.time.LocalDate;
 import model.Formulario;
+import model.solicitudes.Parametro;
 import model.solicitudes.Solicitud;
 
 /**
@@ -13,7 +14,7 @@ import model.solicitudes.Solicitud;
 public class FormBuilder {
 
     private final Solicitud solicitud;
-    private final String loggedUser;
+    private String loggedUser;
     private Formulario form;
 
     public FormBuilder(Solicitud solicitud, String loggedUser) {
@@ -21,22 +22,26 @@ public class FormBuilder {
         this.loggedUser = loggedUser;
     }
 
+    public FormBuilder(Solicitud solicitud) {
+        this.solicitud = solicitud;
+    }
+
     public Formulario build() {
         form = new Formulario();
 
         solicitud.getParametros().forEach(p -> {
             if (p.getName().contains("ID")) {
-                form.setId(getValue(p.getValue()));
+                form.setId(getValue(p));
             } else if (p.getName().contains("TITULO")) {
-                form.setTitulo(getValue(p.getValue()));
+                form.setTitulo(p.getValue().replace("\"", ""));
             } else if (p.getName().contains("NOMBRE")) {
-                form.setNombre(getValue(p.getValue()));
+                form.setNombre(getValue(p));
             } else if (p.getName().contains("TEMA")) {
-                form.setTema(getValue(p.getValue()));
+                form.setTema(getValue(p));
             } else if (p.getName().contains("USUARIO_CREACION")) {
-                form.setUsuarioCreacion(getValue(p.getValue()));
+                form.setUsuarioCreacion(getValue(p));
             } else if (p.getName().contains("FECHA_CREACION")) {
-                form.setFechaCreacion(getValue(p.getValue()));
+                form.setFechaCreacion(getValue(p));
             }
         });
         if (form.getUsuarioCreacion() == null) {
@@ -48,8 +53,26 @@ public class FormBuilder {
 
         return form;
     }
+    
+    public Formulario buildModify() {
+        form = new Formulario();
+        
+        solicitud.getParametros().forEach(p -> {
+            if (p.getName().contains("ID")) {
+                form.setId(getValue(p));
+            } else if (p.getName().contains("TITULO")) {
+                form.setTitulo(p.getValue().replace("\"", ""));
+            } else if (p.getName().contains("NOMBRE")) {
+                form.setNombre(getValue(p));
+            } else if (p.getName().contains("TEMA")) {
+                form.setTema(getValue(p));
+            }
+        });
+        
+        return form;
+    }
 
-    private String getValue(String s) {
-        return s.replaceAll("\\s", "").replace("\"", "");
+    private String getValue(Parametro p) {
+        return p.getValue().replaceAll("\\s", "").replace("\"", "");
     }
 }

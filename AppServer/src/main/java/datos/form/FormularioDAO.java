@@ -5,8 +5,10 @@ import java.util.List;
 import model.Formulario;
 
 import static aux.FileController.*;
+import datos.StorageFileAnalyzer;
 import static datos.form.FormStorageStructureGenerator.generate;
 import java.io.File;
+import java.io.StringReader;
 
 /**
  *
@@ -17,7 +19,8 @@ import java.io.File;
 public class FormularioDAO implements CRUD<Formulario>{
     
     private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/data/forms/";
-
+    private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
+    
     @Override
     public List<Formulario> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -31,7 +34,8 @@ public class FormularioDAO implements CRUD<Formulario>{
 
     @Override
     public Formulario getObject(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringReader text = new StringReader(readFile(PATH_FORMS + id + "/estructura.db"));
+        return analyzer.analyzeForm(text);
     }
 
     @Override

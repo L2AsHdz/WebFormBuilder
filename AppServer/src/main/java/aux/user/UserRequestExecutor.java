@@ -50,9 +50,10 @@ public class UserRequestExecutor {
         userBuilder = new UserBuilder(s);
 
         var oldUser = userBuilder.buildOld();
-        var newUser = userBuilder.buildNew();
 
         if (usuarioDAO.exists(oldUser.getNombre())) {
+            var newUser = userBuilder.buildNew();
+            
             if (usuarioDAO.delete(oldUser.getNombre())) {
                 System.out.println("Usuario " + oldUser.getNombre() + " eliminado");
             }
