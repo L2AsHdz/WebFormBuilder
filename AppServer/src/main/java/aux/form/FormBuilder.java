@@ -2,7 +2,6 @@ package aux.form;
 
 import java.time.LocalDate;
 import model.Formulario;
-import model.solicitudes.Parametro;
 import model.solicitudes.Solicitud;
 
 /**
@@ -23,40 +22,34 @@ public class FormBuilder {
     }
 
     public Formulario build() {
-        String id = "";
-        String titulo = "";
-        String nombre = "";
-        String tema = "";
-        String usuarioCreacion = "";
-        String fechaCreacion = "";
+        form = new Formulario();
 
-        for (Parametro p : solicitud.getParametros()) {
+        solicitud.getParametros().forEach(p -> {
             if (p.getName().contains("ID")) {
-                id = obtenerValor(p.getValue());
+                form.setId(getValue(p.getValue()));
             } else if (p.getName().contains("TITULO")) {
-                titulo = p.getValue().replace("\"", "");
+                form.setTitulo(getValue(p.getValue()));
             } else if (p.getName().contains("NOMBRE")) {
-                nombre = obtenerValor(p.getValue());
+                form.setNombre(getValue(p.getValue()));
             } else if (p.getName().contains("TEMA")) {
-                tema = obtenerValor(p.getValue());
+                form.setTema(getValue(p.getValue()));
             } else if (p.getName().contains("USUARIO_CREACION")) {
-                usuarioCreacion = obtenerValor(p.getValue());
+                form.setUsuarioCreacion(getValue(p.getValue()));
             } else if (p.getName().contains("FECHA_CREACION")) {
-                fechaCreacion = obtenerValor(p.getValue());
+                form.setFechaCreacion(getValue(p.getValue()));
             }
-        }
-        form = new Formulario(id, titulo, nombre, tema, usuarioCreacion, fechaCreacion);
-        if (form.getUsuarioCreacion().isEmpty()) {
+        });
+        if (form.getUsuarioCreacion() == null) {
             form.setUsuarioCreacion(loggedUser);
         }
-        if (form.getFechaCreacion().isEmpty()) {
+        if (form.getFechaCreacion() == null) {
             form.setFechaCreacion(LocalDate.now().toString());
         }
 
         return form;
     }
 
-    private String obtenerValor(String s) {
+    private String getValue(String s) {
         return s.replaceAll("\\s", "").replace("\"", "");
     }
 }

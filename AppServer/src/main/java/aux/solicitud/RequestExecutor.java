@@ -37,6 +37,7 @@ public class RequestExecutor {
                         case MODIFY_USER -> userRE.executeModifyUser(s);
                         case DELETE_USER -> userRE.executeDeleteUser(s);
                         case NEW_FORM -> formRE.executeCreateForm(s, loggedUser);
+                        case EDIT_FORM -> formRE.executeModifyForm(s);
                         case DELETE_FORM -> formRE.executeDeleteForm(s);
                     }
                 });
