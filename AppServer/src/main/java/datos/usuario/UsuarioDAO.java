@@ -5,7 +5,9 @@ import java.util.List;
 import model.Usuario;
 
 import static aux.FileController.*;
+import datos.StorageFileAnalyzer;
 import static datos.usuario.UserStorageStructureGenerator.generate;
+import java.io.StringReader;
 
 /**
  *
@@ -16,6 +18,7 @@ import static datos.usuario.UserStorageStructureGenerator.generate;
 public class UsuarioDAO implements CRUD<Usuario> {
 
     private final String PATH_USERS = "/home/asael/NetBeansProjects/WebFormBuilder/data/users/";
+    private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
 
     @Override
     public List<Usuario> getList() {
@@ -29,7 +32,8 @@ public class UsuarioDAO implements CRUD<Usuario> {
 
     @Override
     public Usuario getObject(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringReader text = new StringReader(readFile(PATH_USERS + id + ".db"));
+        return analyzer.analyzeUser(text);
     }
 
     @Override

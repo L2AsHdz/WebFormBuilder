@@ -50,16 +50,6 @@ public class UserRequestExecutor {
     }
     
     public void executeModifyUser(Solicitud s) {
-        StringReader reader = new StringReader(FileController.readFile("/home/asael/NetBeansProjects/WebFormBuilder/data/users/usER22.db"));
-        StorageLexer lex = new StorageLexer(reader);
-        StorageParser parser = new StorageParser(lex);
         
-        try {
-            parser.parse();
-            System.out.println(parser.getUsuario().getNombre());
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        System.out.println(FileController.readFile("/home/asael/NetBeansProjects/WebFormBuilder/data/users/usER22.db"));
     }
 }

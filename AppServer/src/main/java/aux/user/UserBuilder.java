@@ -26,11 +26,12 @@ public class UserBuilder {
         String fecha = "";
 
         for (Parametro p : solicitud.getParametros()) {
-            if (p.getName().contains("USUARIO")) {
+            String name = p.getName();
+            if (name.contains("USUARIO") | name.contains("USUARIO_NUEVO")) {
                 nameUser = p.getValue().replaceAll("\\s", "").replace("\"", "");
-            } else if (p.getName().contains("PASSWORD")) {
+            } else if (name.contains("PASSWORD") | name.contains("NUEVO_PASSWORD")) {
                 password = p.getValue().replaceAll("\\s", "").replace("\"", "");
-            } else if (p.getName().contains("FECHA_CREACION")) {
+            } else if (name.contains("FECHA_CREACION") | name.contains("MODIFICACION")) {
                 fecha = p.getValue().replaceAll("\\s", "").replace("\"", "");
             }
         }
