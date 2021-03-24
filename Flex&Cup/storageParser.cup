@@ -3,7 +3,6 @@ package analizadores.sintactico;
 import java.util.ArrayList;
 import java.util.List;
 import model.Formulario;
-import model.Token;
 import model.Usuario;
 import model.errores.ErrorAnalisis;
 import model.errores.TipoError;
@@ -28,10 +27,10 @@ parser code {:
     }
 
     public void syntax_error(Symbol s) {
-        Token t = (Token) s.value;
+        String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
         expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
-        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
+        System.out.println(ss);
     }
 
 :}
@@ -78,12 +77,12 @@ paramsForm ::= paramForm COMMA paramsForm
              | paramForm
              ;
 
-paramForm ::= PARAM_NOMBRE_FORM COLON value:v
-            | PARAM_USUARIO_CREACION COLON value:v    
-            | PARAM_ID COLON id:i                 
-            | PARAM_FECHA_CREACION COLON fecha:f  
-            | PARAM_TITULO_FORM COLON literal:l   
-            | PARAM_TEMA COLON tema:t             
+paramForm ::= PARAM_NOMBRE_FORM COLON value:v               {:form.setNombre(v.replace("\"",""));:}
+            | PARAM_USUARIO_CREACION COLON value:v          {:form.setUsuarioCreacion(v.replace("\"",""));:}
+            | PARAM_ID COLON id:i                           {:form.setId(i.replace("\"",""));:}
+            | PARAM_FECHA_CREACION COLON fecha:f            {:form.setFechaCreacion(f.replace("\"",""));:}
+            | PARAM_TITULO_FORM COLON literal:l             {:form.setTitulo(l.replace("\"",""));:}
+            | PARAM_TEMA COLON tema:t                       {:form.setTema(t.replace("\"",""));:}
             ;
 /*****************Fin de producciones para parametros de form*****************/
 
@@ -102,5 +101,9 @@ literal ::= LITERAL:l       {:RESULT = l;:}
 
 entero ::= ENTERO:e         {:RESULT = e;:}
          ;
+
+tema ::= DARK:t                 {:RESULT = t;:}
+       | WHITE:t                {:RESULT = t;:}
+       ;
 
 endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;

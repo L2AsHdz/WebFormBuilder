@@ -1,9 +1,6 @@
 package analizadores.lexico;
 
-import model.Token;
-
 import java_cup.runtime.Symbol;
-
 import static analizadores.sintactico.StorageSym.*;
 
 %%
@@ -20,7 +17,7 @@ import static analizadores.sintactico.StorageSym.*;
 %}
 
 %eofval{
-    return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
+    return new Symbol(EOF, "Fin de linea");
 %eofval}
 
 SALTO = \n|\r|\r\n

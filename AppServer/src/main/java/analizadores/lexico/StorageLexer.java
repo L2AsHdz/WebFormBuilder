@@ -4,10 +4,7 @@
 
 package analizadores.lexico;
 
-import model.Token;
-
 import java_cup.runtime.Symbol;
-
 import static analizadores.sintactico.StorageSym.*;
 
 
@@ -999,7 +996,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          {     return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
+          {     return new Symbol(EOF, "Fin de linea");
  }
       }
       else {

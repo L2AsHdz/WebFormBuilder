@@ -8,7 +8,6 @@ package analizadores.sintactico;
 import java.util.ArrayList;
 import java.util.List;
 import model.Formulario;
-import model.Token;
 import model.Usuario;
 import model.errores.ErrorAnalisis;
 import model.errores.TipoError;
@@ -38,14 +37,15 @@ public class StorageParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\031\000\002\002\003\000\002\002\004\000\002\002" +
+    "\000\033\000\002\002\003\000\002\002\004\000\002\002" +
     "\003\000\002\003\006\000\002\004\006\000\002\005\004" +
     "\000\002\007\005\000\002\007\003\000\002\010\005\000" +
     "\002\010\005\000\002\010\005\000\002\011\005\000\002" +
     "\011\003\000\002\012\005\000\002\012\005\000\002\012" +
     "\005\000\002\012\005\000\002\012\005\000\002\012\005" +
     "\000\002\013\003\000\002\017\003\000\002\014\003\000" +
-    "\002\016\003\000\002\015\003\000\002\006\004" });
+    "\002\016\003\000\002\015\003\000\002\020\003\000\002" +
+    "\020\003\000\002\006\004" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -53,37 +53,39 @@ public class StorageParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\066\000\006\004\004\005\005\001\002\000\004\022" +
+    "\000\070\000\006\004\004\005\005\001\002\000\004\022" +
     "\013\001\002\000\004\022\013\001\002\000\004\002\001" +
     "\001\002\000\004\002\uffff\001\002\000\004\002\011\001" +
     "\002\000\004\002\000\001\002\000\016\010\016\011\017" +
     "\012\022\013\023\014\021\015\024\001\002\000\004\020" +
     "\014\001\002\000\022\006\ufffc\007\ufffc\010\ufffc\011\ufffc" +
     "\012\ufffc\013\ufffc\014\ufffc\015\ufffc\001\002\000\006\017" +
-    "\050\021\ufff5\001\002\000\004\016\045\001\002\000\004" +
-    "\016\042\001\002\000\004\021\037\001\002\000\004\016" +
+    "\052\021\ufff5\001\002\000\004\016\047\001\002\000\004" +
+    "\016\044\001\002\000\004\021\041\001\002\000\004\016" +
     "\035\001\002\000\004\016\032\001\002\000\004\016\030" +
     "\001\002\000\004\016\025\001\002\000\004\027\027\001" +
     "\002\000\006\017\ufff3\021\ufff3\001\002\000\006\017\uffee" +
     "\021\uffee\001\002\000\004\027\027\001\002\000\006\017" +
     "\ufff4\021\ufff4\001\002\000\004\030\033\001\002\000\006" +
     "\017\uffeb\021\uffeb\001\002\000\006\017\ufff0\021\ufff0\001" +
-    "\002\000\002\001\002\000\006\017\uffef\021\uffef\001\002" +
-    "\000\004\023\041\001\002\000\004\002\ufffd\001\002\000" +
-    "\004\002\uffe9\001\002\000\004\024\043\001\002\000\006" +
-    "\017\uffed\021\uffed\001\002\000\006\017\ufff2\021\ufff2\001" +
-    "\002\000\004\025\047\001\002\000\006\017\ufff1\021\ufff1" +
-    "\001\002\000\006\017\uffec\021\uffec\001\002\000\016\010" +
-    "\016\011\017\012\022\013\023\014\021\015\024\001\002" +
-    "\000\004\021\ufff6\001\002\000\010\006\053\007\056\010" +
-    "\054\001\002\000\004\016\067\001\002\000\004\016\065" +
-    "\001\002\000\004\021\037\001\002\000\004\016\062\001" +
-    "\002\000\006\017\060\021\ufffa\001\002\000\010\006\053" +
-    "\007\056\010\054\001\002\000\004\021\ufffb\001\002\000" +
-    "\004\027\027\001\002\000\006\017\ufff8\021\ufff8\001\002" +
-    "\000\004\002\ufffe\001\002\000\004\025\047\001\002\000" +
-    "\006\017\ufff7\021\ufff7\001\002\000\004\027\027\001\002" +
-    "\000\006\017\ufff9\021\ufff9\001\002" });
+    "\002\000\006\031\040\032\036\001\002\000\006\017\uffe8" +
+    "\021\uffe8\001\002\000\006\017\uffef\021\uffef\001\002\000" +
+    "\006\017\uffe9\021\uffe9\001\002\000\004\023\043\001\002" +
+    "\000\004\002\ufffd\001\002\000\004\002\uffe7\001\002\000" +
+    "\004\024\045\001\002\000\006\017\uffed\021\uffed\001\002" +
+    "\000\006\017\ufff2\021\ufff2\001\002\000\004\025\051\001" +
+    "\002\000\006\017\ufff1\021\ufff1\001\002\000\006\017\uffec" +
+    "\021\uffec\001\002\000\016\010\016\011\017\012\022\013" +
+    "\023\014\021\015\024\001\002\000\004\021\ufff6\001\002" +
+    "\000\010\006\055\007\060\010\056\001\002\000\004\016" +
+    "\071\001\002\000\004\016\067\001\002\000\004\021\041" +
+    "\001\002\000\004\016\064\001\002\000\006\017\062\021" +
+    "\ufffa\001\002\000\010\006\055\007\060\010\056\001\002" +
+    "\000\004\021\ufffb\001\002\000\004\027\027\001\002\000" +
+    "\006\017\ufff8\021\ufff8\001\002\000\004\002\ufffe\001\002" +
+    "\000\004\025\051\001\002\000\006\017\ufff7\021\ufff7\001" +
+    "\002\000\004\027\027\001\002\000\006\017\ufff9\021\ufff9" +
+    "\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -91,27 +93,28 @@ public class StorageParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\066\000\010\002\007\003\005\004\006\001\001\000" +
-    "\004\005\051\001\001\000\004\005\011\001\001\000\002" +
+    "\000\070\000\010\002\007\003\005\004\006\001\001\000" +
+    "\004\005\053\001\001\000\004\005\011\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\006\011\017\012\014\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\006\037\001\001\000\002\001\001" +
+    "\002\001\001\000\004\006\041\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\004\013\025\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\013\030\001\001\000\002\001\001\000\004\016" +
     "\033\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\020\035\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\017\043\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\014\045\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\011\050" +
-    "\012\014\001\001\000\002\001\001\000\006\007\054\010" +
-    "\056\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\006\063\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\007\060\010\056\001\001\000\002\001\001\000\004" +
-    "\013\062\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\014\065\001\001\000\002\001\001\000\004\013\067" +
-    "\001\001\000\002\001\001" });
+    "\020\036\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\017\045\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\014\047\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\011\052\012\014\001\001\000" +
+    "\002\001\001\000\006\007\056\010\060\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\006\065\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\007\062\010\060" +
+    "\001\001\000\002\001\001\000\004\013\064\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\014\067\001\001" +
+    "\000\002\001\001\000\004\013\071\001\001\000\002\001" +
+    "\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -168,10 +171,10 @@ public class StorageParser extends java_cup.runtime.lr_parser {
     }
 
     public void syntax_error(Symbol s) {
-        Token t = (Token) s.value;
+        String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
         expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
-        errores.add(new ErrorAnalisis(t.getLexema(), t.getLinea(), t.getColumna(), TipoError.SINTACTICO, descripcion.toString()));
+        System.out.println(ss);
     }
 
 
@@ -338,7 +341,7 @@ class CUP$StorageParser$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String v = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setNombre(v.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -350,7 +353,7 @@ class CUP$StorageParser$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String v = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setUsuarioCreacion(v.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -362,7 +365,7 @@ class CUP$StorageParser$actions {
 		int ileft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setId(i.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -374,7 +377,7 @@ class CUP$StorageParser$actions {
 		int fleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String f = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setFechaCreacion(f.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -386,7 +389,7 @@ class CUP$StorageParser$actions {
 		int lleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int lright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String l = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setTitulo(l.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -398,7 +401,7 @@ class CUP$StorageParser$actions {
 		int tleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
 		String t = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
-
+		form.setTema(t.replace("\"",""));
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("paramForm",8, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -464,7 +467,31 @@ class CUP$StorageParser$actions {
           return CUP$StorageParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET 
+          case 24: // tema ::= DARK 
+            {
+              String RESULT =null;
+		int tleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
+		RESULT = t;
+              CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("tema",14, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
+            }
+          return CUP$StorageParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // tema ::= WHITE 
+            {
+              String RESULT =null;
+		int tleft = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$StorageParser$stack.peek()).value;
+		RESULT = t;
+              CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("tema",14, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
+            }
+          return CUP$StorageParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET 
             {
               Object RESULT =null;
 
