@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  *
  * @date 21/03/2021
@@ -14,6 +16,7 @@ public class Formulario {
     private String tema;
     private String usuarioCreacion;
     private String fechaCreacion;
+    private List<Componente> componentes;
 
     public Formulario(String id, String titulo, String nombre, String tema, String usuarioCreacion, String fechaCreacion) {
         this.id = id;
@@ -73,5 +76,13 @@ public class Formulario {
 
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<Componente> getComponentes() {
+        return componentes;
+    }
+
+    public void setComponentes(List<Componente> componentes) {
+        this.componentes = componentes;
     }
 }
