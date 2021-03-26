@@ -13,6 +13,7 @@ parser code {:
     private List<ErrorAnalisis> errores = new ArrayList();
     private Usuario user = new Usuario();
     private Formulario form = new Formulario();
+    private Componente comp = new Componente();
 
     public List<ErrorAnalisis> getErrores() {
         return this.errores;
@@ -26,6 +27,11 @@ parser code {:
         return this.form;
     }
 
+    private void addComponent() {
+        form.getComponentes().add(comp);
+        comp = new Componente();
+    }
+
     public void syntax_error(Symbol s) {
         String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
@@ -35,10 +41,14 @@ parser code {:
 
 :}
 
-terminal      INICIO_USER, INICIO_FORM;
-terminal      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
-terminal      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
-terminal      COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
+terminal        INICIO_USER, INICIO_FORM;
+terminal        COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
+
+terminal        PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
+terminal        PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+
+terminal        PARAM_COMPONENTES, PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_TEXTO_VISIBLE;
+terminal        PARAM_ALINEACION, PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
 
 terminal String      ID, FECHA, ENTERO, VALUE, LITERAL;
 terminal String      DARK, WHITE;
@@ -83,7 +93,19 @@ paramForm ::= PARAM_NOMBRE_FORM COLON value:v               {:form.setNombre(v.r
             | PARAM_FECHA_CREACION COLON fecha:f            {:form.setFechaCreacion(f.replace("\"",""));:}
             | PARAM_TITULO_FORM COLON literal:l             {:form.setTitulo(l.replace("\"",""));:}
             | PARAM_TEMA COLON tema:t                       {:form.setTema(t.replace("\"",""));:}
+            | componentStruct
             ;
+
+componentStruct ::= PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components CLOSE_ROUND_BRACKET;
+
+components ::= component COMMA components                   {:addComponent();:}
+             | component                                    {:addComponent();:}
+             ;
+
+component ::= PARAM_ID COLON id:i                           {:comp.setId(i);:}
+            | PARAM_NOMBRE_CAMPO COLON value:v              {:comp.setNombreCampo(v);:}
+            | PARAM_FORMULARIO COLON id:i                   {:comp.setFormulario(i);:}
+            | PARAM_CLASE COLON 
 /*****************Fin de producciones para parametros de form*****************/
 
 

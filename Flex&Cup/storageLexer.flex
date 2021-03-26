@@ -44,6 +44,18 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\"NOMBRE\""                    {return new Symbol(PARAM_NOMBRE_FORM, yytext());}
 <YYINITIAL> "\"TEMA\""                      {return new Symbol(PARAM_TEMA, yytext());}
 <YYINITIAL> "\"USUARIO_CREACION\""          {return new Symbol(PARAM_USUARIO_CREACION, yytext());}
+<YYINITIAL> "\"COMPONENTES\""               {return new Symbol(PARAM_COMPONENTES, yytext());}
+
+<YYINITIAL> "\"NOMBRE_CAMPO\""              {return new Symbol(PARAM_NOMBRE_CAMPO, yytext());}
+<YYINITIAL> "\"FOMRULARIO\""                {return new Symbol(PARAM_FORMULARIO, yytext());}
+<YYINITIAL> "\"CLASE\""                     {return new Symbol(PARAM_CLASE, yytext());}
+<YYINITIAL> "\"TEXTO_VISIBLE\""             {return new Symbol(PARAM_TEXTO_VISIBLE, yytext());}
+<YYINITIAL> "\"ALINEACION\""                {return new Symbol(PARAM_ALINEACION, yytext());}
+<YYINITIAL> "\"REQUERIDO\""                 {return new Symbol(PARAM_REQUERIDO, yytext());}
+<YYINITIAL> "\"OPCIONES\""                  {return new Symbol(PARAM_OPCIONES, yytext());}
+<YYINITIAL> "\"FILAS\""                     {return new Symbol(PARAM_FILAS, yytext());}
+<YYINITIAL> "\"COLUMNAS\""                  {return new Symbol(PARAM_COLUMNAS, yytext());}
+<YYINITIAL> "\"URL\""                       {return new Symbol(PARAM_URL, yytext());}
 
 <YYINITIAL> "\""([dD][aA][rR][kK])"\""            {return new Symbol(DARK, yytext());}
 <YYINITIAL> "\""([wW][hH][iI][tT][eE])"\""        {return new Symbol(WHITE, yytext());}
