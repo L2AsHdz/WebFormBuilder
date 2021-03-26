@@ -25,7 +25,10 @@ public class ComponentRequestExecutor {
         var component = componentBuilder.build();
         
         if (formDAO.exists(component.getFormulario())) {
-            System.out.println("Agregando componentes");
+            var form  = formDAO.getObject(component.getFormulario());
+            
+            form.getComponentes().add(component);
+            System.out.println("Componente " + component.getId() + " agregado al form " + form.getId());
         } else {
             System.out.println("No existe el formulario indicado en el componente");
         }

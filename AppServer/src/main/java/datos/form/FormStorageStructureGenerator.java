@@ -22,7 +22,7 @@ public class FormStorageStructureGenerator {
         addLine("\"NOMBRE\" : \"" + form.getNombre() + "\",", 2);
         addLine("\"TEMA\" : \"" + form.getTema() + "\",", 2);
         addLine("\"USUARIO_CREACION\" : \"" + form.getUsuarioCreacion() + "\",", 2);
-        addLine("\"FECHA_CREACION\" : \"" + form.getFechaCreacion() + "\"", 2);
+        addLine("\"FECHA_CREACION\" : \"" + form.getFechaCreacion() + "\",", 2);
         agregarComponentes(form);
         addLine("}", 1);
         addLine(")", 0);
@@ -56,7 +56,7 @@ public class FormStorageStructureGenerator {
             if (c.getUrl() != null) addLine("\"URL\" : \""+c.getUrl()+"\"", 4);
             addLine("},", 3);
         });
-        text.deleteCharAt(text.lastIndexOf(","));
+        if (!form.getComponentes().isEmpty()) text.deleteCharAt(text.lastIndexOf(","));
         addLine(")", 2);
     }
 }
