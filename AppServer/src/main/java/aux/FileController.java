@@ -58,7 +58,6 @@ public class FileController {
         File directorio = new File(directory);
         if (!directorio.exists()) {
             if (directorio.mkdirs()) {
-                System.out.println("Directorio creado");
             } else {
                 System.out.println("Error al crear directorio");
             }

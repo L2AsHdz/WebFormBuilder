@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +26,11 @@ public class Formulario {
         this.tema = tema;
         this.usuarioCreacion = usuarioCreacion;
         this.fechaCreacion = fechaCreacion;
+        this.componentes = new ArrayList();
     }
 
     public Formulario() {
+        this.componentes = new ArrayList();
     }
 
     public String getId() {
