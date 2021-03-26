@@ -1,5 +1,6 @@
 package aux.solicitud;
 
+import aux.component.ComponentRequestExecutor;
 import aux.form.FormRequestExecutor;
 import aux.user.UserRequestExecutor;
 import java.io.Reader;
@@ -30,15 +31,17 @@ public class RequestExecutor {
 
                 var userRE = new UserRequestExecutor();
                 var formRE = new FormRequestExecutor();
+                var componentRE = new ComponentRequestExecutor();
 
                 solicitudes.forEach(s -> {
                     switch (s.getTipo()) {
-                        case CREATE_USER -> userRE.executeCreateUser(s);
-                        case MODIFY_USER -> userRE.executeModifyUser(s);
-                        case DELETE_USER -> userRE.executeDeleteUser(s);
-                        case NEW_FORM -> formRE.executeCreateForm(s, loggedUser);
-                        case EDIT_FORM -> formRE.executeModifyForm(s);
-                        case DELETE_FORM -> formRE.executeDeleteForm(s);
+                        case CREATE_USER    -> userRE.executeCreateUser(s);
+                        case MODIFY_USER    -> userRE.executeModifyUser(s);
+                        case DELETE_USER    -> userRE.executeDeleteUser(s);
+                        case NEW_FORM       -> formRE.executeCreateForm(s, loggedUser);
+                        case EDIT_FORM      -> formRE.executeModifyForm(s);
+                        case DELETE_FORM    -> formRE.executeDeleteForm(s);
+                        case NEW_COMPONENT  -> componentRE.executeAddComponent(s);
                     }
                 });
             } else {
