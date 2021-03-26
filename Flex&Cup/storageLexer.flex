@@ -26,6 +26,7 @@ ENTERO = "\""(0|([1-9][0-9]*))"\""
 
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
+OPCIONES = "\""((\w+\|\w+)(\|\w+)*)"\""
 VALUE = "\""[^ '\"']*"\""
 LITERAL = "\""[^"\""]*"\""
     
@@ -57,6 +58,23 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\"COLUMNAS\""                  {return new Symbol(PARAM_COLUMNAS, yytext());}
 <YYINITIAL> "\"URL\""                       {return new Symbol(PARAM_URL, yytext());}
 
+<YYINITIAL> "\"CAMPO_TEXTO\""               {return new Symbol(CLASS_CAMPO_TEXTO);}
+<YYINITIAL> "\"AREA_TEXTO\""                {return new Symbol(CLASS_AREA_TEXTO);}
+<YYINITIAL> "\"CHECKBOX\""                  {return new Symbol(CLASS_CHECKBOX);}
+<YYINITIAL> "\"RADIO\""                     {return new Symbol(CLASS_RADIO);}
+<YYINITIAL> "\"FICHERO\""                   {return new Symbol(CLASS_FICHERO);}
+<YYINITIAL> "\"IMAGEN\""                    {return new Symbol(CLASS_IMAGEN);}
+<YYINITIAL> "\"COMBO\""                     {return new Symbol(CLASS_COMBO);}
+<YYINITIAL> "\"BOTON\""                     {return new Symbol(CLASS_BOTON);}
+
+<YYINITIAL> "\"CENTRO\""                    {return new Symbol(CENTRO);}
+<YYINITIAL> "\"IZQUIERDA\""                 {return new Symbol(IZQUIERDA);}
+<YYINITIAL> "\"DERECHA\""                   {return new Symbol(DERECHA);}
+<YYINITIAL> "\"JUSTIFICAR\""                {return new Symbol(JUSTIFICAR);}
+
+<YYINITIAL> "\""([sS][iI])"\""                    {return new Symbol(SI);}
+<YYINITIAL> "\""([nN][oO])"\""                    {return new Symbol(NO);}
+
 <YYINITIAL> "\""([dD][aA][rR][kK])"\""            {return new Symbol(DARK, yytext());}
 <YYINITIAL> "\""([wW][hH][iI][tT][eE])"\""        {return new Symbol(WHITE, yytext());}
 
@@ -74,6 +92,7 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> {ID}                        {return new Symbol(ID, yytext());}
 <YYINITIAL> {FECHA}                     {return new Symbol(FECHA, yytext());}
 <YYINITIAL> {ENTERO}                    {return new Symbol(ENTERO, yytext());}
+<YYINITIAL> {OPCIONES}                  {return new Symbol(OPCIONES);}
 <YYINITIAL> {VALUE}                     {return new Symbol(VALUE, yytext());}
 <YYINITIAL> {LITERAL}                   {return new Symbol(LITERAL, yytext());}
 

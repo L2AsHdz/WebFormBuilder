@@ -14,7 +14,7 @@ public class Componente {
     private String textoVisible;
     private String alineacion;
     private String requerido;
-    private ClaseComponente clase;
+    private String clase;
     private String opciones;
     private String noFilas;
     private String noColumnas;
@@ -71,11 +71,11 @@ public class Componente {
         this.requerido = requerido;
     }
 
-    public ClaseComponente getClase() {
+    public String getClase() {
         return clase;
     }
 
-    public void setClase(ClaseComponente clase) {
+    public void setClase(String clase) {
         this.clase = clase;
     }
 

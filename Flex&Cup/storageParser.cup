@@ -2,10 +2,10 @@ package analizadores.sintactico;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.Componente;
 import model.Formulario;
 import model.Usuario;
 import model.errores.ErrorAnalisis;
-import model.errores.TipoError;
 import java_cup.runtime.Symbol;
 
 parser code {:
@@ -50,6 +50,10 @@ terminal        PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARA
 terminal        PARAM_COMPONENTES, PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_TEXTO_VISIBLE;
 terminal        PARAM_ALINEACION, PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
 
+terminal String      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
+terminal String      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
+terminal String      SI, NO, OPCIONES;
+
 terminal String      ID, FECHA, ENTERO, VALUE, LITERAL;
 terminal String      DARK, WHITE;
 
@@ -57,6 +61,9 @@ non terminal        inicio, startUserStructure, startFormStructure, startStructu
 non terminal        paramsUser, paramUser;
 non terminal        paramsForm, paramForm;
 
+non terminal        componentStruct, components, component;
+
+non terminal String         clase, alineacion, required, opciones;
 non terminal String         value, fecha, entero, literal, id, tema;
 
 inicio ::= startUserStructure
@@ -96,7 +103,9 @@ paramForm ::= PARAM_NOMBRE_FORM COLON value:v               {:form.setNombre(v.r
             | componentStruct
             ;
 
-componentStruct ::= PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components CLOSE_ROUND_BRACKET;
+componentStruct ::= PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET CLOSE_ROUND_BRACKET
+                  | PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components CLOSE_ROUND_BRACKET
+                  ;
 
 components ::= component COMMA components                   {:addComponent();:}
              | component                                    {:addComponent();:}
@@ -105,7 +114,15 @@ components ::= component COMMA components                   {:addComponent();:}
 component ::= PARAM_ID COLON id:i                           {:comp.setId(i);:}
             | PARAM_NOMBRE_CAMPO COLON value:v              {:comp.setNombreCampo(v);:}
             | PARAM_FORMULARIO COLON id:i                   {:comp.setFormulario(i);:}
-            | PARAM_CLASE COLON 
+            | PARAM_CLASE COLON clase:c                     {:comp.setClase(c);:}
+            | PARAM_TEXTO_VISIBLE COLON literal:l           {:comp.setTextoVisible(l);:}
+            | PARAM_ALINEACION COLON alineacion:a           {:comp.setAlineacion(a);:}
+            | PARAM_REQUERIDO COLON required:r              {:comp.setRequerido(r);:}
+            | PARAM_OPCIONES COLON opciones:o               {:comp.setOpciones(o);:}
+            | PARAM_FILAS COLON entero:e                    {:comp.setNoFilas(e);:}
+            | PARAM_COLUMNAS COLON entero:e                 {:comp.setNoColumnas(e);:}
+            | PARAM_URL COLON value:v                       {:comp.setUrl(v);:}
+            ;
 /*****************Fin de producciones para parametros de form*****************/
 
 
@@ -127,5 +144,28 @@ entero ::= ENTERO:e         {:RESULT = e;:}
 tema ::= DARK:t                 {:RESULT = t;:}
        | WHITE:t                {:RESULT = t;:}
        ;
+
+clase ::= CLASS_CAMPO_TEXTO:c     {:RESULT = c;:}
+        | CLASS_AREA_TEXTO:c      {:RESULT = c;:}
+        | CLASS_CHECKBOX:c        {:RESULT = c;:}
+        | CLASS_RADIO:c           {:RESULT = c;:}
+        | CLASS_FICHERO:c         {:RESULT = c;:}
+        | CLASS_IMAGEN:c          {:RESULT = c;:}
+        | CLASS_COMBO:c           {:RESULT = c;:}
+        | CLASS_BOTON:c           {:RESULT = c;:}
+        ;
+
+alineacion ::= CENTRO:a           {:RESULT = a;:}
+             | IZQUIERDA:a        {:RESULT = a;:}
+             | DERECHA:a          {:RESULT = a;:}
+             | JUSTIFICAR:a       {:RESULT = a;:}
+             ;
+
+required ::= SI:r   {:RESULT =r;:}
+           | NO:r   {:RESULT =r;:}
+           ;
+
+opciones ::= OPCIONES:o           {:RESULT = o;:}
+           ;
 
 endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;

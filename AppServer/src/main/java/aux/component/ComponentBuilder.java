@@ -1,7 +1,5 @@
 package aux.component;
 
-import model.ClaseComponente;
-import static model.ClaseComponente.*;
 import model.Componente;
 import model.solicitudes.Parametro;
 import model.solicitudes.Solicitud;
@@ -34,7 +32,7 @@ public class ComponentBuilder {
             } else if (p.getName().contains("TEXTO_VISIBLE")) {
                 component.setTextoVisible(p.getValue().replace("\"", ""));
             } else if (p.getName().contains("CLASE")) {
-                component.setClase(getComponent(p));
+                component.setClase(getValue(p));
             } else if (p.getName().contains("ALINEACION")) {
                 component.setAlineacion(getValue(p));
             } else if (p.getName().contains("REQUERIDO")) {
@@ -56,24 +54,5 @@ public class ComponentBuilder {
     
     private String getValue(Parametro p) {
         return p.getValue().replaceAll("\\s", "").replace("\"", "");
-    }
-    
-    private ClaseComponente getComponent(Parametro p) {
-        String nameClase = getValue(p);
-        ClaseComponente clase;
-        
-        clase = switch (nameClase) {
-            case "CAMPO_TEXTO" -> CAMPO_TEXTO;
-            case "AREA_TEXTO" -> AREA_TEXTO;
-            case "CHECKBOX" -> CHECKBOX;
-            case "RADIO" -> RADIO;
-            case "FICHERO" -> FICHERO;
-            case "IMAGEN" -> IMAGEN;
-            case "COMBO" -> COMBO;
-            case "BOTON" -> BOTON;
-            default -> null;
-        };
-        
-        return clase;
     }
 }
