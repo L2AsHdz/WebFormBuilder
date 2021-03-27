@@ -62,6 +62,52 @@ public class ComponentRequestExecutor {
             } else {
                 System.out.println("No existe el componente " + component.getId() + " en el form " + form.getId());
             }
+        } else {
+            System.out.println("El formulario " + component.getFormulario() + " no existe");
+        }
+    }
+    
+    public void executeModifyComponent(Solicitud s) {
+        componentBuilder = new ComponentBuilder(s);
+        var component = componentBuilder.build();
+        
+        if (formDAO.exists(component.getFormulario())) {
+            var form = formDAO.getObject(component.getFormulario());
+            var componentes = form.getComponentes();
+            int index = indexOfComponent(form, component.getId());
+            
+            if (index != -1) {
+                var compForm = componentes.get(index);
+
+                if (component.getNombreCampo() != null) compForm.setNombreCampo(component.getNombreCampo());
+                if (component.getTextoVisible() != null) compForm.setTextoVisible(component.getTextoVisible());
+                if (component.getAlineacion() != null) compForm.setAlineacion(component.getAlineacion());
+                if (component.getRequerido() != null) compForm.setRequerido(component.getRequerido());
+                if (component.getOpciones() != null) compForm.setOpciones(component.getOpciones());
+                if (component.getNoFilas() != null) compForm.setNoFilas(component.getNoFilas());
+                if (component.getNoColumnas() != null) compForm.setNoColumnas(component.getNoColumnas());
+                if (component.getUrl() != null) compForm.setUrl(component.getUrl());
+                
+                if (component.getIndice() > 0) {
+                    int newIndex = component.getIndice();
+                    var compAux = componentes.remove(index);
+                    
+                    if (newIndex >= componentes.size()) {
+                        componentes.add(compAux);
+                    } else {
+                        componentes.add(newIndex-1, compAux);
+                    }
+                }
+                
+                formDAO.create(form);
+                System.out.println("Componente " + compForm.getId() + " modificado");
+                
+            } else {
+                System.out.println("No existe el componente " + component.getId() + " en el form " + form.getId());
+            }
+            
+        } else {
+            System.out.println("El formulario " + component.getFormulario() + " no existe");
         }
     }
 

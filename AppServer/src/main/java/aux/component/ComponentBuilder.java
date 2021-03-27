@@ -45,6 +45,8 @@ public class ComponentBuilder {
                 component.setNoColumnas(getValue(p));
             } else if (p.getName().contains("URL")) {
                 component.setUrl(getValue(p));
+            } else if (p.getName().contains("INDICE")) {
+                component.setIndice(Integer.parseInt(getValue(p)));
             }
         });
         

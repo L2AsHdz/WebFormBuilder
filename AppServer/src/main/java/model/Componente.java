@@ -8,6 +8,7 @@ package model;
  */
 public class Componente {
 
+    private int indice;
     private String id;
     private String nombreCampo;
     private String formulario;
@@ -21,6 +22,14 @@ public class Componente {
     private String url;
 
     public Componente() {
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 
     public String getId() {

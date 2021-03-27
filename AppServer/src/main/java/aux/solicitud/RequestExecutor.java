@@ -43,6 +43,7 @@ public class RequestExecutor {
                         case DELETE_FORM        -> formRE.executeDeleteForm(s);
                         case NEW_COMPONENT      -> componentRE.executeAddComponent(s);
                         case DELETE_COMPONENT   -> componentRE.executeDeleteComponent(s);
+                        case EDIT_COMPONENT     -> componentRE.executeModifyComponent(s);
                     }
                 });
             } else {
