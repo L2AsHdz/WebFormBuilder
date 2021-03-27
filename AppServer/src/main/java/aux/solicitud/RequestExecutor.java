@@ -35,13 +35,14 @@ public class RequestExecutor {
 
                 solicitudes.forEach(s -> {
                     switch (s.getTipo()) {
-                        case CREATE_USER    -> userRE.executeCreateUser(s);
-                        case MODIFY_USER    -> userRE.executeModifyUser(s);
-                        case DELETE_USER    -> userRE.executeDeleteUser(s);
-                        case NEW_FORM       -> formRE.executeCreateForm(s, loggedUser);
-                        case EDIT_FORM      -> formRE.executeModifyForm(s);
-                        case DELETE_FORM    -> formRE.executeDeleteForm(s);
-                        case NEW_COMPONENT  -> componentRE.executeAddComponent(s);
+                        case CREATE_USER        -> userRE.executeCreateUser(s);
+                        case MODIFY_USER        -> userRE.executeModifyUser(s);
+                        case DELETE_USER        -> userRE.executeDeleteUser(s);
+                        case NEW_FORM           -> formRE.executeCreateForm(s, loggedUser);
+                        case EDIT_FORM          -> formRE.executeModifyForm(s);
+                        case DELETE_FORM        -> formRE.executeDeleteForm(s);
+                        case NEW_COMPONENT      -> componentRE.executeAddComponent(s);
+                        case DELETE_COMPONENT   -> componentRE.executeDeleteComponent(s);
                     }
                 });
             } else {

@@ -34,7 +34,7 @@ public class ComponentRequestExecutor {
                     exists = true;
                 }
             }
-            
+
             if (!exists) {
                 form.getComponentes().add(component);
                 formDAO.create(form);
@@ -45,5 +45,11 @@ public class ComponentRequestExecutor {
         } else {
             System.out.println("No existe el formulario indicado en el componente");
         }
+    }
+
+    public void executeDeleteComponent(Solicitud s) {
+        s.getParametros().forEach(c -> {
+            System.out.println(c.getName() + " : " + c.getValue());
+        });
     }
 }

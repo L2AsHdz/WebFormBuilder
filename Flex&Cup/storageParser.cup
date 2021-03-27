@@ -104,14 +104,15 @@ paramForm ::= PARAM_NOMBRE_FORM COLON value:v               {:form.setNombre(v.r
             ;
 
 componentStruct ::= PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET CLOSE_ROUND_BRACKET
-                  | PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components CLOSE_ROUND_BRACKET
+                  | PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components\ CLOSE_ROUND_BRACKET
                   ;
 
-components ::= component COMMA components                   {:addComponent();:}
-             | component                                    {:addComponent();:}
+components ::= component COMMA components
+             | component
              ;
 
-component ::= OPEN_BRACE params CLOSE_BRACE;
+component ::= OPEN_BRACE params CLOSE_BRACE             {:addComponent();:}
+            ;
 
 params ::= param COMMA params
          | param

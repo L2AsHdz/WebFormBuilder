@@ -516,7 +516,7 @@ class CUP$StorageParser$actions {
           case 22: // components ::= component COMMA components 
             {
               Object RESULT =null;
-		addComponent();
+
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("components",10, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -525,7 +525,7 @@ class CUP$StorageParser$actions {
           case 23: // components ::= component 
             {
               Object RESULT =null;
-		addComponent();
+
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("components",10, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;
@@ -534,7 +534,7 @@ class CUP$StorageParser$actions {
           case 24: // component ::= OPEN_BRACE params CLOSE_BRACE 
             {
               Object RESULT =null;
-
+		addComponent();
               CUP$StorageParser$result = parser.getSymbolFactory().newSymbol("component",11, ((java_cup.runtime.Symbol)CUP$StorageParser$stack.elementAt(CUP$StorageParser$top-2)), ((java_cup.runtime.Symbol)CUP$StorageParser$stack.peek()), RESULT);
             }
           return CUP$StorageParser$result;

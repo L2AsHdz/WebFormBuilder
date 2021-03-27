@@ -102,7 +102,7 @@ non terminal Parametro          paramNewForm, paramEditForm, paramDeleteForm;
 non terminal String             nameParamNewForm;
 non terminal String             tema;
 
-non terminal                    paramsNewComponent, paramsEditComponent;
+non terminal                    paramsNewComponent, paramsEditComponent, paramsDeleteComponent;
 non terminal Parametro          paramNewComponent, paramEditComponent, paramDeleteComponent;
 non terminal String             nameParamNewComponent, nameParamEditComponent;
 non terminal String             clase, alineacion, required, opciones;
@@ -394,15 +394,18 @@ bloquesDeleteComponent ::= bloqueDeleteComponent COMMA bloquesDeleteComponent
                          | bloqueDeleteComponent
                          ;
 
-bloqueDeleteComponent ::= OPEN_BRACE paramDeleteComponent:p CLOSE_BRACE
+bloqueDeleteComponent ::= OPEN_BRACE paramsDeleteComponent CLOSE_BRACE
                         {:
-                            parametros.add(p);
                             solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
                             parametros = new ArrayList();
                         :}
                         ;
 
-paramDeleteComponent ::= PARAM_ID:p COLON id:i          {:RESULT = new Parametro(p.getLexema(), i);:}
+paramsDeleteComponent ::= paramDeleteComponent:p COMMA paramsDeleteComponent      {:addParameter(parametros, p);:}
+                        | paramDeleteComponent:p                                  {:addParameter(parametros, p);:}                        ;
+
+paramDeleteComponent ::= PARAM_ID:p COLON id:i              {:RESULT = new Parametro(p.getLexema(), i);:}
+                       | PARAM_FORMULARIO:p COLON id:i      {:RESULT = new Parametro(p.getLexema(), i);:}
                        ;
 /**************************Fin de producciones para parametros de solicitud DeleteComponent**************************/
 
