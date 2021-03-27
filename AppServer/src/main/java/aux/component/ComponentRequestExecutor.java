@@ -48,8 +48,29 @@ public class ComponentRequestExecutor {
     }
 
     public void executeDeleteComponent(Solicitud s) {
-        s.getParametros().forEach(c -> {
-            System.out.println(c.getName() + " : " + c.getValue());
-        });
+        componentBuilder = new ComponentBuilder(s);
+        var component = componentBuilder.buildDelete();
+
+        if (formDAO.exists(component.getFormulario())) {
+            var form = formDAO.getObject(component.getFormulario());
+            int index = indexOfComponent(form, component.getId());
+            
+            if (index != -1) {
+                System.out.println("Eliminando componente en el indice " + index);
+            } else {
+                System.out.println("No existe el componente " + component.getId() + " en el form " + form.getId());
+            }
+        }
+    }
+
+    private int indexOfComponent(Formulario form, String idComponent) {
+        Componente c;
+        for (int i = 0; i < form.getComponentes().size(); i++) {
+            c = form.getComponentes().get(i);
+            if (c.getId().equals(idComponent)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

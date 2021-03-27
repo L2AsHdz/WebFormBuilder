@@ -52,6 +52,20 @@ public class ComponentBuilder {
         return component;
     }
     
+    public Componente buildDelete() {
+        component = new Componente();
+        
+        solicitud.getParametros().forEach(p -> {
+            if (p.getName().contains("ID")) {
+                component.setId(getValue(p));
+            } else if (p.getName().contains("FORMULARIO")) {
+                component.setFormulario(getValue(p));
+            }
+        });
+        
+        return component;
+    }
+    
     private String getValue(Parametro p) {
         return p.getValue().replaceAll("\\s", "").replace("\"", "");
     }
