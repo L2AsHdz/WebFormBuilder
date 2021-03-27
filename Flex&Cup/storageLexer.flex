@@ -14,6 +14,10 @@ import static analizadores.sintactico.StorageSym.*;
 
 %{
 
+    private Symbol symbol(int type){
+        return new Symbol(type, yytext());
+    }
+
 %}
 
 %eofval{
@@ -33,67 +37,67 @@ LITERAL = "\""[^"\""]*"\""
 %%
 
 
-<YYINITIAL> "db.user"                       {return new Symbol(INICIO_USER, yytext());}
-<YYINITIAL> "db.form"                       {return new Symbol(INICIO_FORM, yytext());}
+<YYINITIAL> "db.user"                       {return symbol(INICIO_USER);}
+<YYINITIAL> "db.form"                       {return symbol(INICIO_FORM);}
 
-<YYINITIAL> "\"USUARIO\""                   {return new Symbol(PARAM_USUARIO, yytext());}
-<YYINITIAL> "\"PASSWORD\""                  {return new Symbol(PARAM_PASSWORD, yytext());}
-<YYINITIAL> "\"FECHA_CREACION\""            {return new Symbol(PARAM_FECHA_CREACION, yytext());}
+<YYINITIAL> "\"USUARIO\""                   {return symbol(PARAM_USUARIO);}
+<YYINITIAL> "\"PASSWORD\""                  {return symbol(PARAM_PASSWORD);}
+<YYINITIAL> "\"FECHA_CREACION\""            {return symbol(PARAM_FECHA_CREACION);}
 
-<YYINITIAL> "\"ID\""                        {return new Symbol(PARAM_ID, yytext());}
-<YYINITIAL> "\"TITULO\""                    {return new Symbol(PARAM_TITULO_FORM, yytext());}
-<YYINITIAL> "\"NOMBRE\""                    {return new Symbol(PARAM_NOMBRE_FORM, yytext());}
-<YYINITIAL> "\"TEMA\""                      {return new Symbol(PARAM_TEMA, yytext());}
-<YYINITIAL> "\"USUARIO_CREACION\""          {return new Symbol(PARAM_USUARIO_CREACION, yytext());}
-<YYINITIAL> "\"COMPONENTES\""               {return new Symbol(PARAM_COMPONENTES, yytext());}
+<YYINITIAL> "\"ID\""                        {return symbol(PARAM_ID);}
+<YYINITIAL> "\"TITULO\""                    {return symbol(PARAM_TITULO_FORM);}
+<YYINITIAL> "\"NOMBRE\""                    {return symbol(PARAM_NOMBRE_FORM);}
+<YYINITIAL> "\"TEMA\""                      {return symbol(PARAM_TEMA);}
+<YYINITIAL> "\"USUARIO_CREACION\""          {return symbol(PARAM_USUARIO_CREACION);}
+<YYINITIAL> "\"COMPONENTES\""               {return symbol(PARAM_COMPONENTES);}
 
-<YYINITIAL> "\"NOMBRE_CAMPO\""              {return new Symbol(PARAM_NOMBRE_CAMPO, yytext());}
-<YYINITIAL> "\"FORMULARIO\""                {return new Symbol(PARAM_FORMULARIO, yytext());}
-<YYINITIAL> "\"CLASE\""                     {return new Symbol(PARAM_CLASE, yytext());}
-<YYINITIAL> "\"TEXTO_VISIBLE\""             {return new Symbol(PARAM_TEXTO_VISIBLE, yytext());}
-<YYINITIAL> "\"ALINEACION\""                {return new Symbol(PARAM_ALINEACION, yytext());}
-<YYINITIAL> "\"REQUERIDO\""                 {return new Symbol(PARAM_REQUERIDO, yytext());}
-<YYINITIAL> "\"OPCIONES\""                  {return new Symbol(PARAM_OPCIONES, yytext());}
-<YYINITIAL> "\"FILAS\""                     {return new Symbol(PARAM_FILAS, yytext());}
-<YYINITIAL> "\"COLUMNAS\""                  {return new Symbol(PARAM_COLUMNAS, yytext());}
-<YYINITIAL> "\"URL\""                       {return new Symbol(PARAM_URL, yytext());}
+<YYINITIAL> "\"NOMBRE_CAMPO\""              {return symbol(PARAM_NOMBRE_CAMPO);}
+<YYINITIAL> "\"FORMULARIO\""                {return symbol(PARAM_FORMULARIO);}
+<YYINITIAL> "\"CLASE\""                     {return symbol(PARAM_CLASE);}
+<YYINITIAL> "\"TEXTO_VISIBLE\""             {return symbol(PARAM_TEXTO_VISIBLE);}
+<YYINITIAL> "\"ALINEACION\""                {return symbol(PARAM_ALINEACION);}
+<YYINITIAL> "\"REQUERIDO\""                 {return symbol(PARAM_REQUERIDO);}
+<YYINITIAL> "\"OPCIONES\""                  {return symbol(PARAM_OPCIONES);}
+<YYINITIAL> "\"FILAS\""                     {return symbol(PARAM_FILAS);}
+<YYINITIAL> "\"COLUMNAS\""                  {return symbol(PARAM_COLUMNAS);}
+<YYINITIAL> "\"URL\""                       {return symbol(PARAM_URL);}
 
-<YYINITIAL> "\"CAMPO_TEXTO\""               {return new Symbol(CLASS_CAMPO_TEXTO, yytext());}
-<YYINITIAL> "\"AREA_TEXTO\""                {return new Symbol(CLASS_AREA_TEXTO, yytext());}
-<YYINITIAL> "\"CHECKBOX\""                  {return new Symbol(CLASS_CHECKBOX, yytext());}
-<YYINITIAL> "\"RADIO\""                     {return new Symbol(CLASS_RADIO, yytext());}
-<YYINITIAL> "\"FICHERO\""                   {return new Symbol(CLASS_FICHERO, yytext());}
-<YYINITIAL> "\"IMAGEN\""                    {return new Symbol(CLASS_IMAGEN, yytext());}
-<YYINITIAL> "\"COMBO\""                     {return new Symbol(CLASS_COMBO, yytext());}
-<YYINITIAL> "\"BOTON\""                     {return new Symbol(CLASS_BOTON, yytext());}
+<YYINITIAL> "\"CAMPO_TEXTO\""               {return symbol(CLASS_CAMPO_TEXTO);}
+<YYINITIAL> "\"AREA_TEXTO\""                {return symbol(CLASS_AREA_TEXTO);}
+<YYINITIAL> "\"CHECKBOX\""                  {return symbol(CLASS_CHECKBOX);}
+<YYINITIAL> "\"RADIO\""                     {return symbol(CLASS_RADIO);}
+<YYINITIAL> "\"FICHERO\""                   {return symbol(CLASS_FICHERO);}
+<YYINITIAL> "\"IMAGEN\""                    {return symbol(CLASS_IMAGEN);}
+<YYINITIAL> "\"COMBO\""                     {return symbol(CLASS_COMBO);}
+<YYINITIAL> "\"BOTON\""                     {return symbol(CLASS_BOTON);}
 
-<YYINITIAL> "\"CENTRO\""                    {return new Symbol(CENTRO, yytext());}
-<YYINITIAL> "\"IZQUIERDA\""                 {return new Symbol(IZQUIERDA, yytext());}
-<YYINITIAL> "\"DERECHA\""                   {return new Symbol(DERECHA, yytext());}
-<YYINITIAL> "\"JUSTIFICAR\""                {return new Symbol(JUSTIFICAR, yytext());}
+<YYINITIAL> "\"CENTRO\""                    {return symbol(CENTRO);}
+<YYINITIAL> "\"IZQUIERDA\""                 {return symbol(IZQUIERDA);}
+<YYINITIAL> "\"DERECHA\""                   {return symbol(DERECHA);}
+<YYINITIAL> "\"JUSTIFICAR\""                {return symbol(JUSTIFICAR);}
 
-<YYINITIAL> "\""([sS][iI])"\""                    {return new Symbol(SI, yytext());}
-<YYINITIAL> "\""([nN][oO])"\""                    {return new Symbol(NO, yytext());}
+<YYINITIAL> "\""([sS][iI])"\""                    {return symbol(SI);}
+<YYINITIAL> "\""([nN][oO])"\""                    {return symbol(NO);}
 
-<YYINITIAL> "\""([dD][aA][rR][kK])"\""            {return new Symbol(DARK, yytext());}
-<YYINITIAL> "\""([wW][hH][iI][tT][eE])"\""        {return new Symbol(WHITE, yytext());}
+<YYINITIAL> "\""([dD][aA][rR][kK])"\""            {return symbol(DARK);}
+<YYINITIAL> "\""([wW][hH][iI][tT][eE])"\""        {return symbol(WHITE);}
 
 
 <YYINITIAL> {
-    ":"                                 {return new Symbol(COLON, yytext());}
-    ","                                 {return new Symbol(COMMA, yytext());}
-    "{"                                 {return new Symbol(OPEN_BRACE, yytext());}
-    "}"                                 {return new Symbol(CLOSE_BRACE, yytext());}
-    "("                                 {return new Symbol(OPEN_ROUND_BRACKET, yytext());}
-    ")"                                 {return new Symbol(CLOSE_ROUND_BRACKET, yytext());}
+    ":"                                 {return symbol(COLON);}
+    ","                                 {return symbol(COMMA);}
+    "{"                                 {return symbol(OPEN_BRACE);}
+    "}"                                 {return symbol(CLOSE_BRACE);}
+    "("                                 {return symbol(OPEN_ROUND_BRACKET);}
+    ")"                                 {return symbol(CLOSE_ROUND_BRACKET);}
     {ESPACIO}                           {/*Ignorar*/}
 }
 
-<YYINITIAL> {ID}                        {return new Symbol(ID, yytext());}
-<YYINITIAL> {FECHA}                     {return new Symbol(FECHA, yytext());}
-<YYINITIAL> {ENTERO}                    {return new Symbol(ENTERO, yytext());}
-<YYINITIAL> {OPCIONES}                  {return new Symbol(OPCIONES, yytext());}
-<YYINITIAL> {VALUE}                     {return new Symbol(VALUE, yytext());}
-<YYINITIAL> {LITERAL}                   {return new Symbol(LITERAL, yytext());}
+<YYINITIAL> {ID}                        {return symbol(ID);}
+<YYINITIAL> {FECHA}                     {return symbol(FECHA);}
+<YYINITIAL> {ENTERO}                    {return symbol(ENTERO);}
+<YYINITIAL> {OPCIONES}                  {return symbol(OPCIONES);}
+<YYINITIAL> {VALUE}                     {return symbol(VALUE);}
+<YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
 
 [^]                                     {System.out.println("Error " + yytext());}

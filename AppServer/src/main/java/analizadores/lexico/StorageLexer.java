@@ -1004,6 +1004,10 @@ public class StorageLexer implements java_cup.runtime.Scanner {
 
   /* user code: */
 
+    private Symbol symbol(int type){
+        return new Symbol(type, yytext());
+    }
+
 
 
   /**
@@ -1423,247 +1427,247 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 53: break;
           case 3:
-            { return new Symbol(OPEN_ROUND_BRACKET, yytext());
+            { return symbol(OPEN_ROUND_BRACKET);
             }
             // fall through
           case 54: break;
           case 4:
-            { return new Symbol(CLOSE_ROUND_BRACKET, yytext());
+            { return symbol(CLOSE_ROUND_BRACKET);
             }
             // fall through
           case 55: break;
           case 5:
-            { return new Symbol(COMMA, yytext());
+            { return symbol(COMMA);
             }
             // fall through
           case 56: break;
           case 6:
-            { return new Symbol(COLON, yytext());
+            { return symbol(COLON);
             }
             // fall through
           case 57: break;
           case 7:
-            { return new Symbol(OPEN_BRACE, yytext());
+            { return symbol(OPEN_BRACE);
             }
             // fall through
           case 58: break;
           case 8:
-            { return new Symbol(CLOSE_BRACE, yytext());
+            { return symbol(CLOSE_BRACE);
             }
             // fall through
           case 59: break;
           case 9:
-            { return new Symbol(VALUE, yytext());
+            { return symbol(VALUE);
             }
             // fall through
           case 60: break;
           case 10:
-            { return new Symbol(LITERAL, yytext());
+            { return symbol(LITERAL);
             }
             // fall through
           case 61: break;
           case 11:
-            { return new Symbol(ID, yytext());
+            { return symbol(ID);
             }
             // fall through
           case 62: break;
           case 12:
-            { return new Symbol(ENTERO, yytext());
+            { return symbol(ENTERO);
             }
             // fall through
           case 63: break;
           case 13:
-            { return new Symbol(PARAM_ID, yytext());
+            { return symbol(PARAM_ID);
             }
             // fall through
           case 64: break;
           case 14:
-            { return new Symbol(NO, yytext());
+            { return symbol(NO);
             }
             // fall through
           case 65: break;
           case 15:
-            { return new Symbol(SI, yytext());
+            { return symbol(SI);
             }
             // fall through
           case 66: break;
           case 16:
-            { return new Symbol(OPCIONES, yytext());
+            { return symbol(OPCIONES);
             }
             // fall through
           case 67: break;
           case 17:
-            { return new Symbol(PARAM_URL, yytext());
+            { return symbol(PARAM_URL);
             }
             // fall through
           case 68: break;
           case 18:
-            { return new Symbol(DARK, yytext());
+            { return symbol(DARK);
             }
             // fall through
           case 69: break;
           case 19:
-            { return new Symbol(PARAM_TEMA, yytext());
+            { return symbol(PARAM_TEMA);
             }
             // fall through
           case 70: break;
           case 20:
-            { return new Symbol(CLASS_BOTON, yytext());
+            { return symbol(CLASS_BOTON);
             }
             // fall through
           case 71: break;
           case 21:
-            { return new Symbol(PARAM_CLASE, yytext());
+            { return symbol(PARAM_CLASE);
             }
             // fall through
           case 72: break;
           case 22:
-            { return new Symbol(CLASS_COMBO, yytext());
+            { return symbol(CLASS_COMBO);
             }
             // fall through
           case 73: break;
           case 23:
-            { return new Symbol(PARAM_FILAS, yytext());
+            { return symbol(PARAM_FILAS);
             }
             // fall through
           case 74: break;
           case 24:
-            { return new Symbol(CLASS_RADIO, yytext());
+            { return symbol(CLASS_RADIO);
             }
             // fall through
           case 75: break;
           case 25:
-            { return new Symbol(WHITE, yytext());
+            { return symbol(WHITE);
             }
             // fall through
           case 76: break;
           case 26:
-            { return new Symbol(INICIO_FORM, yytext());
+            { return symbol(INICIO_FORM);
             }
             // fall through
           case 77: break;
           case 27:
-            { return new Symbol(INICIO_USER, yytext());
+            { return symbol(INICIO_USER);
             }
             // fall through
           case 78: break;
           case 28:
-            { return new Symbol(CENTRO, yytext());
+            { return symbol(CENTRO);
             }
             // fall through
           case 79: break;
           case 29:
-            { return new Symbol(CLASS_IMAGEN, yytext());
+            { return symbol(CLASS_IMAGEN);
             }
             // fall through
           case 80: break;
           case 30:
-            { return new Symbol(PARAM_NOMBRE_FORM, yytext());
+            { return symbol(PARAM_NOMBRE_FORM);
             }
             // fall through
           case 81: break;
           case 31:
-            { return new Symbol(PARAM_TITULO_FORM, yytext());
+            { return symbol(PARAM_TITULO_FORM);
             }
             // fall through
           case 82: break;
           case 32:
-            { return new Symbol(DERECHA, yytext());
+            { return symbol(DERECHA);
             }
             // fall through
           case 83: break;
           case 33:
-            { return new Symbol(CLASS_FICHERO, yytext());
+            { return symbol(CLASS_FICHERO);
             }
             // fall through
           case 84: break;
           case 34:
-            { return new Symbol(PARAM_USUARIO, yytext());
+            { return symbol(PARAM_USUARIO);
             }
             // fall through
           case 85: break;
           case 35:
-            { return new Symbol(FECHA, yytext());
+            { return symbol(FECHA);
             }
             // fall through
           case 86: break;
           case 36:
-            { return new Symbol(CLASS_CHECKBOX, yytext());
+            { return symbol(CLASS_CHECKBOX);
             }
             // fall through
           case 87: break;
           case 37:
-            { return new Symbol(PARAM_COLUMNAS, yytext());
+            { return symbol(PARAM_COLUMNAS);
             }
             // fall through
           case 88: break;
           case 38:
-            { return new Symbol(PARAM_OPCIONES, yytext());
+            { return symbol(PARAM_OPCIONES);
             }
             // fall through
           case 89: break;
           case 39:
-            { return new Symbol(PARAM_PASSWORD, yytext());
+            { return symbol(PARAM_PASSWORD);
             }
             // fall through
           case 90: break;
           case 40:
-            { return new Symbol(IZQUIERDA, yytext());
+            { return symbol(IZQUIERDA);
             }
             // fall through
           case 91: break;
           case 41:
-            { return new Symbol(PARAM_REQUERIDO, yytext());
+            { return symbol(PARAM_REQUERIDO);
             }
             // fall through
           case 92: break;
           case 42:
-            { return new Symbol(PARAM_ALINEACION, yytext());
+            { return symbol(PARAM_ALINEACION);
             }
             // fall through
           case 93: break;
           case 43:
-            { return new Symbol(CLASS_AREA_TEXTO, yytext());
+            { return symbol(CLASS_AREA_TEXTO);
             }
             // fall through
           case 94: break;
           case 44:
-            { return new Symbol(PARAM_FORMULARIO, yytext());
+            { return symbol(PARAM_FORMULARIO);
             }
             // fall through
           case 95: break;
           case 45:
-            { return new Symbol(JUSTIFICAR, yytext());
+            { return symbol(JUSTIFICAR);
             }
             // fall through
           case 96: break;
           case 46:
-            { return new Symbol(CLASS_CAMPO_TEXTO, yytext());
+            { return symbol(CLASS_CAMPO_TEXTO);
             }
             // fall through
           case 97: break;
           case 47:
-            { return new Symbol(PARAM_COMPONENTES, yytext());
+            { return symbol(PARAM_COMPONENTES);
             }
             // fall through
           case 98: break;
           case 48:
-            { return new Symbol(PARAM_NOMBRE_CAMPO, yytext());
+            { return symbol(PARAM_NOMBRE_CAMPO);
             }
             // fall through
           case 99: break;
           case 49:
-            { return new Symbol(PARAM_TEXTO_VISIBLE, yytext());
+            { return symbol(PARAM_TEXTO_VISIBLE);
             }
             // fall through
           case 100: break;
           case 50:
-            { return new Symbol(PARAM_FECHA_CREACION, yytext());
+            { return symbol(PARAM_FECHA_CREACION);
             }
             // fall through
           case 101: break;
           case 51:
-            { return new Symbol(PARAM_USUARIO_CREACION, yytext());
+            { return symbol(PARAM_USUARIO_CREACION);
             }
             // fall through
           case 102: break;
