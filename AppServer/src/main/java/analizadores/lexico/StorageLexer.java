@@ -489,7 +489,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
     "\1\15\1\27\4\15\1\16\1\17\1\15\1\16\5\15"+
     "\5\27\1\15\2\27\1\133\10\27\1\134\37\27\1\15"+
     "\1\54\1\15\1\27\4\15\1\16\1\17\1\15\1\16"+
-    "\5\15\5\27\1\15\14\27\1\135\36\27\1\15\1\54"+
+    "\5\15\5\27\1\15\21\27\1\135\31\27\1\15\1\54"+
     "\1\15\1\27\4\15\1\16\1\136\1\15\1\16\5\15"+
     "\5\27\1\15\53\27\1\15\1\54\1\15\1\27\4\15"+
     "\1\16\1\17\1\15\1\16\5\15\5\27\1\15\1\137"+
@@ -552,8 +552,8 @@ public class StorageLexer implements java_cup.runtime.Scanner {
     "\5\27\1\15\7\27\1\201\43\27\1\15\1\54\1\15"+
     "\1\27\4\15\1\16\1\17\1\15\1\16\5\15\5\27"+
     "\1\15\1\202\52\27\1\15\1\54\1\15\1\27\4\15"+
-    "\1\16\1\17\1\15\1\16\5\15\5\27\1\15\21\27"+
-    "\1\203\31\27\1\15\1\54\1\15\1\27\4\15\1\16"+
+    "\1\16\1\17\1\15\1\16\5\15\5\27\1\15\14\27"+
+    "\1\203\36\27\1\15\1\54\1\15\1\27\4\15\1\16"+
     "\1\17\1\15\1\16\5\15\5\27\1\15\6\27\1\204"+
     "\44\27\1\15\1\54\1\15\1\27\4\15\1\16\1\17"+
     "\1\15\1\16\5\15\5\27\1\15\24\27\1\205\26\27"+
@@ -1478,17 +1478,17 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 64: break;
           case 14:
-            { return new Symbol(NO);
+            { return new Symbol(NO, yytext());
             }
             // fall through
           case 65: break;
           case 15:
-            { return new Symbol(SI);
+            { return new Symbol(SI, yytext());
             }
             // fall through
           case 66: break;
           case 16:
-            { return new Symbol(OPCIONES);
+            { return new Symbol(OPCIONES, yytext());
             }
             // fall through
           case 67: break;
@@ -1508,7 +1508,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 70: break;
           case 20:
-            { return new Symbol(CLASS_BOTON);
+            { return new Symbol(CLASS_BOTON, yytext());
             }
             // fall through
           case 71: break;
@@ -1518,7 +1518,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 72: break;
           case 22:
-            { return new Symbol(CLASS_COMBO);
+            { return new Symbol(CLASS_COMBO, yytext());
             }
             // fall through
           case 73: break;
@@ -1528,7 +1528,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 74: break;
           case 24:
-            { return new Symbol(CLASS_RADIO);
+            { return new Symbol(CLASS_RADIO, yytext());
             }
             // fall through
           case 75: break;
@@ -1548,12 +1548,12 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 78: break;
           case 28:
-            { return new Symbol(CENTRO);
+            { return new Symbol(CENTRO, yytext());
             }
             // fall through
           case 79: break;
           case 29:
-            { return new Symbol(CLASS_IMAGEN);
+            { return new Symbol(CLASS_IMAGEN, yytext());
             }
             // fall through
           case 80: break;
@@ -1568,12 +1568,12 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 82: break;
           case 32:
-            { return new Symbol(DERECHA);
+            { return new Symbol(DERECHA, yytext());
             }
             // fall through
           case 83: break;
           case 33:
-            { return new Symbol(CLASS_FICHERO);
+            { return new Symbol(CLASS_FICHERO, yytext());
             }
             // fall through
           case 84: break;
@@ -1588,7 +1588,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 86: break;
           case 36:
-            { return new Symbol(CLASS_CHECKBOX);
+            { return new Symbol(CLASS_CHECKBOX, yytext());
             }
             // fall through
           case 87: break;
@@ -1608,7 +1608,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 90: break;
           case 40:
-            { return new Symbol(IZQUIERDA);
+            { return new Symbol(IZQUIERDA, yytext());
             }
             // fall through
           case 91: break;
@@ -1623,7 +1623,7 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 93: break;
           case 43:
-            { return new Symbol(CLASS_AREA_TEXTO);
+            { return new Symbol(CLASS_AREA_TEXTO, yytext());
             }
             // fall through
           case 94: break;
@@ -1633,12 +1633,12 @@ public class StorageLexer implements java_cup.runtime.Scanner {
             // fall through
           case 95: break;
           case 45:
-            { return new Symbol(JUSTIFICAR);
+            { return new Symbol(JUSTIFICAR, yytext());
             }
             // fall through
           case 96: break;
           case 46:
-            { return new Symbol(CLASS_CAMPO_TEXTO);
+            { return new Symbol(CLASS_CAMPO_TEXTO, yytext());
             }
             // fall through
           case 97: break;

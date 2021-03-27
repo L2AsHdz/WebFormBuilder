@@ -61,7 +61,7 @@ non terminal        inicio, startUserStructure, startFormStructure, startStructu
 non terminal        paramsUser, paramUser;
 non terminal        paramsForm, paramForm;
 
-non terminal        componentStruct, components, component;
+non terminal        componentStruct, components, component, params, param;
 
 non terminal String         clase, alineacion, required, opciones;
 non terminal String         value, fecha, entero, literal, id, tema;
@@ -111,18 +111,24 @@ components ::= component COMMA components                   {:addComponent();:}
              | component                                    {:addComponent();:}
              ;
 
-component ::= PARAM_ID COLON id:i                           {:comp.setId(i);:}
-            | PARAM_NOMBRE_CAMPO COLON value:v              {:comp.setNombreCampo(v);:}
-            | PARAM_FORMULARIO COLON id:i                   {:comp.setFormulario(i);:}
-            | PARAM_CLASE COLON clase:c                     {:comp.setClase(c);:}
-            | PARAM_TEXTO_VISIBLE COLON literal:l           {:comp.setTextoVisible(l);:}
-            | PARAM_ALINEACION COLON alineacion:a           {:comp.setAlineacion(a);:}
-            | PARAM_REQUERIDO COLON required:r              {:comp.setRequerido(r);:}
-            | PARAM_OPCIONES COLON opciones:o               {:comp.setOpciones(o);:}
-            | PARAM_FILAS COLON entero:e                    {:comp.setNoFilas(e);:}
-            | PARAM_COLUMNAS COLON entero:e                 {:comp.setNoColumnas(e);:}
-            | PARAM_URL COLON value:v                       {:comp.setUrl(v);:}
-            ;
+component ::= OPEN_BRACE params CLOSE_BRACE;
+
+params ::= param COMMA params
+         | param
+         ;
+
+param ::= PARAM_ID COLON id:i                           {:comp.setId(i.replace("\"",""));:}
+        | PARAM_NOMBRE_CAMPO COLON value:v              {:comp.setNombreCampo(v.replace("\"",""));:}
+        | PARAM_FORMULARIO COLON id:i                   {:comp.setFormulario(i.replace("\"",""));:}
+        | PARAM_CLASE COLON clase:c                     {:comp.setClase(c.replace("\"",""));:}
+        | PARAM_TEXTO_VISIBLE COLON literal:l           {:comp.setTextoVisible(l.replace("\"",""));:}
+        | PARAM_ALINEACION COLON alineacion:a           {:comp.setAlineacion(a.replace("\"",""));:}
+        | PARAM_REQUERIDO COLON required:r              {:comp.setRequerido(r.replace("\"",""));:}
+        | PARAM_OPCIONES COLON opciones:o               {:comp.setOpciones(o.replace("\"",""));:}
+        | PARAM_FILAS COLON entero:e                    {:comp.setNoFilas(e.replace("\"",""));:}
+        | PARAM_COLUMNAS COLON entero:e                 {:comp.setNoColumnas(e.replace("\"",""));:}
+        | PARAM_URL COLON value:v                       {:comp.setUrl(v.replace("\"",""));:}
+        ;
 /*****************Fin de producciones para parametros de form*****************/
 
 
