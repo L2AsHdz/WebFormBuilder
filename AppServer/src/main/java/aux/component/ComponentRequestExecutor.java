@@ -56,6 +56,8 @@ public class ComponentRequestExecutor {
             int index = indexOfComponent(form, component.getId());
             
             if (index != -1) {
+                form.getComponentes().remove(index);
+                formDAO.create(form);
                 System.out.println("Eliminando componente en el indice " + index);
             } else {
                 System.out.println("No existe el componente " + component.getId() + " en el form " + form.getId());
