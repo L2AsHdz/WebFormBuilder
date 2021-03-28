@@ -37,6 +37,12 @@
                             <button type="reset" class="btn btn-info mr-2">Limpiar</button>
                             <button type="submit" class="btn btn-success">Iniciar sesion</button>
                         </div>
+                        <c:if test="${!empty(errorLogin)}" >
+                            <div class="alert alert-danger alert-dismissible mt-2">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                ${errorLogin}
+                            </div>
+                        </c:if>
                     </form>
                 </div>
             </div>
