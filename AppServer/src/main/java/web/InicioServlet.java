@@ -3,6 +3,7 @@ package web;
 import datos.CRUD;
 import datos.form.FormularioDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Formulario;
+import model.Usuario;
 
 /**
  *
@@ -34,7 +36,14 @@ public class InicioServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Formulario> forms = formDAO.getList();
-        request.setAttribute("formularios", forms);
+        List<Formulario> formsUser = new ArrayList();
+        Usuario user = (Usuario) request.getSession().getAttribute("user");
+        forms.forEach(f -> {
+            if (f.getUsuarioCreacion().equals(user.getNombre())) {
+                formsUser.add(f);
+            }
+        });
+        request.setAttribute("formularios", formsUser);
         request.getRequestDispatcher("inicioUsuario.jsp").forward(request, response);
     }
 
