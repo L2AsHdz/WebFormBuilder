@@ -33,26 +33,37 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String user = request.getParameter("usuario");
-        String pass = request.getParameter("password");
+        String accion = request.getParameter("accion");
 
-        if (userDAO.exists(user)) {
-            Usuario usuario = userDAO.getObject(user);
+        switch (accion) {
+            case "log" -> {
 
-            if (usuario.getPassword().equals(pass)) {
-                HttpSession sesion = request.getSession();
-                sesion.setMaxInactiveInterval(3600);
-                sesion.setAttribute("user", usuario);
+                String user = request.getParameter("usuario");
+                String pass = request.getParameter("password");
 
-                response.sendRedirect("inicioUsuario.jsp");
+                if (userDAO.exists(user)) {
+                    Usuario usuario = userDAO.getObject(user);
 
-            } else {
-                request.setAttribute("errorLogin", "Las credenciales ingresadas no son validas");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                    if (usuario.getPassword().equals(pass)) {
+                        HttpSession sesion = request.getSession();
+                        sesion.setMaxInactiveInterval(3600);
+                        sesion.setAttribute("user", usuario);
+
+                        response.sendRedirect("inicioUsuario.jsp");
+
+                    } else {
+                        request.setAttribute("errorLogin", "Las credenciales ingresadas no son validas");
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("errorLogin", "Las credenciales ingresadas no son validas");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
             }
-        } else {
-            request.setAttribute("errorLogin", "Las credenciales ingresadas no son validas");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            case "logout" -> {
+                request.getSession().invalidate();
+                response.sendRedirect("index.jsp");
+            }
         }
 
     }

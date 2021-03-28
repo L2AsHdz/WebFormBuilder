@@ -24,7 +24,7 @@
                 <div class="col-xl-6">
                     <h3 class="text-center mt-5">Iniciar sesion</h3>
 
-                    <form id="form-login" action="${pageContext.request.contextPath}/login" method="POST">
+                    <form id="form-login" action="${pageContext.request.contextPath}/login?accion=log" method="POST">
                         <div class="form-group">
                             <label for="usuario">Usuario</label>
                             <input type="text" class="form-control" name="usuario" placeholder="Ingrese codigo" autofocus>
