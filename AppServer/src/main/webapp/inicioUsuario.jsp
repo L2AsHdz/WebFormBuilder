@@ -8,10 +8,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>WebFormBuilder</title>
+        <<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>WebFormBuilder - ${user.nombre}</title>
+
+        <!--CSS-->
+        <jsp:include page="/WEB-INF/extras/extrasCSS.jsp"/>
     </head>
     <body>
-        <h1>${user}</h1>
+        <!-- Barra de navegacion -->
+        <jsp:include page="/WEB-INF/user/navBar.jsp"/>
+        
+        
+        
+        <!--JS--> 
+        <jsp:include page="/WEB-INF/extras/extrasJS.jsp"/>
     </body>
 </html>

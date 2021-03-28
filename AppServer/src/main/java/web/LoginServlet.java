@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             if (usuario.getPassword().equals(pass)) {
                 HttpSession sesion = request.getSession();
                 sesion.setMaxInactiveInterval(3600);
-                sesion.setAttribute("user", user);
+                sesion.setAttribute("user", usuario);
 
                 response.sendRedirect("inicioUsuario.jsp");
 

@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Usuario;
 
 /**
  *
@@ -27,7 +29,14 @@ public class IndexServlet extends HttpServlet{
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        
+        HttpSession sesion = request.getSession();
+        Usuario user = (Usuario) sesion.getAttribute("user");
+        if (user != null) {
+            response.sendRedirect("inicioUsuario.jsp");
+        } else {
+            response.sendRedirect("login.jsp");
+        }
     }
     
 }
