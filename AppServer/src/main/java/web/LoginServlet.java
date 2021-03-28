@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
                         sesion.setMaxInactiveInterval(3600);
                         sesion.setAttribute("user", usuario);
 
-                        response.sendRedirect("inicioUsuario.jsp");
+                        response.sendRedirect("inicio");
 
                     } else {
                         request.setAttribute("errorLogin", "Las credenciales ingresadas no son validas");

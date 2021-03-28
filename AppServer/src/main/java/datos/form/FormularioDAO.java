@@ -9,6 +9,7 @@ import datos.StorageFileAnalyzer;
 import static datos.form.FormStorageStructureGenerator.generate;
 import java.io.File;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,7 +24,12 @@ public class FormularioDAO implements CRUD<Formulario>{
     
     @Override
     public List<Formulario> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> fileNames = getfileNames(PATH_FORMS);
+        List<Formulario> forms = new ArrayList();
+        
+        fileNames.forEach(fn -> forms.add(getObject(fn)));
+        
+        return forms;
     }
 
     @Override

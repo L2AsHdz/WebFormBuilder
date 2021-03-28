@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -62,6 +64,12 @@ public class FileController {
                 System.out.println("Error al crear directorio");
             }
         }
+    }
+    
+    public static List<String> getfileNames(String path) {
+        File file = new File(path);
+        List<String> fileNames = Arrays.asList(file.list());
+        return fileNames;
     }
 
     public static boolean verifyFile(String archivo) {

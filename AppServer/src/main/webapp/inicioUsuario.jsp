@@ -52,7 +52,7 @@
                                             <td>${form.tema}</td>
                                             <td>${form.fechaCreacion}</td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/formBuilder" class="btn btn-outline-info">
+                                                <a href="${pageContext.request.contextPath}/formBuilder?id=${form.id}" class="btn btn-outline-info">
                                                     <i class="fas fa-plus"></i> Generar
                                                 </a>
                                             </td>

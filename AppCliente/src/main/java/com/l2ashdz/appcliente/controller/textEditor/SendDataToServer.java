@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
  */
 public class SendDataToServer {
     
-    private static final String URL = "http://localhost:8080/AppServer/requestReader";
+    private static final String URL = "http://localhost:8080/WebFormBuilder/requestReader";
     private static final HttpClient client = HttpClient.newHttpClient();
     
     public static String send(String text, String loggedUser) {
