@@ -52,15 +52,47 @@
                                                 </div>
                                             </c:forEach>
                                         </c:when>
+                                        <c:when test="${c.clase eq 'RADIO'}">
+                                            <label>${c.textoVisible}</label>
+                                            <c:forEach var="o" items="${c.options}">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input" name="${c.nombreCampo}">${o}
+                                                    </label>
+                                                </div>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:when test="${c.clase eq 'FICHERO'}">
+                                            <div class="form-group mt-3">
+                                                <label>${c.textoVisible}</label>
+                                                <input type="file" class="form-control-file border" name="${c.nombreCampo}" accept=".*">
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${c.clase eq 'IMAGEN'}">
+                                            <label>${c.textoVisible}</label>
+                                            <div class="form-group">
+                                                <img src="${c.url}" class="img-fluid" name="${c.nombreCampo}" alt="${c.nombreCampo}">
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${c.clase eq 'COMBO'}">
+                                            <div class="form-group">
+                                                <label>${c.textoVisible}</label>
+                                                <select class="form-control" name="${c.nombreCampo}" id="${c.nombreCampo}">
+                                                    <option value="">Seleccione un opcion...</option>
+                                                    <c:forEach var="o" items="${c.options}">
+                                                        <option>${o}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${c.clase eq 'BOTON'}">
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary">${c.textoVisible}</button>
+                                            </div>
+                                        </c:when>
                                     </c:choose>
                                 </c:forEach>
-
-
-
-
-
                             </form>
-
                         </div>
                     </div>
                 </div>
