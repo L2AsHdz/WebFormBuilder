@@ -9,14 +9,14 @@ import model.Componente;
 /**
  *
  * @date 29/03/2021
- * @time 00:08:16
+ * @time 00:58:23
  * @author asael
  */
-public class CheckBoxgenerator extends Generator {
+public class RadioGenerator extends Generator {
 
     private Componente c;
 
-    public CheckBoxgenerator() {
+    public RadioGenerator() {
     }
 
     public void setC(Componente c) {
@@ -27,7 +27,7 @@ public class CheckBoxgenerator extends Generator {
     public String generate() {
         text = new StringBuilder();
         List<String> opciones;
-        
+
         if (c.getOpciones().contains("|")) {
             opciones = Arrays.asList(c.getOpciones().split("\\|"));
         } else {
@@ -40,7 +40,7 @@ public class CheckBoxgenerator extends Generator {
         opciones.forEach(o -> {
             addLine("<div class=\"form-check\">", 8);
             addLine("<label class=\"form-check-label\">", 9);
-            addLine("<input type=\"checkbox\" class=\"form-check-input\" name=\"" + c.getNombreCampo() + "\">" + o + "", 10);
+            addLine("<input type=\"radio\" class=\"form-check-input\" name=\"" + c.getNombreCampo() + "\">" + o + "", 10);
             addLine("</label>", 9);
             addLine("</div>", 8);
         });

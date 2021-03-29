@@ -16,12 +16,14 @@ public class ComponentsGenerator extends Generator {
     private final CampoTextoGenerator campoTextoG;
     private final AreaTextoGenerator areaTextoG;
     private final CheckBoxgenerator checkBoxG;
+    private final RadioGenerator raadioG;
 
     public ComponentsGenerator(List<Componente> componentes) {
         this.componentes = componentes;
         campoTextoG = new CampoTextoGenerator();
         areaTextoG = new AreaTextoGenerator();
         checkBoxG = new CheckBoxgenerator();
+        raadioG = new RadioGenerator();
     }
 
     @Override
@@ -41,7 +43,10 @@ public class ComponentsGenerator extends Generator {
                     checkBoxG.setC(c);
                     text.append(checkBoxG.generate());
                 }
-                case "RADIO" -> {}
+                case "RADIO" -> {
+                    raadioG.setC(c);
+                    text.append(raadioG.generate());
+                }
                 case "FICHERO" -> {}
                 case "IMAGEN" -> {}
                 case "COMBO" -> {}
