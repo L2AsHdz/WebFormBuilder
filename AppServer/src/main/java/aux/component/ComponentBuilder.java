@@ -23,7 +23,7 @@ public class ComponentBuilder {
         component = new Componente();
         
         solicitud.getParametros().forEach(p -> {
-            if (p.getName().contains("ID")) {
+            if (p.getName().replaceAll("\\s", "").replace("\"", "").equals("ID")) {
                 component.setId(getValue(p));
             } else if (p.getName().contains("NOMBRE_CAMPO")) {
                 component.setNombreCampo(getValue(p));
@@ -49,7 +49,12 @@ public class ComponentBuilder {
                 component.setIndice(Integer.parseInt(getValue(p)));
             }
         });
-        
+        if (component.getAlineacion() == null) {
+            component.setAlineacion("IZQUIERDA");
+        }
+        if (component.getRequerido() == null) {
+            component.setRequerido("NO");
+        }
         
         return component;
     }
