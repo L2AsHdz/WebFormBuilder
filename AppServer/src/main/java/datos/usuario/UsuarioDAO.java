@@ -29,6 +29,7 @@ public class UsuarioDAO implements CRUD<Usuario> {
     @Override
     public void create(Usuario u) {
         userSSG = new UserStorageStructureGenerator(u);
+        createDirectory(PATH_USERS);
         saveFile(PATH_USERS + u.getNombre() + ".db", userSSG.generate());
     }
 

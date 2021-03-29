@@ -62,6 +62,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
 
     public void start() {
         this.textEditorV.pack();
+        this.textEditorV.setTitle("Documento sin guardar");
         this.textEditorV.setResizable(false);
         this.textEditorV.setLocationRelativeTo(null);
         this.textEditorV.setVisible(true);
@@ -102,6 +103,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             try {
                 path = fc.getSelectedFile().getAbsolutePath();
                 this.textEditorV.getTxtArea().setText(readFile(path));
+                this.textEditorV.setTitle(path);
                 hasChanges = false;
             } catch (Exception ex) {
                 System.out.println("se cancelo");
@@ -115,6 +117,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     private void nuevo() {
         if (!hasChanges) {
             this.textEditorV.getTxtArea().setText("");
+            this.textEditorV.setTitle("Documento sin guardar");
             path = "";
             hasChanges = false;
         } else {
