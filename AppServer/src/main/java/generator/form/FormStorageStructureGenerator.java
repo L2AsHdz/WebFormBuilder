@@ -31,7 +31,7 @@ public class FormStorageStructureGenerator extends Generator {
         addLine("}", 1);
         addLine(")", 0);
 
-        return getText().toString();
+        return text.toString();
     }
 
     private void agregarComponentes(Formulario form) {
@@ -49,10 +49,10 @@ public class FormStorageStructureGenerator extends Generator {
             if (c.getNoFilas() != null) addLine("\"FILAS\" : \""+c.getNoFilas()+"\",", 4);
             if (c.getNoColumnas() != null) addLine("\"COLUMNAS\" : \""+c.getNoColumnas()+"\",", 4);
             if (c.getUrl() != null) addLine("\"URL\" : \""+c.getUrl()+"\",", 4);
-            getText().deleteCharAt(getText().lastIndexOf(","));
+            text.deleteCharAt(text.lastIndexOf(","));
             addLine("},", 3);
         });
-        if (!form.getComponentes().isEmpty()) getText().deleteCharAt(getText().lastIndexOf(","));
+        if (!form.getComponentes().isEmpty()) text.deleteCharAt(text.lastIndexOf(","));
         addLine(")", 2);
     }
 }

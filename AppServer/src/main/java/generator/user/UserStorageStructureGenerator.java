@@ -28,6 +28,6 @@ public class UserStorageStructureGenerator extends Generator {
         addLine("}", 1);
         addLine(")", 0);
         
-        return getText().toString();
+        return text.toString();
     }
 }

@@ -12,9 +12,11 @@ import model.Formulario;
 public class HtmlPageGenerator extends Generator {
     
     private Formulario form;
+    private CampoTextoGenerator campoTextoG;
 
     public HtmlPageGenerator(Formulario form) {
         this.form = form;
+        campoTextoG = new CampoTextoGenerator(form.getComponentes());
     }
     
     @Override
@@ -36,8 +38,23 @@ public class HtmlPageGenerator extends Generator {
         //body
         addLine("<body>", 1);
         addLine("<div class=\"container-fluid\">", 2);
-        addLine("<div class=\"row\">", 3);
-        addLine("<div class=\"col-6\">", 4);
+        addLine("<div class=\"row my-5\">", 3);
+        addLine("<div class=\"col-2\"></div>", 4);
+        addLine("<div class=\"col-8\">", 4);
+        addLine("<div class=\"card my-5\">", 5);
+        addLine("<div class=\"card-header text-center\">", 6);
+        addLine("<h4>"+form.getTitulo()+"</h4>", 7);
+        addLine("</div>", 6);
+        
+        //componentes
+        addLine("<form id=\"form-"+form.getId()+"\" action=\"/WebFormBuilder/readData\" method=\"POST\" enctype=\"multipart/form-data\">", 6);
+        addLine("<div class=\"card-body\">", 7);
+        text.append(campoTextoG.generate());
+        addLine("</div>", 7);
+        addLine("</form>", 6);
+        
+        //divs de cierre
+        addLine("</div>", 5 );
         addLine("</div>", 4);
         addLine("</div>", 3);
         addLine("</div>", 2);
@@ -51,6 +68,6 @@ public class HtmlPageGenerator extends Generator {
         
         addLine("</html>", 0);
         
-        return getText().toString();
+        return text.toString();
     }
 }

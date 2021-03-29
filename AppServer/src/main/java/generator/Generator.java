@@ -8,13 +8,9 @@ package generator;
  */
 public abstract class Generator {
     
-    private StringBuilder text = new StringBuilder();
+    protected StringBuilder text = new StringBuilder();
     
     public abstract String generate();
-
-    public StringBuilder getText() {
-        return text;
-    }
     
     protected void addLine(String s, int tabulaciones) {
 

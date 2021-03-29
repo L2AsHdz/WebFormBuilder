@@ -23,7 +23,7 @@ import static aux.FileController.createDirectory;
 @WebServlet("/builder")
 public class FormBuilderServlet extends HttpServlet {
 
-    private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/webapp/formsHtml/";
+    private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/webapp/forms/";
     private CRUD<Formulario> formDAO = new FormularioDAO();
     private HtmlPageGenerator htmlPG;
 
@@ -45,6 +45,7 @@ public class FormBuilderServlet extends HttpServlet {
         createDirectory(PATH_FORMS + form.getUsuarioCreacion());
         saveFile(PATH_FORMS + form.getUsuarioCreacion() + "/" + form.getId() + ".html", htmlPG.generate());
         System.out.println("Html creado");
+        response.sendRedirect("forms/"+form.getUsuarioCreacion()+"/"+form.getId() + ".html");
     }
 
 }
