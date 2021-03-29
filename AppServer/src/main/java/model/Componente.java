@@ -25,8 +25,6 @@ public class Componente {
     private List<String> options;
 
     public Componente() {
-        alineacion = "IZQUIERDA";
-        requerido = "NO";
     }
 
     public int getIndice() {
