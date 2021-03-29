@@ -43,12 +43,7 @@ import static analizadores.sintactico.RequestsSym.*;
     return new Symbol(EOF, new Token(yyline, yycolumn, "Fin de linea"));
 %eofval}
 
-SALTO = \n|\r|\r\n
-ESPACIO = {SALTO} | [ \t\f]
-LETRA = [a-zA-Z]
 ENTERO = "\""(0|([1-9][0-9]*))"\""
-DECIMAL = 0|([1-9][0-9]*)(\.(0|([0-9]*[1-9])))?
-
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
 OPCIONES = "\""((\w+\|\w+)(\|\w+)*)"\""

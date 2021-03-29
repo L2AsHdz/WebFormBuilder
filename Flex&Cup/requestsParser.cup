@@ -107,7 +107,7 @@ non terminal Parametro          paramNewComponent, paramEditComponent, paramDele
 non terminal String             nameParamNewComponent, nameParamEditComponent;
 non terminal String             clase, alineacion, required, opciones;
 
-non terminal String             value, id, fecha, literal, entero;
+non terminal String             value, id, fecha, literal, entero, keyword;
 
 inicio ::= startRequest
          | startRequests
@@ -410,6 +410,10 @@ paramDeleteComponent ::= PARAM_ID:p COLON id:i              {:RESULT = new Param
 /**************************Fin de producciones para parametros de solicitud DeleteComponent**************************/
 
 value ::= VALUE:v           {:RESULT = v.getLexema();:}
+        | id:i              {:RESULT = i;:}
+        | entero:e          {:RESULT = e;:}
+        | fecha:f           {:RESULT = f;:}
+        | keyword:k         {:RESULT = k;:}
         ;
 
 id ::= ID:i                 {:RESULT = i.getLexema();:}
@@ -419,6 +423,7 @@ fecha ::= FECHA:f           {:RESULT = f.getLexema();:}
         ;
 
 literal ::= LITERAL:l       {:RESULT = l.getLexema();:}
+          | value:v         {:RESULT = v;:}
           ;
 
 entero ::= ENTERO:e         {:RESULT = e.getLexema();:}
@@ -449,7 +454,50 @@ required ::= SI:r   {:RESULT =r.getLexema();:}
            ;
 
 opciones ::= OPCIONES:o         {:RESULT = o.getLexema();:}
+           | value:v            {:RESULT = v;:}
            ;
+
+keyword ::= tema:t                      {:RESULT = t;:}
+          | clase:c                     {:RESULT = c;:}
+          | alineacion:a                {:RESULT = a;:}
+          | required:r                  {:RESULT = r;:}
+          | LOGIN:k                     {:RESULT = k.getLexema();:}
+          | CREATE_USER:k               {:RESULT = k.getLexema();:}
+          | DELETE_USER:k               {:RESULT = k.getLexema();:}
+          | MODIFY_USER:k               {:RESULT = k.getLexema();:}
+          | NEW_FORM:k                  {:RESULT = k.getLexema();:}
+          | DELETE_FORM:k               {:RESULT = k.getLexema();:}
+          | MODIFY_FORM:k               {:RESULT = k.getLexema();:}
+          | NEW_COMPONENT:k             {:RESULT = k.getLexema();:}
+          | DELETE_COMPONENT:k          {:RESULT = k.getLexema();:}
+          | EDIT_COMPONENT:k            {:RESULT = k.getLexema();:}
+          | USER_CREDENTIALS:k          {:RESULT = k.getLexema();:}
+          | FORM_PARAMS:k               {:RESULT = k.getLexema();:}
+          | COMPONENT_PARAMS:k          {:RESULT = k.getLexema();:}
+          | PARAM_USUARIO:k             {:RESULT = k.getLexema();:}
+          | PARAM_PASSWORD:k            {:RESULT = k.getLexema();:}
+          | PARAM_FECHA_CREACION:k      {:RESULT = k.getLexema();:}
+          | PARAM_FECHA_MODIFICACION:k  {:RESULT = k.getLexema();:}
+          | PARAM_OLD_USER:k            {:RESULT = k.getLexema();:}
+          | PARAM_NEW_USER:k            {:RESULT = k.getLexema();:}
+          | PARAM_NEW_PASSWORD:k        {:RESULT = k.getLexema();:}
+          | PARAM_ID:k                  {:RESULT = k.getLexema();:}
+          | PARAM_TITULO_FORM:k         {:RESULT = k.getLexema();:}
+          | PARAM_NOMBRE_FORM:k         {:RESULT = k.getLexema();:}
+          | PARAM_TEMA:k                {:RESULT = k.getLexema();:}
+          | PARAM_USUARIO_CREACION:k    {:RESULT = k.getLexema();:}
+          | PARAM_NOMBRE_CAMPO:k        {:RESULT = k.getLexema();:}
+          | PARAM_FORMULARIO:k          {:RESULT = k.getLexema();:}
+          | PARAM_CLASE:k               {:RESULT = k.getLexema();:}
+          | PARAM_INDICE:k              {:RESULT = k.getLexema();:}
+          | PARAM_TEXTO_VISIBLE:k       {:RESULT = k.getLexema();:}
+          | PARAM_ALINEACION:k          {:RESULT = k.getLexema();:}
+          | PARAM_REQUERIDO:k           {:RESULT = k.getLexema();:}
+          | PARAM_OPCIONES:k            {:RESULT = k.getLexema();:}
+          | PARAM_FILAS:k               {:RESULT = k.getLexema();:}
+          | PARAM_COLUMNAS:k            {:RESULT = k.getLexema();:}
+          | PARAM_URL:k                 {:RESULT = k.getLexema();:}
+          ;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 
