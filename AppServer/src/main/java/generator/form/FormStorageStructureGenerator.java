@@ -1,5 +1,6 @@
-package datos.form;
+package generator.form;
 
+import generator.Generator;
 import model.Formulario;
 
 /**
@@ -8,13 +9,16 @@ import model.Formulario;
  * @time 01:08:45
  * @author asael
  */
-public class FormStorageStructureGenerator {
+public class FormStorageStructureGenerator extends Generator {
+    
+    private Formulario form;
 
-    private static StringBuilder text;
+    public FormStorageStructureGenerator(Formulario form) {
+        this.form = form;
+    }
 
-    public static String generate(Formulario form) {
-        text = new StringBuilder();
-
+    @Override
+    public String generate() {
         addLine("db.form(", 0);
         addLine("{", 1);
         addLine("\"ID\" : \"" + form.getId() + "\",", 2);
@@ -27,19 +31,10 @@ public class FormStorageStructureGenerator {
         addLine("}", 1);
         addLine(")", 0);
 
-        return text.toString();
+        return getText().toString();
     }
 
-    private static void addLine(String s, int tabulaciones) {
-
-        for (int i = 0; i < tabulaciones; i++) {
-            text.append("\t");
-        }
-
-        text.append(s).append("\n");
-    }
-
-    private static void agregarComponentes(Formulario form) {
+    private void agregarComponentes(Formulario form) {
         addLine("\"COMPONENTES\" : (", 2);
         form.getComponentes().forEach(c -> {
             addLine("{", 3);
@@ -54,10 +49,10 @@ public class FormStorageStructureGenerator {
             if (c.getNoFilas() != null) addLine("\"FILAS\" : \""+c.getNoFilas()+"\",", 4);
             if (c.getNoColumnas() != null) addLine("\"COLUMNAS\" : \""+c.getNoColumnas()+"\",", 4);
             if (c.getUrl() != null) addLine("\"URL\" : \""+c.getUrl()+"\",", 4);
-            text.deleteCharAt(text.lastIndexOf(","));
+            getText().deleteCharAt(getText().lastIndexOf(","));
             addLine("},", 3);
         });
-        if (!form.getComponentes().isEmpty()) text.deleteCharAt(text.lastIndexOf(","));
+        if (!form.getComponentes().isEmpty()) getText().deleteCharAt(getText().lastIndexOf(","));
         addLine(")", 2);
     }
 }

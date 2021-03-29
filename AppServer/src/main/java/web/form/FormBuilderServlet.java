@@ -1,6 +1,6 @@
 package web.form;
 
-import aux.html.HtmlPageGenerator;
+import generator.html.HtmlPageGenerator;
 import datos.CRUD;
 import datos.form.FormularioDAO;
 import java.io.IOException;

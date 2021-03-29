@@ -1,5 +1,6 @@
-package aux.html;
+package generator.html;
 
+import generator.Generator;
 import model.Formulario;
 
 /**
@@ -8,16 +9,15 @@ import model.Formulario;
  * @time 16:32:55
  * @author asael
  */
-public class HtmlPageGenerator {
+public class HtmlPageGenerator extends Generator {
     
     private Formulario form;
-    private StringBuilder textHtml;
 
     public HtmlPageGenerator(Formulario form) {
         this.form = form;
-        this.textHtml = new StringBuilder();
     }
     
+    @Override
     public String generate() {
         addLine("<!DOCTYPE html>", 0);
         addLine("<html>", 0);
@@ -27,9 +27,9 @@ public class HtmlPageGenerator {
         addLine("<title>"+form.getTitulo()+"</title>", 2);
            
         //extras css
-        addLine("<link rel=\"stylesheet\" href=\"WebFormBuilder/css/bootstrap.css\">", 2);
-        addLine("<link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.2/css/all.css\">", 2);
-        addLine("<link rel=\"stylesheet\" href=\"WebFormBuilder/css/styles.css\">", 2);
+        addLine("<link rel=\"stylesheet\" href=\"/WebFormBuilder/css/bootstrap.css\">", 2);
+        addLine("<link rel=\"stylesheet\" href=\"https://pro.fontawesome.com/releases/v5.10.0/css/all.css\">", 2);
+        addLine("<link rel=\"stylesheet\" href=\"/WebFormBuilder/css/styles.css\">", 2);
         addLine("</head>", 1);
         //fin head
         
@@ -43,23 +43,14 @@ public class HtmlPageGenerator {
         addLine("</div>", 2);
         
         //extras js
-        addLine("<script src=\"WebFormBuilder/js/jquery-3.6.0.js\"></script>", 2);
-        addLine("<script src=\"WebFormBuilder/js/popper.js\"></script>", 2);
-        addLine("<script src=\"WebFormBuilder/js/bootstrap.js\"></script>", 2);
+        addLine("<script src=\"/WebFormBuilder/js/jquery-3.6.0.js\"></script>", 2);
+        addLine("<script src=\"/WebFormBuilder/js/popper.js\"></script>", 2);
+        addLine("<script src=\"/WebFormBuilder/js/bootstrap.js\"></script>", 2);
         addLine("</body>", 1);
         //fin body
         
         addLine("</html>", 0);
         
-        return textHtml.toString();
-    }
-    
-    private void addLine(String s, int tabulaciones) {
-
-        for (int i = 0; i < tabulaciones; i++) {
-            textHtml.append("    ");
-        }
-
-        textHtml.append(s).append("\n");
+        return getText().toString();
     }
 }

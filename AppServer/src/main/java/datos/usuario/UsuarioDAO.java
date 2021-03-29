@@ -6,7 +6,7 @@ import model.Usuario;
 
 import static aux.FileController.*;
 import datos.StorageFileAnalyzer;
-import static datos.usuario.UserStorageStructureGenerator.generate;
+import generator.user.UserStorageStructureGenerator;
 import java.io.StringReader;
 
 /**
@@ -19,6 +19,7 @@ public class UsuarioDAO implements CRUD<Usuario> {
 
     private final String PATH_USERS = "/home/asael/NetBeansProjects/WebFormBuilder/data/users/";
     private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
+    private UserStorageStructureGenerator userSSG;
 
     @Override
     public List<Usuario> getList() {
@@ -27,7 +28,8 @@ public class UsuarioDAO implements CRUD<Usuario> {
 
     @Override
     public void create(Usuario u) {
-        saveFile(PATH_USERS + u.getNombre() + ".db", generate(u));
+        userSSG = new UserStorageStructureGenerator(u);
+        saveFile(PATH_USERS + u.getNombre() + ".db", userSSG.generate());
     }
 
     @Override

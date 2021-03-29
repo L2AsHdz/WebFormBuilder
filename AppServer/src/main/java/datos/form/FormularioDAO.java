@@ -6,7 +6,7 @@ import model.Formulario;
 
 import static aux.FileController.*;
 import datos.StorageFileAnalyzer;
-import static datos.form.FormStorageStructureGenerator.generate;
+import generator.form.FormStorageStructureGenerator;
 import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class FormularioDAO implements CRUD<Formulario>{
     
     private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/data/forms/";
     private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
+    private FormStorageStructureGenerator formSSG;
     
     @Override
     public List<Formulario> getList() {
@@ -34,8 +35,9 @@ public class FormularioDAO implements CRUD<Formulario>{
 
     @Override
     public void create(Formulario f) {
+        formSSG = new FormStorageStructureGenerator(f);
         createDirectory(PATH_FORMS + f.getId());
-        saveFile(PATH_FORMS + f.getId() + "/estructura.db", generate(f));
+        saveFile(PATH_FORMS + f.getId() + "/estructura.db", formSSG.generate());
     }
 
     @Override
