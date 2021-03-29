@@ -6,14 +6,14 @@ import model.Componente;
 /**
  *
  * @date 28/03/2021
- * @time 22:29:35
+ * @time 22:41:30
  * @author asael
  */
-public class CampoTextoGenerator extends Generator {
+public class AreaTextoGenerator extends Generator {
 
     private Componente c;
 
-    public CampoTextoGenerator() {
+    public AreaTextoGenerator() {
     }
 
     public void setComp(Componente comp) {
@@ -26,7 +26,7 @@ public class CampoTextoGenerator extends Generator {
         
         addLine("<div class=\"form-group\">", 8);
         addLine("<label for=\"" + c.getNombreCampo() + "\">" + c.getTextoVisible() + "</label>", 9);
-        addLine("<input type=\"text\" class=\"form-control\" name=\"" + c.getNombreCampo() + "\" value=\"\">", 9);
+        addLine("<textarea class=\"form-control\" name=\"" + c.getNombreCampo() + "\" rows=\"" + c.getNoFilas() + "\" cols=\"" + c.getNoColumnas() + "\"></textarea>", 9);
         addLine("</div>", 8);
 
         return text.toString();

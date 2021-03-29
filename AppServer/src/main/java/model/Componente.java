@@ -13,8 +13,8 @@ public class Componente {
     private String nombreCampo;
     private String formulario;
     private String textoVisible;
-    private String alineacion;
-    private String requerido;
+    private String alineacion = "IZQUIERDA";
+    private String requerido = "NO";
     private String clase;
     private String opciones;
     private String noFilas;

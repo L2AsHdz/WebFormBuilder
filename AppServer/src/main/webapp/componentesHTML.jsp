@@ -35,7 +35,7 @@
                                 <!-- Clase tipo area texto -->
                                 <div class="form-group">
                                     <label for="areaTexto">Area texto:</label>
-                                    <textarea id="area" class="form-control" name="areaTexto" rows="5"></textarea>
+                                    <textarea id="area" class="form-control" name="areaTexto" rows="5" cols="15"></textarea>
                                 </div>
 
                                 <!-- Clase tipo checkbox -->

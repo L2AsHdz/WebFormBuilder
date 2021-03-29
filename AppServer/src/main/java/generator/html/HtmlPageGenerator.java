@@ -12,11 +12,11 @@ import model.Formulario;
 public class HtmlPageGenerator extends Generator {
     
     private Formulario form;
-    private CampoTextoGenerator campoTextoG;
+    private ComponentsGenerator componentsG;
 
     public HtmlPageGenerator(Formulario form) {
         this.form = form;
-        campoTextoG = new CampoTextoGenerator(form.getComponentes());
+        componentsG = new ComponentsGenerator(form.getComponentes());
     }
     
     @Override
@@ -49,7 +49,7 @@ public class HtmlPageGenerator extends Generator {
         //componentes
         addLine("<form id=\"form-"+form.getId()+"\" action=\"/WebFormBuilder/readData\" method=\"POST\" enctype=\"multipart/form-data\">", 6);
         addLine("<div class=\"card-body\">", 7);
-        text.append(campoTextoG.generate());
+        text.append(componentsG.generate());
         addLine("</div>", 7);
         addLine("</form>", 6);
         
