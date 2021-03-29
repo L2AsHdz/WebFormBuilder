@@ -1,18 +1,17 @@
 package web.form;
 
-import generator.html.HtmlPageGenerator;
 import datos.CRUD;
 import datos.form.FormularioDAO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Formulario;
-
-import static aux.FileController.saveFile;
-import static aux.FileController.createDirectory;
 
 /**
  *
@@ -23,9 +22,7 @@ import static aux.FileController.createDirectory;
 @WebServlet("/builder")
 public class FormBuilderServlet extends HttpServlet {
 
-    private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/AppServer/src/main/webapp/forms/";
     private CRUD<Formulario> formDAO = new FormularioDAO();
-    private HtmlPageGenerator htmlPG;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,12 +37,23 @@ public class FormBuilderServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idForm = request.getParameter("id");
         Formulario form = formDAO.getObject(idForm);
-        htmlPG = new HtmlPageGenerator(form);
 
-        createDirectory(PATH_FORMS + form.getUsuarioCreacion());
-        saveFile(PATH_FORMS + form.getUsuarioCreacion() + "/" + form.getId() + ".html", htmlPG.generate());
-        System.out.println("Html creado");
-        response.sendRedirect("forms/"+form.getUsuarioCreacion()+"/"+form.getId() + ".html");
+        form.getComponentes().forEach(c -> {
+            switch (c.getClase()) {
+                case "CHECKBOX", "RADIO", "COMBO" -> {
+                    if (c.getOpciones().contains("|")) {
+                        c.setOptions(Arrays.asList(c.getOpciones().split("\\|")));
+                    } else {
+                        List<String> options = new ArrayList();
+                        options.add(c.getOpciones());
+                        c.setOptions(options);
+                    }
+                }
+            }
+        });
+
+        request.setAttribute("form", form);
+        request.getRequestDispatcher("formulario.jsp").forward(request, response);
     }
 
 }

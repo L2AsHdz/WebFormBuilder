@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  *
  * @date 24/03/2021
@@ -13,15 +15,18 @@ public class Componente {
     private String nombreCampo;
     private String formulario;
     private String textoVisible;
-    private String alineacion = "IZQUIERDA";
-    private String requerido = "NO";
+    private String alineacion;
+    private String requerido;
     private String clase;
     private String opciones;
     private String noFilas;
     private String noColumnas;
     private String url;
+    private List<String> options;
 
     public Componente() {
+        alineacion = "IZQUIERDA";
+        requerido = "NO";
     }
 
     public int getIndice() {
@@ -118,5 +123,13 @@ public class Componente {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 }
