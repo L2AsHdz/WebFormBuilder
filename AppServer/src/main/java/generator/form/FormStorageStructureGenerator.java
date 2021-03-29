@@ -19,6 +19,7 @@ public class FormStorageStructureGenerator extends Generator {
 
     @Override
     public String generate() {
+        text = new StringBuilder();
         addLine("db.form(", 0);
         addLine("{", 1);
         addLine("\"ID\" : \"" + form.getId() + "\",", 2);

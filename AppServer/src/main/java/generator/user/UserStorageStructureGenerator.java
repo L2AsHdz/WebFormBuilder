@@ -19,7 +19,7 @@ public class UserStorageStructureGenerator extends Generator {
     
     @Override
     public String generate(){
-        
+        text = new StringBuilder();
         addLine("db.user(", 0);
         addLine("{", 1);
         addLine("\"USUARIO\" : \""+user.getNombre()+"\",", 2);

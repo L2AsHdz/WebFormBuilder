@@ -21,6 +21,7 @@ public class HtmlPageGenerator extends Generator {
     
     @Override
     public String generate() {
+        text = new StringBuilder();
         addLine("<!DOCTYPE html>", 0);
         addLine("<html>", 0);
         //head

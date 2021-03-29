@@ -24,6 +24,7 @@ public class ComponentsGenerator extends Generator {
 
     @Override
     public String generate() {
+        text = new StringBuilder();
         componentes.forEach(c -> {
             switch(c.getClase()) {
                 case "CAMPO_TEXTO" -> {
