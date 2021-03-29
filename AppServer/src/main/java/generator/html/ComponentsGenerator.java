@@ -17,6 +17,7 @@ public class ComponentsGenerator extends Generator {
     private final AreaTextoGenerator areaTextoG;
     private final CheckBoxgenerator checkBoxG;
     private final RadioGenerator raadioG;
+    private final FicheroGenerator ficheroG;
 
     public ComponentsGenerator(List<Componente> componentes) {
         this.componentes = componentes;
@@ -24,6 +25,7 @@ public class ComponentsGenerator extends Generator {
         areaTextoG = new AreaTextoGenerator();
         checkBoxG = new CheckBoxgenerator();
         raadioG = new RadioGenerator();
+        ficheroG = new FicheroGenerator();
     }
 
     @Override
@@ -47,7 +49,10 @@ public class ComponentsGenerator extends Generator {
                     raadioG.setC(c);
                     text.append(raadioG.generate());
                 }
-                case "FICHERO" -> {}
+                case "FICHERO" -> {
+                    ficheroG.setC(c);
+                    text.append(ficheroG.generate());
+                }
                 case "IMAGEN" -> {}
                 case "COMBO" -> {}
                 case "BOTON" -> {}
