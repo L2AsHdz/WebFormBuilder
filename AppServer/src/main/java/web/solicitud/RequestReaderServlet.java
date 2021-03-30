@@ -39,6 +39,7 @@ public class RequestReaderServlet extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             out.println(respuesta);
+            System.out.println(respuesta);
         } catch (Exception e) {
         }
 
