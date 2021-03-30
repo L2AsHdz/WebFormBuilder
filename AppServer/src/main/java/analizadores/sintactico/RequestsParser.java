@@ -14,6 +14,8 @@ import model.solicitudes.Parametro;
 import validator.Validator;
 import validator.user.CreateUserRequestValidator;
 import validator.user.ModifyUserRequestValidator;
+import validator.form.CreateFormRequestValidator;
+import validator.form.ModifyFormRequestValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.Symbol;
@@ -637,6 +639,8 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
 
     private Validator createUserRV = new CreateUserRequestValidator();
     private Validator modifyUserRV = new ModifyUserRequestValidator();
+    private Validator createFormRV = new CreateFormRequestValidator();
+    private Validator modifyFormRV = new ModifyFormRequestValidator();
     String error;
 
     public List<ErrorAnalisis> getErrores() {
@@ -929,8 +933,16 @@ class CUP$RequestsParser$actions {
           case 24: // bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                        solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        error = createUserRV.validate(o, parametros);
+                        if (error.isEmpty()) {
+                            solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        } else {
+                            System.out.println(error);
+                        }
                         parametros = new ArrayList();
                      
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueLogin",15, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
@@ -1317,8 +1329,16 @@ class CUP$RequestsParser$actions {
           case 55: // bloqueNewForm ::= OPEN_BRACE paramsNewForm CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        error = createFormRV.validate(o, parametros);
+                        if (error.isEmpty()) {
+                            solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        } else {
+                            System.out.println(error);
+                        }
                         parametros = new ArrayList();
                      
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueNewForm",22, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
@@ -1519,8 +1539,16 @@ class CUP$RequestsParser$actions {
           case 71: // bloqueEditForm ::= OPEN_BRACE paramsEditForm CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    error = modifyFormRV.validate(o, parametros);
+                    if (error.isEmpty()) {
+                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    } else {
+                        System.out.println(error);
+                    }
                     parametros = new ArrayList();
                  
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueEditForm",23, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);

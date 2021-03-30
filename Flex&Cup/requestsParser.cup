@@ -9,6 +9,8 @@ import model.solicitudes.Parametro;
 import validator.Validator;
 import validator.user.CreateUserRequestValidator;
 import validator.user.ModifyUserRequestValidator;
+import validator.form.CreateFormRequestValidator;
+import validator.form.ModifyFormRequestValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,8 @@ parser code{:
 
     private Validator createUserRV = new CreateUserRequestValidator();
     private Validator modifyUserRV = new ModifyUserRequestValidator();
+    private Validator createFormRV = new CreateFormRequestValidator();
+    private Validator modifyFormRV = new ModifyFormRequestValidator();
     String error;
 
     public List<ErrorAnalisis> getErrores() {
@@ -156,9 +160,14 @@ bloquesLogin ::= bloqueLogin COMMA bloquesLogin
                | bloqueLogin
                ;
 
-bloqueLogin ::= OPEN_BRACE paramsLogin CLOSE_BRACE
+bloqueLogin ::= OPEN_BRACE:o paramsLogin CLOSE_BRACE
                      {:
-                        solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        error = createUserRV.validate(o, parametros);
+                        if (error.isEmpty()) {
+                            solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
+                        } else {
+                            System.out.println(error);
+                        }
                         parametros = new ArrayList();
                      :}
                      ;
@@ -269,9 +278,14 @@ bloquesNewForm ::= bloqueNewForm COMMA bloquesNewForm
                | bloqueNewForm
                ;
 
-bloqueNewForm ::= OPEN_BRACE paramsNewForm CLOSE_BRACE
+bloqueNewForm ::= OPEN_BRACE:o paramsNewForm CLOSE_BRACE
                      {:
-                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        error = createFormRV.validate(o, parametros);
+                        if (error.isEmpty()) {
+                            solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
+                        } else {
+                            System.out.println(error);
+                        }
                         parametros = new ArrayList();
                      :}
                      ;
@@ -318,9 +332,14 @@ bloquesEditForm ::= bloqueEditForm COMMA bloquesEditForm
                   | bloqueEditForm
                   ;
 
-bloqueEditForm ::= OPEN_BRACE paramsEditForm CLOSE_BRACE
+bloqueEditForm ::= OPEN_BRACE:o paramsEditForm CLOSE_BRACE
                  {:
-                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    error = modifyFormRV.validate(o, parametros);
+                    if (error.isEmpty()) {
+                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
+                    } else {
+                        System.out.println(error);
+                    }
                     parametros = new ArrayList();
                  :}
                  ;
