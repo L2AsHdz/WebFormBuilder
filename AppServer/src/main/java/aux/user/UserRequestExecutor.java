@@ -1,7 +1,10 @@
 package aux.user;
 
 import datos.CRUD;
+import datos.form.FormularioDAO;
 import datos.usuario.UsuarioDAO;
+import java.util.List;
+import model.Formulario;
 import model.Usuario;
 import model.solicitudes.Solicitud;
 
@@ -14,10 +17,12 @@ import model.solicitudes.Solicitud;
 public class UserRequestExecutor {
 
     private final CRUD<Usuario> usuarioDAO;
+    private final CRUD<Formulario> formDAO;
     private UserBuilder userBuilder;
 
     public UserRequestExecutor() {
         usuarioDAO = new UsuarioDAO();
+        formDAO = new FormularioDAO();
     }
 
     public void executeCreateUser(Solicitud s) {
@@ -49,14 +54,20 @@ public class UserRequestExecutor {
     public void executeModifyUser(Solicitud s) {
         userBuilder = new UserBuilder(s);
 
-        var oldUser = userBuilder.buildOld();
-
-        if (usuarioDAO.exists(oldUser.getNombre())) {
+        var u = userBuilder.buildOld();
+        if (usuarioDAO.exists(u.getNombre())) {
+            var oldUser = usuarioDAO.getObject(u.getNombre());
             var newUser = userBuilder.buildNew();
+            newUser.setFechaCreacion(oldUser.getFechaCreacion());
             
-            if (usuarioDAO.delete(oldUser.getNombre())) {
-                System.out.println("Usuario " + oldUser.getNombre() + " eliminado");
-            }
+            List<Formulario> forms = formDAO.getList();
+            forms.forEach(f -> {
+                if (f.getUsuarioCreacion().equals(oldUser.getNombre())) {
+                    f.setUsuarioCreacion(newUser.getNombre());
+                    formDAO.create(f);
+                }
+            });
+            usuarioDAO.delete(oldUser.getNombre());
             usuarioDAO.create(newUser);
             //generar respuesta
             System.out.println("Se modifico el usuario " + oldUser.getNombre());

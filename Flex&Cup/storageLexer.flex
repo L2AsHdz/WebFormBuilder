@@ -41,6 +41,7 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "\"USUARIO\""                   {return symbol(PARAM_USUARIO);}
 <YYINITIAL> "\"PASSWORD\""                  {return symbol(PARAM_PASSWORD);}
 <YYINITIAL> "\"FECHA_CREACION\""            {return symbol(PARAM_FECHA_CREACION);}
+<YYINITIAL> "\"FECHA_MODIFICACION\""        {return symbol(PARAM_FECHA_MODIFICACION);}
 
 <YYINITIAL> "\"ID\""                        {return symbol(PARAM_ID);}
 <YYINITIAL> "\"TITULO\""                    {return symbol(PARAM_TITULO_FORM);}

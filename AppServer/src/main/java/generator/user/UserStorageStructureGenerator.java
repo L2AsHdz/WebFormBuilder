@@ -24,7 +24,9 @@ public class UserStorageStructureGenerator extends Generator {
         addLine("{", 1);
         addLine("\"USUARIO\" : \""+user.getNombre()+"\",", 2);
         addLine("\"PASSWORD\" : \""+user.getPassword()+"\",", 2);
-        addLine("\"FECHA_CREACION\" : \""+user.getFechaCreacion()+"\"", 2);
+        addLine("\"FECHA_CREACION\" : \""+user.getFechaCreacion()+"\",", 2);
+        if (user.getFechaModificacion() != null) addLine("\"FECHA_MODIFICACION\" : \""+user.getFechaModificacion()+"\",", 2);
+        text.deleteCharAt(text.lastIndexOf(","));
         addLine("}", 1);
         addLine(")", 0);
         

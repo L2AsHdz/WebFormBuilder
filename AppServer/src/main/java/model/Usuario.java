@@ -11,6 +11,7 @@ public class Usuario {
     private String nombre;
     private String password;
     private String fechaCreacion;
+    private String fechaModificacion;
 
     public Usuario() {
     }
@@ -43,5 +44,13 @@ public class Usuario {
 
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 }

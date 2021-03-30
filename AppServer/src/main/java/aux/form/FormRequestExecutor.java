@@ -25,9 +25,13 @@ public class FormRequestExecutor {
         var form = formBuilder.build();
 
         if (!formDAO.exists(form.getId())) {
-            formDAO.create(form);
-            //Generar respuesta
-            System.out.println("Formulario " + form.getId() + " creado");
+            if (form.getUsuarioCreacion().equals(loggedUser)) {
+                formDAO.create(form);
+                //Generar respuesta
+                System.out.println("Formulario " + form.getId() + " creado");
+            } else {
+                System.out.println("El usuario ingresado no es el que esta logueado actualmente");
+            }
         } else {
             System.out.println("Error, formulario ya existe");
         }

@@ -1,8 +1,9 @@
 package aux.user;
 
+import datos.CRUD;
+import datos.usuario.UsuarioDAO;
 import java.time.LocalDate;
 import model.Usuario;
-import model.solicitudes.Parametro;
 import model.solicitudes.Solicitud;
 
 /**
@@ -62,11 +63,11 @@ public class UserBuilder {
             } else if (p.getName().contains("NUEVO_PASSWORD")) {
                 user.setPassword(getValue(p.getValue()));
             } else if (p.getName().contains("MODIFICACION")) {
-                user.setFechaCreacion(getValue(p.getValue()));
+                user.setFechaModificacion(getValue(p.getValue()));
             }
         });
-        if (user.getFechaCreacion() == null) {
-            user.setFechaCreacion(LocalDate.now().toString());
+        if (user.getFechaModificacion()== null) {
+            user.setFechaModificacion(LocalDate.now().toString());
         }
         
         return user;
