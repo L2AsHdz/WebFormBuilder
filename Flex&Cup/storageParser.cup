@@ -44,11 +44,11 @@ parser code {:
 terminal        INICIO_USER, INICIO_FORM;
 terminal        COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
 
-terminal        PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
-terminal        PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
+terminal String      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION;
+terminal String      PARAM_ID, PARAM_TITULO_FORM, PARAM_NOMBRE_FORM, PARAM_TEMA, PARAM_USUARIO_CREACION;
 
-terminal        PARAM_COMPONENTES, PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_TEXTO_VISIBLE;
-terminal        PARAM_ALINEACION, PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
+terminal String      PARAM_COMPONENTES, PARAM_NOMBRE_CAMPO, PARAM_FORMULARIO, PARAM_CLASE, PARAM_TEXTO_VISIBLE;
+terminal String      PARAM_ALINEACION, PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FILAS, PARAM_COLUMNAS, PARAM_URL;
 
 terminal String      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
 terminal String      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
@@ -64,7 +64,7 @@ non terminal        paramsForm, paramForm;
 non terminal        componentStruct, components, component, params, param;
 
 non terminal String         clase, alineacion, required, opciones;
-non terminal String         value, fecha, entero, literal, id, tema;
+non terminal String         value, fecha, entero, literal, id, tema, keyword;
 
 inicio ::= startUserStructure
          | startFormStructure
@@ -104,7 +104,7 @@ paramForm ::= PARAM_NOMBRE_FORM COLON value:v               {:form.setNombre(v.r
             ;
 
 componentStruct ::= PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET CLOSE_ROUND_BRACKET
-                  | PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components\ CLOSE_ROUND_BRACKET
+                  | PARAM_COMPONENTES COLON OPEN_ROUND_BRACKET components CLOSE_ROUND_BRACKET
                   ;
 
 components ::= component COMMA components
@@ -134,6 +134,10 @@ param ::= PARAM_ID COLON id:i                           {:comp.setId(i.replace("
 
 
 value ::= VALUE:v           {:RESULT = v;:}
+        | id:i              {:RESULT = i;:}
+        | fecha:f           {:RESULT = f;:}
+        | entero:e          {:RESULT = e;:}
+        | keyword:k         {:RESULT = k;:}
         ;
 
 id ::= ID:i                 {:RESULT = i;:}
@@ -143,6 +147,7 @@ fecha ::= FECHA:f           {:RESULT = f;:}
         ;
 
 literal ::= LITERAL:l       {:RESULT = l;:}
+          | value:v         {:RESULT = v;:}
           ;
 
 entero ::= ENTERO:e         {:RESULT = e;:}
@@ -173,6 +178,32 @@ required ::= SI:r   {:RESULT =r;:}
            ;
 
 opciones ::= OPCIONES:o           {:RESULT = o;:}
+           | value:v              {:RESULT = v;:}
            ;
+
+keyword ::= tema:t                      {:RESULT = t;:}
+          | clase:c                     {:RESULT = c;:}
+          | alineacion:a                {:RESULT = a;:}
+          | required:r                  {:RESULT = r;:}
+          | PARAM_USUARIO:k             {:RESULT = k;:}
+          | PARAM_PASSWORD:k            {:RESULT = k;:}
+          | PARAM_FECHA_CREACION:k      {:RESULT = k;:}
+          | PARAM_ID:k                  {:RESULT = k;:}
+          | PARAM_TITULO_FORM:k         {:RESULT = k;:}
+          | PARAM_NOMBRE_FORM:k         {:RESULT = k;:}
+          | PARAM_TEMA:k                {:RESULT = k;:}
+          | PARAM_USUARIO_CREACION:k    {:RESULT = k;:}
+          | PARAM_COMPONENTES:k         {:RESULT = k;:}
+          | PARAM_NOMBRE_CAMPO:k        {:RESULT = k;:}
+          | PARAM_FORMULARIO:k          {:RESULT = k;:}
+          | PARAM_CLASE:k               {:RESULT = k;:}
+          | PARAM_TEXTO_VISIBLE:k       {:RESULT = k;:}
+          | PARAM_ALINEACION:k          {:RESULT = k;:}
+          | PARAM_REQUERIDO:k           {:RESULT = k;:}
+          | PARAM_OPCIONES:k            {:RESULT = k;:}
+          | PARAM_FILAS:k               {:RESULT = k;:}
+          | PARAM_COLUMNAS:k            {:RESULT = k;:}
+          | PARAM_URL:k                 {:RESULT = k;:}
+          ;
 
 endStructure ::= CLOSE_BRACE CLOSE_ROUND_BRACKET;

@@ -24,8 +24,6 @@ import static analizadores.sintactico.StorageSym.*;
     return new Symbol(EOF, "Fin de linea");
 %eofval}
 
-SALTO = \n|\r|\r\n
-ESPACIO = {SALTO} | [ \t\f]
 ENTERO = "\""(0|([1-9][0-9]*))"\""
 
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
@@ -90,7 +88,7 @@ LITERAL = "\""[^"\""]*"\""
     "}"                                 {return symbol(CLOSE_BRACE);}
     "("                                 {return symbol(OPEN_ROUND_BRACKET);}
     ")"                                 {return symbol(CLOSE_ROUND_BRACKET);}
-    {ESPACIO}                           {/*Ignorar*/}
+    (\s)                                {/*Ignorar*/}
 }
 
 <YYINITIAL> {ID}                        {return symbol(ID);}
