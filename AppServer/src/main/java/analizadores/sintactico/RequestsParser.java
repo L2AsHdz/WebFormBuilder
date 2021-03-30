@@ -16,6 +16,9 @@ import validator.user.CreateUserRequestValidator;
 import validator.user.ModifyUserRequestValidator;
 import validator.form.CreateFormRequestValidator;
 import validator.form.ModifyFormRequestValidator;
+import validator.component.CreateComponentRequestValidator;
+import validator.component.ModifyComponentRequestValidator;
+import validator.component.DeleteComponentRequestValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.Symbol;
@@ -641,6 +644,9 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
     private Validator modifyUserRV = new ModifyUserRequestValidator();
     private Validator createFormRV = new CreateFormRequestValidator();
     private Validator modifyFormRV = new ModifyFormRequestValidator();
+    private Validator createComponentRV = new CreateComponentRequestValidator();
+    private Validator modifyComponentRV = new ModifyComponentRequestValidator();
+    private Validator deleteComponentRV = new DeleteComponentRequestValidator();
     String error;
 
     public List<ErrorAnalisis> getErrores() {
@@ -1661,8 +1667,17 @@ class CUP$RequestsParser$actions {
           case 80: // bloqueNewComponent ::= OPEN_BRACE paramsNewComponent CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                        solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+
+                        error = createComponentRV.validate(o, parametros);
+                        if (error.isEmpty()) {
+                            solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+                        } else {
+                            System.out.println(error);
+                        }
                         parametros = new ArrayList();
                      
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueNewComponent",28, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
@@ -1889,9 +1904,17 @@ class CUP$RequestsParser$actions {
           case 97: // bloqueEditComponent ::= OPEN_BRACE paramsEditComponent CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
-                        parametros = new ArrayList();
+                            error = modifyComponentRV.validate(o, parametros);
+                            if (error.isEmpty()) {
+                                solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
+                            } else {
+                                System.out.println(error);
+                            }
+                            parametros = new ArrayList();
                       
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueEditComponent",29, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
@@ -2132,8 +2155,16 @@ class CUP$RequestsParser$actions {
           case 115: // bloqueDeleteComponent ::= OPEN_BRACE paramsDeleteComponent CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                            solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
+                            error = deleteComponentRV.validate(o, parametros);
+                            if (error.isEmpty()) {
+                                solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
+                            } else {
+                                System.out.println(error);
+                            }
                             parametros = new ArrayList();
                         
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueDeleteComponent",30, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
