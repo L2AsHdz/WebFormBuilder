@@ -43,7 +43,7 @@ parser code{:
         return this.solicitudes;
     }
 
-    private void addParameter(List<Parametro> parametros, Parametro param) {
+    private void addParameter(Parametro param) {
         boolean add = true;
         
         for (Parametro p : parametros) {
@@ -178,8 +178,8 @@ bloqueLogin ::= OPEN_BRACE:o paramsLogin CLOSE_BRACE
                      :}
                      ;
 
-paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(parametros, p);:}
-              | paramLogin:p                          {:addParameter(parametros, p);:}
+paramsLogin ::= paramLogin:p COMMA paramsLogin        {:addParameter(p);:}
+              | paramLogin:p                          {:addParameter(p);:}
               ;
 
 paramLogin ::= nameParamLogin:n COLON value:v           {:RESULT = new Parametro(n, v);:}
@@ -209,8 +209,8 @@ bloqueCreateUser ::= OPEN_BRACE:o paramsCreateUser CLOSE_BRACE
                    :}
                    ;
 
-paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(parametros, p);:}
-                   | paramCreateUser:p                          {:addParameter(parametros, p);:}
+paramsCreateUser ::= paramCreateUser:p COMMA paramsCreateUser   {:addParameter(p);:}
+                   | paramCreateUser:p                          {:addParameter(p);:}
                    ;
      
 paramCreateUser ::= nameParamCreateUser:n COLON value:v         {:RESULT = new Parametro(n, v);:}
@@ -241,8 +241,8 @@ bloqueModifyUser ::= OPEN_BRACE:o paramsModifyUser CLOSE_BRACE
                         :}
                         ;
 
-paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter(parametros, p);:}
-                   | paramModifyUser:p                            {:addParameter(parametros, p);:}
+paramsModifyUser ::= paramModifyUser:p COMMA paramsModifyUser     {:addParameter(p);:}
+                   | paramModifyUser:p                            {:addParameter(p);:}
                    ;
 
 paramModifyUser ::= nameParamModifyUser:n COLON value:v             {:RESULT = new Parametro(n, v);:}
@@ -296,8 +296,8 @@ bloqueNewForm ::= OPEN_BRACE:o paramsNewForm CLOSE_BRACE
                      :}
                      ;
 
-paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(parametros, p);:}
-              | paramNewForm:p                              {:addParameter(parametros, p);:}
+paramsNewForm ::= paramNewForm:p COMMA paramsNewForm        {:addParameter(p);:}
+              | paramNewForm:p                              {:addParameter(p);:}
               ;
 
 paramNewForm ::= nameParamNewForm:n COLON value:v           {:RESULT = new Parametro(n, v);:}
@@ -350,8 +350,8 @@ bloqueEditForm ::= OPEN_BRACE:o paramsEditForm CLOSE_BRACE
                  :}
                  ;
 
-paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(parametros, p);:}
-                 | paramEditForm:p                              {:addParameter(parametros, p);:}
+paramsEditForm ::= paramEditForm:p COMMA paramsEditForm         {:addParameter(p);:}
+                 | paramEditForm:p                              {:addParameter(p);:}
                  ;
 
 paramEditForm ::= PARAM_ID:p COLON id:i                      {:RESULT = new Parametro(p.getLexema(), i);:}
@@ -381,8 +381,8 @@ bloqueNewComponent ::= OPEN_BRACE:o paramsNewComponent CLOSE_BRACE
                      :}
                      ;
 
-paramsNewComponent ::= paramNewComponent:p COMMA paramsNewComponent         {:addParameter(parametros, p);:}
-                     | paramNewComponent:p                                  {:addParameter(parametros, p);:}
+paramsNewComponent ::= paramNewComponent:p COMMA paramsNewComponent         {:addParameter(p);:}
+                     | paramNewComponent:p                                  {:addParameter(p);:}
                      ;
 
 paramNewComponent ::= nameParamNewComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
@@ -421,8 +421,8 @@ bloqueEditComponent ::= OPEN_BRACE:o paramsEditComponent CLOSE_BRACE
                       :}
                       ;
 
-paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:addParameter(parametros, p);:}
-                      | paramEditComponent:p                                  {:addParameter(parametros, p);:}
+paramsEditComponent ::= paramEditComponent:p COMMA paramsEditComponent        {:addParameter(p);:}
+                      | paramEditComponent:p                                  {:addParameter(p);:}
                       ;
 
 paramEditComponent ::= nameParamEditComponent:n COLON value:v         {:RESULT = new Parametro(n, v);:}
@@ -462,8 +462,8 @@ bloqueDeleteComponent ::= OPEN_BRACE:o paramsDeleteComponent CLOSE_BRACE
                         :}
                         ;
 
-paramsDeleteComponent ::= paramDeleteComponent:p COMMA paramsDeleteComponent      {:addParameter(parametros, p);:}
-                        | paramDeleteComponent:p                                  {:addParameter(parametros, p);:}                        ;
+paramsDeleteComponent ::= paramDeleteComponent:p COMMA paramsDeleteComponent      {:addParameter(p);:}
+                        | paramDeleteComponent:p                                  {:addParameter(p);:}                        ;
 
 paramDeleteComponent ::= PARAM_ID:p COLON id:i              {:RESULT = new Parametro(p.getLexema(), i);:}
                        | PARAM_FORMULARIO:p COLON id:i      {:RESULT = new Parametro(p.getLexema(), i);:}

@@ -657,7 +657,7 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
         return this.solicitudes;
     }
 
-    private void addParameter(List<Parametro> parametros, Parametro param) {
+    private void addParameter(Parametro param) {
         boolean add = true;
         
         for (Parametro p : parametros) {
@@ -962,7 +962,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsLogin",31, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -974,7 +974,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsLogin",31, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1063,7 +1063,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",32, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1075,7 +1075,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsCreateUser",32, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1179,7 +1179,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",33, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1191,7 +1191,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsModifyUser",33, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1358,7 +1358,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsNewForm",41, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1370,7 +1370,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsNewForm",41, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1568,7 +1568,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsEditForm",42, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1580,7 +1580,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsEditForm",42, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1691,7 +1691,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsNewComponent",48, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1703,7 +1703,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsNewComponent",48, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1927,7 +1927,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsEditComponent",49, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -1939,7 +1939,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsEditComponent",49, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -2178,7 +2178,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsDeleteComponent",50, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
@@ -2190,7 +2190,7 @@ class CUP$RequestsParser$actions {
 		int pleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()).right;
 		Parametro p = (Parametro)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.peek()).value;
-		addParameter(parametros, p);
+		addParameter(p);
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("paramsDeleteComponent",50, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);
             }
           return CUP$RequestsParser$result;
