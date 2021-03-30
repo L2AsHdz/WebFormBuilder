@@ -11,8 +11,10 @@ import model.solicitudes.Parametro;
  * @author asael
  */
 public abstract class Validator {
+    
+    protected StringBuilder error;
 
-    public abstract String validate(Token openBrace, List<Parametro> params);
+    public abstract String validate(Token o, List<Parametro> params);
     
     protected String getName(Parametro p) {
         return p.getName().replace("\"", "").replaceAll("\\s", "");

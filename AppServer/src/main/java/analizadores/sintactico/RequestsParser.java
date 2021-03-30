@@ -13,6 +13,7 @@ import model.solicitudes.TipoSolicitud;
 import model.solicitudes.Parametro;
 import validator.Validator;
 import validator.user.CreateUserRequestValidator;
+import validator.user.ModifyUserRequestValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.Symbol;
@@ -635,6 +636,7 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
     private List<Parametro> parametros = new ArrayList();
 
     private Validator createUserRV = new CreateUserRequestValidator();
+    private Validator modifyUserRV = new ModifyUserRequestValidator();
     String error;
 
     public List<ErrorAnalisis> getErrores() {
@@ -1136,8 +1138,16 @@ class CUP$RequestsParser$actions {
           case 41: // bloqueModifyUser ::= OPEN_BRACE paramsModifyUser CLOSE_BRACE 
             {
               Object RESULT =null;
+		int oleft = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).left;
+		int oright = ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).right;
+		Token o = (Token)((java_cup.runtime.Symbol) CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)).value;
 		
-                            solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
+                            error = modifyUserRV.validate(o, parametros);
+                            if (error.isEmpty()) {
+                                solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
+                            } else {
+                                System.out.println(error);
+                            }
                             parametros = new ArrayList();
                         
               CUP$RequestsParser$result = parser.getSymbolFactory().newSymbol("bloqueModifyUser",17, ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.elementAt(CUP$RequestsParser$top-2)), ((java_cup.runtime.Symbol)CUP$RequestsParser$stack.peek()), RESULT);

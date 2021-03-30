@@ -7,27 +7,29 @@ import validator.Validator;
 
 /**
  *
- * @date 29/03/2021
- * @time 21:06:08
+ * @date 30/03/2021
+ * @time 00:57:01
  * @author asael
  */
-public class CreateUserRequestValidator extends  Validator {
+public class ModifyUserRequestValidator extends Validator {
 
     @Override
     public String validate(Token o, List<Parametro> params) {
         error = new StringBuilder("");
-        boolean user = false;
-        boolean pass = false;
+        boolean oldUser = false;
+        boolean newPass = false;
+        boolean newUser = false;
         
         for (Parametro p : params) {
             switch (getName(p)) {
-                case "USUARIO" -> user = true;
-                case "PASSWORD" -> pass = true;
+                case "USUARIO_ANTIGUO" -> oldUser = true;
+                case "USUARIO_NUEVO" -> newUser = true;
+                case "NUEVO_PASSWORD" -> newPass = true;
             }
         }
         
-        if (!user | !pass) {
-            error.append("El USUARIO y PASSWORD son parametros obligatorios, linea: ")
+        if (!oldUser | !newPass | !newUser) {
+            error.append("Faltan parametros obligatorios en la solicitud, linea: ")
                     .append(o.getLinea())
                     .append(", col: ")
                     .append(o.getColumna());
