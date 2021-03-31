@@ -4,8 +4,11 @@ import aux.user.UserBuilder;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
 import executor.Executor;
+import generator.response.ResponseStructureGenerator;
 import model.Usuario;
+import model.response.Response;
 import model.solicitudes.Solicitud;
+import static model.response.TipoRespuesta.CREAR_USUARIO;
 
 /**
  *
@@ -33,13 +36,10 @@ public class CreateUserRequestExecutor extends Executor {
         if (!usuarioDAO.exists(usuario.getNombre())) {
             usuarioDAO.create(usuario);
             //Generar respuesta
-            response.append("Usuario ")
-                    .append(usuario.getNombre())
-                    .append(" creado");
+            response.append(new ResponseStructureGenerator(
+                    new Response(CREAR_USUARIO, "succes", "Usuario " + usuario.getNombre() + " creado")).generate());
         } else {
-            response.append("Error, usuario ")
-                    .append(usuario.getNombre())
-                    .append(" ya existe en el sistema");
+            response.append(new ResponseStructureGenerator(new Response(CREAR_USUARIO, "Error", "El usuario " + usuario.getNombre() + " ya existe en el sistema")).generate());
         }
         
         return response.toString();

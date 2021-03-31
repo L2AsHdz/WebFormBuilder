@@ -8,7 +8,7 @@ package generator;
  */
 public abstract class Generator {
     
-    protected StringBuilder text = new StringBuilder();
+    protected StringBuilder text;
     
     public abstract String generate();
     
