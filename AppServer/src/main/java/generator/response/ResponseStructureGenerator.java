@@ -24,7 +24,7 @@ public class ResponseStructureGenerator extends Generator {
         addLine("<!ini_respuesta: \"" + r.getTipoRespuesta() + "\">", 0);
         addLine("{\"PARAMETROS_RESPUESTA\" : [", 1);
         addLine("{", 3);
-        addLine("\"ESTADO\" : \""+r.getEstado()+"\",", 4);
+        addLine("\"STATE\" : \""+r.getEstado()+"\",", 4);
         addLine("\"MESSAGE\" : \""+r.getMessage()+"\"", 4);
         addLine("}", 3);
         addLine("]", 2);
