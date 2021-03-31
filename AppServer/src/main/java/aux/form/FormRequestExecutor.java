@@ -29,10 +29,10 @@ public class FormRequestExecutor {
     }
 
     public String executeDeleteForm(Solicitud s) {
-        return modifyFormRE.execute(s);
+        return deleteFormRE.execute(s);
     }
 
     public String executeModifyForm(Solicitud s) {
-        return deleteFormRE.execute(s);
+        return modifyFormRE.execute(s);
     }
 }

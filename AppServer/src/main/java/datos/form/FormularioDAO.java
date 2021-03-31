@@ -18,19 +18,19 @@ import java.util.ArrayList;
  * @time 11:42:41
  * @author asael
  */
-public class FormularioDAO implements CRUD<Formulario>{
-    
+public class FormularioDAO implements CRUD<Formulario> {
+
     private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/data/forms/";
     private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
     private Generator formSSG;
-    
+
     @Override
     public List<Formulario> getList() {
         List<String> fileNames = getfileNames(PATH_FORMS);
         List<Formulario> forms = new ArrayList();
         
         fileNames.forEach(fn -> forms.add(getObject(fn)));
-        
+
         return forms;
     }
 

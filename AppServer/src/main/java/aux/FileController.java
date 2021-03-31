@@ -41,11 +41,11 @@ public class FileController {
             System.out.println("No se encontró el archivo");
         }
     }
-    
+
     public static boolean deleteFile(String path) {
         return new File(path).delete();
     }
-    
+
     public static boolean deleteDirectory(File file) {
 
         if (file.isDirectory()) {
@@ -53,9 +53,9 @@ public class FileController {
                 deleteDirectory(f);
             }
         }
-         return file.delete();
+        return file.delete();
     }
-    
+
     public static void createDirectory(String directory) {
         File directorio = new File(directory);
         if (!directorio.exists()) {
@@ -65,10 +65,14 @@ public class FileController {
             }
         }
     }
-    
+
     public static List<String> getfileNames(String path) {
         File file = new File(path);
-        List<String> fileNames = Arrays.asList(file.list());
+        List<String> fileNames = new ArrayList();
+
+        if (file.exists()) {
+            fileNames = Arrays.asList(file.list());
+        }
         return fileNames;
     }
 

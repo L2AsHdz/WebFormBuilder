@@ -29,60 +29,44 @@ public class ModifyComponentRequestExecutor extends Executor {
 
         componentBuilder = new ComponentBuilder(s);
         var component = componentBuilder.build();
-
+        
         if (formDAO.exists(component.getFormulario())) {
             var form = formDAO.getObject(component.getFormulario());
             var componentes = form.getComponentes();
             int index = indexOfComponent(form, component.getId());
-
+            
             if (index != -1) {
                 var compForm = componentes.get(index);
 
-                if (component.getNombreCampo() != null) {
-                    compForm.setNombreCampo(component.getNombreCampo());
-                }
-                if (component.getTextoVisible() != null) {
-                    compForm.setTextoVisible(component.getTextoVisible());
-                }
-                if (component.getAlineacion() != null) {
-                    compForm.setAlineacion(component.getAlineacion());
-                }
-                if (component.getRequerido() != null) {
-                    compForm.setRequerido(component.getRequerido());
-                }
-                if (component.getOpciones() != null) {
-                    compForm.setOpciones(component.getOpciones());
-                }
-                if (component.getNoFilas() != null) {
-                    compForm.setNoFilas(component.getNoFilas());
-                }
-                if (component.getNoColumnas() != null) {
-                    compForm.setNoColumnas(component.getNoColumnas());
-                }
-                if (component.getUrl() != null) {
-                    compForm.setUrl(component.getUrl());
-                }
-
+                if (component.getNombreCampo() != null) compForm.setNombreCampo(component.getNombreCampo());
+                if (component.getTextoVisible() != null) compForm.setTextoVisible(component.getTextoVisible());
+                if (component.getAlineacion() != null) compForm.setAlineacion(component.getAlineacion());
+                if (component.getRequerido() != null) compForm.setRequerido(component.getRequerido());
+                if (component.getOpciones() != null) compForm.setOpciones(component.getOpciones());
+                if (component.getNoFilas() != null) compForm.setNoFilas(component.getNoFilas());
+                if (component.getNoColumnas() != null) compForm.setNoColumnas(component.getNoColumnas());
+                if (component.getUrl() != null) compForm.setUrl(component.getUrl());
+                
                 if (component.getIndice() > 0) {
                     int newIndex = component.getIndice();
                     var compAux = componentes.remove(index);
-
+                    
                     if (newIndex >= componentes.size()) {
                         componentes.add(compAux);
                     } else {
-                        componentes.add(newIndex - 1, compAux);
+                        componentes.add(newIndex-1, compAux);
                     }
                 }
-
+                
                 formDAO.create(form);
                 response.append("Componente ").append(compForm.getId()).append(" modificado");
-
+                
             } else {
                 response.append("No existe el componente ").append(component.getId()).append(" en el form ").append(form.getId());
             }
-
+            
         } else {
-            response.append(component.getFormulario() + "El formulario " + " no existe");
+            response.append("El formulario ").append(component.getFormulario()).append(" no existe");
         }
 
         return response.toString();

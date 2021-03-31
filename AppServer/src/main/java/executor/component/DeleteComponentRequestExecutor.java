@@ -37,7 +37,7 @@ public class DeleteComponentRequestExecutor extends Executor{
             if (index != -1) {
                 form.getComponentes().remove(index);
                 formDAO.create(form);
-                response.append("Eliminando componente en el indice ").append(index);
+                response.append("Eliminando componente en el indice ").append(index+1);
             } else {
                 response.append("No existe el componente ").append(component.getId()).append(" en el form ").append(form.getId());
             }

@@ -45,6 +45,7 @@ public class CreateComponentRequestExecutor extends Executor {
                 formDAO.create(form);
                 response.append("Componente ").append(component.getId()).append(" agregado al form ").append(form.getId());
             } else {
+                response.append("El componente ya existe en el form ").append(form.getId());
             }
         } else {
             response.append("No existe el formulario indicado en el componente");
