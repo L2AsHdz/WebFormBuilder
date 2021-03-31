@@ -30,9 +30,9 @@ public class DeleteFormRequestExecutor extends Executor {
                 .replaceAll("\\s", "");
 
         if (formDAO.delete(idForm)) {
-            addResponse(ELIMINAR_FORMULARIO, "success", "Formulario " + idForm + " eliminado");
+            addResponse(ELIMINAR_FORMULARIO, "Exito", "Formulario " + idForm + " eliminado");
         } else {
-            addResponse(ELIMINAR_FORMULARIO, "error", "No se puede eliminar, el formulario " + idForm + " no existe");
+            addResponse(ELIMINAR_FORMULARIO, "Error", "No se puede eliminar, el formulario " + idForm + " no existe");
         }
 
         return response.toString();

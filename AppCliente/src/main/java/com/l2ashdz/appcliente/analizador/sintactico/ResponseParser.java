@@ -164,6 +164,10 @@ public class ResponseParser extends java_cup.runtime.lr_parser {
     private List<Respuesta> respuestas = new ArrayList();
     private Respuesta respuesta = new Respuesta();
 
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
     private void addRespuesta() {
         respuestas.add(respuesta);
         respuesta = new Respuesta();

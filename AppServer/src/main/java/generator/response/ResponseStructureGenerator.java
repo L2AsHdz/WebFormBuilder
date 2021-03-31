@@ -25,11 +25,13 @@ public class ResponseStructureGenerator extends Generator {
         addLine("{\"PARAMETROS_RESPUESTA\" : [", 1);
         addLine("{", 3);
         addLine("\"STATE\" : \""+r.getEstado()+"\",", 4);
-        addLine("\"MESSAGE\" : \""+r.getMessage()+"\"", 4);
+        addLine("\"MESSAGE\" : \""+r.getMessage()+"\",", 4);
+        if (r.getLoggedUser() != null) addLine("\"LOGGED_USER\" : \""+r.getLoggedUser()+"\",", 0);
         addLine("}", 3);
         addLine("]", 2);
         addLine("}", 1);
         addLine("<fin_respuesta!>", 0);
+        text.deleteCharAt(text.lastIndexOf(","));
 
         return text.toString();
     }

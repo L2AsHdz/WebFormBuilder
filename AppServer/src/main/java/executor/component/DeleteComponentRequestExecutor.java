@@ -38,12 +38,12 @@ public class DeleteComponentRequestExecutor extends Executor{
             if (index != -1) {
                 form.getComponentes().remove(index);
                 formDAO.create(form);
-                addResponse(ELIMINAR_COMPONENTE, "success", "Se elimino el componente " + component.getId() + " del formulario " + form.getId());
+                addResponse(ELIMINAR_COMPONENTE, "Exito", "Se elimino el componente " + component.getId() + " del formulario " + form.getId());
             } else {
-                addResponse(ELIMINAR_COMPONENTE, "error", "No existe el componente " + component.getId() + " en el formulario " + form.getId());
+                addResponse(ELIMINAR_COMPONENTE, "Error", "No existe el componente " + component.getId() + " en el formulario " + form.getId());
             }
         } else {
-            addResponse(ELIMINAR_COMPONENTE, "error", "El formulario " + component.getFormulario() + " no existe");
+            addResponse(ELIMINAR_COMPONENTE, "Error", "El formulario " + component.getFormulario() + " no existe");
         }
 
         return response.toString();

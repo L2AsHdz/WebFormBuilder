@@ -10,6 +10,10 @@ parser code {:
     private List<Respuesta> respuestas = new ArrayList();
     private Respuesta respuesta = new Respuesta();
 
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
     private void addRespuesta() {
         respuestas.add(respuesta);
         respuesta = new Respuesta();

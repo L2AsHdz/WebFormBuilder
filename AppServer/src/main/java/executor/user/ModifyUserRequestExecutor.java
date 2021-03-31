@@ -51,9 +51,9 @@ public class ModifyUserRequestExecutor extends Executor {
             usuarioDAO.delete(oldUser.getNombre());
             usuarioDAO.create(newUser);
 
-            addResponse(MODIFICAR_USUARIO, "success", "Se modifico el usuario " + oldUser.getNombre());
+            addResponse(MODIFICAR_USUARIO, "Exito", "Se modifico el usuario " + oldUser.getNombre());
         } else {
-            addResponse(MODIFICAR_USUARIO, "error", "No se puede modificar, el usuario " + u.getNombre() + " no existe");
+            addResponse(MODIFICAR_USUARIO, "Error", "No se puede modificar, el usuario " + u.getNombre() + " no existe");
         }
         
         return response.toString();

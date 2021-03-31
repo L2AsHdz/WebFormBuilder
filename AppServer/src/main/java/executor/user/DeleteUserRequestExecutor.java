@@ -30,9 +30,9 @@ public class DeleteUserRequestExecutor extends Executor {
                 .replaceAll("\\s", "");
 
         if (usuarioDAO.delete(nombre)) {
-            addResponse(ELIMINAR_USUARIO, "success", "Usuario " + nombre + " se elimino correctamente");
+            addResponse(ELIMINAR_USUARIO, "Exito", "Usuario " + nombre + " se elimino correctamente");
         } else {
-            addResponse(ELIMINAR_USUARIO, "error", "Imposible eliminar, el usuario " + nombre + " no existe");
+            addResponse(ELIMINAR_USUARIO, "Error", "Imposible eliminar, el usuario " + nombre + " no existe");
         }
 
         return response.toString();

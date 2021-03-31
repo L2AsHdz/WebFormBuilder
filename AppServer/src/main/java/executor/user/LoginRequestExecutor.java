@@ -32,9 +32,9 @@ public class LoginRequestExecutor extends Executor {
         var user = userBuilder.build();
         
         if (userDAO.exists(user.getNombre())) {
-            addResponse(LOGIN_USUARIO, "success", "Login completo para " + user.getNombre());
+            addResponse(LOGIN_USUARIO, "Exito", "Login completo para " + user.getNombre());
         } else {
-            addResponse(LOGIN_USUARIO, "error", "El usuario no existe, imposible logearse");
+            addResponse(LOGIN_USUARIO, "Error", "El usuario no existe, imposible logearse");
         }
         
         return response.toString();

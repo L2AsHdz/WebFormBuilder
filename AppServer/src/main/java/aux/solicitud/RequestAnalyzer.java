@@ -16,10 +16,10 @@ import model.solicitudes.Solicitud;
  */
 public class RequestAnalyzer {
 
-    RequestsLexer lex;
-    RequestsParser parser;
-    List<Error> errores = new ArrayList<>();
-    List<Solicitud> solicitudes = new ArrayList<>();
+    private RequestsLexer lex;
+    private RequestsParser parser;
+    private List<Error> errores = new ArrayList<>();
+    private List<Solicitud> solicitudes = new ArrayList<>();
 
     public RequestAnalyzer() {
     }
