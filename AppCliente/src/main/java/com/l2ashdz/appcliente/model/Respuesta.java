@@ -11,6 +11,7 @@ public class Respuesta {
     private String tipoRespuesta;
     private String estado;
     private String message;
+    private String loggedUser;
 
     public Respuesta(String tipoRespuesta, String estado, String message) {
         this.tipoRespuesta = tipoRespuesta;
@@ -43,5 +44,13 @@ public class Respuesta {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(String loggedUser) {
+        this.loggedUser = loggedUser;
     }
 }

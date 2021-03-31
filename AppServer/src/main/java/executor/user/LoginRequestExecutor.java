@@ -4,7 +4,9 @@ import aux.user.UserBuilder;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
 import executor.Executor;
+import generator.response.ResponseStructureGenerator;
 import model.Usuario;
+import model.response.Response;
 import model.solicitudes.Solicitud;
 import static model.response.TipoRespuesta.LOGIN_USUARIO;
 
@@ -32,7 +34,7 @@ public class LoginRequestExecutor extends Executor {
         var user = userBuilder.build();
         
         if (userDAO.exists(user.getNombre())) {
-            addResponse(LOGIN_USUARIO, "Exito", "Login completo para " + user.getNombre());
+            response.append(new ResponseStructureGenerator(new Response(LOGIN_USUARIO, "Exito", "El usuario logueado ahora es " + user.getNombre(), user.getNombre())).generate());
         } else {
             addResponse(LOGIN_USUARIO, "Error", "El usuario no existe, imposible logearse");
         }

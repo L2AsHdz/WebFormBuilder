@@ -19,6 +19,13 @@ public class Response {
         this.message = message;
     }
 
+    public Response(TipoRespuesta tipoRespuesta, String estado, String message, String loggedUser) {
+        this.tipoRespuesta = tipoRespuesta;
+        this.estado = estado;
+        this.message = message;
+        this.loggedUser = loggedUser;
+    }
+
     public Response() {
     }
 

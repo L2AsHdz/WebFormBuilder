@@ -35,7 +35,7 @@ terminal String     LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
 terminal String     NEW_FORM, DELETE_FORM, MODIFY_FORM;
 terminal String     NEW_COMPONENT, DELETE_COMPONENT, EDIT_COMPONENT;
 
-terminal        PARAM_STATE, PARAM_MESSAGE, SUCCES, ERROR;
+terminal        PARAM_STATE, PARAM_MESSAGE, PARAM_LOGGED_USER, SUCCES, ERROR;
 
 terminal String     LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
 terminal String     VALUE, LITERAL;
@@ -84,6 +84,7 @@ paramsResponse ::= paramResponse COMMA paramsResponse
 
 paramResponse ::= PARAM_STATE COLON state:s         {:respuesta.setEstado(s);:}
                 | PARAM_MESSAGE COLON literal:l     {:respuesta.setMessage(l);:}
+                | PARAM_LOGGED_USER COLON value:v   {:respuesta.setLoggedUser(v);:}
                 ;
 
 value ::= VALUE:v           {:RESULT = v;:}

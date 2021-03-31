@@ -32,7 +32,7 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "ini_respuesta"             {return symbol(START_RESPONSE);}
 <YYINITIAL> "fin_respuesta"             {return symbol(END_RESPONSE);}
 <YYINITIAL> "ini_respuestas"            {return symbol(START_RESPONSES);}
-<YYINITIAL> "din_respuestas"            {return symbol(END_RESPONSES);}
+<YYINITIAL> "fin_respuestas"            {return symbol(END_RESPONSES);}
 
 <YYINITIAL> "\"PARAMETROS_RESPUESTA\""      {return symbol(RESPONSE_PARAMS);}
 
@@ -51,9 +51,10 @@ LITERAL = "\""[^"\""]*"\""
 
 <YYINITIAL> "\"STATE\""                 {return symbol(PARAM_STATE);}
 <YYINITIAL> "\"MESSAGE\""               {return symbol(PARAM_MESSAGE);}
+<YYINITIAL> "\"LOGGED_USER\""           {return symbol(PARAM_LOGGED_USER);}
 
-<YYINITIAL> "\"succes\""                {return symbol(SUCCES);}
-<YYINITIAL> "\"error\""                 {return symbol(ERROR);}
+<YYINITIAL> "\"Exito\""                {return symbol(SUCCES);}
+<YYINITIAL> "\"Error\""                 {return symbol(ERROR);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}
