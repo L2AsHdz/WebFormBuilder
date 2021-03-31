@@ -1,9 +1,6 @@
-package aux.user;
+package executor.user;
 
 import executor.Executor;
-import executor.user.CreateUserRequestExecutor;
-import executor.user.DeleteUserRequestExecutor;
-import executor.user.ModifyUserRequestExecutor;
 import model.solicitudes.Solicitud;
 
 /**
@@ -17,11 +14,13 @@ public class UserRequestExecutor {
     private final Executor createUserRE;
     private final Executor modifyUserRE;
     private final Executor deleteUserRE;
+    private final Executor loginRE;
 
     public UserRequestExecutor() {
         createUserRE = new CreateUserRequestExecutor();
         modifyUserRE = new ModifyUserRequestExecutor();
         deleteUserRE = new DeleteUserRequestExecutor();
+        loginRE = new LoginRequestExecutor();
     }
 
     public String executeCreateUser(Solicitud s) {

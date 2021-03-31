@@ -1,9 +1,6 @@
-package aux.component;
+package executor.component;
 
 import executor.Executor;
-import executor.component.CreateComponentRequestExecutor;
-import executor.component.DeleteComponentRequestExecutor;
-import executor.component.ModifyComponentRequestExecutor;
 import model.solicitudes.Solicitud;
 
 /**

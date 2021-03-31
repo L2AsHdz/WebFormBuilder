@@ -1,9 +1,9 @@
 package aux.solicitud;
 
-import aux.component.ComponentRequestExecutor;
-import aux.form.FormRequestExecutor;
-import aux.user.LoginRequestExecutor;
-import aux.user.UserRequestExecutor;
+import executor.component.ComponentRequestExecutor;
+import executor.form.FormRequestExecutor;
+import executor.user.LoginRequestExecutor;
+import executor.user.UserRequestExecutor;
 import java.io.Reader;
 
 /**
@@ -14,7 +14,7 @@ import java.io.Reader;
  */
 public class RequestExecutor {
 
-    private String answer = "";
+    private StringBuilder answer = new StringBuilder();
 
     public RequestExecutor() {
     }
@@ -45,7 +45,7 @@ public class RequestExecutor {
                         case NEW_COMPONENT      -> addLinea(componentRE.executeAddComponent(s));
                         case DELETE_COMPONENT   -> addLinea(componentRE.executeDeleteComponent(s));
                         case EDIT_COMPONENT     -> addLinea(componentRE.executeModifyComponent(s));
-                        case LOGIN              -> System.out.println("Ya hay un usuario logueado, cierre sesion primero");
+                        case LOGIN              -> addLinea("Ya hay un usuario logueado, cierre sesion primero");
                     }
                 });
             } else {
@@ -55,15 +55,15 @@ public class RequestExecutor {
             solicitudes.forEach(s -> {
                 var loginRE = new LoginRequestExecutor();
                 if ("LOGIN".equals(s.getTipo().name())) {
-                    loginRE.executeLogin(s);
+                    addLinea(loginRE.execute(s));
                 }
             });
         }
 
-        return answer;
+        return answer.toString();
     }
 
     private void addLinea(String s) {
-        answer += s + "\n";
+        answer.append(s).append("\n");
     }
 }
