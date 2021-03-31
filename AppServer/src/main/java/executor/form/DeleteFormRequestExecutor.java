@@ -5,6 +5,7 @@ import datos.form.FormularioDAO;
 import executor.Executor;
 import model.Formulario;
 import model.solicitudes.Solicitud;
+import static model.response.TipoRespuesta.ELIMINAR_FORMULARIO;
 
 /**
  *
@@ -29,12 +30,9 @@ public class DeleteFormRequestExecutor extends Executor {
                 .replaceAll("\\s", "");
 
         if (formDAO.delete(idForm)) {
-            response.append("Formulario ")
-                    .append(idForm)
-                    .append(" eliminado");
+            addResponse(ELIMINAR_FORMULARIO, "success", "Formulario " + idForm + " eliminado");
         } else {
-            response.append("No existe el formulario ")
-                    .append(idForm);
+            addResponse(ELIMINAR_FORMULARIO, "error", "No se puede eliminar, el formulario " + idForm + " no existe");
         }
 
         return response.toString();

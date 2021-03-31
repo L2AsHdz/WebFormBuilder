@@ -36,10 +36,9 @@ public class CreateUserRequestExecutor extends Executor {
         if (!usuarioDAO.exists(usuario.getNombre())) {
             usuarioDAO.create(usuario);
             //Generar respuesta
-            response.append(new ResponseStructureGenerator(
-                    new Response(CREAR_USUARIO, "succes", "Usuario " + usuario.getNombre() + " creado")).generate());
+            addResponse(CREAR_USUARIO, "succes", "Usuario " + usuario.getNombre() + " creado");
         } else {
-            response.append(new ResponseStructureGenerator(new Response(CREAR_USUARIO, "Error", "El usuario " + usuario.getNombre() + " ya existe en el sistema")).generate());
+            addResponse(CREAR_USUARIO, "Error", "El usuario " + usuario.getNombre() + " ya existe en el sistema");
         }
         
         return response.toString();

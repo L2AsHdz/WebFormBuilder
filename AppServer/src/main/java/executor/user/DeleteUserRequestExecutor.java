@@ -3,9 +3,7 @@ package executor.user;
 import datos.CRUD;
 import datos.usuario.UsuarioDAO;
 import executor.Executor;
-import generator.response.ResponseStructureGenerator;
 import model.Usuario;
-import model.response.Response;
 import model.solicitudes.Solicitud;
 import static model.response.TipoRespuesta.ELIMINAR_USUARIO;
 
@@ -32,11 +30,9 @@ public class DeleteUserRequestExecutor extends Executor {
                 .replaceAll("\\s", "");
 
         if (usuarioDAO.delete(nombre)) {
-            response.append(new ResponseStructureGenerator(
-                    new Response(ELIMINAR_USUARIO, "success", "Usuario " + nombre + " se elimino correctamente")).generate());
+            addResponse(ELIMINAR_USUARIO, "success", "Usuario " + nombre + " se elimino correctamente");
         } else {
-            response.append(new ResponseStructureGenerator(
-                    new Response(ELIMINAR_USUARIO, "error", "Imposible eliminar, el usuario " + nombre + " no existe")).generate());
+            addResponse(ELIMINAR_USUARIO, "error", "Imposible eliminar, el usuario " + nombre + " no existe");
         }
 
         return response.toString();
