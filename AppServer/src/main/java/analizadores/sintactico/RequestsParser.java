@@ -20,6 +20,7 @@ import validator.component.CreateComponentRequestValidator;
 import validator.component.ModifyComponentRequestValidator;
 import validator.component.DeleteComponentRequestValidator;
 import validator.component.ClassParameterValidator;
+import validator.component.ClassRequiredParametersValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.Symbol;
@@ -649,6 +650,7 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
     private Validator modifyComponentRV = new ModifyComponentRequestValidator();
     private Validator deleteComponentRV = new DeleteComponentRequestValidator();
     private Validator classParameterV = new ClassParameterValidator();
+    private Validator classRequiredParametersV = new ClassRequiredParametersValidator();
     String error;
 
     public List<ErrorAnalisis> getErrores() {
@@ -1676,9 +1678,14 @@ class CUP$RequestsParser$actions {
 
                         error = createComponentRV.validate(o, parametros);
                         if (error.isEmpty()) {
-                            error = classParameterV.validate(o, parametros);
+                            error = classRequiredParametersV.validate(o, parametros);
                             if (error.isEmpty()) {
-                                solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+                                error = classParameterV.validate(o, parametros);
+                                if (error.isEmpty()) {
+                                    solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
+                                } else {
+                                    System.out.println(error);
+                                }
                             } else {
                                 System.out.println(error);
                             }
@@ -1917,9 +1924,14 @@ class CUP$RequestsParser$actions {
 		
                             error = modifyComponentRV.validate(o, parametros);
                             if (error.isEmpty()) {
-                                error = classParameterV.validate(o, parametros);
+                                error = classRequiredParametersV.validate(o, parametros);
                                 if (error.isEmpty()) {
-                                    solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
+                                    error = classParameterV.validate(o, parametros);
+                                    if (error.isEmpty()) {
+                                        solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
+                                    } else {
+                                        System.out.println(error);
+                                    }
                                 } else {
                                     System.out.println(error);
                                 }
