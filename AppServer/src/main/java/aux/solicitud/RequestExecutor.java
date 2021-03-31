@@ -2,6 +2,7 @@ package aux.solicitud;
 
 import aux.component.ComponentRequestExecutor;
 import aux.form.FormRequestExecutor;
+import aux.user.LoginRequestExecutor;
 import aux.user.UserRequestExecutor;
 import java.io.Reader;
 
@@ -44,13 +45,19 @@ public class RequestExecutor {
                         case NEW_COMPONENT      -> componentRE.executeAddComponent(s);
                         case DELETE_COMPONENT   -> componentRE.executeDeleteComponent(s);
                         case EDIT_COMPONENT     -> componentRE.executeModifyComponent(s);
+                        case LOGIN              -> System.out.println("Ya hay un usuario logueado, cierre sesion primero");
                     }
                 });
             } else {
                 errores.forEach(e -> addLinea(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
             }
         } else {
-            //Ignorar solicitudes e informar que no esta logeado
+            solicitudes.forEach(s -> {
+                var loginRE = new LoginRequestExecutor();
+                if ("LOGIN".equals(s.getTipo().name())) {
+                    loginRE.executeLogin(s);
+                }
+            });
         }
 
         return answer;
