@@ -42,9 +42,9 @@ public class RequestExecutor {
                         case NEW_FORM           -> addLinea(formRE.executeCreateForm(s, loggedUser));
                         case EDIT_FORM          -> addLinea(formRE.executeModifyForm(s));
                         case DELETE_FORM        -> addLinea(formRE.executeDeleteForm(s));
-                        case NEW_COMPONENT      -> componentRE.executeAddComponent(s);
-                        case DELETE_COMPONENT   -> componentRE.executeDeleteComponent(s);
-                        case EDIT_COMPONENT     -> componentRE.executeModifyComponent(s);
+                        case NEW_COMPONENT      -> addLinea(componentRE.executeAddComponent(s));
+                        case DELETE_COMPONENT   -> addLinea(componentRE.executeDeleteComponent(s));
+                        case EDIT_COMPONENT     -> addLinea(componentRE.executeModifyComponent(s));
                         case LOGIN              -> System.out.println("Ya hay un usuario logueado, cierre sesion primero");
                     }
                 });
