@@ -39,9 +39,9 @@ public class RequestExecutor {
                         case CREATE_USER        -> addLinea(userRE.executeCreateUser(s));
                         case MODIFY_USER        -> addLinea(userRE.executeModifyUser(s));
                         case DELETE_USER        -> addLinea(userRE.executeDeleteUser(s));
-                        case NEW_FORM           -> formRE.executeCreateForm(s, loggedUser);
-                        case EDIT_FORM          -> formRE.executeModifyForm(s);
-                        case DELETE_FORM        -> formRE.executeDeleteForm(s);
+                        case NEW_FORM           -> addLinea(formRE.executeCreateForm(s, loggedUser));
+                        case EDIT_FORM          -> addLinea(formRE.executeModifyForm(s));
+                        case DELETE_FORM        -> addLinea(formRE.executeDeleteForm(s));
                         case NEW_COMPONENT      -> componentRE.executeAddComponent(s);
                         case DELETE_COMPONENT   -> componentRE.executeDeleteComponent(s);
                         case EDIT_COMPONENT     -> componentRE.executeModifyComponent(s);
