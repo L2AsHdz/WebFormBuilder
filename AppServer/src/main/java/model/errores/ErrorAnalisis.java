@@ -1,25 +1,22 @@
 package model.errores;
 
-import java.io.Serializable;
-
 /**
  *
  * @author asael
  */
-public class ErrorAnalisis implements Serializable {
+public class ErrorAnalisis extends Error {
 
     private String lexema;
     private int linea;
     private int columna;
     private TipoError tipoError;
-    private String descripcion;
 
     public ErrorAnalisis(String lexema, int linea, int columna, TipoError tipoError, String descripcion) {
+        super(descripcion);
         this.lexema = lexema;
         this.linea = linea;
         this.columna = columna;
         this.tipoError = tipoError;
-        this.descripcion = descripcion;
     }
 
     public ErrorAnalisis() {
@@ -57,11 +54,13 @@ public class ErrorAnalisis implements Serializable {
         this.tipoError = tipoError;
     }
 
+    @Override
     public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        StringBuilder desc = new StringBuilder();
+        desc.append("Error en lexema: ").append(getLexema())
+                .append(" -  linea: ").append(getLinea())
+                .append(" y columna: ").append(getColumna())
+                .append(" - ").append(super.getDescripcion());
+        return desc.toString();
     }
 }

@@ -1,6 +1,7 @@
 package analizadores.sintactico;
 
 import model.Token;
+import model.errores.Error;
 import model.errores.ErrorAnalisis;
 import model.errores.TipoError;
 import model.solicitudes.Solicitud;
@@ -24,22 +25,22 @@ import java_cup.runtime.Symbol;
 
 parser code{:
 
-    private List<ErrorAnalisis> errores = new ArrayList();
-    private List<Solicitud> solicitudes = new ArrayList();
+    private final List<Error> errores = new ArrayList();
+    private final List<Solicitud> solicitudes = new ArrayList();
     private List<Parametro> parametros = new ArrayList();
 
-    private Validator createUserRV = new CreateUserRequestValidator();
-    private Validator modifyUserRV = new ModifyUserRequestValidator();
-    private Validator createFormRV = new CreateFormRequestValidator();
-    private Validator modifyFormRV = new ModifyFormRequestValidator();
-    private Validator createComponentRV = new CreateComponentRequestValidator();
-    private Validator modifyComponentRV = new ModifyComponentRequestValidator();
-    private Validator deleteComponentRV = new DeleteComponentRequestValidator();
-    private Validator classParameterV = new ClassParameterValidator();
-    private Validator classRequiredParametersV = new ClassRequiredParametersValidator();
+    private final Validator createUserRV = new CreateUserRequestValidator();
+    private final Validator modifyUserRV = new ModifyUserRequestValidator();
+    private final Validator createFormRV = new CreateFormRequestValidator();
+    private final Validator modifyFormRV = new ModifyFormRequestValidator();
+    private final Validator createComponentRV = new CreateComponentRequestValidator();
+    private final Validator modifyComponentRV = new ModifyComponentRequestValidator();
+    private final Validator deleteComponentRV = new DeleteComponentRequestValidator();
+    private final Validator classParameterV = new ClassParameterValidator();
+    private final Validator classRequiredParametersV = new ClassRequiredParametersValidator();
     String error;
 
-    public List<ErrorAnalisis> getErrores() {
+    public List<Error> getErrores() {
         return this.errores;
     }
 
@@ -176,7 +177,7 @@ bloqueLogin ::= OPEN_BRACE:o paramsLogin CLOSE_BRACE
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      :}
@@ -207,7 +208,7 @@ bloqueCreateUser ::= OPEN_BRACE:o paramsCreateUser CLOSE_BRACE
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.CREATE_USER, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                    :}
@@ -239,7 +240,7 @@ bloqueModifyUser ::= OPEN_BRACE:o paramsModifyUser CLOSE_BRACE
                             if (error.isEmpty()) {
                                 solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                         :}
@@ -294,7 +295,7 @@ bloqueNewForm ::= OPEN_BRACE:o paramsNewForm CLOSE_BRACE
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      :}
@@ -348,7 +349,7 @@ bloqueEditForm ::= OPEN_BRACE:o paramsEditForm CLOSE_BRACE
                     if (error.isEmpty()) {
                         solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
                     } else {
-                        System.out.println(error);
+                        errores.add(new Error(error));
                     }
                     parametros = new ArrayList();
                  :}
@@ -383,13 +384,13 @@ bloqueNewComponent ::= OPEN_BRACE:o paramsNewComponent CLOSE_BRACE
                                 if (error.isEmpty()) {
                                     solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
                                 } else {
-                                    System.out.println(error);
+                                    errores.add(new Error(error));
                                 }
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      :}
@@ -433,13 +434,13 @@ bloqueEditComponent ::= OPEN_BRACE:o paramsEditComponent CLOSE_BRACE
                                     if (error.isEmpty()) {
                                         solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
                                     } else {
-                                        System.out.println(error);
+                                        errores.add(new Error(error));
                                     }
                                 } else {
-                                    System.out.println(error);
+                                    errores.add(new Error(error));
                                 }
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                       :}
@@ -480,7 +481,7 @@ bloqueDeleteComponent ::= OPEN_BRACE:o paramsDeleteComponent CLOSE_BRACE
                             if (error.isEmpty()) {
                                 solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                         :}

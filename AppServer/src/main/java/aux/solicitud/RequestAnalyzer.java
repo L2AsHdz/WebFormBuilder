@@ -5,7 +5,7 @@ import analizadores.sintactico.RequestsParser;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import model.errores.ErrorAnalisis;
+import model.errores.Error;
 import model.solicitudes.Solicitud;
 
 /**
@@ -18,7 +18,7 @@ public class RequestAnalyzer {
 
     RequestsLexer lex;
     RequestsParser parser;
-    List<ErrorAnalisis> errores = new ArrayList<>();
+    List<Error> errores = new ArrayList<>();
     List<Solicitud> solicitudes = new ArrayList<>();
 
     public RequestAnalyzer() {
@@ -35,7 +35,7 @@ public class RequestAnalyzer {
         }
     }
 
-    public List<ErrorAnalisis> getErrores() {
+    public List<Error> getErrores() {
         return errores;
     }
 

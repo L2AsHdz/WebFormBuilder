@@ -6,6 +6,7 @@
 package analizadores.sintactico;
 
 import model.Token;
+import model.errores.Error;
 import model.errores.ErrorAnalisis;
 import model.errores.TipoError;
 import model.solicitudes.Solicitud;
@@ -638,22 +639,22 @@ public class RequestsParser extends java_cup.runtime.lr_parser {
 
 
 
-    private List<ErrorAnalisis> errores = new ArrayList();
-    private List<Solicitud> solicitudes = new ArrayList();
+    private final List<Error> errores = new ArrayList();
+    private final List<Solicitud> solicitudes = new ArrayList();
     private List<Parametro> parametros = new ArrayList();
 
-    private Validator createUserRV = new CreateUserRequestValidator();
-    private Validator modifyUserRV = new ModifyUserRequestValidator();
-    private Validator createFormRV = new CreateFormRequestValidator();
-    private Validator modifyFormRV = new ModifyFormRequestValidator();
-    private Validator createComponentRV = new CreateComponentRequestValidator();
-    private Validator modifyComponentRV = new ModifyComponentRequestValidator();
-    private Validator deleteComponentRV = new DeleteComponentRequestValidator();
-    private Validator classParameterV = new ClassParameterValidator();
-    private Validator classRequiredParametersV = new ClassRequiredParametersValidator();
+    private final Validator createUserRV = new CreateUserRequestValidator();
+    private final Validator modifyUserRV = new ModifyUserRequestValidator();
+    private final Validator createFormRV = new CreateFormRequestValidator();
+    private final Validator modifyFormRV = new ModifyFormRequestValidator();
+    private final Validator createComponentRV = new CreateComponentRequestValidator();
+    private final Validator modifyComponentRV = new ModifyComponentRequestValidator();
+    private final Validator deleteComponentRV = new DeleteComponentRequestValidator();
+    private final Validator classParameterV = new ClassParameterValidator();
+    private final Validator classRequiredParametersV = new ClassRequiredParametersValidator();
     String error;
 
-    public List<ErrorAnalisis> getErrores() {
+    public List<Error> getErrores() {
         return this.errores;
     }
 
@@ -951,7 +952,7 @@ class CUP$RequestsParser$actions {
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.LOGIN, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      
@@ -1052,7 +1053,7 @@ class CUP$RequestsParser$actions {
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.CREATE_USER, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                    
@@ -1168,7 +1169,7 @@ class CUP$RequestsParser$actions {
                             if (error.isEmpty()) {
                                 solicitudes.add(new Solicitud(TipoSolicitud.MODIFY_USER, parametros));
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                         
@@ -1347,7 +1348,7 @@ class CUP$RequestsParser$actions {
                         if (error.isEmpty()) {
                             solicitudes.add(new Solicitud(TipoSolicitud.NEW_FORM, parametros));
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      
@@ -1557,7 +1558,7 @@ class CUP$RequestsParser$actions {
                     if (error.isEmpty()) {
                         solicitudes.add(new Solicitud(TipoSolicitud.EDIT_FORM, parametros));
                     } else {
-                        System.out.println(error);
+                        errores.add(new Error(error));
                     }
                     parametros = new ArrayList();
                  
@@ -1684,13 +1685,13 @@ class CUP$RequestsParser$actions {
                                 if (error.isEmpty()) {
                                     solicitudes.add(new Solicitud(TipoSolicitud.NEW_COMPONENT, parametros));
                                 } else {
-                                    System.out.println(error);
+                                    errores.add(new Error(error));
                                 }
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                         } else {
-                            System.out.println(error);
+                            errores.add(new Error(error));
                         }
                         parametros = new ArrayList();
                      
@@ -1930,13 +1931,13 @@ class CUP$RequestsParser$actions {
                                     if (error.isEmpty()) {
                                         solicitudes.add(new Solicitud(TipoSolicitud.EDIT_COMPONENT, parametros));
                                     } else {
-                                        System.out.println(error);
+                                        errores.add(new Error(error));
                                     }
                                 } else {
-                                    System.out.println(error);
+                                    errores.add(new Error(error));
                                 }
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                       
@@ -2187,7 +2188,7 @@ class CUP$RequestsParser$actions {
                             if (error.isEmpty()) {
                                 solicitudes.add(new Solicitud(TipoSolicitud.DELETE_COMPONENT, parametros));
                             } else {
-                                System.out.println(error);
+                                errores.add(new Error(error));
                             }
                             parametros = new ArrayList();
                         

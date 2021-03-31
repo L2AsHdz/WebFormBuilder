@@ -49,7 +49,7 @@ public class RequestExecutor {
                     }
                 });
             } else {
-                errores.forEach(e -> addLinea(e.getLexema() + "- " + e.getDescripcion() + " Linea: " + e.getLinea() + " Columna: " + e.getColumna()));
+                errores.forEach(e -> addLinea(e.getDescripcion()));
             }
         } else {
             solicitudes.forEach(s -> {
