@@ -8,6 +8,7 @@ package com.l2ashdz.appcliente.view;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultEditorKit;
@@ -43,6 +44,9 @@ public class TextEditorView extends javax.swing.JFrame {
         btnShowReports = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmAbrir = new javax.swing.JMenuItem();
@@ -63,6 +67,7 @@ public class TextEditorView extends javax.swing.JFrame {
         itmAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(850, 600));
 
         txtArea.setColumns(20);
         txtArea.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -90,9 +95,9 @@ public class TextEditorView extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGap(80, 80, 80)
                 .addComponent(lblPosCaret)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(btnSendToServer)
                 .addGap(18, 18, 18)
                 .addComponent(btnShowReports)
@@ -111,18 +116,36 @@ public class TextEditorView extends javax.swing.JFrame {
                 .addGap(8, 8, 8))
         );
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setText("Area de respuestas:");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout pnlDeskLayout = new javax.swing.GroupLayout(pnlDesk);
         pnlDesk.setLayout(pnlDeskLayout);
         pnlDeskLayout.setHorizontalGroup(
             pnlDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
+            .addGroup(pnlDeskLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
         pnlDeskLayout.setVerticalGroup(
             pnlDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDeskLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -179,6 +202,11 @@ public class TextEditorView extends javax.swing.JFrame {
         jMenu3.add(itmManual);
 
         itmAbout.setText("Acerda de...");
+        itmAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmAboutActionPerformed(evt);
+            }
+        });
         jMenu3.add(itmAbout);
 
         menuBar.add(jMenu3);
@@ -201,6 +229,11 @@ public class TextEditorView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
+        String mensaje = "Proyecto 1 Compiladores 1 2021\nAsael Hernandez";
+        JOptionPane.showMessageDialog(null, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_itmAboutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendToServer;
     private javax.swing.JButton btnShowReports;
@@ -217,13 +250,16 @@ public class TextEditorView extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmSaveAs;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblPosCaret;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel pnlDesk;
