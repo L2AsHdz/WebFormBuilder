@@ -20,6 +20,7 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import static com.l2ashdz.appcliente.controller.FileController.*;
 import static com.l2ashdz.appcliente.controller.textEditor.SendDataToServer.send;
+import javax.swing.JFrame;
 
 /**
  *
@@ -62,8 +63,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
 
     public void start() {
         this.textEditorV.pack();
-        this.textEditorV.setResizable(false);
-        this.textEditorV.setLocationRelativeTo(null);
+        this.textEditorV.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.textEditorV.setVisible(true);
     }
 
