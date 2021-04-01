@@ -48,6 +48,13 @@ public class RequestExecutor {
                         case LOGIN              -> addLinea("Ya hay un usuario logueado, cierre sesion primero");
                     }
                 });
+                
+                if (solicitudes.size() > 1) {
+                    StringBuilder temp = answer;
+                    answer = new StringBuilder("<!ini_respuestas>\n");
+                    answer.append(temp.toString());
+                    addLinea("<!fin_respuestas>");
+                }
             } else {
                 errores.forEach(e -> addLinea(e.getDescripcion()));
             }
