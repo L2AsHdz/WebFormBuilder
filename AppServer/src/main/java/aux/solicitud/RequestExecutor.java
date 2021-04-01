@@ -71,6 +71,7 @@ public class RequestExecutor {
             solicitudes.forEach(s -> {
                 var loginRE = new LoginRequestExecutor();
                 if ("LOGIN".equals(s.getTipo().name())) {
+                    answer = new StringBuilder();
                     addLinea(loginRE.execute(s));
                 }
             });

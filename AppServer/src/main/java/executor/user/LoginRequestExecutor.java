@@ -33,7 +33,13 @@ public class LoginRequestExecutor extends Executor {
         var user = userBuilder.build();
         
         if (userDAO.exists(user.getNombre())) {
-            response.append(new ResponseStructureGenerator(new Response("El usuario logueado ahora es " + user.getNombre(), user.getNombre())).generate());
+            var userSys = userDAO.getObject(user.getNombre());
+            
+            if (userSys.getPassword().equals(user.getPassword())) {
+                response.append(new ResponseStructureGenerator(new Response("El usuario logueado ahora es " + user.getNombre(), user.getNombre())).generate());
+            } else {
+                addResponse("Las contraseñas no coinciden");
+            }
         } else {
             addResponse("El usuario no existe, imposible logearse");
         }

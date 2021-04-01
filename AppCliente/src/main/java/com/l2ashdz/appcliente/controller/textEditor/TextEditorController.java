@@ -33,7 +33,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     private final TextEditorView textEditorV;
     private final ResponseAnalyzer responseA = new ResponseAnalyzer();
     private boolean hasChanges = false;
-    private String usuarioLogueado = "prueba";
+    private String usuarioLogueado = "";
     private String path = "";
     
     public TextEditorController(TextEditorView textEditorV) {
@@ -76,7 +76,6 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
             String text = this.textEditorV.getTxtArea().getText();
             String respuestaServer = send(text, usuarioLogueado);
-            System.out.println(respuestaServer);
             responseA.analyze(respuestaServer);
             System.out.println(responseA.getMessages()+ "\n");
             System.out.println(responseA.getLoggedUser());

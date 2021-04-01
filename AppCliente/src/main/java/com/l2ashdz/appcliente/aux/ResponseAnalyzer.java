@@ -14,13 +14,13 @@ import java.util.List;
  * @author asael
  */
 public class ResponseAnalyzer {
-    
+
     private ResponseLexer lexer;
     private ResponseParser parser;
     private List<Respuesta> respuestas;
     private String loggedUser;
     private StringBuilder messages;
-    
+
     public ResponseAnalyzer() {
     }
 
@@ -35,24 +35,28 @@ public class ResponseAnalyzer {
             e.printStackTrace(System.out);
         }
     }
-    
+
     public String getMessages() {
         messages = new StringBuilder();
-        
+
         Respuesta r;
-        for (int i = 0; i < respuestas.size(); i++) {
-            r = respuestas.get(i);
-            if (r.getLoggedUser() != null) loggedUser = r.getLoggedUser();
-            addLinea("Respuesta a solicitud " + (i + 1) + ": " + r.getMessage());
+        if (respuestas != null) {
+            for (int i = 0; i < respuestas.size(); i++) {
+                r = respuestas.get(i);
+                if (r.getLoggedUser() != null) {
+                    loggedUser = r.getLoggedUser();
+                }
+                addLinea("Respuesta a solicitud " + (i + 1) + ": " + r.getMessage());
+            }
         }
-        
+
         return messages.toString();
     }
 
     public String getLoggedUser() {
-        return loggedUser;
+        return (loggedUser != null) ? loggedUser.replace("\"", "") : "";
     }
-    
+
     private void addLinea(String s) {
         messages.append(s.replace("\"", "")).append("\n");
     }
