@@ -8,6 +8,7 @@ package com.l2ashdz.appcliente.view;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultEditorKit;
@@ -201,6 +202,11 @@ public class TextEditorView extends javax.swing.JFrame {
         jMenu3.add(itmManual);
 
         itmAbout.setText("Acerda de...");
+        itmAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmAboutActionPerformed(evt);
+            }
+        });
         jMenu3.add(itmAbout);
 
         menuBar.add(jMenu3);
@@ -222,6 +228,11 @@ public class TextEditorView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAboutActionPerformed
+        String mensaje = "Proyecto 1 Compiladores 1 2021\nAsael Hernandez";
+        JOptionPane.showMessageDialog(null, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_itmAboutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendToServer;
