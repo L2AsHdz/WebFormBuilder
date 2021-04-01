@@ -66,6 +66,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     public void start() {
         this.textEditorV.pack();
         this.textEditorV.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.textEditorV.setTitle("Documento sin guardar");
         this.textEditorV.setVisible(true);
     }
 
@@ -115,6 +116,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
                 path = fc.getSelectedFile().getAbsolutePath();
                 this.textEditorV.getTxtArea().setText(readFile(path));
                 this.textEditorV.setTitle(path);
+                this.textEditorV.getTxtAreaRespuestas().setText("");
                 hasChanges = false;
             } catch (Exception ex) {
                 System.out.println("se cancelo");
@@ -128,6 +130,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     private void nuevo() {
         if (!hasChanges) {
             this.textEditorV.getTxtArea().setText("");
+            this.textEditorV.getTxtAreaRespuestas().setText("");
             this.textEditorV.setTitle("Documento sin guardar");
             path = "";
             hasChanges = false;
@@ -140,6 +143,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         String texto = this.textEditorV.getTxtArea().getText();
         if (verifyFile(path)) {
             saveFile(path, texto);
+            this.textEditorV.setTitle(path);
             hasChanges = false;
         } else {
             JFileChooser fc = new JFileChooser();
@@ -169,6 +173,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
                 try {
                     path = fc.getSelectedFile().getAbsolutePath() + ".txt";
                     saveFile(path, texto);
+                    this.textEditorV.setTitle(path);
                     hasChanges = false;
                 } catch (Exception e) {
                     System.out.println("se cancelo");
