@@ -29,14 +29,14 @@ import javax.swing.JFrame;
  */
 public class TextEditorController extends WindowAdapter implements ActionListener,
         DocumentListener, UndoableEditListener, CaretListener {
-    
+
     private final UndoManager undoManager = new UndoManager();
     private final TextEditorView textEditorV;
     private final ResponseAnalyzer responseA = new ResponseAnalyzer();
     private boolean hasChanges = false;
     private String usuarioLogueado = "";
     private String path = "";
-    
+
     public TextEditorController(TextEditorView textEditorV) {
         this.textEditorV = textEditorV;
         this.textEditorV.getBtnSendToServer().addActionListener(this);
@@ -53,8 +53,8 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         this.textEditorV.getItmCortar().addActionListener(this);
         this.textEditorV.getItmPegar().addActionListener(this);
 
-        this.textEditorV.getItmAbout().addActionListener(this);
         this.textEditorV.getItmManual().addActionListener(this);
+        this.textEditorV.getBtnLogout().addActionListener(this);
 
         this.textEditorV.getTxtArea().addCaretListener(this);
         this.textEditorV.getTxtArea().getDocument().addDocumentListener(this);
@@ -74,10 +74,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
 
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
             String text = this.textEditorV.getTxtArea().getText();
-            String respuestaServer = send(text, usuarioLogueado);
-            responseA.analyze(respuestaServer);
-            System.out.println(responseA.getMessages()+ "\n");
-            System.out.println(responseA.getLoggedUser());
+            setDatos(send(text, usuarioLogueado));
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
@@ -94,8 +91,19 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             deshacer();
         } else if (this.textEditorV.getItmManual() == e.getSource()) {
 
-        } else if (this.textEditorV.getItmAbout() == e.getSource()) {
+        } else if (this.textEditorV.getBtnLogout() == e.getSource()) {
+            usuarioLogueado = "";
+            textEditorV.getBtnLogout().setEnabled(false);
+        }
+    }
 
+    private void setDatos(String respuestaServer) {
+        responseA.analyze(respuestaServer);
+        textEditorV.getTxtAreaRespuestas().setText(responseA.getMessages());
+        if (!responseA.getLoggedUser().isEmpty()) {
+            textEditorV.getLblLoggedUser().setText(responseA.getLoggedUser());
+            usuarioLogueado = responseA.getLoggedUser();
+            textEditorV.getBtnLogout().setEnabled(true);
         }
     }
 
@@ -198,7 +206,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             }
         }
     }
-    
+
     private void rehacer() {
         try {
             undoManager.redo();
@@ -253,7 +261,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             columna = caretPos - this.textEditorV.getTxtArea().getLineStartOffset(linea);
             linea++;
             columna++;
-            
+
         } catch (BadLocationException e) {
         }
         this.textEditorV.getLblPosCaret().setText("Linea: " + linea + "  -  Columna: " + columna);
