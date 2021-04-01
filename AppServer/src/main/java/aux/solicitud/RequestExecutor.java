@@ -4,7 +4,9 @@ import executor.component.ComponentRequestExecutor;
 import executor.form.FormRequestExecutor;
 import executor.user.LoginRequestExecutor;
 import executor.user.UserRequestExecutor;
+import generator.response.ResponseStructureGenerator;
 import java.io.Reader;
+import model.response.Response;
 
 /**
  *
@@ -45,7 +47,7 @@ public class RequestExecutor {
                         case NEW_COMPONENT      -> addLinea(componentRE.executeAddComponent(s));
                         case DELETE_COMPONENT   -> addLinea(componentRE.executeDeleteComponent(s));
                         case EDIT_COMPONENT     -> addLinea(componentRE.executeModifyComponent(s));
-                        case LOGIN              -> addLinea("Ya hay un usuario logueado, cierre sesion primero");
+                        case LOGIN              -> addLinea("\"Ya hay un usuario logueado, cierre sesion primero\"");
                     }
                 });
                 
@@ -56,7 +58,14 @@ public class RequestExecutor {
                     addLinea("<!fin_respuestas>");
                 }
             } else {
-                errores.forEach(e -> addLinea(e.getDescripcion()));
+                
+                if (errores.size() > 1) {
+                    addLinea("<!ini_respuestas>");
+                    errores.forEach(e -> addResponse(e.getDescripcion()));
+                    addLinea("<!fin_respuestas>");
+                } else {
+                    errores.forEach(e -> addResponse(e.getDescripcion()));
+                }
             }
         } else {
             solicitudes.forEach(s -> {
@@ -72,5 +81,9 @@ public class RequestExecutor {
 
     private void addLinea(String s) {
         answer.append(s).append("\n");
+    }
+    
+    protected void addResponse(String message) {
+        addLinea(new ResponseStructureGenerator(new Response(message)).generate());
     }
 }
