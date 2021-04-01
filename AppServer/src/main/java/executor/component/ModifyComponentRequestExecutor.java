@@ -7,7 +7,6 @@ import executor.Executor;
 import model.Componente;
 import model.Formulario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.MODIFICAR_COMPONENTE;
 
 /**
  *
@@ -60,14 +59,14 @@ public class ModifyComponentRequestExecutor extends Executor {
                 }
                 
                 formDAO.create(form);
-                addResponse(MODIFICAR_COMPONENTE, "Exito", "Componente " + compForm.getId() + " modificado");
+                addResponse("Componente " + compForm.getId() + " modificado");
                 
             } else {
-                addResponse(MODIFICAR_COMPONENTE, "Error", "No existe el componente " + component.getId() + " en el formulario " + form.getId());
+                addResponse("No existe el componente " + component.getId() + " en el formulario " + form.getId());
             }
             
         } else {
-            addResponse(MODIFICAR_COMPONENTE, "Error", "El formulario " + component.getFormulario() + " no existe");
+            addResponse("El formulario " + component.getFormulario() + " no existe");
         }
 
         return response.toString();

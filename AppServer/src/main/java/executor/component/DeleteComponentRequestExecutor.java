@@ -7,7 +7,6 @@ import executor.Executor;
 import model.Componente;
 import model.Formulario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.ELIMINAR_COMPONENTE;
 
 /**
  *
@@ -38,12 +37,12 @@ public class DeleteComponentRequestExecutor extends Executor{
             if (index != -1) {
                 form.getComponentes().remove(index);
                 formDAO.create(form);
-                addResponse(ELIMINAR_COMPONENTE, "Exito", "Se elimino el componente " + component.getId() + " del formulario " + form.getId());
+                addResponse("Se elimino el componente " + component.getId() + " del formulario " + form.getId());
             } else {
-                addResponse(ELIMINAR_COMPONENTE, "Error", "No existe el componente " + component.getId() + " en el formulario " + form.getId());
+                addResponse("No existe el componente " + component.getId() + " en el formulario " + form.getId());
             }
         } else {
-            addResponse(ELIMINAR_COMPONENTE, "Error", "El formulario " + component.getFormulario() + " no existe");
+            addResponse("El formulario " + component.getFormulario() + " no existe");
         }
 
         return response.toString();

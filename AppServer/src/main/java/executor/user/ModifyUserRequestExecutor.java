@@ -9,8 +9,6 @@ import java.util.List;
 import model.Formulario;
 import model.Usuario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.MODIFICAR_USUARIO;
-
 
 /**
  *
@@ -51,9 +49,9 @@ public class ModifyUserRequestExecutor extends Executor {
             usuarioDAO.delete(oldUser.getNombre());
             usuarioDAO.create(newUser);
 
-            addResponse(MODIFICAR_USUARIO, "Exito", "Se modifico el usuario " + oldUser.getNombre());
+            addResponse("Se modifico el usuario " + oldUser.getNombre());
         } else {
-            addResponse(MODIFICAR_USUARIO, "Error", "No se puede modificar, el usuario " + u.getNombre() + " no existe");
+            addResponse("No se puede modificar, el usuario " + u.getNombre() + " no existe");
         }
         
         return response.toString();

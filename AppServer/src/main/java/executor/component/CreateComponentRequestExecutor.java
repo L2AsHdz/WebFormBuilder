@@ -7,7 +7,6 @@ import executor.Executor;
 import model.Componente;
 import model.Formulario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.AGREGAR_COMPONENTE;
 
 /**
  *
@@ -44,12 +43,12 @@ public class CreateComponentRequestExecutor extends Executor {
             if (!exists) {
                 form.getComponentes().add(component);
                 formDAO.create(form);
-                addResponse(AGREGAR_COMPONENTE, "Exito", "Componente " + component.getId() + " agregado al formulario " + form.getId());
+                addResponse("Componente " + component.getId() + " agregado al formulario " + form.getId());
             } else {
-                addResponse(AGREGAR_COMPONENTE, "Error", "Ya existe el componente " + component.getId() + " en el formulario " + form.getId());
+                addResponse("Ya existe el componente " + component.getId() + " en el formulario " + form.getId());
             }
         } else {
-            addResponse(AGREGAR_COMPONENTE, "Error", "No existe el formulario " + component.getFormulario());
+            addResponse("No existe el formulario " + component.getFormulario());
         }
         
         return response.toString();

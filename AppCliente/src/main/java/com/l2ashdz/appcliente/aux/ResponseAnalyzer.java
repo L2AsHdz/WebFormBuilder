@@ -4,6 +4,7 @@ import com.l2ashdz.appcliente.analizador.lexico.ResponseLexer;
 import com.l2ashdz.appcliente.analizador.sintactico.ResponseParser;
 import com.l2ashdz.appcliente.model.Respuesta;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.List;
 
 /**
@@ -18,11 +19,13 @@ public class ResponseAnalyzer {
     private ResponseParser parser;
     private List<Respuesta> respuestas;
     private String loggedUser;
-
+    private StringBuilder messages;
+    
     public ResponseAnalyzer() {
     }
 
-    public void analyze(Reader reader) {
+    public void analyze(String s) {
+        StringReader reader = new StringReader(s);
         try {
             lexer = new ResponseLexer(reader);
             parser = new ResponseParser(lexer);
@@ -34,14 +37,11 @@ public class ResponseAnalyzer {
     }
     
     public String getMessages() {
-        StringBuilder messages = new StringBuilder();
+        messages = new StringBuilder();
         
         respuestas.forEach(r -> {
-            if ("LOGIN_USUARIO".equals(r.getTipoRespuesta())) {
-                loggedUser = "obtener usuario de respuestas";
-            } else {
-                messages.append("");
-            }
+            if (r.getLoggedUser() != null) loggedUser = r.getLoggedUser();
+            addLinea(r.getMessage());
         });
         
         return messages.toString();
@@ -51,5 +51,7 @@ public class ResponseAnalyzer {
         return loggedUser;
     }
     
-    
+    private void addLinea(String s) {
+        messages.append(s.replace("\"", "")).append("\n");
+    }
 }

@@ -29,20 +29,15 @@ parser code {:
 :}
 
 terminal        START_RESPONSE, END_RESPONSE, START_RESPONSES, END_RESPONSES;
-terminal        RESPONSE_PARAMS;
+terminal        RESPONSE_PARAMS, SERVER_RESPONSE;
 
-terminal String     LOGIN, CREATE_USER, DELETE_USER, MODIFY_USER;
-terminal String     NEW_FORM, DELETE_FORM, MODIFY_FORM;
-terminal String     NEW_COMPONENT, DELETE_COMPONENT, EDIT_COMPONENT;
-
-terminal        PARAM_STATE, PARAM_MESSAGE, PARAM_LOGGED_USER, SUCCES, ERROR;
+terminal        PARAM_MESSAGE, PARAM_LOGGED_USER;
 
 terminal String     LESS_THAN, GREATER_THAN, EXCLAMATION_MARK, COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET;
 terminal String     VALUE, LITERAL;
 
 non terminal        inicio, startResponses, responses, endResponses, startResponse, endResponse, startContent, endContent;
 
-non terminal String         responseType;
 non terminal String         bloqueResponse, paramsResponse, paramResponse;
 non terminal String         value, literal, state;
 
@@ -59,19 +54,7 @@ responses ::= startResponse endResponses
             | startResponse responses
             ;
 
-startResponse ::= LESS_THAN EXCLAMATION_MARK START_RESPONSE COLON responseType endContent endResponse;
-
-responseType ::= LOGIN startContent
-               | CREATE_USER startContent
-               | MODIFY_USER startContent
-               | DELETE_USER startContent
-               | NEW_FORM startContent
-               | MODIFY_FORM startContent
-               | DELETE_FORM startContent
-               | NEW_COMPONENT startContent
-               | EDIT_COMPONENT startContent
-               | DELETE_COMPONENT startContent
-               ;
+startResponse ::= LESS_THAN EXCLAMATION_MARK START_RESPONSE COLON SERVER_RESPONSE startContent endContent endResponse;
 
 startContent ::= GREATER_THAN OPEN_BRACE RESPONSE_PARAMS COLON OPEN_BRACKET bloqueResponse;
 
@@ -82,21 +65,16 @@ paramsResponse ::= paramResponse COMMA paramsResponse
                  | paramResponse
                  ;
 
-paramResponse ::= PARAM_STATE COLON state:s         {:respuesta.setEstado(s);:}
-                | PARAM_MESSAGE COLON literal:l     {:respuesta.setMessage(l);:}
+paramResponse ::= PARAM_MESSAGE COLON literal:l     {:respuesta.setMessage(l);:}
                 | PARAM_LOGGED_USER COLON value:v   {:respuesta.setLoggedUser(v);:}
                 ;
 
 value ::= VALUE:v           {:RESULT = v;:}
         ;
 
-litera ::= LITERAL:l        {:RESULT = l;:}
+literal ::= LITERAL:l        {:RESULT = l;:}
          | value:v          {:RESULT = v;:}
          ;
-
-state ::= SUCCES
-        | ERROR
-        ;
 
 endContent ::= CLOSE_BRACKET CLOSE_BRACE;
 

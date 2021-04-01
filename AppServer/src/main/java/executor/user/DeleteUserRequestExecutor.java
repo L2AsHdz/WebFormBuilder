@@ -5,7 +5,6 @@ import datos.usuario.UsuarioDAO;
 import executor.Executor;
 import model.Usuario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.ELIMINAR_USUARIO;
 
 /**
  *
@@ -30,9 +29,9 @@ public class DeleteUserRequestExecutor extends Executor {
                 .replaceAll("\\s", "");
 
         if (usuarioDAO.delete(nombre)) {
-            addResponse(ELIMINAR_USUARIO, "Exito", "Usuario " + nombre + " se elimino correctamente");
+            addResponse("Usuario " + nombre + " se elimino correctamente");
         } else {
-            addResponse(ELIMINAR_USUARIO, "Error", "Imposible eliminar, el usuario " + nombre + " no existe");
+            addResponse("Imposible eliminar, el usuario " + nombre + " no existe");
         }
 
         return response.toString();

@@ -34,27 +34,11 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> "ini_respuestas"            {return symbol(START_RESPONSES);}
 <YYINITIAL> "fin_respuestas"            {return symbol(END_RESPONSES);}
 
-<YYINITIAL> "\"PARAMETROS_RESPUESTA\""      {return symbol(RESPONSE_PARAMS);}
+<YYINITIAL> "\"RESPUESTA_SERVIDOR\""       {return symbol(SERVER_RESPONSE);}
+<YYINITIAL> "\"PARAMETROS_RESPUESTA\""  {return symbol(RESPONSE_PARAMS);}
 
-<YYINITIAL> "\"LOGIN_USUARIO\""             {return symbol(LOGIN);}
-<YYINITIAL> "\"CREAR_USUARIO\""             {return symbol(CREATE_USER);}
-<YYINITIAL> "\"ELIMINAR_USUARIO\""          {return symbol(DELETE_USER);}
-<YYINITIAL> "\"MODIFICAR_USUARIO\""         {return symbol(MODIFY_USER);}
-
-<YYINITIAL> "\"NUEVO_FORMULARIO\""          {return symbol(NEW_FORM);}
-<YYINITIAL> "\"ELIMINAR_FORMULARIO\""       {return symbol(DELETE_FORM);}
-<YYINITIAL> "\"MODIFICAR_FORMULARIO\""      {return symbol(MODIFY_FORM);}
-
-<YYINITIAL> "\"AGREGAR_COMPONENTE\""        {return symbol(NEW_COMPONENT);}
-<YYINITIAL> "\"ELIMINAR_COMPONENTE\""       {return symbol(DELETE_COMPONENT);}
-<YYINITIAL> "\"MODIFICAR_COMPONENTE\""      {return symbol(EDIT_COMPONENT);}
-
-<YYINITIAL> "\"STATE\""                 {return symbol(PARAM_STATE);}
 <YYINITIAL> "\"MESSAGE\""               {return symbol(PARAM_MESSAGE);}
 <YYINITIAL> "\"LOGGED_USER\""           {return symbol(PARAM_LOGGED_USER);}
-
-<YYINITIAL> "\"Exito\""                {return symbol(SUCCES);}
-<YYINITIAL> "\"Error\""                 {return symbol(ERROR);}
 
 <YYINITIAL> {
     "<"                                 {return symbol(LESS_THAN);}

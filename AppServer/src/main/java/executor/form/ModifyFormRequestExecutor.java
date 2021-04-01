@@ -6,7 +6,6 @@ import datos.form.FormularioDAO;
 import executor.Executor;
 import model.Formulario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.MODIFICAR_FORMUALARIO;
 
 
 /**
@@ -40,10 +39,10 @@ public class ModifyFormRequestExecutor extends Executor {
             if (modifyForm.getTema() != null) currentForm.setTema(modifyForm.getTema());
             
             formDAO.create(currentForm);
-            addResponse(MODIFICAR_FORMUALARIO, "Exito", "El formulario " + currentForm.getId() + " fue modificado");
+            addResponse("El formulario " + currentForm.getId() + " fue modificado");
             //generar respuesta
         } else {
-            addResponse(MODIFICAR_FORMUALARIO, "Error", "No se puede modificar el formulario " + modifyForm.getId() + " porque no existe");
+            addResponse("No se puede modificar el formulario " + modifyForm.getId() + " porque no existe");
         }
         
         return response.toString();

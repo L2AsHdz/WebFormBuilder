@@ -6,7 +6,6 @@ import datos.form.FormularioDAO;
 import executor.Executor;
 import model.Formulario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.NUEVO_FORMULARIO;
 
 /**
  *
@@ -32,12 +31,12 @@ public class CreateFormRequestExecutor extends Executor {
         if (!formDAO.exists(form.getId())) {
             if (form.getUsuarioCreacion().equals(loggedUser)) {
                 formDAO.create(form);
-                addResponse(NUEVO_FORMULARIO, "Exito", "Formulario " + form.getId() + " creado exitosamente");
+                addResponse("Formulario " + form.getId() + " creado exitosamente");
             } else {
-                addResponse(NUEVO_FORMULARIO, "Error", "El usuario ingresado no es el que esta logueado actualmente");
+                addResponse("El usuario ingresado no es el que esta logueado actualmente");
             }
         } else {
-            addResponse(NUEVO_FORMULARIO, "Error", "No se puede crear, el formulario " + form.getId() + " ya existe");
+            addResponse("No se puede crear, el formulario " + form.getId() + " ya existe");
         }
 
         return response.toString();

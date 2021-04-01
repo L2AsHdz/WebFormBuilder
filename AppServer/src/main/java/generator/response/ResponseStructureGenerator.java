@@ -21,10 +21,9 @@ public class ResponseStructureGenerator extends Generator {
     public String generate() {
         text = new StringBuilder();
 
-        addLine("<!ini_respuesta: \"" + r.getTipoRespuesta() + "\">", 0);
+        addLine("<!ini_respuesta: \"RESPUESTA_SERVIDOR\">", 0);
         addLine("{\"PARAMETROS_RESPUESTA\" : [", 1);
         addLine("{", 3);
-        addLine("\"STATE\" : \""+r.getEstado()+"\",", 4);
         addLine("\"MESSAGE\" : \""+r.getMessage()+"\",", 4);
         if (r.getLoggedUser() != null) addLine("\"LOGGED_USER\" : \""+r.getLoggedUser()+"\",", 0);
         addLine("}", 3);

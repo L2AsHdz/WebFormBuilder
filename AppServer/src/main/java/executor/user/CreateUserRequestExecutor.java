@@ -6,7 +6,6 @@ import datos.usuario.UsuarioDAO;
 import executor.Executor;
 import model.Usuario;
 import model.solicitudes.Solicitud;
-import static model.response.TipoRespuesta.CREAR_USUARIO;
 
 /**
  *
@@ -34,9 +33,9 @@ public class CreateUserRequestExecutor extends Executor {
         if (!usuarioDAO.exists(usuario.getNombre())) {
             usuarioDAO.create(usuario);
             //Generar respuesta
-            addResponse(CREAR_USUARIO, "Exito", "Usuario " + usuario.getNombre() + " creado");
+            addResponse("Usuario " + usuario.getNombre() + " creado");
         } else {
-            addResponse(CREAR_USUARIO, "Error", "El usuario " + usuario.getNombre() + " ya existe en el sistema");
+            addResponse("El usuario " + usuario.getNombre() + " ya existe en el sistema");
         }
         
         return response.toString();

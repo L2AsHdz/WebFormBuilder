@@ -1,5 +1,6 @@
 package com.l2ashdz.appcliente.controller.textEditor;
 
+import com.l2ashdz.appcliente.aux.ResponseAnalyzer;
 import com.l2ashdz.appcliente.view.TextEditorView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
     
     private final UndoManager undoManager = new UndoManager();
     private final TextEditorView textEditorV;
+    private final ResponseAnalyzer responseA = new ResponseAnalyzer();
     private boolean hasChanges = false;
     private String usuarioLogueado = "prueba";
     private String path = "";
@@ -74,8 +76,10 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         if (this.textEditorV.getBtnSendToServer() == e.getSource()) {
             String text = this.textEditorV.getTxtArea().getText();
             String respuestaServer = send(text, usuarioLogueado);
-            //this.textEditorV.getTxtArea().setText(respuestaServer);
             System.out.println(respuestaServer);
+            responseA.analyze(respuestaServer);
+            System.out.println(responseA.getMessages()+ "\n");
+            System.out.println(responseA.getLoggedUser());
         } else if (this.textEditorV.getBtnShowReports() == e.getSource()) {
 
         } else if (this.textEditorV.getItmAbrir() == e.getSource()) {
