@@ -13,7 +13,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.OutputStream;
 
 /**
  *
@@ -39,7 +38,8 @@ public class FormExportServlet extends HttpServlet {
         response.setContentType("application/octet-stream");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + idForm + ".form");
 
-        String content = readFile("/home/asael/NetBeansProjects/WebFormBuilder/data/forms/" + idForm + "/estructura.db");
+        String nameUser = System.getProperty("user.name");
+        String content = readFile("/home/" + nameUser + "/WebFormBuilder/data/forms/" + idForm + "/estructura.db");
         File form = new File(idForm + ".form");
         FileWriter fileWriter = new FileWriter(form);
         try ( BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
@@ -47,7 +47,6 @@ public class FormExportServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        
 
         FileInputStream inputStream = new FileInputStream(form);
         try ( PrintWriter out = response.getWriter()) {

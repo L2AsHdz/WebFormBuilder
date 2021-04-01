@@ -1,0 +1,7 @@
+db.user(
+    {
+        "USUARIO" : "admin",
+        "PASSWORD" : "admin",
+        "FECHA_CREACION" : "2023-05-06"
+    }
+)

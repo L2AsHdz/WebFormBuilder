@@ -20,7 +20,8 @@ import java.util.ArrayList;
  */
 public class FormularioDAO implements CRUD<Formulario> {
 
-    private final String PATH_FORMS = "/home/asael/NetBeansProjects/WebFormBuilder/data/forms/";
+    private final String NAME_USER_LINUX = System.getProperty("user.name");
+    private final String PATH_FORMS = "/home/" + NAME_USER_LINUX + "/WebFormBuilder/data/forms/";
     private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
     private Generator formSSG;
 
@@ -28,7 +29,7 @@ public class FormularioDAO implements CRUD<Formulario> {
     public List<Formulario> getList() {
         List<String> fileNames = getfileNames(PATH_FORMS);
         List<Formulario> forms = new ArrayList();
-        
+
         fileNames.forEach(fn -> forms.add(getObject(fn)));
 
         return forms;

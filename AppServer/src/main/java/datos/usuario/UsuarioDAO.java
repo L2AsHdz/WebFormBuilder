@@ -18,7 +18,8 @@ import java.io.StringReader;
  */
 public class UsuarioDAO implements CRUD<Usuario> {
 
-    private final String PATH_USERS = "/home/asael/NetBeansProjects/WebFormBuilder/data/users/";
+    private final String NAME_USER_LINUX = System.getProperty("user.name");
+    private final String PATH_USERS = "/home/" + NAME_USER_LINUX + "/WebFormBuilder/data/users/";
     private final StorageFileAnalyzer analyzer = new StorageFileAnalyzer();
     private Generator userSSG;
 

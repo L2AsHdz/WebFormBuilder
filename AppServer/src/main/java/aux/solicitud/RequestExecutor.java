@@ -47,7 +47,7 @@ public class RequestExecutor {
                         case NEW_COMPONENT      -> addLinea(componentRE.executeAddComponent(s));
                         case DELETE_COMPONENT   -> addLinea(componentRE.executeDeleteComponent(s));
                         case EDIT_COMPONENT     -> addLinea(componentRE.executeModifyComponent(s));
-                        case LOGIN              -> addLinea("\"Ya hay un usuario logueado, cierre sesion primero\"");
+                        case LOGIN              -> addResponse("Ya hay un usuario logueado, cierre sesion primero");
                     }
                 });
                 
