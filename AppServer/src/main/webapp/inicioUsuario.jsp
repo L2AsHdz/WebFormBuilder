@@ -40,6 +40,7 @@
                                         <th>Tema</th>
                                         <th>Fecha creacion</th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,8 +53,11 @@
                                             <td>${form.tema}</td>
                                             <td>${form.fechaCreacion}</td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/builder?id=${form.id}" class="btn btn-outline-info">
-                                                    <i class="fas fa-plus"></i> Generar
+                                                <button type="button" class="btn btn-outline-info" onclick="copyTC('http://localhost:8080/${pageContext.request.contextPath}/builder?id=${form.id}');">Copiar link</button>
+                                            </td>
+                                            <td>
+                                                <a href="${pageContext.request.contextPath}/export?id=${form.id}" class="btn btn-secondary">
+                                                    <i class="fas fa-file-export"></i> Exportar
                                                 </a>
                                             </td>
                                         </tr>
@@ -68,5 +72,17 @@
 
         <!--JS--> 
         <jsp:include page="/WEB-INF/extras/extrasJS.jsp"/>
+
+        <script>
+            function copyTC(value) {
+                const t = document.createElement('textarea');
+                t.value = value;
+                t.style.visibility = true;
+                document.body.appendChild(t);
+                t.select();
+                document.execCommand('copy');
+                t.parentElement.removeChild(t);
+            }
+        </script>
     </body>
 </html>

@@ -7,12 +7,6 @@
 
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/cajero/retirar.jsp">No se que poner</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/cajero/depositar.jsp">Holiiiii</a>
-                </li>
             </ul>
 
             <ul class="navbar-nav">
