@@ -41,7 +41,6 @@ public class FormStorageStructureGenerator extends Generator {
             addLine("{", 3);
             addLine("\"ID\" : \""+c.getId()+"\",", 4);
             if (c.getNombreCampo() != null) addLine("\"NOMBRE_CAMPO\" : \""+c.getNombreCampo()+"\",", 4);
-            addLine("\"FORMULARIO\" : \""+c.getFormulario()+"\",", 4);
             addLine("\"TEXTO_VISIBLE\" : \""+c.getTextoVisible()+"\",", 4);
             if (c.getAlineacion() != null) addLine("\"ALINEACION\" : \""+c.getAlineacion()+"\",", 4);
             if (c.getRequerido() != null) addLine("\"REQUERIDO\" : \""+c.getRequerido()+"\",", 4);

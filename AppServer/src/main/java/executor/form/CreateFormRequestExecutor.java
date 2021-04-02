@@ -33,7 +33,7 @@ public class CreateFormRequestExecutor extends Executor {
                 formDAO.create(form);
                 addResponse("Formulario " + form.getId() + " creado exitosamente");
             } else {
-                addResponse("El usuario ingresado no es el que esta logueado actualmente");
+                addResponse("El usuario ingresado en el formulario " + form.getId() + " no es el que esta logueado actualmente");
             }
         } else {
             addResponse("No se puede crear, el formulario " + form.getId() + " ya existe");
