@@ -52,6 +52,7 @@ public class TextEditorView extends javax.swing.JFrame {
         itmAbrir = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         itmNuevo = new javax.swing.JMenuItem();
+        itmImport = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         itmSave = new javax.swing.JMenuItem();
         itmSaveAs = new javax.swing.JMenuItem();
@@ -159,6 +160,10 @@ public class TextEditorView extends javax.swing.JFrame {
         itmNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         itmNuevo.setText("Nuevo");
         jMenu1.add(itmNuevo);
+
+        itmImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        itmImport.setText("Importar");
+        jMenu1.add(itmImport);
         jMenu1.add(jSeparator2);
 
         itmSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -243,6 +248,7 @@ public class TextEditorView extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmCopiar;
     private javax.swing.JMenuItem itmCortar;
     private javax.swing.JMenuItem itmDeshacer;
+    private javax.swing.JMenuItem itmImport;
     private javax.swing.JMenuItem itmManual;
     private javax.swing.JMenuItem itmNuevo;
     private javax.swing.JMenuItem itmPegar;
@@ -341,5 +347,9 @@ public class TextEditorView extends javax.swing.JFrame {
 
     public JButton getBtnLogout() {
         return btnLogout;
+    }
+
+    public JMenuItem getItmImport() {
+        return itmImport;
     }
 }

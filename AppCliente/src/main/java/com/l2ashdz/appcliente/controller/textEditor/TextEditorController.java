@@ -22,6 +22,7 @@ import javax.swing.text.BadLocationException;
 import static com.l2ashdz.appcliente.controller.FileController.*;
 import static com.l2ashdz.appcliente.controller.textEditor.SendDataToServer.send;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -46,6 +47,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         this.textEditorV.getItmSave().addActionListener(this);
         this.textEditorV.getItmSaveAs().addActionListener(this);
         this.textEditorV.getItmNuevo().addActionListener(this);
+        this.textEditorV.getItmImport().addActionListener(this);
 
         this.textEditorV.getItmRehacer().addActionListener(this);
         this.textEditorV.getItmDeshacer().addActionListener(this);
@@ -82,6 +84,17 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             abrir();
         } else if (this.textEditorV.getItmNuevo() == e.getSource()) {
             nuevo();
+        } else if (this.textEditorV.getItmImport() == e.getSource()) {
+            String content = getContentFile();
+            String idForm = "";
+            if (!content.isEmpty()) {idForm = getIdForm();
+            }
+            if (!content.isEmpty() && !idForm.isEmpty()) {
+                System.out.println("enviar datos al servidor");
+                System.out.println(send(content, usuarioLogueado, idForm));
+            } else {
+                System.out.println("no hacer nada");
+            }
         } else if (this.textEditorV.getItmSave() == e.getSource()) {
             guardar();
         } else if (this.textEditorV.getItmSaveAs() == e.getSource()) {
@@ -96,6 +109,39 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             usuarioLogueado = "";
             textEditorV.getBtnLogout().setEnabled(false);
         }
+    }
+
+    private String getContentFile() {
+        String content = "";
+
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("FORM Documents", "form"));
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.showOpenDialog(this.textEditorV);
+        try {
+            path = fc.getSelectedFile().getAbsolutePath();
+            content = readFile(path);
+        } catch (Exception ex) {
+            System.out.println("se cancelo");
+        }
+
+        return content;
+    }
+
+    private String getIdForm() {
+        String idForm;
+        idForm = JOptionPane.showInputDialog(null, "Ingrese un ID para el formulario", "$IdForm");
+
+        if (idForm != null) {
+            while (!idForm.matches("[\\_\\-\\$](\\w|[\\_\\-\\$])*")) {
+                idForm = JOptionPane.showInputDialog(null, "El formato no coincide\nIngrese el id nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            idForm = "";
+        }
+
+        return idForm;
     }
 
     private void setDatos(String respuestaServer) {
@@ -120,7 +166,6 @@ public class TextEditorController extends WindowAdapter implements ActionListene
                 hasChanges = false;
             } catch (Exception ex) {
                 System.out.println("se cancelo");
-                ex.printStackTrace(System.out);
             }
         } else {
             cambiosSinGuardar(1);

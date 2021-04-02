@@ -32,7 +32,7 @@ public class ResponseAnalyzer {
             parser.parse();
             respuestas = parser.getRespuestas();
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            System.out.println("Entrada vacia");
         }
     }
 
