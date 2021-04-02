@@ -37,7 +37,7 @@ public class ReadDataServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idForm = request.getParameter("idForm");
+        /*String idForm = request.getParameter("idForm");
         var form = formDAO.getObject(idForm);
 
         Part part;
@@ -58,14 +58,14 @@ public class ReadDataServlet extends HttpServlet {
             }
             if (values != null) {
                 for (String v : values) {
-                    System.out.print(v + " - ");
+                    System.out.print(v + "|");
                 }
             }
 
             if (value != null) {
                 System.out.println(value);
             }
-        }
+        }*/
 
         response.sendRedirect("success.jsp");
     }

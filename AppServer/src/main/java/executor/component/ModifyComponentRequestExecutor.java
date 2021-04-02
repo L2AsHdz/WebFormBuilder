@@ -28,28 +28,102 @@ public class ModifyComponentRequestExecutor extends Executor {
         response = new StringBuilder();
 
         componentBuilder = new ComponentBuilder(s);
-        var component = componentBuilder.build();
+        var comp = componentBuilder.build();
         
-        if (formDAO.exists(component.getFormulario())) {
-            var form = formDAO.getObject(component.getFormulario());
+        if (formDAO.exists(comp.getFormulario())) {
+            var form = formDAO.getObject(comp.getFormulario());
             var componentes = form.getComponentes();
-            int index = indexOfComponent(form, component.getId());
+            int index = indexOfComponent(form, comp.getId());
             
             if (index != -1) {
+                boolean canCreated = true;
+                boolean hasFieldName = comp.getNombreCampo()!= null;
+                boolean hasVisibleText = comp.getTextoVisible()!= null;
+                boolean hasAlignment = comp.getAlineacion()!= null;
+                boolean hasRequired = comp.getRequerido()!= null;
+                boolean hasOptions = comp.getOpciones() != null;
+                boolean hasRows = comp.getNoFilas()!= null;
+                boolean hasColumns = comp.getNoColumnas()!= null;
+                boolean hasURL = comp.getUrl()!= null;
                 var compForm = componentes.get(index);
 
-                if (component.getNombreCampo() != null) compForm.setNombreCampo(component.getNombreCampo());
-                if (component.getTextoVisible() != null) compForm.setTextoVisible(component.getTextoVisible());
-                if (component.getAlineacion() != null) compForm.setAlineacion(component.getAlineacion());
-                if (component.getRequerido() != null) compForm.setRequerido(component.getRequerido());
-                if (component.getOpciones() != null) compForm.setOpciones(component.getOpciones());
-                if (component.getNoFilas() != null) compForm.setNoFilas(component.getNoFilas());
-                if (component.getNoColumnas() != null) compForm.setNoColumnas(component.getNoColumnas());
-                if (component.getUrl() != null) compForm.setUrl(component.getUrl());
+                if (comp.getClase() != null) {
+                    if (hasFieldName) compForm.setNombreCampo(comp.getNombreCampo());
+                    if (hasVisibleText) compForm.setTextoVisible(comp.getTextoVisible());
+                    if (hasAlignment) compForm.setAlineacion(comp.getAlineacion());
+                    if (hasRequired) compForm.setRequerido(comp.getRequerido());
+                    if (hasOptions) compForm.setOpciones(comp.getOpciones());
+                    if (hasRows) compForm.setNoFilas(comp.getNoFilas());
+                    if (hasColumns) compForm.setNoColumnas(comp.getNoColumnas());
+                    if (hasURL) compForm.setUrl(comp.getUrl());
+                    compForm.setClase(comp.getClase());
+                    System.out.println("Nuevo componente");
+                } else {
+                    
+                    switch (compForm.getClase()) {
+                        case "CAMPO_TEXTO", "FICHERO" -> {
+                            if (hasOptions | hasRows | hasColumns | hasURL) {
+                                canCreated = false;
+                                addResponse("No se puede modificar el componente " + compForm.getId() + " se ingresaron parametros que no coinciden con la clase " + compForm.getClase());
+                            }
+                        }
+                        
+                        case "CHECKBOX", "RADIO", "COMBO" -> {
+                            if (hasRows | hasColumns | hasURL) {
+                                canCreated = false;
+                                addResponse("No se puede modificar el componente " + compForm.getId() + " se ingresaron parametros que no coinciden con la clase " + compForm.getClase());
+                            } else {
+                                if (hasOptions) compForm.setOpciones(comp.getOpciones());
+                            }
+                        }
+                        
+                        case "AREA_TEXTO" -> {
+                            if (hasURL | hasOptions) {
+                                canCreated = false;
+                                addResponse("No se puede modificar el componente " + compForm.getId() + " se ingresaron parametros que no coinciden con la clase " + compForm.getClase());
+                            } else {
+                                if (hasRows) compForm.setNoFilas(comp.getNoFilas());
+                                if (hasColumns) compForm.setNoColumnas(comp.getNoColumnas());
+                            }
+                        }
+                        
+                        case "IMAGEN" -> {
+                            if (hasOptions | hasRows | hasColumns | hasFieldName | hasRequired) {
+                                canCreated = false;
+                                addResponse("No se puede modificar el componente " + compForm.getId() + " se ingresaron parametros que no coinciden con la clase " + compForm.getClase());
+                            } else {
+                                if (hasURL) compForm.setUrl(comp.getUrl());
+                            }
+                        }
+                        
+                        case "BOTON" -> {
+                            if (hasOptions | hasRows | hasColumns | hasFieldName | hasRequired | hasURL) {
+                                canCreated = false;
+                                addResponse("No se puede modificar el componente " + compForm.getId() + " se ingresaron parametros que no coinciden con la clase " + compForm.getClase());
+                            }
+                        }
+                    }
+                    
+                    switch (compForm.getClase()) {
+                        case "CAMPO_TEXTO", "FICHERO", "CHECKBOX", "RADIO", "COMBO", "AREA_TEXTO" -> {
+                            if (hasFieldName) compForm.setNombreCampo(comp.getNombreCampo());
+                            if (hasVisibleText) compForm.setTextoVisible(comp.getTextoVisible());
+                            if (hasAlignment) compForm.setAlineacion(comp.getAlineacion());
+                            if (hasRequired) compForm.setRequerido(comp.getRequerido());
+                            
+                        }
+                        case "IMAGEN", "BOTON" -> {
+                            if (hasVisibleText) compForm.setTextoVisible(comp.getTextoVisible());
+                            if (hasAlignment) compForm.setAlineacion(comp.getAlineacion());
+                        }
+                    }
+                }
                 
-                if (component.getIndice() > 0) {
-                    int newIndex = component.getIndice();
+                
+                if (comp.getIndice() > 0) {
+                    int newIndex = comp.getIndice();
                     var compAux = componentes.remove(index);
+                    System.out.println(compAux.toString());
                     
                     if (newIndex >= componentes.size()) {
                         componentes.add(compAux);
@@ -58,15 +132,17 @@ public class ModifyComponentRequestExecutor extends Executor {
                     }
                 }
                 
-                formDAO.create(form);
-                addResponse("Componente " + compForm.getId() + " modificado");
+                if (canCreated) {
+                    formDAO.create(form);
+                    addResponse("Componente " + compForm.getId() + " modificado");
+                }
                 
             } else {
-                addResponse("No existe el componente " + component.getId() + " en el formulario " + form.getId());
+                addResponse("No existe el componente " + comp.getId() + " en el formulario " + form.getId());
             }
             
         } else {
-            addResponse("El formulario " + component.getFormulario() + " no existe");
+            addResponse("El formulario " + comp.getFormulario() + " no existe");
         }
 
         return response.toString();

@@ -90,17 +90,17 @@
                                             
                                         <c:when test="${c.clase eq 'RADIO'}">
                                             <label>${c.textoVisible}</label>
-                                            <c:forEach var="o" items="${c.options}">
+                                            <c:forEach var="o" items="${c.options}" varStatus="s">
                                                 <div class="custom-control custom-radio">
                                                 <c:choose>
                                                     <c:when test="${c.requerido eq 'SI'}">
-                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${o}" name="${c.nombreCampo}" value="${o}" required>
+                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${s.count}" name="${c.nombreCampo}" value="${o}" required>
                                                     </c:when>
                                                     <c:otherwise>
-                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${o}" name="${c.nombreCampo}" value="${o}">
+                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${s.count}" name="${c.nombreCampo}" value="${o}">
                                                     </c:otherwise>
                                                 </c:choose>
-                                                    <label class="custom-control-label" for="${c.nombreCampo}${o}">${o}</label>
+                                                    <label class="custom-control-label" for="${c.nombreCampo}${s.count}">${o}</label>
                                                 </div>
                                             </c:forEach>
                                         </c:when>

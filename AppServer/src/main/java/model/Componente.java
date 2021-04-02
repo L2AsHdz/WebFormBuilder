@@ -130,4 +130,11 @@ public class Componente {
     public void setOptions(List<String> options) {
         this.options = options;
     }
+
+    @Override
+    public String toString() {
+        return "Componente{" + "indice=" + indice + ", id=" + id + ", nombreCampo=" + nombreCampo + ", formulario=" + formulario + ", textoVisible=" + textoVisible + ", alineacion=" + alineacion + ", requerido=" + requerido + ", clase=" + clase + ", opciones=" + opciones + ", noFilas=" + noFilas + ", noColumnas=" + noColumnas + ", url=" + url + ", options=" + options + '}';
+    }
+    
+    
 }
