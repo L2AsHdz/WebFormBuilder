@@ -62,7 +62,7 @@ public class Formulario {
     }
 
     public void setTema(String tema) {
-        this.tema = tema;
+        this.tema = tema.toUpperCase();
     }
 
     public String getUsuarioCreacion() {

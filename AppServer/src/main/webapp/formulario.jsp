@@ -20,11 +20,26 @@
             <div class="row my-5">
                 <div class="col-2"></div>
                 <div class="col-8">
+                    <c:choose>
+                        <c:when test="${form.tema eq 'DARK'}">
+                    <div class="card my-5 text-white">
+                        <div class="card-header text-center bg-dark">
+                        </c:when>
+                        <c:otherwise>
                     <div class="card my-5">
                         <div class="card-header text-center">
+                        </c:otherwise>
+                    </c:choose>
                             <h4>${form.titulo}</h4>
                         </div>
+                        <c:choose>
+                            <c:when test="${form.tema eq 'DARK'}">
+                        <div class="card-body bg-secondary">
+                            </c:when>
+                            <c:otherwise>
                         <div class="card-body">
+                            </c:otherwise>
+                        </c:choose>
 
                             <form id="form-id" action="${pageContext.request.contextPath}/readData" method="POST" enctype="multipart/form-data">
 

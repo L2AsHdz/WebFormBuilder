@@ -19,11 +19,11 @@
             <div class="row my-5">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <div class="card my-5">
-                        <div class="card-header text-center">
+                    <div class="card my-5 text-white">
+                        <div class="card-header text-center bg-dark">
                             <h4>Titulo del formualario</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body bg-secondary">
 
                             <form id="form-id" action="${pageContext.request.contextPath}/readData" method="POST" enctype="multipart/form-data">
                                 <!-- Clase tipo campo texto -->
