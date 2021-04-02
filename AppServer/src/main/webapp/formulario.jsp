@@ -41,70 +41,119 @@
                             </c:otherwise>
                         </c:choose>
 
-                            <form id="form-id" action="${pageContext.request.contextPath}/readData" method="POST" enctype="multipart/form-data">
+                            <form id="form-id" action="${pageContext.request.contextPath}/readData?idForm=${form.id}" method="POST" enctype="multipart/form-data" class="was-validated">
 
                                 <c:forEach var="c" items="${form.componentes}">
                                     <c:choose>
+                                        
                                         <c:when test="${c.clase eq 'CAMPO_TEXTO'}">
                                             <div class="form-group">
                                                 <label for="${c.nombreCampo}">${c.textoVisible}</label>
+                                                <c:choose>
+                                                    <c:when test="${c.requerido eq 'SI'}">
+                                                <input type="text" class="form-control" name="${c.nombreCampo}" required>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                 <input type="text" class="form-control" name="${c.nombreCampo}">
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </c:when>
+                                        
+                                        
                                         <c:when test="${c.clase eq 'AREA_TEXTO'}">
                                             <div class="form-group">
                                                 <label for="${c.nombreCampo}">${c.textoVisible}</label>
+                                                <c:choose>
+                                                    <c:when test="${c.requerido eq 'SI'}">
+                                                <textarea class="form-control" name="${c.nombreCampo}" rows="${c.noFilas}" cols="${c.noColumnas}" required></textarea>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                 <textarea class="form-control" name="${c.nombreCampo}" rows="${c.noFilas}" cols="${c.noColumnas}"></textarea>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </c:when>
+                                        
+                                        
                                         <c:when test="${c.clase eq 'CHECKBOX'}">
                                             <label>${c.textoVisible}</label>
                                             <c:forEach var="o" items="${c.options}">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="${c.nombreCampo}">${o}
+                                                        <input type="checkbox" class="form-check-input" name="${c.nombreCampo}" value="${o}">${o}
                                                     </label>
                                                 </div>
                                             </c:forEach>
                                         </c:when>
+                                            
+                                            
                                         <c:when test="${c.clase eq 'RADIO'}">
                                             <label>${c.textoVisible}</label>
                                             <c:forEach var="o" items="${c.options}">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="${c.nombreCampo}">${o}
-                                                    </label>
+                                                <div class="custom-control custom-radio">
+                                                <c:choose>
+                                                    <c:when test="${c.requerido eq 'SI'}">
+                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${o}" name="${c.nombreCampo}" value="${o}" required>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="radio" class="custom-control-input" id="${c.nombreCampo}${o}" name="${c.nombreCampo}" value="${o}">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                    <label class="custom-control-label" for="${c.nombreCampo}${o}">${o}</label>
                                                 </div>
                                             </c:forEach>
                                         </c:when>
+                                            
+                                            
                                         <c:when test="${c.clase eq 'FICHERO'}">
                                             <div class="form-group mt-3">
                                                 <label>${c.textoVisible}</label>
-                                                <input type="file" class="form-control-file border" name="${c.nombreCampo}" accept=".*">
+                                                <c:choose>
+                                                    <c:when test="${c.requerido eq 'SI'}">
+                                                    <input type="file" class="form-control-file border" name="${c.nombreCampo}" required>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <input type="file" class="form-control-file border" name="${c.nombreCampo}">
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </c:when>
+                                            
+                                            
                                         <c:when test="${c.clase eq 'IMAGEN'}">
                                             <label>${c.textoVisible}</label>
                                             <div class="form-group">
                                                 <img src="${c.url}" class="img-fluid" name="${c.nombreCampo}" alt="${c.nombreCampo}">
                                             </div>
                                         </c:when>
+                                            
+                                            
                                         <c:when test="${c.clase eq 'COMBO'}">
                                             <div class="form-group">
                                                 <label>${c.textoVisible}</label>
+                                                <c:choose>
+                                                    <c:when test="${c.requerido eq 'SI'}">
+                                                <select class="form-control" name="${c.nombreCampo}" id="${c.nombreCampo}" required>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                 <select class="form-control" name="${c.nombreCampo}" id="${c.nombreCampo}">
-                                                    <option value="">Seleccione un opcion...</option>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                     <c:forEach var="o" items="${c.options}">
                                                         <option>${o}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                         </c:when>
+                                            
+                                            
                                         <c:when test="${c.clase eq 'BOTON'}">
                                             <div class="text-center">
                                                 <button type="submit" class="btn btn-primary">${c.textoVisible}</button>
                                             </div>
                                         </c:when>
+                                            
                                     </c:choose>
                                 </c:forEach>
                             </form>
