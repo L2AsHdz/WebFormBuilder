@@ -5,9 +5,11 @@ import datos.CRUD;
 import datos.form.FormularioDAO;
 import datos.usuario.UsuarioDAO;
 import executor.Executor;
+import generator.response.ResponseStructureGenerator;
 import java.util.List;
 import model.Formulario;
 import model.Usuario;
+import model.response.Response;
 import model.solicitudes.Solicitud;
 
 /**
@@ -49,7 +51,7 @@ public class ModifyUserRequestExecutor extends Executor {
             usuarioDAO.delete(oldUser.getNombre());
             usuarioDAO.create(newUser);
 
-            addResponse("Se modifico el usuario " + oldUser.getNombre());
+            response.append(new ResponseStructureGenerator(new Response("Se modifico el usuario " + oldUser.getNombre(), newUser.getNombre())).generate());
         } else {
             addResponse("No se puede modificar, el usuario " + u.getNombre() + " no existe");
         }

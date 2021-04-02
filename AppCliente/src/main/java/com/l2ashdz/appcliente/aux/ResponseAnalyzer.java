@@ -3,8 +3,8 @@ package com.l2ashdz.appcliente.aux;
 import com.l2ashdz.appcliente.analizador.lexico.ResponseLexer;
 import com.l2ashdz.appcliente.analizador.sintactico.ResponseParser;
 import com.l2ashdz.appcliente.model.Respuesta;
-import java.io.Reader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +25,8 @@ public class ResponseAnalyzer {
     }
 
     public void analyze(String s) {
+        respuestas = new ArrayList();
+        loggedUser = null;
         StringReader reader = new StringReader(s);
         try {
             lexer = new ResponseLexer(reader);

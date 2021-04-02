@@ -157,7 +157,6 @@ public class ResponseParser extends java_cup.runtime.lr_parser {
         String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
         expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
-        System.out.println(ss + " - " + descripcion);
     }
 
 

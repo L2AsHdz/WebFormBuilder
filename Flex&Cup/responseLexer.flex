@@ -24,7 +24,7 @@ import java_cup.runtime.Symbol;
     return new Symbol(EOF, "Fin de linea");
 %eofval}
 
-VALUE = "\""[^ '\"']*"\""
+VALUE = "\""[^\s"\""]*"\""
 LITERAL = "\""[^"\""]*"\""
 
 %%
@@ -56,4 +56,4 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> {VALUE}                     {return symbol(VALUE);}
 <YYINITIAL> {LITERAL}                     {return symbol(LITERAL);}
 
-[^]                                     {System.out.println("Error " + yytext());}
+[^]                                     {System.out.println("Error responseLexer: " + yytext());}
