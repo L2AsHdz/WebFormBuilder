@@ -8,63 +8,66 @@ package analizadores.sintactico;
 /** CUP generated class containing symbol constants. */
 public class StorageSym {
   /* terminals */
-  public static final int PARAM_ID = 14;
-  public static final int PARAM_ALINEACION = 24;
-  public static final int PARAM_TEXTO_VISIBLE = 23;
-  public static final int ENTERO = 47;
-  public static final int SI = 42;
-  public static final int WHITE = 51;
-  public static final int CLASS_RADIO = 33;
-  public static final int PARAM_CLASE = 22;
-  public static final int IZQUIERDA = 39;
-  public static final int FECHA = 46;
-  public static final int CLASS_CHECKBOX = 32;
+  public static final int PARAM_ID = 15;
+  public static final int PARAM_ALINEACION = 25;
+  public static final int PARAM_TEXTO_VISIBLE = 24;
+  public static final int ENTERO = 49;
+  public static final int SI = 43;
+  public static final int WHITE = 53;
+  public static final int CLASS_RADIO = 34;
+  public static final int PARAM_CLASE = 23;
+  public static final int IZQUIERDA = 40;
+  public static final int FECHA = 48;
+  public static final int CLASS_CHECKBOX = 33;
   public static final int INICIO_USER = 2;
-  public static final int CLASS_COMBO = 36;
-  public static final int PARAM_TEMA = 17;
-  public static final int PARAM_NOMBRE_CAMPO = 20;
-  public static final int CLOSE_ROUND_BRACKET = 9;
-  public static final int COMMA = 5;
-  public static final int CENTRO = 38;
+  public static final int CLASS_COMBO = 37;
+  public static final int PARAM_TEMA = 18;
+  public static final int PARAM_NOMBRE_CAMPO = 21;
+  public static final int CLOSE_ROUND_BRACKET = 10;
+  public static final int COMMA = 6;
+  public static final int CENTRO = 39;
   public static final int INICIO_FORM = 3;
-  public static final int PARAM_FORMULARIO = 21;
-  public static final int PARAM_COMPONENTES = 19;
-  public static final int CLASS_CAMPO_TEXTO = 30;
-  public static final int PARAM_URL = 29;
-  public static final int ID = 45;
+  public static final int PARAM_FORMULARIO = 22;
+  public static final int PARAM_COMPONENTES = 20;
+  public static final int CLASS_CAMPO_TEXTO = 31;
+  public static final int PARAM_URL = 30;
+  public static final int ID = 47;
   public static final int EOF = 0;
-  public static final int PARAM_FECHA_CREACION = 12;
-  public static final int CLASS_BOTON = 37;
-  public static final int PARAM_TITULO_FORM = 15;
-  public static final int PARAM_NOMBRE_FORM = 16;
+  public static final int PARAM_FECHA_CREACION = 13;
+  public static final int CLASS_BOTON = 38;
+  public static final int PARAM_TITULO_FORM = 16;
+  public static final int PARAM_NOMBRE_FORM = 17;
   public static final int error = 1;
-  public static final int PARAM_PASSWORD = 11;
-  public static final int OPEN_BRACE = 6;
-  public static final int PARAM_FILAS = 27;
-  public static final int CLASS_AREA_TEXTO = 31;
-  public static final int CLASS_IMAGEN = 35;
-  public static final int PARAM_USUARIO_CREACION = 18;
-  public static final int LITERAL = 49;
-  public static final int COLON = 4;
-  public static final int PARAM_FECHA_MODIFICACION = 13;
-  public static final int NO = 43;
-  public static final int DERECHA = 40;
-  public static final int CLASS_FICHERO = 34;
-  public static final int PARAM_COLUMNAS = 28;
-  public static final int DARK = 50;
-  public static final int OPEN_ROUND_BRACKET = 8;
-  public static final int CLOSE_BRACE = 7;
-  public static final int VALUE = 48;
-  public static final int PARAM_OPCIONES = 26;
-  public static final int PARAM_REQUERIDO = 25;
-  public static final int JUSTIFICAR = 41;
-  public static final int PARAM_USUARIO = 10;
-  public static final int OPCIONES = 44;
+  public static final int OPCIONES2 = 46;
+  public static final int PARAM_PASSWORD = 12;
+  public static final int OPEN_BRACE = 7;
+  public static final int PARAM_FILAS = 28;
+  public static final int CLASS_AREA_TEXTO = 32;
+  public static final int CLASS_IMAGEN = 36;
+  public static final int PARAM_USUARIO_CREACION = 19;
+  public static final int LITERAL = 51;
+  public static final int COLON = 5;
+  public static final int PARAM_FECHA_MODIFICACION = 14;
+  public static final int NO = 44;
+  public static final int DERECHA = 41;
+  public static final int INICIO_DATOS = 4;
+  public static final int CLASS_FICHERO = 35;
+  public static final int PARAM_COLUMNAS = 29;
+  public static final int DARK = 52;
+  public static final int OPEN_ROUND_BRACKET = 9;
+  public static final int CLOSE_BRACE = 8;
+  public static final int VALUE = 50;
+  public static final int PARAM_OPCIONES = 27;
+  public static final int PARAM_REQUERIDO = 26;
+  public static final int JUSTIFICAR = 42;
+  public static final int PARAM_USUARIO = 11;
+  public static final int OPCIONES = 45;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "INICIO_USER",
   "INICIO_FORM",
+  "INICIO_DATOS",
   "COLON",
   "COMMA",
   "OPEN_BRACE",
@@ -106,6 +109,7 @@ public class StorageSym {
   "SI",
   "NO",
   "OPCIONES",
+  "OPCIONES2",
   "ID",
   "FECHA",
   "ENTERO",

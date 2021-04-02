@@ -3,6 +3,8 @@ package datos;
 import analizadores.lexico.StorageLexer;
 import analizadores.sintactico.StorageParser;
 import java.io.Reader;
+import java.util.List;
+import model.DatoRecopilado;
 import model.Formulario;
 import model.Usuario;
 
@@ -40,6 +42,19 @@ public class StorageFileAnalyzer {
             
             parser.parse();
             return parser.getForm();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return null;
+        }
+    }
+    
+    public List<DatoRecopilado> analyzeData(Reader reader) {
+        try {
+            lex = new StorageLexer(reader);
+            parser = new StorageParser(lex);
+            
+            parser.parse();
+            return parser.getDatos();
         } catch (Exception e) {
             e.printStackTrace(System.out);
             return null;

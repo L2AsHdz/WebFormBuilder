@@ -30,7 +30,7 @@ import model.Formulario;
 public class ReadDataServlet extends HttpServlet {
 
     private final CRUD<Formulario> formDAO = new FormularioDAO();
-    private final DatoRecopiladoDAO datoDAO = new DatoRecopiladoDAO();
+    private final DatoRecopiladoDAO dataDAO = new DatoRecopiladoDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +49,14 @@ public class ReadDataServlet extends HttpServlet {
         Part part;
         String value;
         String values;
-        List<DatoRecopilado> datosRecopilados = new ArrayList();
+        List<DatoRecopilado> datosRecopilados;
+        
+        if (dataDAO.exists(idForm)) {
+            datosRecopilados = dataDAO.getObject(idForm);
+        } else {
+            datosRecopilados = new ArrayList();
+        }
+        
         for (Componente c : form.getComponentes()) {
             values = null;
             value = null;
@@ -64,11 +71,13 @@ public class ReadDataServlet extends HttpServlet {
                     } catch (IOException | ServletException e) {
                     }
                 }
-                case "CAMPO_TEXTO", "RADIO", "COMBO", "AREA_TEXTO"->
+                case "CAMPO_TEXTO", "RADIO", "COMBO", "AREA_TEXTO" ->
                     value = request.getParameter(c.getNombreCampo());
             }
             if (values != null) {
-                datosRecopilados.add(new DatoRecopilado(c.getNombreCampo(), values));
+                if (!values.equals("null")) {
+                    datosRecopilados.add(new DatoRecopilado(c.getNombreCampo(), values));
+                }
             }
 
             if (value != null) {
@@ -76,8 +85,9 @@ public class ReadDataServlet extends HttpServlet {
                     datosRecopilados.add(new DatoRecopilado(c.getNombreCampo(), value));
                 }
             }
-            datoDAO.create(datosRecopilados, idForm);
         }
+        
+        dataDAO.create(datosRecopilados, idForm);
 
         response.sendRedirect("success.jsp");
     }

@@ -29,6 +29,7 @@ ENTERO = "\""(0|([1-9][0-9]*))"\""
 ID = "\""[\_\-\$](\w|[\_\-\$])*"\""
 FECHA = "\""\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"\""
 OPCIONES = "\""((\w+\|\w+)(\|\w+)*)"\""
+OPCIONES2 = "\""((\w+\,\w+)(\,\w+)*)"\""
 VALUE = "\""[^ '\"']*"\""
 LITERAL = "\""[^"\""]*"\""
     
@@ -37,6 +38,7 @@ LITERAL = "\""[^"\""]*"\""
 
 <YYINITIAL> "db.user"                       {return symbol(INICIO_USER);}
 <YYINITIAL> "db.form"                       {return symbol(INICIO_FORM);}
+<YYINITIAL> "db.recopiledData"              {return symbol(INICIO_DATOS);}
 
 <YYINITIAL> "\"USUARIO\""                   {return symbol(PARAM_USUARIO);}
 <YYINITIAL> "\"PASSWORD\""                  {return symbol(PARAM_PASSWORD);}
@@ -96,6 +98,7 @@ LITERAL = "\""[^"\""]*"\""
 <YYINITIAL> {FECHA}                     {return symbol(FECHA);}
 <YYINITIAL> {ENTERO}                    {return symbol(ENTERO);}
 <YYINITIAL> {OPCIONES}                  {return symbol(OPCIONES);}
+<YYINITIAL> {OPCIONES}                  {return symbol(OPCIONES2);}
 <YYINITIAL> {VALUE}                     {return symbol(VALUE);}
 <YYINITIAL> {LITERAL}                   {return symbol(LITERAL);}
 

@@ -112,6 +112,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         }
         if (!content.isEmpty() && !idForm.isEmpty()) {
             responseA.analyze(send(content, usuarioLogueado, idForm));
+            textEditorV.getTxtArea().setText("");
             textEditorV.getTxtAreaRespuestas().setText(responseA.getMessages());
         }
     }

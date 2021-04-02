@@ -5,6 +5,7 @@ import java.util.List;
 import model.Componente;
 import model.Formulario;
 import model.Usuario;
+import model.DatoRecopilado;
 import model.errores.ErrorAnalisis;
 import java_cup.runtime.Symbol;
 
@@ -14,9 +15,14 @@ parser code {:
     private Usuario user = new Usuario();
     private Formulario form = new Formulario();
     private Componente comp = new Componente();
+    private List<DatoRecopilado> datos = new ArrayList();
 
     public List<ErrorAnalisis> getErrores() {
         return this.errores;
+    }
+
+    public List<DatoRecopilado> getDatos() {
+        return this.datos;
     }
 
     public Usuario getUsuario(){
@@ -41,7 +47,7 @@ parser code {:
 
 :}
 
-terminal        INICIO_USER, INICIO_FORM;
+terminal        INICIO_USER, INICIO_FORM, INICIO_DATOS;
 terminal        COLON, COMMA, OPEN_BRACE, CLOSE_BRACE, OPEN_ROUND_BRACKET, CLOSE_ROUND_BRACKET;
 
 terminal String      PARAM_USUARIO, PARAM_PASSWORD, PARAM_FECHA_CREACION, PARAM_FECHA_MODIFICACION;
@@ -52,14 +58,15 @@ terminal String      PARAM_ALINEACION, PARAM_REQUERIDO, PARAM_OPCIONES, PARAM_FI
 
 terminal String      CLASS_CAMPO_TEXTO, CLASS_AREA_TEXTO, CLASS_CHECKBOX, CLASS_RADIO, CLASS_FICHERO, CLASS_IMAGEN, CLASS_COMBO, CLASS_BOTON;
 terminal String      CENTRO, IZQUIERDA, DERECHA, JUSTIFICAR;
-terminal String      SI, NO, OPCIONES;
+terminal String      SI, NO, OPCIONES, OPCIONES2;
 
 terminal String      ID, FECHA, ENTERO, VALUE, LITERAL;
 terminal String      DARK, WHITE;
 
-non terminal        inicio, startUserStructure, startFormStructure, startStructure, endStructure;
+non terminal        inicio, startUserStructure, startFormStructure, startDataStructure, startStructure, endStructure;
 non terminal        paramsUser, paramUser;
 non terminal        paramsForm, paramForm;
+non terminal        paramsData, paramData;
 
 non terminal        componentStruct, components, component, params, param;
 
@@ -68,10 +75,12 @@ non terminal String         value, fecha, entero, literal, id, tema, keyword;
 
 inicio ::= startUserStructure
          | startFormStructure
+         | startDataStructure
          ;
 
 startUserStructure ::= INICIO_USER startStructure paramsUser endStructure;
 startFormStructure ::= INICIO_FORM startStructure paramsForm endStructure;
+startDataStructure ::= INICIO_DATOS startStructure paramsData endStructure;
 
 startStructure ::= OPEN_ROUND_BRACKET OPEN_BRACE;
 
@@ -134,6 +143,16 @@ param ::= PARAM_ID COLON id:i                           {:comp.setId(i.replace("
 /*****************Fin de producciones para parametros de form*****************/
 
 
+
+/*********************Producciones para parametros de data*********************/
+paramsData ::= paramData COMMA paramsData
+             | paramData
+             ;
+
+paramData ::= value:n COLON literal:v                     {:datos.add(new DatoRecopilado(n.replace("\"",""),v.replace("\"","")));:}
+            ;
+/*****************Fin de producciones para parametros de data*****************/
+
 value ::= VALUE:v           {:RESULT = v;:}
         | id:i              {:RESULT = i;:}
         | fecha:f           {:RESULT = f;:}
@@ -148,7 +167,7 @@ fecha ::= FECHA:f           {:RESULT = f;:}
         ;
 
 literal ::= LITERAL:l       {:RESULT = l;:}
-          | value:v         {:RESULT = v;:}
+          | opciones:v        {:RESULT = v;:}
           ;
 
 entero ::= ENTERO:e         {:RESULT = e;:}
@@ -179,6 +198,7 @@ required ::= SI:r   {:RESULT =r;:}
            ;
 
 opciones ::= OPCIONES:o           {:RESULT = o;:}
+           | OPCIONES2:o          {:RESULT = o;:}
            | value:v              {:RESULT = v;:}
            ;
 

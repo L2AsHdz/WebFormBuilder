@@ -1,17 +1,12 @@
 package datos.form;
 
-import datos.CRUD;
 import java.util.List;
-import model.Formulario;
 
 import static aux.FileController.*;
 import datos.StorageFileAnalyzer;
 import generator.Generator;
-import generator.form.FormStorageStructureGenerator;
 import generator.form.RecopiledDataGenerator;
-import java.io.File;
 import java.io.StringReader;
-import java.util.ArrayList;
 import model.DatoRecopilado;
 
 /**
@@ -33,7 +28,12 @@ public class DatoRecopiladoDAO {
     }
 
     public List<DatoRecopilado> getObject(String idForm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringReader text = new StringReader(readFile(PATH_FORMS + idForm + "/recopiledData.db"));
+        return analyzer.analyzeData(text);
+    }
+    
+    public boolean exists(String idForm) {
+        return verifyFile(PATH_FORMS + idForm + "/recopiledData.db");
     }
 
 }
