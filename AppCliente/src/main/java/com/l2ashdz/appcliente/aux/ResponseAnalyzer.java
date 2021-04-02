@@ -41,15 +41,13 @@ public class ResponseAnalyzer {
     public String getMessages() {
         messages = new StringBuilder();
 
-        Respuesta r;
         if (respuestas != null) {
-            for (int i = 0; i < respuestas.size(); i++) {
-                r = respuestas.get(i);
+            respuestas.forEach(r -> {
                 if (r.getLoggedUser() != null) {
                     loggedUser = r.getLoggedUser();
                 }
-                addLinea("Respuesta a solicitud " + (i + 1) + ": " + r.getMessage());
-            }
+                addLinea("  " + r.getMessage());
+            });
         }
 
         return messages.toString();

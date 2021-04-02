@@ -59,8 +59,6 @@ public class IndexServlet extends HttpServlet {
         if (!verifyFile(archivoDestino)) {
             createDirectory(ruta);
             saveFile(archivoDestino, texto);
-        } else {
-            System.out.println("archivo");
         }
     }
 }

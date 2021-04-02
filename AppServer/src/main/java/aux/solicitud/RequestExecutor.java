@@ -61,10 +61,10 @@ public class RequestExecutor {
                 
                 if (errores.size() > 1) {
                     addLinea("<!ini_respuestas>");
-                    errores.forEach(e -> addResponse(e.getDescripcion()));
+                    errores.forEach(e -> addResponse(e.getDescripcion().replace("\"", "")));
                     addLinea("<!fin_respuestas>");
                 } else {
-                    errores.forEach(e -> addResponse(e.getDescripcion()));
+                    errores.forEach(e -> addResponse(e.getDescripcion().replace("\"", "")));
                 }
             }
         } else {
