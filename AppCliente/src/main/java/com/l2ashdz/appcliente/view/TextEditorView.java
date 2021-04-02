@@ -163,6 +163,7 @@ public class TextEditorView extends javax.swing.JFrame {
 
         itmImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         itmImport.setText("Importar");
+        itmImport.setEnabled(false);
         jMenu1.add(itmImport);
         jMenu1.add(jSeparator2);
 

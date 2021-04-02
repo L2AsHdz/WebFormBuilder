@@ -85,16 +85,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
         } else if (this.textEditorV.getItmNuevo() == e.getSource()) {
             nuevo();
         } else if (this.textEditorV.getItmImport() == e.getSource()) {
-            String content = getContentFile();
-            String idForm = "";
-            if (!content.isEmpty()) {idForm = getIdForm();
-            }
-            if (!content.isEmpty() && !idForm.isEmpty()) {
-                System.out.println("enviar datos al servidor");
-                System.out.println(send(content, usuarioLogueado, idForm));
-            } else {
-                System.out.println("no hacer nada");
-            }
+            importForm();
         } else if (this.textEditorV.getItmSave() == e.getSource()) {
             guardar();
         } else if (this.textEditorV.getItmSaveAs() == e.getSource()) {
@@ -107,7 +98,21 @@ public class TextEditorController extends WindowAdapter implements ActionListene
 
         } else if (this.textEditorV.getBtnLogout() == e.getSource()) {
             usuarioLogueado = "";
+            textEditorV.getLblLoggedUser().setText("No esta logueado");
             textEditorV.getBtnLogout().setEnabled(false);
+            textEditorV.getItmImport().setEnabled(false);
+        }
+    }
+
+    private void importForm() {
+        String content = getContentFile();
+        String idForm = "";
+        if (!content.isEmpty()) {
+            idForm = getIdForm();
+        }
+        if (!content.isEmpty() && !idForm.isEmpty()) {
+            responseA.analyze(send(content, usuarioLogueado, idForm));
+            textEditorV.getTxtAreaRespuestas().setText(responseA.getMessages());
         }
     }
 
@@ -151,6 +156,7 @@ public class TextEditorController extends WindowAdapter implements ActionListene
             textEditorV.getLblLoggedUser().setText(responseA.getLoggedUser());
             usuarioLogueado = responseA.getLoggedUser();
             textEditorV.getBtnLogout().setEnabled(true);
+            textEditorV.getItmImport().setEnabled(true);
         }
     }
 

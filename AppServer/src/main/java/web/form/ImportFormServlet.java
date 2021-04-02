@@ -1,5 +1,6 @@
 package web.form;
 
+import executor.form.ImportFormExecutor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,8 +36,11 @@ public class ImportFormServlet extends HttpServlet {
         String loggedUser = request.getHeader("loggedUser");
         String idForm = request.getHeader("idForm");
         
+        ImportFormExecutor importFE = new ImportFormExecutor();
+        String respuesta = importFE.execute(reader, loggedUser, idForm);
+        
         try (PrintWriter out = response.getWriter()) {
-            out.println("Se importo correctamente");
+            out.println(respuesta);
         } catch (Exception e) {
         }
     }
