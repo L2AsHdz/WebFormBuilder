@@ -21,6 +21,7 @@ public class ClassRequiredParametersValidator extends ClassParameterValidator {
         boolean cols = false;
         boolean options = false;
         boolean url = false;
+        boolean textV = false;
         
         for (Parametro p : params) {
             switch (getClass(p)) {
@@ -30,6 +31,7 @@ public class ClassRequiredParametersValidator extends ClassParameterValidator {
                     for (Parametro pr : params) {
                         switch (getName(pr)) {
                             case "NOMBRE_CAMPO" -> nombreC = true;
+                            case "TEXTO_VISIBLE" -> textV = true;
                         }
                     }
                 }
@@ -40,6 +42,7 @@ public class ClassRequiredParametersValidator extends ClassParameterValidator {
                         switch (getName(pr)) {
                             case "NOMBRE_CAMPO" -> nombreC = true;
                             case "OPCIONES" -> options = true; 
+                            case "TEXTO_VISIBLE" -> textV = true;
                         }
                     }
                 }
@@ -51,6 +54,7 @@ public class ClassRequiredParametersValidator extends ClassParameterValidator {
                             case "NOMBRE_CAMPO" -> nombreC = true;
                             case "FILAS" -> filas = true;
                             case "COLUMNAS" -> cols= true;
+                            case "TEXTO_VISIBLE" -> textV = true;
                         }
                     }
                 }
@@ -60,35 +64,52 @@ public class ClassRequiredParametersValidator extends ClassParameterValidator {
                     for (Parametro pr : params) {
                         switch (getName(pr)) {
                             case "URL" -> url = true;
+                            case "TEXTO_VISIBLE" -> textV = true;
                         }
                     }
                 }
                 
+                case "BOTON" -> {
+                    clase = getClass(p);
+                    for (Parametro pr : params) {
+                        switch (getName(pr)) {
+                            case "TEXTO_VISIBLE" -> textV = true;
+                        }
+                    }
+                } 
             }
         }
         
         switch (clase) {
             case "CAMPO_TEXTO", "FICHERO" -> {
                 if (!nombreC) {
-                    setMSG("El parametro NOMBRE_CAMPO es obligatorio", o);
+                    setMSG("El parametro NOMBRE_CAMPO es obligatorio, ", o);
                 }
             }
             
             case "CHECKBOX", "RADIO", "COMBO" -> {
                 if (!nombreC | !options) {
-                    setMSG("Los parametros NOMBRE_CAMPO y OPCIONES son obligatorios", o);
+                    setMSG("Los parametros NOMBRE_CAMPO y OPCIONES son obligatorios, ", o);
                 }
             }
             
             case "AREA_TEXTO" -> {
                 if (!nombreC | !filas | !cols) {
-                    setMSG("Faltan parametros obligatorios para la clase AREA_TEXTO", o);
+                    setMSG("Faltan parametros obligatorios para la clase AREA_TEXTO, ", o);
                 }
             }
             
             case "IMAGEN" -> {
                 if (!url) {
-                    setMSG("El parametro URL es obligatorio", o);
+                    setMSG("El parametro URL es obligatorio, ", o);
+                }
+            }
+        }
+        
+        switch (clase) {
+            case "CAMPO_TEXTO", "FICHERO", "CHECKBOX", "RADIO", "COMBO", "AREA_TEXTO", "IMAGEN", "BOTON" -> {
+                if (!textV) {
+                    setMSG("el parametro TEXTO_VISIBLE es obligatorio cuando se modifica la clase del componente", o);
                 }
             }
         }

@@ -119,16 +119,14 @@ public class ModifyComponentRequestExecutor extends Executor {
                     }
                 }
                 
-                
                 if (comp.getIndice() > 0) {
-                    int newIndex = comp.getIndice();
+                    int newIndex = comp.getIndice()-1;
                     var compAux = componentes.remove(index);
-                    System.out.println(compAux.toString());
                     
                     if (newIndex >= componentes.size()) {
                         componentes.add(compAux);
                     } else {
-                        componentes.add(newIndex-1, compAux);
+                        componentes.add(newIndex, compAux);
                     }
                 }
                 
